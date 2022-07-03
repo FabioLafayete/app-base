@@ -1,0 +1,4 @@
+final environment = {
+  "baseUrl": "",
+  "bearerToken": ""
+};
