@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../components/app_theme_widget.dart';
+import '../../../components/custom_button.dart';
 import '../../../util/colors.dart';
 
 class WelcomeWidget extends StatefulWidget {
@@ -113,6 +114,23 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                       'Um lugar feito para você, por você! Onde a saúde e bem-estar esta em primeiro lugar.',
                       color: colors.background,
                       fontSize: width * 0.05
+                  ),
+                  SizedBox(height: height * 0.07),
+                  CustomButton(
+                    title: 'ENTRAR',
+                    heightButton: 45,
+                    sizeTitle: 16,
+                    colorTitle: colors.secondary,
+                    colorButton: colors.background,
+                    onPress: (){},
+                  ),
+                  SizedBox(height: height * 0.01),
+                  CustomButton(
+                    title: 'Não tem cadastro? Adquire aqui',
+                    sizeTitle: 16,
+                    colorTitle: Colors.white,
+                    cleanButton: true,
+                    onPress: (){},
                   )
                 ],
               ),
