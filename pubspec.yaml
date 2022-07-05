@@ -15,6 +15,7 @@ dependencies:
   get:
   dio:
   mockito:
+  cached_network_image: 3.2.1
 
 dev_dependencies:
   flutter_test:

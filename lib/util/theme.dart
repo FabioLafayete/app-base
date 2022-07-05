@@ -19,6 +19,7 @@ class Themes extends GetxController{
 
   final lightTheme = ThemeData.light().copyWith(
     primaryColor: AppColors().light.primary,
+    primaryColorLight: AppColors().light.secondary,
     backgroundColor: AppColors().light.background,
     textTheme: TextTheme(
       bodyText1: TextStyle(color: AppColors().light.text),
@@ -28,6 +29,7 @@ class Themes extends GetxController{
 
   final darkTheme = ThemeData.light().copyWith(
       primaryColor: AppColors().dark.primary,
+      primaryColorLight: AppColors().dark.secondary,
       backgroundColor: AppColors().dark.background,
       textTheme: TextTheme(
         bodyText1: TextStyle(color: AppColors().dark.text),

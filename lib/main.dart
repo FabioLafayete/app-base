@@ -16,7 +16,7 @@ void main() async {
   runApp(
       GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: PagesNames.home,
+        initialRoute: PagesNames.login,
         getPages: PagesRoutes.pages,
         locale: const Locale('pt', 'BR'),
         theme: Themes().lightTheme,
@@ -31,7 +31,7 @@ Future _preload() async {
 
   Get.put(AppConfig.instance);
   Get.put(Themes(), permanent: true);
-  Get.changeTheme(Themes().darkTheme);
+  //Get.changeTheme(Themes().darkTheme);
 
   await Future.wait([
     AppConfig().load(),
