@@ -32,12 +32,12 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
   final List<String> _images03 = [
     'https://images.pexels.com/photos/66346/pexels-photo-66346.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     'https://images.pexels.com/photos/4057738/pexels-photo-4057738.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/5946045/pexels-photo-5946045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+    'https://images.pexels.com/photos/3059981/pexels-photo-3059981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
   ];
   final List<String> _images04 = [
     'https://images.pexels.com/photos/66346/pexels-photo-66346.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     'https://images.pexels.com/photos/4057738/pexels-photo-4057738.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/3059981/pexels-photo-3059981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+    'https://images.pexels.com/photos/5946045/pexels-photo-5946045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
   ];
 
   final double width = Get.width;
@@ -55,6 +55,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
         topGrid = true;
       });
     });
+
   }
 
   @override
@@ -164,6 +165,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
             ClipRRect(
               borderRadius: BorderRadius.circular(13),
               child: CachedNetworkImage(
+                fadeInDuration: const Duration(milliseconds: 300),
                 imageUrl: images[index],
                 fit: BoxFit.cover,
               ),
