@@ -11,7 +11,12 @@ import '../../../util/colors.dart';
 
 class WelcomeWidget extends StatefulWidget {
 
-  WelcomeWidget({Key? key}) : super(key: key);
+  const WelcomeWidget({
+    Key? key,
+    required this.signInOnPress
+  }) : super(key: key);
+
+  final Function() signInOnPress;
 
   @override
   State<WelcomeWidget> createState() => _WelcomeWidgetState();
@@ -123,7 +128,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     sizeTitle: 16,
                     colorTitle: colors.secondary,
                     colorButton: colors.background,
-                    onPress: (){},
+                    onPress: widget.signInOnPress,
                   ),
                   SizedBox(height: height * 0.01),
                   CustomButton(
