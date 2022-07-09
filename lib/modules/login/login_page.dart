@@ -38,30 +38,42 @@ class LoginPage extends BaseWidget<LoginViewModel> {
                 colorBorderFocus: colors.secondary.withOpacity(0.7),
                 colorLabel: colors.textSecondary,
                 colorLabelFocus: colors.secondary.withOpacity(0.7),
-                textInputType: TextInputType.emailAddress
+                textInputType: TextInputType.emailAddress,
+                onChanged: (email) => viewModel.setEmail(email)
             ),
             space(0.03),
-            if(viewModel.email.isNotEmpty)
+            if(viewModel.showCode)
               Container(
                 margin: EdgeInsets.symmetric(horizontal: width * 0.01).copyWith(
                   bottom: height * 0.03,
                 ),
-                child: pinCodeInput(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    text(
+                        'Informe o código enviado no seu e-mail...',
+                        color: colors.textSecondary
+                    ),
+                    pinCodeInput(),
+                  ],
+                ),
               ),
+            Spacer(),
             CustomButton(
               title: 'AVANÇAR',
               colorTitle: colors.background,
               colorButton: colors.primary,
               iconRight: true,
-              onPress: (){
-                viewModel.setEmail(viewModel.controllerEmail.text);
-              },
+              loading: viewModel.isLoading,
+              onPress: viewModel.enableButton() ? (){
+                viewModel.sendCode();
+              } : null,
             ),
             space(0.05)
           ],
         )),
         dismissible: false,
-      onClose: (){
+        onClose: (){
           viewModel.cleanLogin();
         }
     );

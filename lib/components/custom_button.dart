@@ -53,17 +53,8 @@ class CustomButton extends BaseWidget {
       width: width,
       height: heightButton ?? 50,
       child: ElevatedButton(
-        onPressed: onPress,
-        style: ButtonStyle(
-            overlayColor: MaterialStateProperty.all<Color>(colors.primary.withOpacity(0.1)),
-            backgroundColor: MaterialStateProperty.all<Color>(colorButton ?? colors.primary),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(13.0),
-                    side: colorBorder != null ? BorderSide(color: colorBorder!) : BorderSide.none
-                )
-            )
-        ),
+        onPressed: loading ? (){} : onPress,
+        style: onPress != null ? enableButtonStyle() : disableButtonStyle(),
         child: !loading ? Stack(
           alignment: Alignment.center,
           children: [
@@ -97,4 +88,33 @@ class CustomButton extends BaseWidget {
       ),
     );
   }
+
+  ButtonStyle enableButtonStyle(){
+    return ButtonStyle(
+        overlayColor: MaterialStateProperty.all<Color>(colors.primary.withOpacity(0.1)),
+        backgroundColor: MaterialStateProperty.all<Color>(colorButton ?? colors.primary),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(13.0),
+                side: colorBorder != null ? BorderSide(color: colorBorder!) : BorderSide.none
+            )
+        )
+    );
+  }
+
+  ButtonStyle disableButtonStyle(){
+    return ButtonStyle(
+        overlayColor: MaterialStateProperty.all<Color>(colors.primary.withOpacity(0.1)),
+        backgroundColor: MaterialStateProperty.all<Color>(
+            colorButton?.withOpacity(0.4) ?? colors.primary.withOpacity(0.4)
+        ),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(13.0),
+                side: colorBorder != null ? BorderSide(color: colorBorder!) : BorderSide.none
+            )
+        )
+    );
+  }
+
 }

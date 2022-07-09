@@ -1,4 +1,5 @@
 import 'package:app/modules/login/login_controller.dart';
+import 'package:app/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,7 +8,9 @@ import '../../components/base_view_model.dart';
 class LoginViewModel extends BaseViewModel<LoginController> {
 
 
-  final Rx<String> _email = Rx('');
+  final RxString _email = RxString('');
+
+  final RxBool _showCode = RxBool(true);
 
   final Rx<String> _code1 = Rx('');
   final Rx<String> _code2 = Rx('');
@@ -16,6 +19,10 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   final Rx<String> _code5 = Rx('');
 
   String get email => _email.value;
+
+  bool get showCode => _showCode.value;
+  bool isEmail(String email) => Util.isEmail(email);
+
   String get code1 => _code1.value;
   String get code2 => _code2.value;
   String get code3 => _code3.value;
@@ -23,6 +30,8 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   String get code5 => _code5.value;
 
   setEmail(String value) => _email.value = value;
+
+  setShowCode(bool value) => _showCode.value = value;
 
   void setCode1(String value) {
     _code1.value = value;
@@ -59,7 +68,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   void setCode5(String value) {
     _code5.value = value;
     if (value.isNotEmpty) {
-      codePart5FocusNode.nextFocus();
+      Get.focusScope?.unfocus();
     } else {
       codePart4FocusNode.requestFocus();
     }
@@ -81,6 +90,26 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   TextEditingController controllerCode5 = TextEditingController();
 
 
+  Future<void> sendCode() async {
+    try{
+      setIsLoading(true);
+      await Future.delayed(Duration(seconds: 1));
+      setShowCode(true);
+      await Future.delayed(Duration(milliseconds: 50));
+      codePart1FocusNode.requestFocus();
+    }catch(error){
+
+    }finally{
+      setIsLoading(false);
+    }
+  }
+
+  bool enableButton() {
+    if(email.isNotEmpty) if(isEmail(email)) return true;
+    return false;
+  }
+
+
   void cleanLogin(){
     setEmail('');
     setCode1('');
@@ -95,6 +124,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
     controllerCode5.clear();
     controllerEmail.clear();
     Get.focusScope?.unfocus();
+    //setShowCode(false);
   }
 
 }

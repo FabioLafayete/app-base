@@ -161,7 +161,7 @@ class VisualDisplay {
         borderRadius: BorderRadius.circular(width * 0.03),
         boxShadow: const [
           BoxShadow(
-            color: Colors.black26,
+            color: Colors.black12,
             blurRadius: 2,
             offset: Offset(1.5, 2.5),
           ),
