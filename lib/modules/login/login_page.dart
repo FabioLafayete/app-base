@@ -54,11 +54,12 @@ class LoginPage extends BaseWidget<LoginViewModel> {
                         'Informe o código enviado no seu e-mail...',
                         color: colors.textSecondary
                     ),
+                    space(0.02),
                     pinCodeInput(),
                   ],
                 ),
               ),
-            Spacer(),
+            const Spacer(),
             CustomButton(
               title: 'AVANÇAR',
               colorTitle: colors.background,
@@ -69,10 +70,11 @@ class LoginPage extends BaseWidget<LoginViewModel> {
                 viewModel.sendCode();
               } : null,
             ),
-            space(0.05)
+            space(0.03)
           ],
         )),
         dismissible: false,
+        height: viewModel.enableButton() ? (height * viewModel.heightLogin) : null,
         onClose: (){
           viewModel.cleanLogin();
         }

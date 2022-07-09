@@ -32,8 +32,10 @@ class VisualDisplay {
               ),
               Stack(
                 children: [
-                  Container(
-                    height: height ?? Get.height * 0.5,
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    //height: height ?? Get.height * 0.5,
+                    height: height != null ? Get.height * 0.5 : Get.height * 0.8,
                     padding: const EdgeInsets.all(16).copyWith(
                       top: 30
                     ),
@@ -65,7 +67,7 @@ class VisualDisplay {
       ignoreSafeArea: true,
       isScrollControlled: true,
       isDismissible: dismissible,
-      enableDrag: dismissible,
+      enableDrag: false,
       exitBottomSheetDuration: exitBottomSheetDuration,
       enterBottomSheetDuration: enterBottomSheetDuration,
     ).whenComplete((){
