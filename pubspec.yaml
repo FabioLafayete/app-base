@@ -16,6 +16,8 @@ dependencies:
   dio:
   mockito:
   cached_network_image: 3.2.1
+  flutter_spinkit: 5.1.0
+  easy_mask: 2.0.1
 
 dev_dependencies:
   flutter_test:
