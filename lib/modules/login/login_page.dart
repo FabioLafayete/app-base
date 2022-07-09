@@ -17,12 +17,26 @@ class LoginPage extends BaseWidget<LoginViewModel> {
 
   void _login(){
     VisualDisplay.bottomSheet(
-        Container(
-          color: colors.background,
-          child: Center(
-            child: text('teste'),
-          ),
-        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            text(
+                'Entrar na minha conta',
+                color: colors.text,
+                fontSize: 20,
+                fontWeight: FontWeight.w600
+            ),
+            space(0.05),
+            VisualDisplay.textField(
+              labelText: 'E-mail',
+              fillColor: Colors.white,
+              colorBorder: Colors.white,
+              colorBorderFocus: colors.primary,
+              colorLabel: colors.textSecondary,
+              colorLabelFocus: colors.primary
+            )
+          ],
+        )
 
     );
   }

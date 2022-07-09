@@ -124,7 +124,6 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   SizedBox(height: height * 0.07),
                   CustomButton(
                     title: 'ENTRAR',
-                    heightButton: 45,
                     sizeTitle: 16,
                     colorTitle: colors.secondary,
                     colorButton: colors.background,

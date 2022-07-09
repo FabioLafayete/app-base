@@ -1,5 +1,6 @@
 import 'package:app/components/base_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomButton extends BaseWidget {
   CustomButton({
@@ -44,7 +45,7 @@ class CustomButton extends BaseWidget {
     }
     return SizedBox(
       width: width,
-      height: heightButton,
+      height: heightButton ?? 50,
       child: ElevatedButton(
         onPressed: onPress,
         style: ButtonStyle(
@@ -52,7 +53,7 @@ class CustomButton extends BaseWidget {
             backgroundColor: MaterialStateProperty.all<Color>(colorButton ?? colors.primary),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(13.0),
                     side: BorderSide(color: colorBorder ?? colors.secondary)
                 )
             )

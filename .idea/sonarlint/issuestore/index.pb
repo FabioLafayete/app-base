@@ -9,8 +9,6 @@ R
 "lib/modules/home/home_binding.dart,e/1/e11d332261a6e06f857c314c12db085038a825ae
 U
 %lib/modules/home/home_controller.dart,9/c/9cefecaed39cbcfbe33deb77c35d5783f3baa7b0
-M
-lib/components/base_page.dart,d/1/d18abca445bf12bd91ae513187f58beb5bd6c2ae
 O
 lib/components/base_widget.dart,9/d/9defcf718a942fbc1131878aa490b687722aae33
 F
