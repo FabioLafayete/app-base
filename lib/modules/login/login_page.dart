@@ -75,7 +75,6 @@ class LoginPage extends BaseWidget<LoginViewModel> {
        )),
         dismissible: false,
         onClose: (){
-          viewModel.bottomSheet.setHeightBottomSheet(0.5);
           viewModel.cleanLogin();
         }
     );

@@ -11,7 +11,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
 
   final RxString _email = RxString('');
 
-  final RxBool _showCode = RxBool(true);
+  final RxBool _showCode = RxBool(false);
 
   final Rx<String> _code1 = Rx('');
   final Rx<String> _code2 = Rx('');
@@ -95,9 +95,9 @@ class LoginViewModel extends BaseViewModel<LoginController> {
     try{
       setIsLoading(true);
       await Future.delayed(Duration(seconds: 1));
+      bottomSheet.setHeightBottomSheet(0.6);
+      await Future.delayed(Duration(milliseconds: 300));
       setShowCode(true);
-      await Future.delayed(Duration(milliseconds: 50));
-      bottomSheet.setHeightBottomSheet(0.8);
     }catch(error){
 
     }finally{
@@ -108,6 +108,12 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   bool enableButton() {
     if(email.isNotEmpty) if(isEmail(email)) return true;
     return false;
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    bottomSheet.setHeightBottomSheet(0.4);
   }
 
 
@@ -125,7 +131,8 @@ class LoginViewModel extends BaseViewModel<LoginController> {
     controllerCode5.clear();
     controllerEmail.clear();
     Get.focusScope?.unfocus();
-    //setShowCode(false);
+    setShowCode(false);
+    bottomSheet.setHeightBottomSheet(0.4);
   }
 
 }

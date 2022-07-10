@@ -17,6 +17,4 @@ class BottomSheetViewModel extends BaseViewModel<BottomSheetController> {
 
 }
 
-class BottomSheetController extends GetxController {
-
-}
+class BottomSheetController extends GetxController {}
