@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../components/base_view_model.dart';
+import '../../components/bottom_sheet/botto_sheet_view_model.dart';
 
 class LoginViewModel extends BaseViewModel<LoginController> {
 
@@ -12,16 +13,15 @@ class LoginViewModel extends BaseViewModel<LoginController> {
 
   final RxBool _showCode = RxBool(true);
 
-  final RxDouble _heightLogin = RxDouble(0.6);
-
   final Rx<String> _code1 = Rx('');
   final Rx<String> _code2 = Rx('');
   final Rx<String> _code3 = Rx('');
   final Rx<String> _code4 = Rx('');
   final Rx<String> _code5 = Rx('');
 
+  final bottomSheet = Get.find<BottomSheetViewModel>();
+
   String get email => _email.value;
-  double get heightLogin => _heightLogin.value;
   bool get showCode => _showCode.value;
   bool isEmail(String email) => Util.isEmail(email);
 
@@ -32,7 +32,6 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   String get code5 => _code5.value;
 
   setEmail(String value) => _email.value = value;
-  setHeightLogin(double value) => _heightLogin.value = value;
   setShowCode(bool value) => _showCode.value = value;
 
   void setCode1(String value) {
@@ -98,8 +97,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
       await Future.delayed(Duration(seconds: 1));
       setShowCode(true);
       await Future.delayed(Duration(milliseconds: 50));
-      codePart1FocusNode.requestFocus();
-      setHeightLogin(0.5);
+      bottomSheet.setHeightBottomSheet(0.8);
     }catch(error){
 
     }finally{

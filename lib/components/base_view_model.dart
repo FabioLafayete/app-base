@@ -15,6 +15,7 @@ abstract class BaseViewModel<T extends GetxController> extends GetxController {
 
   setIsLoading(bool value) => _isLoading.value = value;
 
+
   @override
   void onInit() {
     super.onInit();

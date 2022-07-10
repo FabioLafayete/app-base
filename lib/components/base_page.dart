@@ -1,5 +1,6 @@
 import 'package:app/components/base_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BasePage extends BaseWidget {
   BasePage({
@@ -30,7 +31,7 @@ class BasePage extends BaseWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () => Get.focusScope?.unfocus(),
       child: Scaffold(
         appBar: showAppBar ? (appBar ?? _appBar(context)) : null,
         bottomNavigationBar: bottomNavigationBar,
