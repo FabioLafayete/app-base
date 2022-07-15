@@ -20,7 +20,7 @@ class LoginPage extends BaseWidget<LoginViewModel> {
   void _login(){
     VisualDisplay.bottomSheet(
         Obx(() =>  Column(
-         children: [
+          children: [
            text(
                'Entrar na minha conta',
                color: colors.text,
@@ -39,6 +39,13 @@ class LoginPage extends BaseWidget<LoginViewModel> {
                colorLabel: colors.textSecondary,
                colorLabelFocus: colors.secondary.withOpacity(0.7),
                textInputType: TextInputType.emailAddress,
+               enabled: !viewModel.showCode,
+               suffix: viewModel.showCode ?
+               GestureDetector(
+                   onTap: viewModel.changeEmail,
+                   child: text('trocar e-mail', color: colors.primary)
+               ) :
+               null,
                onChanged: (email) => viewModel.setEmail(email)
            ),
            space(0.03),
@@ -70,7 +77,7 @@ class LoginPage extends BaseWidget<LoginViewModel> {
                viewModel.sendCode();
              } : null,
            ),
-           space(0.03)
+           space(0.02)
          ],
        )),
         dismissible: false,

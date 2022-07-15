@@ -95,9 +95,22 @@ class LoginViewModel extends BaseViewModel<LoginController> {
     try{
       setIsLoading(true);
       await Future.delayed(Duration(seconds: 1));
-      bottomSheet.setHeightBottomSheet(0.6);
+      bottomSheet.setHeightBottomSheet(0.48);
+      Get.focusScope?.unfocus();
       await Future.delayed(Duration(milliseconds: 300));
       setShowCode(true);
+    }catch(error){
+
+    }finally{
+      setIsLoading(false);
+    }
+  }
+
+  Future<void> changeEmail() async {
+    try{
+      Get.focusScope?.unfocus();
+      setShowCode(false);
+      bottomSheet.setHeightBottomSheet(0.32);
     }catch(error){
 
     }finally{
@@ -113,7 +126,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   @override
   void onInit() {
     super.onInit();
-    bottomSheet.setHeightBottomSheet(0.4);
+    bottomSheet.setHeightBottomSheet(0.32);
   }
 
 
@@ -132,7 +145,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
     controllerEmail.clear();
     Get.focusScope?.unfocus();
     setShowCode(false);
-    bottomSheet.setHeightBottomSheet(0.4);
+    bottomSheet.setHeightBottomSheet(0.32);
   }
 
 }
