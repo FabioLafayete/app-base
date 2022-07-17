@@ -2,8 +2,6 @@ import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-
 import '../util/colors.dart';
 import 'bottom_sheet/bottom_sheet.dart';
 
@@ -46,57 +44,90 @@ class VisualDisplay {
     Color? colorBorder,
     Color? colorBorderFocus,
     Color? colorCursor,
-    bool? enabled,
+    Color? shadowColor,
+    bool readOnly = false,
+    AutovalidateMode? autoValidateMode,
+    String? Function(String?)? validator,
     Widget? prefix,
     Widget? suffix,
     TextEditingController? controller
   }){
-    return Material(
-      elevation: 5,
-      shadowColor: Colors.black38,
-      borderRadius: BorderRadius.circular(15),
-      child: TextField(
-        controller: controller,
-        onChanged: onChanged,
-        style: TextStyle(
-            color: colorText ?? AppColors().text,
-            fontSize: 18,
-            fontWeight: FontWeight.w400
+    return Stack(
+      children: [
+        Container(
+          height: 50,
+          margin: const EdgeInsets.symmetric(horizontal: 4).copyWith(
+              top: 9
+          ),
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(
+              Radius.circular(15),
+            ),
+            boxShadow: [
+              BoxShadow(
+                  color: shadowColor ?? Colors.black12,
+                  blurRadius: 5,
+                  spreadRadius: 3
+              ),
+            ],
+          ),
         ),
-        obscureText: obscure ?? false,
-        enabled: enabled,
-        keyboardType: textInputType,
-        textInputAction: textInputAction,
-        cursorColor: colorCursor,
-        onEditingComplete: onEditingComplete,
-        inputFormatters: inputMask,
-        decoration: InputDecoration(
-          errorText: errorText,
-          prefixIcon: prefix,
-          suffixIcon: suffix,
-          alignLabelWithHint: true,
-          filled: fillColor != null ? true : false,
-          fillColor: fillColor,
-          contentPadding: const EdgeInsets.all(20).copyWith(left: 10),
-          icon: icon,
-          labelText: labelText,
-          labelStyle: TextStyle(
-              color: colorLabel,
-              fontSize: 16,
+        TextFormField(
+          controller: controller,
+          onChanged: onChanged,
+          style: TextStyle(
+              color: colorText ?? AppColors().text,
+              fontSize: 18,
               fontWeight: FontWeight.w400
           ),
-          floatingLabelStyle: colorLabelFocus != null ?
-          TextStyle(color: colorLabelFocus, fontSize: 16) : null,
-          focusedBorder: OutlineInputBorder(
+          obscureText: obscure ?? false,
+          readOnly: readOnly,
+          keyboardType: textInputType,
+          autovalidateMode: autoValidateMode,
+          textInputAction: textInputAction,
+          cursorColor: colorCursor,
+          onEditingComplete: onEditingComplete,
+          inputFormatters: inputMask,
+          validator: validator,
+          decoration: InputDecoration(
+            isDense: true,
+            errorText: errorText,
+            prefixIcon: prefix,
+            suffixIcon: Padding(
+                padding: const EdgeInsets.only(top: 15, right: 20),
+                child: suffix
+            ),
+            alignLabelWithHint: true,
+            filled: fillColor != null ? true : false,
+            fillColor: fillColor,
+            contentPadding: const EdgeInsets.all(20).copyWith(left: 10),
+            icon: icon,
+            labelText: labelText,
+            labelStyle: TextStyle(
+                color: colorLabel,
+                fontSize: 16,
+                fontWeight: FontWeight.w400
+            ),
+            hoverColor: Colors.transparent,
+            floatingLabelStyle: colorLabelFocus != null ?
+            TextStyle(color: colorLabelFocus, fontSize: 16, fontWeight: FontWeight.w600) : null,
+            errorStyle: TextStyle(fontWeight: FontWeight.w600, color: AppColors().error),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors().error, width: 2),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors().error, width: 2),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            focusedBorder: !readOnly ? OutlineInputBorder(
               borderSide: BorderSide(color: (colorBorderFocus ?? colorBorder) ?? AppColors().secondary, width: 2),
               borderRadius: BorderRadius.circular(15),
+            ) : OutlineInputBorder(borderSide:  BorderSide(color: colorBorder ?? AppColors().secondary), borderRadius: BorderRadius.circular(15)),
+            enabledBorder: OutlineInputBorder(borderSide:  BorderSide(color: colorBorder ?? AppColors().secondary), borderRadius: BorderRadius.circular(15)),
           ),
-          enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: colorBorder ?? AppColors().secondary, width: 2),
-              borderRadius: BorderRadius.circular(15),
-          )
         ),
-      ),
+      ],
     );
   }
 

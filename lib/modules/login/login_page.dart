@@ -37,16 +37,30 @@ class LoginPage extends BaseWidget<LoginViewModel> {
                colorCursor: colors.secondary,
                colorBorderFocus: colors.secondary.withOpacity(0.7),
                colorLabel: colors.textSecondary,
-               colorLabelFocus: colors.secondary.withOpacity(0.7),
+               colorLabelFocus: colors.textSecondary,
                textInputType: TextInputType.emailAddress,
-               enabled: !viewModel.showCode,
+               readOnly: viewModel.showCode,
+               errorText: viewModel.errorEmail,
+               validator: (txt) {
+                 if(txt != null){
+                   if(!GetUtils.isEmail(txt)){
+                     //viewModel.setErrorEmail('Digite um e-mail válido...');
+                     return 'Digite um e-mail válido...';
+                   }
+                 }
+                 return null;
+               },
                suffix: viewModel.showCode ?
                GestureDetector(
                    onTap: viewModel.changeEmail,
-                   child: text('trocar e-mail', color: colors.primary)
+                   child: text(
+                       'trocar e-mail', color: colors.primary,
+                       fontWeight: FontWeight.w600
+                   )
                ) :
                null,
-               onChanged: (email) => viewModel.setEmail(email)
+               onChanged: (email) => viewModel.setEmail(email),
+
            ),
            space(0.03),
            if(viewModel.showCode)

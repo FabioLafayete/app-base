@@ -10,6 +10,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
 
 
   final RxString _email = RxString('');
+  final Rxn<String> _errorEmail = Rxn<String>();
 
   final RxBool _showCode = RxBool(false);
 
@@ -22,6 +23,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   final bottomSheet = Get.find<BottomSheetViewModel>();
 
   String get email => _email.value;
+  String? get errorEmail => _errorEmail.value;
   bool get showCode => _showCode.value;
   bool isEmail(String email) => Util.isEmail(email);
 
@@ -32,6 +34,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   String get code5 => _code5.value;
 
   setEmail(String value) => _email.value = value;
+  setErrorEmail(String value) => _errorEmail.value = value;
   setShowCode(bool value) => _showCode.value = value;
 
   void setCode1(String value) {
@@ -110,7 +113,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
     try{
       Get.focusScope?.unfocus();
       setShowCode(false);
-      bottomSheet.setHeightBottomSheet(0.32);
+      bottomSheet.setHeightBottomSheet(0.35);
     }catch(error){
 
     }finally{
@@ -126,7 +129,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   @override
   void onInit() {
     super.onInit();
-    bottomSheet.setHeightBottomSheet(0.32);
+    bottomSheet.setHeightBottomSheet(0.35);
   }
 
 
@@ -145,7 +148,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
     controllerEmail.clear();
     Get.focusScope?.unfocus();
     setShowCode(false);
-    bottomSheet.setHeightBottomSheet(0.32);
+    bottomSheet.setHeightBottomSheet(0.35);
   }
 
 }
