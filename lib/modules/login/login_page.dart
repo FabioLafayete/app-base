@@ -41,11 +41,20 @@ class LoginPage extends BaseWidget<LoginViewModel> {
                textInputType: TextInputType.emailAddress,
                readOnly: viewModel.showCode,
                errorText: viewModel.errorEmail,
+               onEditingComplete: (){
+                 if(viewModel.enableButton()){
+                   viewModel.sendCode();
+                 } else {
+                   viewModel.setErrorEmail('Digite um e-mail válido');
+                 }
+               },
                validator: (txt) {
+                 if(viewModel.errorEmail != null){
+                   return viewModel.errorEmail;
+                 }
                  if(txt != null){
                    if(!GetUtils.isEmail(txt)){
-                     //viewModel.setErrorEmail('Digite um e-mail válido...');
-                     return 'Digite um e-mail válido...';
+                     return 'Digite um e-mail válido';
                    }
                  }
                  return null;
@@ -57,9 +66,13 @@ class LoginPage extends BaseWidget<LoginViewModel> {
                        'trocar e-mail', color: colors.primary,
                        fontWeight: FontWeight.w600
                    )
-               ) :
-               null,
-               onChanged: (email) => viewModel.setEmail(email),
+               ) : null,
+               onChanged: (email) {
+                 viewModel.setEmail(email);
+                 if(GetUtils.isEmail(email)){
+                   viewModel.setErrorEmail(null);
+                 }
+               },
 
            ),
            space(0.03),

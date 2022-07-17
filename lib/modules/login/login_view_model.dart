@@ -34,7 +34,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   String get code5 => _code5.value;
 
   setEmail(String value) => _email.value = value;
-  setErrorEmail(String value) => _errorEmail.value = value;
+  setErrorEmail(String? value) => _errorEmail.value = value;
   setShowCode(bool value) => _showCode.value = value;
 
   void setCode1(String value) {
@@ -99,9 +99,9 @@ class LoginViewModel extends BaseViewModel<LoginController> {
       setIsLoading(true);
       await Future.delayed(Duration(seconds: 1));
       bottomSheet.setHeightBottomSheet(0.48);
-      Get.focusScope?.unfocus();
       await Future.delayed(Duration(milliseconds: 300));
       setShowCode(true);
+      Get.focusScope?.unfocus();
     }catch(error){
 
     }finally{
@@ -110,15 +110,10 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   }
 
   Future<void> changeEmail() async {
-    try{
-      Get.focusScope?.unfocus();
-      setShowCode(false);
-      bottomSheet.setHeightBottomSheet(0.35);
-    }catch(error){
-
-    }finally{
-      setIsLoading(false);
-    }
+    Get.focusScope?.unfocus();
+    setShowCode(false);
+    bottomSheet.setHeightBottomSheet(0.35);
+    setErrorEmail(null);
   }
 
   bool enableButton() {
@@ -149,6 +144,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
     Get.focusScope?.unfocus();
     setShowCode(false);
     bottomSheet.setHeightBottomSheet(0.35);
+    setErrorEmail(null);
   }
 
 }

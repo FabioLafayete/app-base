@@ -173,38 +173,30 @@ class VisualDisplay {
           isCollapsed: true,
           contentPadding: const EdgeInsets.all(6),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(width * 0.03),
-            ),
+            borderRadius: BorderRadius.circular(width * 0.03),
             borderSide: BorderSide(
               width: 2,
               color: AppColors().primary.withOpacity(0.9),
             ),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(width * 0.03),
-            ),
+            borderRadius: BorderRadius.circular(width * 0.03),
             borderSide: BorderSide(
               width: 2,
               color: listenText!.isNotEmpty ?
               AppColors().primary.withOpacity(0.9) :
-              AppColors().primary.withOpacity(0.7),
+              Colors.grey.shade500,
             ),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(width * 0.03),
-            ),
+            borderRadius: BorderRadius.circular(width * 0.03),
             borderSide: BorderSide(
               width: 2,
               color: AppColors().error,
             ),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: const BorderRadius.all(
-              Radius.circular(4),
-            ),
+            borderRadius: BorderRadius.circular(width * 0.03),
             borderSide: BorderSide(
               width: 2,
               color: AppColors().error,
