@@ -43,7 +43,7 @@ class LoginPage extends BaseWidget<LoginViewModel> {
                errorText: viewModel.errorEmail,
                onEditingComplete: (){
                  if(viewModel.enableButton()){
-                   viewModel.sendCode();
+                   viewModel.onPress();
                  } else {
                    viewModel.setErrorEmail('Digite um e-mail válido');
                  }
@@ -95,14 +95,13 @@ class LoginPage extends BaseWidget<LoginViewModel> {
              ),
            const Spacer(),
            CustomButton(
-             title: 'AVANÇAR',
+             title: viewModel.showCode ? 'VALIDAR CÓDIGO' : 'AVANÇAR',
              colorTitle: colors.background,
              colorButton: colors.primary,
-             iconRight: true,
+             iconRight: viewModel.showCode ? false :  true,
              loading: viewModel.isLoading,
-             onPress: viewModel.enableButton() ? (){
-               viewModel.sendCode();
-             } : null,
+             onPress: viewModel.enableButton(isCodeValidate: viewModel.showCode) ?
+                 () => viewModel.onPress(isCodeValidate: viewModel.showCode) : null,
            ),
            space(0.02)
          ],
@@ -122,31 +121,36 @@ class LoginPage extends BaseWidget<LoginViewModel> {
             onChanged: viewModel.setCode1,
             focusNode: viewModel.codePart1FocusNode,
             controller: viewModel.controllerCode1,
-            listenText: viewModel.code1
+            listenText: viewModel.code1,
+            errorText: viewModel.errorCode
         ),
         VisualDisplay.textFieldPin(
             onChanged: viewModel.setCode2,
             focusNode: viewModel.codePart2FocusNode,
             controller: viewModel.controllerCode2,
-            listenText: viewModel.code2
+            listenText: viewModel.code2,
+            errorText: viewModel.errorCode
         ),
         VisualDisplay.textFieldPin(
             onChanged: viewModel.setCode3,
             focusNode: viewModel.codePart3FocusNode,
             controller: viewModel.controllerCode3,
-            listenText: viewModel.code3
+            listenText: viewModel.code3,
+            errorText: viewModel.errorCode
         ),
         VisualDisplay.textFieldPin(
             onChanged: viewModel.setCode4,
             focusNode: viewModel.codePart4FocusNode,
             controller: viewModel.controllerCode4,
-            listenText: viewModel.code4
+            listenText: viewModel.code4,
+            errorText: viewModel.errorCode
         ),
         VisualDisplay.textFieldPin(
             onChanged: viewModel.setCode5,
             focusNode: viewModel.codePart5FocusNode,
             controller: viewModel.controllerCode5,
-            listenText: viewModel.code5
+            listenText: viewModel.code5,
+            errorText: viewModel.errorCode
         ),
       ],
     ));

@@ -11,6 +11,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
 
   final RxString _email = RxString('');
   final Rxn<String> _errorEmail = Rxn<String>();
+  final Rxn<String> _errorCode = Rxn<String>();
 
   final RxBool _showCode = RxBool(false);
 
@@ -24,6 +25,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
 
   String get email => _email.value;
   String? get errorEmail => _errorEmail.value;
+  String? get errorCode => _errorCode.value;
   bool get showCode => _showCode.value;
   bool isEmail(String email) => Util.isEmail(email);
 
@@ -35,6 +37,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
 
   setEmail(String value) => _email.value = value;
   setErrorEmail(String? value) => _errorEmail.value = value;
+  setErrorCode(String? value) => _errorCode.value = value;
   setShowCode(bool value) => _showCode.value = value;
 
   void setCode1(String value) {
@@ -94,7 +97,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   TextEditingController controllerCode5 = TextEditingController();
 
 
-  Future<void> sendCode() async {
+  Future<void> onPress({bool isCodeValidate = false}) async {
     try{
       setIsLoading(true);
       await Future.delayed(Duration(seconds: 1));
@@ -116,8 +119,35 @@ class LoginViewModel extends BaseViewModel<LoginController> {
     setErrorEmail(null);
   }
 
-  bool enableButton() {
-    if(email.isNotEmpty) if(isEmail(email)) return true;
+  Future<void> checkCode() async {
+    try{
+      setIsLoading(true);
+      await Future.delayed(Duration(seconds: 1));
+
+      if(false) {
+
+      } else {
+        setErrorCode('');
+      }
+    }catch(error){
+
+    }finally{
+      setIsLoading(false);
+    }
+  }
+
+  bool enableButton({bool isCodeValidate = false}) {
+    if(isCodeValidate){
+      if(code1.isNotEmpty &&
+          code2.isNotEmpty &&
+          code3.isNotEmpty &&
+          code4.isNotEmpty &&
+          code5.isNotEmpty) {
+        return true;
+      }
+    } else {
+      if(email.isNotEmpty) if(isEmail(email)) return true;
+    }
     return false;
   }
 
@@ -145,6 +175,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
     setShowCode(false);
     bottomSheet.setHeightBottomSheet(0.35);
     setErrorEmail(null);
+    setErrorCode(null);
   }
 
 }

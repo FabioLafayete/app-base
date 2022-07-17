@@ -135,7 +135,8 @@ class VisualDisplay {
     Function(String)? onChanged,
     FocusNode? focusNode,
     TextEditingController? controller,
-    String? listenText = ''
+    String? listenText = '',
+    String? errorText
   }) {
     double width = Get.width;
     double height = Get.height;
@@ -169,6 +170,7 @@ class VisualDisplay {
         minLines: null,
         decoration: InputDecoration(
           filled: false,
+          errorText: errorText != null ? '' : null,
           fillColor: AppColors().primary.withOpacity(0.05),
           isCollapsed: true,
           contentPadding: const EdgeInsets.all(6),
