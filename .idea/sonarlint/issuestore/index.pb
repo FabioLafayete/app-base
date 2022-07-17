@@ -22,3 +22,11 @@ Q
 !lib/components/custom_button.dart,e/1/e11a4990fe91f54372b00d87174177315052e963
 <
 pubspec.yaml,e/8/e8e045469170189f1d6ef12576bd01af132b1018
+D
+lib/util/colors.dart,f/a/fa05dbf4aa9adc7ff89d71219340705dc91be2d6
+M
+lib/components/base_page.dart,d/1/d18abca445bf12bd91ae513187f58beb5bd6c2ae
+]
+-lib/modules/login/widgets/welcome_widget.dart,6/8/68812372210c3100a22b8e531cc6c77ba54912bb
+g
+7lib/components/bottom_sheet/botto_sheet_view_model.dart,a/4/a4283efd59919d6aec19fac8cfda9f4998a470ff
