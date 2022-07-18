@@ -12,9 +12,12 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   final RxString _email = RxString('');
   final Rxn<String> _errorEmail = Rxn<String>();
   final Rxn<String> _errorCode = Rxn<String>();
+  final RxBool _isLoading = RxBool(false);
+  final RxBool _isLoadingSendCode = RxBool(false);
 
   final RxBool _showCode = RxBool(false);
-
+  bool get isLoading => _isLoading.value;
+  bool get isLoadingSendCode => _isLoadingSendCode.value;
   final Rx<String> _code1 = Rx('');
   final Rx<String> _code2 = Rx('');
   final Rx<String> _code3 = Rx('');
@@ -35,6 +38,8 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   String get code4 => _code4.value;
   String get code5 => _code5.value;
 
+  setIsLoading(bool value) => _isLoading.value = value;
+  setIsLoadingSendCode(bool value) => _isLoadingSendCode.value = value;
   setEmail(String value) => _email.value = value;
   setErrorEmail(String? value) => _errorEmail.value = value;
   setErrorCode(String? value) => _errorCode.value = value;
@@ -100,22 +105,20 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   Future<void> onPress({bool isCodeValidate = false}) async {
     try{
       setIsLoading(true);
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
       if(isCodeValidate){
-        bottomSheet.setHeightBottomSheet(0.52);
-        await Future.delayed(Duration(milliseconds: 300));
+        bottomSheet.setHeightBottomSheet(0.55);
+        await Future.delayed(const Duration(milliseconds: 300));
         setErrorCode('');
         cleanCode();
         Get.focusScope?.unfocus();
       } else {
-        bottomSheet.setHeightBottomSheet(0.48);
-        await Future.delayed(Duration(milliseconds: 300));
+        bottomSheet.setHeightBottomSheet(0.52);
+        await Future.delayed(const Duration(milliseconds: 300));
         setShowCode(true);
         Get.focusScope?.unfocus();
       }
-    }catch(error){
-
-    }finally{
+    } finally{
       setIsLoading(false);
     }
   }

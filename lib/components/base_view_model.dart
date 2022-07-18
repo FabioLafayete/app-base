@@ -9,12 +9,6 @@ abstract class BaseViewModel<T extends GetxController> extends GetxController {
   T? controller;
   bool hasController;
 
-  final RxBool _isLoading = RxBool(false);
-
-  bool get isLoading => _isLoading.value;
-
-  setIsLoading(bool value) => _isLoading.value = value;
-
 
   @override
   void onInit() {

@@ -97,7 +97,18 @@ class LoginPage extends BaseWidget<LoginViewModel> {
                          'Código informado inválido',
                          color: colors.error,
                        ),
-                     )
+                     ),
+                   if(viewModel.showCode)
+                   CustomButton(
+                     title: 'reenviar código',
+                     colorTitle: colors.primary,
+                     cleanButton: true,
+                     loading: viewModel.isLoading,
+                     loadingColor: colors.primary,
+                     onPress: (){
+                       viewModel.onPress();
+                     }
+                   )
                  ],
                ),
              ),

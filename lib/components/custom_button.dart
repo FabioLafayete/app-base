@@ -38,7 +38,7 @@ class CustomButton extends BaseWidget {
     if(cleanButton){
       return SizedBox(
         width: width,
-        child: TextButton(
+        child: !loading ? TextButton(
             onPressed: onPress,
             child: text(
                 title,
@@ -46,6 +46,12 @@ class CustomButton extends BaseWidget {
                 fontWeight: boldText ? FontWeight.w600 : FontWeight.normal,
                 fontSize: sizeTitle
             )
+        ) : Padding(
+          padding: const EdgeInsets.only(top: 15),
+          child: SpinKitThreeBounce(
+            color: loadingColor ?? colors.background,
+            size: 20,
+          ),
         ),
       );
     }
