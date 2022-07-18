@@ -81,6 +81,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
     _code5.value = value;
     if (value.isNotEmpty) {
       Get.focusScope?.unfocus();
+      callLogin();
     } else {
       codePart4FocusNode.requestFocus();
     }
@@ -107,13 +108,13 @@ class LoginViewModel extends BaseViewModel<LoginController> {
       setIsLoading(true);
       await Future.delayed(const Duration(seconds: 1));
       if(isCodeValidate){
-        bottomSheet.setHeightBottomSheet(0.55);
+        bottomSheet.setHeightBottomSheet(0.56);
         await Future.delayed(const Duration(milliseconds: 300));
         setErrorCode('');
         cleanCode();
         Get.focusScope?.unfocus();
       } else {
-        bottomSheet.setHeightBottomSheet(0.52);
+        bottomSheet.setHeightBottomSheet(0.53);
         await Future.delayed(const Duration(milliseconds: 300));
         setShowCode(true);
         Get.focusScope?.unfocus();
@@ -123,12 +124,26 @@ class LoginViewModel extends BaseViewModel<LoginController> {
     }
   }
 
+  Future<void> resendCode() async {
+    try{
+      setIsLoadingSendCode(true);
+      Get.focusScope?.unfocus();
+      await Future.delayed(const Duration(seconds: 1));
+      cleanCode();
+      setErrorCode(null);
+      bottomSheet.setHeightBottomSheet(0.53);
+    } finally{
+      setIsLoadingSendCode(false);
+    }
+  }
+
   Future<void> changeEmail() async {
     Get.focusScope?.unfocus();
     setShowCode(false);
     cleanCode();
     bottomSheet.setHeightBottomSheet(0.35);
     setErrorEmail(null);
+    setErrorCode(null);
   }
 
   bool enableButton({bool isCodeValidate = false}) {
@@ -152,11 +167,21 @@ class LoginViewModel extends BaseViewModel<LoginController> {
     controllerCode3.clear();
     controllerCode4.clear();
     controllerCode5.clear();
-    setCode1('');
-    setCode2('');
-    setCode3('');
-    setCode4('');
-    setCode5('');
+    _code1.value = '';
+    _code2.value = '';
+    _code3.value = '';
+    _code4.value = '';
+    _code5.value = '';
+  }
+
+  callLogin(){
+    if(code1.isNotEmpty &&
+        code2.isNotEmpty &&
+        code3.isNotEmpty &&
+        code4.isNotEmpty &&
+        code5.isNotEmpty) {
+      onPress(isCodeValidate: true);
+    }
   }
 
   @override

@@ -92,22 +92,23 @@ class LoginPage extends BaseWidget<LoginViewModel> {
                    pinCodeInput(),
                    if(viewModel.errorCode != null)
                      Container(
-                       margin: EdgeInsets.only(top: 10),
+                       margin: const EdgeInsets.only(top: 10),
                        child: text(
                          'Código informado inválido',
                          color: colors.error,
                        ),
                      ),
                    if(viewModel.showCode)
-                   CustomButton(
-                     title: 'reenviar código',
-                     colorTitle: colors.primary,
-                     cleanButton: true,
-                     loading: viewModel.isLoading,
-                     loadingColor: colors.primary,
-                     onPress: (){
-                       viewModel.onPress();
-                     }
+                   Padding(
+                     padding: const EdgeInsets.only(top: 5),
+                     child: CustomButton(
+                       title: 'Enviar novo código',
+                       colorTitle: colors.primary,
+                       cleanButton: true,
+                       loading: viewModel.isLoadingSendCode,
+                       loadingColor: colors.primary,
+                       onPress: viewModel.resendCode
+                     ),
                    )
                  ],
                ),

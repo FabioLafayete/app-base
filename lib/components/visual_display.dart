@@ -89,6 +89,7 @@ class VisualDisplay {
           onEditingComplete: onEditingComplete,
           inputFormatters: inputMask,
           validator: validator,
+          autocorrect: false,
           decoration: InputDecoration(
             isDense: true,
             errorText: errorText,
@@ -161,7 +162,7 @@ class VisualDisplay {
         textAlign: TextAlign.center,
         cursorColor: AppColors().text,
         style: TextStyle(
-            color: AppColors().primary,
+            color: AppColors().text,
             fontSize: 24,
             fontWeight: FontWeight.w700
         ),

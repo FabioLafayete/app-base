@@ -131,7 +131,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   ),
                   SizedBox(height: height * 0.01),
                   CustomButton(
-                    title: 'Não tem cadastro? Adquire aqui',
+                    title: 'Não tem cadastro? Adquira aqui',
                     sizeTitle: 16,
                     colorTitle: Colors.white,
                     cleanButton: true,
