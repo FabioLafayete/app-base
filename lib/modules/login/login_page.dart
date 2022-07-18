@@ -90,6 +90,14 @@ class LoginPage extends BaseWidget<LoginViewModel> {
                    ),
                    space(0.02),
                    pinCodeInput(),
+                   if(viewModel.errorCode != null)
+                     Container(
+                       margin: EdgeInsets.only(top: 10),
+                       child: text(
+                         'Código informado inválido',
+                         color: colors.error,
+                       ),
+                     )
                  ],
                ),
              ),

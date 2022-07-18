@@ -101,10 +101,18 @@ class LoginViewModel extends BaseViewModel<LoginController> {
     try{
       setIsLoading(true);
       await Future.delayed(Duration(seconds: 1));
-      bottomSheet.setHeightBottomSheet(0.48);
-      await Future.delayed(Duration(milliseconds: 300));
-      setShowCode(true);
-      Get.focusScope?.unfocus();
+      if(isCodeValidate){
+        bottomSheet.setHeightBottomSheet(0.52);
+        await Future.delayed(Duration(milliseconds: 300));
+        setErrorCode('');
+        cleanCode();
+        Get.focusScope?.unfocus();
+      } else {
+        bottomSheet.setHeightBottomSheet(0.48);
+        await Future.delayed(Duration(milliseconds: 300));
+        setShowCode(true);
+        Get.focusScope?.unfocus();
+      }
     }catch(error){
 
     }finally{
@@ -115,25 +123,9 @@ class LoginViewModel extends BaseViewModel<LoginController> {
   Future<void> changeEmail() async {
     Get.focusScope?.unfocus();
     setShowCode(false);
+    cleanCode();
     bottomSheet.setHeightBottomSheet(0.35);
     setErrorEmail(null);
-  }
-
-  Future<void> checkCode() async {
-    try{
-      setIsLoading(true);
-      await Future.delayed(Duration(seconds: 1));
-
-      if(false) {
-
-      } else {
-        setErrorCode('');
-      }
-    }catch(error){
-
-    }finally{
-      setIsLoading(false);
-    }
   }
 
   bool enableButton({bool isCodeValidate = false}) {
@@ -151,6 +143,19 @@ class LoginViewModel extends BaseViewModel<LoginController> {
     return false;
   }
 
+  cleanCode(){
+    controllerCode1.clear();
+    controllerCode2.clear();
+    controllerCode3.clear();
+    controllerCode4.clear();
+    controllerCode5.clear();
+    setCode1('');
+    setCode2('');
+    setCode3('');
+    setCode4('');
+    setCode5('');
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -160,16 +165,7 @@ class LoginViewModel extends BaseViewModel<LoginController> {
 
   void cleanLogin(){
     setEmail('');
-    setCode1('');
-    setCode2('');
-    setCode3('');
-    setCode4('');
-    setCode5('');
-    controllerCode1.clear();
-    controllerCode2.clear();
-    controllerCode3.clear();
-    controllerCode4.clear();
-    controllerCode5.clear();
+    cleanCode();
     controllerEmail.clear();
     Get.focusScope?.unfocus();
     setShowCode(false);

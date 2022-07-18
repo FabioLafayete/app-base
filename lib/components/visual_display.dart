@@ -172,7 +172,8 @@ class VisualDisplay {
           filled: false,
           errorText: errorText != null ? '' : null,
           fillColor: AppColors().primary.withOpacity(0.05),
-          isCollapsed: true,
+          isCollapsed: false,
+          isDense: true,
           contentPadding: const EdgeInsets.all(6),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(width * 0.03),
@@ -204,6 +205,7 @@ class VisualDisplay {
               color: AppColors().error,
             ),
           ),
+          errorStyle: const TextStyle(fontSize: 0.01)
         ),
         onChanged: onChanged,
         focusNode: focusNode,
