@@ -24,3 +24,7 @@ M
 lib/components/base_page.dart,d/1/d18abca445bf12bd91ae513187f58beb5bd6c2ae
 g
 7lib/components/bottom_sheet/botto_sheet_view_model.dart,a/4/a4283efd59919d6aec19fac8cfda9f4998a470ff
+]
+-lib/components/bottom_sheet/bottom_sheet.dart,b/4/b43f2d8801ed1eb32d1c560df882bb64723690de
+]
+-lib/modules/login/widgets/welcome_widget.dart,6/8/68812372210c3100a22b8e531cc6c77ba54912bb

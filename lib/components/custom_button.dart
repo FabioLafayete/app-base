@@ -36,10 +36,12 @@ class CustomButton extends BaseWidget {
   @override
   Widget build(BuildContext context) {
     if(cleanButton){
-      return SizedBox(
-        width: width,
+      return Center(
         child: !loading ? TextButton(
             onPressed: onPress,
+            style: ButtonStyle(
+                overlayColor: MaterialStateColor.resolveWith((states) => Colors.transparent)
+            ),
             child: text(
                 title,
                 color: colorTitle ?? colors.text,
