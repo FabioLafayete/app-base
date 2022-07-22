@@ -7,7 +7,7 @@ import 'onboard_controller.dart';
 class OnboardViewModel extends BaseViewModel<OnboardController> {
 
   final RxInt _index = RxInt(1);
-  final RxList<Widget> _steps = RxList(List.generate(5, (index) => Container()).toList());
+  final RxList<Widget> _steps = RxList(List.generate(10, (index) => Container()).toList());
 
   int get index => _index.value;
   List<Widget> get steps => _steps;

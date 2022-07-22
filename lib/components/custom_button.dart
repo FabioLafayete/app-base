@@ -103,7 +103,7 @@ class CustomButton extends BaseWidget {
         backgroundColor: MaterialStateProperty.all<Color>(colorButton ?? colors.primary),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(13.0),
+                borderRadius: BorderRadius.circular(1000.0),
                 side: colorBorder != null ? BorderSide(color: colorBorder!) : BorderSide.none
             )
         )
@@ -118,7 +118,7 @@ class CustomButton extends BaseWidget {
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(13.0),
+                borderRadius: BorderRadius.circular(1000.0),
                 side: colorBorder != null ? BorderSide(color: colorBorder!) : BorderSide.none
             )
         )

@@ -15,32 +15,32 @@ class OnboardPage extends BaseWidget<OnboardViewModel> {
   Widget build(BuildContext context) {
     return BasePage(
       padding: 0,
-      body: Obx(() => Column(
-        children: [
-          space(0.05),
-          VisualDisplay.progressBar(
-              totalItems: viewModel.steps.length,
-              index: viewModel.index
-          ),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: CustomButton(
-              title: 'AVANCAR',
-              colorTitle: colors.background,
-              colorButton: colors.primary,
-              iconRight: true,
-              onPress: (){
-                print(viewModel.index);
-                print(viewModel.steps.length);
-
-                viewModel.setIndex(viewModel.index + 1);
-              },
+      showAppBar: false,
+      body: SafeArea(
+        child: Obx(() => Column(
+          children: [
+            space(0.01),
+            VisualDisplay.progressBar(
+                totalItems: viewModel.steps.length,
+                index: viewModel.index
             ),
-          ),
-          space(0.05),
-        ],
-      )),
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: CustomButton(
+                title: 'AVANCAR',
+                colorTitle: colors.background,
+                colorButton: colors.primary,
+                iconRight: true,
+                onPress: (){
+                  viewModel.setIndex(viewModel.index + 1);
+                },
+              ),
+            ),
+            space(0.05),
+          ],
+        )),
+      ),
     );
   }
 }
