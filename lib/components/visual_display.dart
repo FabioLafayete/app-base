@@ -215,4 +215,27 @@ class VisualDisplay {
     );
   }
 
+  static Widget progressBar({
+    required int totalItems,
+    required int index,
+  }){
+    print(((index == 0 ? 1 : index) / totalItems));
+    return Container(
+      height: 5,
+      width: Get.width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100),
+        color: AppColors().primary.withOpacity(0.1),
+      ),
+      child: Center(
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          color: AppColors().primary,
+          //width: Get.width / ((index == 0 ? 1 : index) / totalItems),
+          width: Get.width / ((index == 0 ? 1 : index) / totalItems),
+        ),
+      ),
+    );
+  }
+
 }

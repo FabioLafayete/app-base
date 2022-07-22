@@ -1,4 +1,6 @@
 import 'package:app/modules/login/login_bindings.dart';
+import 'package:app/modules/onboard/onboard_bindings.dart';
+import 'package:app/modules/onboard/onboard_page.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +19,11 @@ abstract class PagesRoutes {
         name: PagesNames.login,
         page: () => LoginPage(),
         binding: LoginBindings()
+    ),
+    GetPage(
+        name: PagesNames.onboard,
+        page: () => OnboardPage(),
+        binding: OnboardBinding()
     ),
   ];
 }
