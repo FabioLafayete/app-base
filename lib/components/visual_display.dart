@@ -31,6 +31,7 @@ class VisualDisplay {
     Widget? icon,
     String? labelText,
     String? errorText,
+    String? initialValue,
     bool? obscure,
     Function(String)? onChanged,
     Function()? onEditingComplete,
@@ -74,6 +75,7 @@ class VisualDisplay {
         ),
         TextFormField(
           controller: controller,
+          initialValue: initialValue,
           onChanged: onChanged,
           style: TextStyle(
               color: colorText ?? AppColors().text,
@@ -230,7 +232,7 @@ class VisualDisplay {
       child: AnimatedContainer(
           duration: const Duration(milliseconds: 500),
           color: AppColors().primary,
-          width: Get.width * ((index == 0 ? 1 : index) / totalItems),
+          width: Get.width * ((index == 0 ? 1 : index + 1) / totalItems),
       ),
     );
   }

@@ -26,7 +26,7 @@ abstract class BaseWidget<T extends GetxController> extends StatelessWidget {
     );
   }
 
-  T get viewModel {
+  T get controller {
     if (_value.isEmpty) _value.add(Get.find<T>());
     return _value.first;
   }

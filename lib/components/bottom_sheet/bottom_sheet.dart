@@ -34,7 +34,7 @@ class CustomBottomSheet extends BaseWidget<BottomSheetViewModel> {
               children: [
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
-                  height: height * viewModel.heightBottomSheet,
+                  height: height * controller.heightBottomSheet,
                   padding: const EdgeInsets.all(16).copyWith(
                       top: 30
                   ),

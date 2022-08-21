@@ -1,12 +1,10 @@
-import 'package:app/modules/login/login_controller.dart';
 import 'package:app/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../components/base_view_model.dart';
-import '../../components/bottom_sheet/botto_sheet_view_model.dart';
+import '../../../components/bottom_sheet/botto_sheet_view_model.dart';
 
-class LoginViewModel extends BaseViewModel<LoginController> {
+class LoginController extends GetxController {
 
 
   final RxString _email = RxString('');

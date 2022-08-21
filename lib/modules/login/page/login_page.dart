@@ -1,12 +1,12 @@
 import 'package:app/components/custom_button.dart';
 import 'package:app/components/visual_display.dart';
+import 'package:app/modules/login/controller/login_controller.dart';
 import 'package:app/modules/login/widgets/welcome_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../components/base_widget.dart';
-import 'login_view_model.dart';
+import '../../../components/base_widget.dart';
 
-class LoginPage extends BaseWidget<LoginViewModel> {
+class LoginPage extends BaseWidget<LoginController> {
 
   LoginPage({Key? key}) : super(key: key);
 
@@ -30,7 +30,7 @@ class LoginPage extends BaseWidget<LoginViewModel> {
            ),
            space(0.05),
            VisualDisplay.textField(
-               controller: viewModel.controllerEmail,
+               controller: controller.controllerEmail,
                labelText: 'E-mail',
                fillColor: Colors.white,
                colorBorder: Colors.white,
@@ -39,18 +39,18 @@ class LoginPage extends BaseWidget<LoginViewModel> {
                colorLabel: colors.textSecondary,
                colorLabelFocus: colors.textSecondary,
                textInputType: TextInputType.emailAddress,
-               readOnly: viewModel.showCode,
-               errorText: viewModel.errorEmail,
+               readOnly: controller.showCode,
+               errorText: controller.errorEmail,
                onEditingComplete: (){
-                 if(viewModel.enableButton()){
-                   viewModel.onPress();
+                 if(controller.enableButton()){
+                   controller.onPress();
                  } else {
-                   viewModel.setErrorEmail('Digite um e-mail válido');
+                   controller.setErrorEmail('Digite um e-mail válido');
                  }
                },
                validator: (txt) {
-                 if(viewModel.errorEmail != null){
-                   return viewModel.errorEmail;
+                 if(controller.errorEmail != null){
+                   return controller.errorEmail;
                  }
                  if(txt != null){
                    if(!GetUtils.isEmail(txt)){
@@ -59,24 +59,24 @@ class LoginPage extends BaseWidget<LoginViewModel> {
                  }
                  return null;
                },
-               suffix: viewModel.showCode ?
+               suffix: controller.showCode ?
                GestureDetector(
-                   onTap: viewModel.changeEmail,
+                   onTap: controller.changeEmail,
                    child: text(
                        'trocar e-mail', color: colors.primary,
                        fontWeight: FontWeight.w600
                    )
                ) : null,
                onChanged: (email) {
-                 viewModel.setEmail(email);
+                 controller.setEmail(email);
                  if(GetUtils.isEmail(email)){
-                   viewModel.setErrorEmail(null);
+                   controller.setErrorEmail(null);
                  }
                },
 
            ),
            space(0.03),
-           if(viewModel.showCode)
+           if(controller.showCode)
              Container(
                margin: EdgeInsets.symmetric(horizontal: width * 0.01).copyWith(
                  bottom: height * 0.03,
@@ -90,7 +90,7 @@ class LoginPage extends BaseWidget<LoginViewModel> {
                    ),
                    space(0.02),
                    pinCodeInput(),
-                   if(viewModel.errorCode != null)
+                   if(controller.errorCode != null)
                      Container(
                        margin: const EdgeInsets.only(top: 10),
                        child: text(
@@ -98,16 +98,16 @@ class LoginPage extends BaseWidget<LoginViewModel> {
                          color: colors.error,
                        ),
                      ),
-                   if(viewModel.showCode)
+                   if(controller.showCode)
                    Padding(
                      padding: const EdgeInsets.only(top: 5),
                      child: CustomButton(
                        title: 'Enviar novo código',
                        colorTitle: colors.primary,
                        cleanButton: true,
-                       loading: viewModel.isLoadingSendCode,
+                       loading: controller.isLoadingSendCode,
                        loadingColor: colors.primary,
-                       onPress: viewModel.resendCode
+                       onPress: controller.resendCode
                      ),
                    )
                  ],
@@ -115,20 +115,20 @@ class LoginPage extends BaseWidget<LoginViewModel> {
              ),
            const Spacer(),
            CustomButton(
-             title: viewModel.showCode ? 'VALIDAR CÓDIGO' : 'AVANÇAR',
+             title: controller.showCode ? 'VALIDAR CÓDIGO' : 'AVANÇAR',
              colorTitle: colors.background,
              colorButton: colors.primary,
-             iconRight: viewModel.showCode ? false :  true,
-             loading: viewModel.isLoading,
-             onPress: viewModel.enableButton(isCodeValidate: viewModel.showCode) ?
-                 () => viewModel.onPress(isCodeValidate: viewModel.showCode) : null,
+             iconRight: controller.showCode ? false :  true,
+             loading: controller.isLoading,
+             onPress: controller.enableButton(isCodeValidate: controller.showCode) ?
+                 () => controller.onPress(isCodeValidate: controller.showCode) : null,
            ),
            space(0.02)
          ],
        )),
         dismissible: false,
         onClose: (){
-          viewModel.cleanLogin();
+          controller.cleanLogin();
         }
     );
   }
@@ -138,39 +138,39 @@ class LoginPage extends BaseWidget<LoginViewModel> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         VisualDisplay.textFieldPin(
-            onChanged: viewModel.setCode1,
-            focusNode: viewModel.codePart1FocusNode,
-            controller: viewModel.controllerCode1,
-            listenText: viewModel.code1,
-            errorText: viewModel.errorCode
+            onChanged: controller.setCode1,
+            focusNode: controller.codePart1FocusNode,
+            controller: controller.controllerCode1,
+            listenText: controller.code1,
+            errorText: controller.errorCode
         ),
         VisualDisplay.textFieldPin(
-            onChanged: viewModel.setCode2,
-            focusNode: viewModel.codePart2FocusNode,
-            controller: viewModel.controllerCode2,
-            listenText: viewModel.code2,
-            errorText: viewModel.errorCode
+            onChanged: controller.setCode2,
+            focusNode: controller.codePart2FocusNode,
+            controller: controller.controllerCode2,
+            listenText: controller.code2,
+            errorText: controller.errorCode
         ),
         VisualDisplay.textFieldPin(
-            onChanged: viewModel.setCode3,
-            focusNode: viewModel.codePart3FocusNode,
-            controller: viewModel.controllerCode3,
-            listenText: viewModel.code3,
-            errorText: viewModel.errorCode
+            onChanged: controller.setCode3,
+            focusNode: controller.codePart3FocusNode,
+            controller: controller.controllerCode3,
+            listenText: controller.code3,
+            errorText: controller.errorCode
         ),
         VisualDisplay.textFieldPin(
-            onChanged: viewModel.setCode4,
-            focusNode: viewModel.codePart4FocusNode,
-            controller: viewModel.controllerCode4,
-            listenText: viewModel.code4,
-            errorText: viewModel.errorCode
+            onChanged: controller.setCode4,
+            focusNode: controller.codePart4FocusNode,
+            controller: controller.controllerCode4,
+            listenText: controller.code4,
+            errorText: controller.errorCode
         ),
         VisualDisplay.textFieldPin(
-            onChanged: viewModel.setCode5,
-            focusNode: viewModel.codePart5FocusNode,
-            controller: viewModel.controllerCode5,
-            listenText: viewModel.code5,
-            errorText: viewModel.errorCode
+            onChanged: controller.setCode5,
+            focusNode: controller.codePart5FocusNode,
+            controller: controller.controllerCode5,
+            listenText: controller.code5,
+            errorText: controller.errorCode
         ),
       ],
     ));
