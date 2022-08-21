@@ -8,18 +8,25 @@ class SelectItem extends BaseWidget {
     Key? key,
     required this.items,
     required this.onChange,
-    this.backgroundColor
+    this.backgroundColor,
+    this.initialValue
   }) : super(key: key);
 
   final List<SelectItemMenu> items;
   final Function(SelectItemMenu?) onChange;
   final Color? backgroundColor;
+  final String? initialValue;
 
   Rxn<SelectItemMenu> itemSelected = Rxn();
 
   @override
   Widget build(BuildContext context) {
-
+    if(initialValue != null){
+      print(initialValue);
+      itemSelected.value = items.firstWhereOrNull(
+              (element) => element.title == initialValue
+      );
+    }
     return Column(
       children: List.generate(items.length,
               (index) => Obx(() => _item(items[index]))),
@@ -30,7 +37,10 @@ class SelectItem extends BaseWidget {
     bool isSelected = itemSelected.value != null && itemSelected.value == item;
     bool hasIcon = item.icon != null;
     return GestureDetector(
-        onTap: () => itemSelected.value = item,
+        onTap: (){
+          itemSelected.value = item;
+          onChange(item);
+        },
         child: Container(
           margin: const EdgeInsets.only(top: 20),
           decoration: BoxDecoration(

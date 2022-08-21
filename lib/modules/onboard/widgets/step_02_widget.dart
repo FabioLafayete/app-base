@@ -1,9 +1,9 @@
 import 'package:app/components/base_widget.dart';
 import 'package:app/modules/onboard/controller/onboard_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../components/select_item/select_item.dart';
-import '../../../components/visual_display.dart';
 
 class Step02Widget extends BaseWidget<OnboardController> {
   Step02Widget({Key? key}) : super(key: key);
@@ -23,7 +23,8 @@ class Step02Widget extends BaseWidget<OnboardController> {
         space(0.1),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: SelectItem(
+          child: Obx(() => SelectItem(
+            initialValue: controller.gender,
             items: [
               SelectItemMenu(
                   title: 'Masculino',
@@ -38,10 +39,8 @@ class Step02Widget extends BaseWidget<OnboardController> {
                   icon: text('👱‍️', fontSize: 18)
               ),
             ],
-            onChange: (value){
-
-            },
-          ),
+            onChange: (value) => controller.setGender(value?.title),
+          )),
         )
       ],
     );
