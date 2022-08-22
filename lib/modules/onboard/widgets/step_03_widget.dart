@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 
 import '../../../components/select_item/select_item.dart';
 
-class Step02Widget extends BaseWidget<OnboardController> {
-  Step02Widget({Key? key}) : super(key: key);
+class Step03Widget extends BaseWidget<OnboardController> {
+  Step03Widget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,31 +15,32 @@ class Step02Widget extends BaseWidget<OnboardController> {
       children: [
         space(0.05),
         text(
-          'Qual o seu gênero?',
+          'Qual o seu principal objetivo?',
           fontSize: 25,
           color: colors.text,
-          fontWeight: FontWeight.w700
+          fontWeight: FontWeight.w700,
+          textAlign: TextAlign.center
         ),
         const Spacer(),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Obx(() => SelectItem(
-            initialValue: controller.gender,
+            initialValue: controller.target,
             items: [
               SelectItemMenu(
-                  title: 'Masculino',
-                  icon: text('👱‍♂️', fontSize: 24)
+                  title: 'Perder peso',
+                  icon: text('🏋️‍♀️', fontSize: 24)
               ),
               SelectItemMenu(
-                  title: 'Feminino',
-                  icon: text('👩', fontSize: 24)
+                  title: 'Ganhar massa muscular',
+                  icon: text('💪️', fontSize: 24)
               ),
               SelectItemMenu(
-                  title: 'Outro',
-                  icon: text('👱‍️', fontSize: 24)
+                  title: 'Definir e manter o peso',
+                  icon: text('🏃‍♀️', fontSize: 24)
               ),
             ],
-            onChange: (value) => controller.setGender(value?.title),
+            onChange: (value) => controller.setTarget(value?.title),
           )),
         )
       ],

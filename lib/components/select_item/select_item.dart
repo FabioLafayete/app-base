@@ -56,10 +56,7 @@ class SelectItem extends BaseWidget {
             children: [
               if(hasIcon)
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 16
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: item.icon!,
                 ),
               Expanded(

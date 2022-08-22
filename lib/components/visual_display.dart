@@ -30,6 +30,7 @@ class VisualDisplay {
   static Widget textField({
     Widget? icon,
     String? labelText,
+    String? hintText,
     String? errorText,
     String? initialValue,
     bool? obscure,
@@ -39,6 +40,7 @@ class VisualDisplay {
     TextInputAction? textInputAction,
     List<TextInputFormatter>? inputMask,
     Color? colorLabel,
+    Color? colorHint,
     Color? fillColor,
     Color? colorLabelFocus,
     Color? colorText,
@@ -105,6 +107,12 @@ class VisualDisplay {
             fillColor: fillColor,
             contentPadding: const EdgeInsets.all(20).copyWith(left: 10),
             icon: icon,
+            hintText: hintText,
+            hintStyle: TextStyle(
+                color: colorHint,
+                fontSize: 16,
+                fontWeight: FontWeight.w400
+            ),
             labelText: labelText,
             labelStyle: TextStyle(
                 color: colorLabel,
