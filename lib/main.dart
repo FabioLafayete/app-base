@@ -33,7 +33,7 @@ Future _preload() async {
   Get.put(Themes(), permanent: true);
   Get.put(BottomSheetController());
   Get.put(BottomSheetViewModel());
-  //Get.changeTheme(Themes().darkTheme);
+  Get.changeTheme(Themes().darkTheme);
 
   await Future.wait([
     AppConfig().load(),

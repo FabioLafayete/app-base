@@ -10,6 +10,8 @@ import '../../../components/custom_button.dart';
 import '../widgets/step_02_widget.dart';
 import '../widgets/step_03_widget.dart';
 import '../widgets/step_04_widget.dart';
+import '../widgets/step_05_widget.dart';
+import '../widgets/step_06_widget.dart';
 
 class OnboardPage extends BaseWidget<OnboardController> {
 
@@ -23,8 +25,8 @@ class OnboardPage extends BaseWidget<OnboardController> {
       Step02Widget(),
       Step03Widget(),
       Step04Widget(),
-      Container(color: Colors.yellow),
-      Container(color: Colors.grey),
+      Step05Widget(),
+      Step06Widget(),
       Container(color: Colors.green),
     ];
 

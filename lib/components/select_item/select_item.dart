@@ -73,7 +73,7 @@ class SelectItem extends BaseWidget {
                       Colors.transparent,
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 18),
-                    alignment: Alignment.center,
+                    alignment: Alignment.centerLeft,
                       child: text(
                           item.title,
                           fontSize: 16,

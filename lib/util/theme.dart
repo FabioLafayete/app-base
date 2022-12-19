@@ -28,7 +28,7 @@ class Themes extends GetxController{
     )
   );
 
-  final darkTheme = ThemeData.light().copyWith(
+  final darkTheme = ThemeData.dark().copyWith(
       primaryColor: AppColors().dark.primary,
       primaryColorLight: AppColors().dark.secondary,
       backgroundColor: AppColors().dark.background,

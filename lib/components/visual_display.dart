@@ -225,6 +225,68 @@ class VisualDisplay {
     );
   }
 
+
+  static Widget textFieldClean({
+    String? hintText,
+    String? errorText,
+    String? initialValue,
+    bool? obscure,
+    Function(String)? onChanged,
+    Function()? onEditingComplete,
+    TextInputType? textInputType,
+    TextInputAction? textInputAction,
+    List<TextInputFormatter>? inputMask,
+    Color? colorHint,
+    Color? fillColor,
+    Color? colorText,
+    Color? colorCursor,
+    bool readOnly = false,
+    AutovalidateMode? autoValidateMode,
+    String? Function(String?)? validator,
+    Widget? prefix,
+    TextEditingController? controller
+  }){
+    return TextFormField(
+      controller: controller,
+      initialValue: initialValue,
+      onChanged: onChanged,
+      style: TextStyle(
+          color: colorText ?? AppColors().text,
+          fontSize: 64,
+          fontWeight: FontWeight.w700
+      ),
+      obscureText: obscure ?? false,
+      readOnly: readOnly,
+      keyboardType: textInputType,
+      autovalidateMode: autoValidateMode,
+      textInputAction: textInputAction,
+      cursorColor: colorCursor,
+      onEditingComplete: onEditingComplete,
+      inputFormatters: inputMask,
+      validator: validator,
+      autocorrect: false,
+      textAlign: TextAlign.start,
+      decoration: InputDecoration(
+        isDense: true,
+        contentPadding: const EdgeInsets.only(bottom: 0),
+        errorText: errorText,
+        prefixIcon: prefix,
+        alignLabelWithHint: true,
+        filled: fillColor != null ? true : false,
+        fillColor: fillColor,
+        hintText: hintText,
+        hintStyle: TextStyle(
+            color: colorHint,
+            fontSize: 64,
+            fontWeight: FontWeight.w500
+        ),
+        hoverColor: Colors.transparent,
+        enabledBorder: InputBorder.none,
+        border: InputBorder.none
+      ),
+    );
+  }
+
   static Widget progressBar({
     required int totalItems,
     required int index,

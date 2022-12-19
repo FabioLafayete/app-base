@@ -16,7 +16,7 @@ class Step04Widget extends BaseWidget<OnboardController> {
       children: [
         space(0.05),
         text(
-          'Qual o seu principal objetivo?',
+          'E sua data de nascimento?',
           fontSize: 25,
           color: colors.text,
           fontWeight: FontWeight.w700,
