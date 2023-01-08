@@ -72,7 +72,7 @@ class SelectItem extends BaseWidget {
                       (backgroundColor ?? colors.primary) :
                       Colors.transparent,
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 18),
+                    padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 10),
                     alignment: Alignment.centerLeft,
                       child: text(
                           item.title,

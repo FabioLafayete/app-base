@@ -16,7 +16,7 @@ void main() async {
   runApp(
       GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: PagesNames.onboard,
+        initialRoute: PagesNames.home,
         getPages: PagesRoutes.pages,
         locale: const Locale('pt', 'BR'),
         theme: Themes().lightTheme,

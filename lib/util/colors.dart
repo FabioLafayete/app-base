@@ -6,8 +6,8 @@ class AppColors {
   final ColorsSchema _light = ColorsSchema(
     text: Colors.white,
     textSecondary: Colors.white60,
-    primary: const Color.fromRGBO(60, 185, 142, 1),
-    secondary: const Color.fromRGBO(35, 134, 114, 1),
+    primary: Colors.pink.shade400,
+    secondary: Colors.pink.shade700,
     background: const Color.fromRGBO(245, 245, 245, 1),
     error: const Color(0xFFC21D4F),
   );
@@ -15,8 +15,8 @@ class AppColors {
   final ColorsSchema _dark = ColorsSchema(
       text: Colors.black,
       textSecondary: Colors.black54,
-      primary: const Color.fromRGBO(60, 185, 142, 1),
-      secondary: const Color.fromRGBO(35, 134, 114, 1),
+      primary: Colors.pink.shade400,
+      secondary: Colors.pink.shade700,
       background: const Color.fromRGBO(245, 245, 245, 1),
       error: const Color(0xFFC21D4F),
   );

@@ -9,8 +9,8 @@ import '../../../components/select_item/select_item.dart';
 import '../../../components/visual_display.dart';
 
 
-class Step06Widget extends BaseWidget<OnboardController> {
-  Step06Widget({Key? key}) : super(key: key);
+class Step07Widget extends BaseWidget<OnboardController> {
+  Step07Widget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class Step06Widget extends BaseWidget<OnboardController> {
       children: [
         space(0.05),
         text(
-          'Qual o seu peso atual?',
+          'Qual sua altura?',
           fontSize: 25,
           color: colors.text,
           fontWeight: FontWeight.w700,
@@ -32,7 +32,7 @@ class Step06Widget extends BaseWidget<OnboardController> {
             children: [
               Expanded(
                 child: VisualDisplay.textFieldClean(
-                  hintText: '00',
+                  hintText: '000',
                   colorHint: Colors.black.withOpacity(0.4),
                   colorCursor: Colors.black,
                   textInputType: TextInputType.number,
@@ -43,7 +43,7 @@ class Step06Widget extends BaseWidget<OnboardController> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: text(
-                    'kg',
+                    'cm',
                     fontSize: 25,
                     color: colors.text,
                     fontWeight: FontWeight.w700,

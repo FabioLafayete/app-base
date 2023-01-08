@@ -281,8 +281,8 @@ class VisualDisplay {
             fontWeight: FontWeight.w500
         ),
         hoverColor: Colors.transparent,
-        enabledBorder: InputBorder.none,
-        border: InputBorder.none
+        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(style: BorderStyle.solid, color: Colors.black.withOpacity(0.5))),
+        enabledBorder: UnderlineInputBorder(borderSide: BorderSide(style: BorderStyle.solid, color: Colors.black.withOpacity(0.5)))
       ),
     );
   }

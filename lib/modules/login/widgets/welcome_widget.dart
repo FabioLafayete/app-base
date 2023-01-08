@@ -26,13 +26,16 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
 
   final List<String> _images01 = [
     'https://images.pexels.com/photos/1128678/pexels-photo-1128678.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/4051252/pexels-photo-4051252.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    // 'https://images.pexels.com/photos/4051252/pexels-photo-4051252.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/66346/pexels-photo-66346.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     'https://images.pexels.com/photos/1153369/pexels-photo-1153369.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
   ];
   final List<String> _images02 = [
     'https://images.pexels.com/photos/992819/pexels-photo-992819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/1310777/pexels-photo-1310777.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/8852027/pexels-photo-8852027.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+    // 'https://images.pexels.com/photos/1310777/pexels-photo-1310777.jpeg?auto=compress&cs=tinysrgb&w=800',
+    // 'https://images.pexels.com/photos/8852027/pexels-photo-8852027.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/3297882/pexels-photo-3297882.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/416809/pexels-photo-416809.jpeg?auto=compress&cs=tinysrgb&w=1600'
   ];
   final List<String> _images03 = [
     'https://images.pexels.com/photos/66346/pexels-photo-66346.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
@@ -40,9 +43,10 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     'https://images.pexels.com/photos/3059981/pexels-photo-3059981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
   ];
   final List<String> _images04 = [
-    'https://images.pexels.com/photos/66346/pexels-photo-66346.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     'https://images.pexels.com/photos/4057738/pexels-photo-4057738.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/5946045/pexels-photo-5946045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+    // 'https://images.pexels.com/photos/5946045/pexels-photo-5946045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+    'https://images.pexels.com/photos/4051252/pexels-photo-4051252.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/4944978/pexels-photo-4944978.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
   ];
 
   final double width = Get.width;
@@ -109,7 +113,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   SizedBox(
                       width: width * 0.8,
                       child: text(
-                        'Bem-vinda a NOME-APP',
+                        'Bem-vinda ao Impullse!',
                         fontSize: width * 0.1,
                         fontWeight: FontWeight.w600,
                         color: colors.background
@@ -117,7 +121,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   ),
                   SizedBox(height: height * 0.05),
                   text(
-                      'Um lugar feito para você, por você! Onde a saúde e bem-estar esta em primeiro lugar.',
+                      'Explore nossa motivação e encontre sua força',
                       color: colors.background,
                       fontSize: width * 0.05
                   ),
@@ -155,16 +159,16 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
           return Container(
             margin: const EdgeInsets.symmetric(vertical: 3),
             width: width * 0.3,
-            height: height * 0.18,
+            height: height * 0.19,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
-                    width: 2.5,
+                    width: 0,
                     color: _showLogo ? Colors.transparent : colors.background.withOpacity(0.8)
                 )
             ),
             child: _showLogo ? Center(
-              child: Icon(Icons.favorite, size: 50, color: colors.background),
+              child: Icon(Icons.flash_on, size: 50, color: colors.background),
             ) :
             ClipRRect(
               borderRadius: BorderRadius.circular(13),
@@ -188,6 +192,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
+                Colors.white,
                 colors.primary,
                 colors.secondary,
               ]
