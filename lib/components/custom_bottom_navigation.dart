@@ -1,5 +1,7 @@
+import 'package:app/route/pages_name.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class CustomBottomNavigation extends StatefulWidget {
@@ -10,11 +12,15 @@ class CustomBottomNavigation extends StatefulWidget {
 }
 
 class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
+
+  late Size size;
+  late double bottom;
+
   List<BottomNavigationBarModel> lists = [
     BottomNavigationBarModel(
       name: 'Home',
-      icon: Icons.whatshot,
-      routerName: '/home',
+      icon: FontAwesomeIcons.heartPulse,
+      routerName: PagesNames.home,
     ),
     BottomNavigationBarModel(
       name: 'Alimentação',
@@ -22,7 +28,7 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
     ),
     BottomNavigationBarModel(
       name: 'Treinos',
-      icon: Icons.fitness_center_outlined,
+      icon: FontAwesomeIcons.dumbbell,
     ),
     BottomNavigationBarModel(
       name: 'Comunidade',
@@ -32,36 +38,40 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
 
   @override
   Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
+    bottom = MediaQuery.of(context).padding.bottom;
     return _bar(lists);
   }
 
   double get spaceButton => 24;
 
   Widget _bar(List<BottomNavigationBarModel> list) {
+
     final values = [...list];
 
-    return LayoutBuilder(builder: (context, constraints) {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            padding: EdgeInsets.only(bottom: spaceButton, top: 15, left: 5, right: 5),
-            decoration: BoxDecoration(
-              color: AppColors().background,
-              border: Border.all(
-                color: Colors.grey.withOpacity(0.5), width: 0.2
-              )
-            ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Card(
+          color: AppColors().background,
+          margin: EdgeInsets.symmetric(horizontal: size.width * 0.15).copyWith(bottom: spaceButton),
+          elevation: 3,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(1000),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ...values.map((it) => _item(it)),
               ],
             ),
           ),
-        ],
-      );
-    });
+        ),
+      ],
+    );
   }
 
   Widget _item(BottomNavigationBarModel item) {
@@ -82,20 +92,21 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (item.name?.isNotEmpty ?? false)
-                Icon(
+              SizedBox(
+                child: Icon(
                   item.icon,
                   color: color,
                 ),
-              const SizedBox(height: 3),
-              Text(
-                item.name ?? '',
-                style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: sameHere ? FontWeight.w800 : FontWeight.w400,
-                    color: color
-                ),
               ),
+              // const SizedBox(height: 3),
+              // Text(
+              //   item.name ?? '',
+              //   style: TextStyle(
+              //       fontSize: 10,
+              //       fontWeight: sameHere ? FontWeight.w800 : FontWeight.w400,
+              //       color: color
+              //   ),
+              // ),
             ],
           ),
         ),

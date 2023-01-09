@@ -20,6 +20,7 @@ dependencies:
   easy_mask: 2.0.1
   flutter_holo_date_picker: 1.0.6
   percent_indicator: 4.0.1
+  font_awesome_flutter: 10.3.0
 
 
 dev_dependencies:
