@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import '../modules/home/binding/home_bindings.dart';
 import '../modules/home/page/home_page.dart';
 import '../modules/login/page/login_page.dart';
+import '../modules/navigator/binding/nav_bindings.dart';
+import '../modules/navigator/page/nav_page.dart';
 
 abstract class PagesRoutes {
   static final pages = [
@@ -23,6 +25,11 @@ abstract class PagesRoutes {
         name: PagesNames.home,
         page: () => HomePage(),
         binding: HomeBindings()
+    ),
+    GetPage(
+        name: PagesNames.nav,
+        page: () => NavPage(),
+        binding: NavBindings()
     ),
   ];
 }

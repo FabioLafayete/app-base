@@ -21,14 +21,24 @@ dependencies:
   flutter_holo_date_picker: 1.0.6
   percent_indicator: 4.0.1
   font_awesome_flutter: 10.3.0
-
+  video_player: 2.5.1
+  chewie: 1.4.0
+  sliding_up_panel: 2.0.0+1
+  timeago: 3.3.0
+  miniplayer: 1.0.1
+  freezed_annotation: 2.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  freezed: 2.3.2
+  build_runner: 2.3.3
+  json_serializable: 6.6.1
   flutter_lints: ^2.0.0
 
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - assets/video/
