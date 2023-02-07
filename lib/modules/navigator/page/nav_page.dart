@@ -38,47 +38,14 @@ class NavPage extends BaseWidget<NavController> {
               child: SafeArea(
                 child: Miniplayer(
                 minHeight: 80,
-                backgroundColor: colors.background,
+                backgroundColor: Colors.transparent,
                 controller: controller.miniplayerController,
                 maxHeight: height,
                 builder: (heightPlayer, percentage){
-                  if(controller.videoSelected == null) return  SizedBox.shrink();
-                  return Container(
-                    color: colors.background,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Flexible(
-                          child: Stack(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    color: Colors.red,
-                                    width: width * 0.6,
-                                    height: 80,
-                                    child: Row(
-                                      children: [
-                                        text(controller.videoSelected!.name),
-
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Flexible(
-                                child: VideoPlayerView(
-                                  dataSourceType: controller.videoSelected!.type,
-                                  url: controller.videoSelected!.url
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                  if(controller.videoSelected == null) return const SizedBox.shrink();
+                  return VideoPlayerView(
+                      dataSourceType: controller.videoSelected!.type,
+                      url: controller.videoSelected!.url
                   );
                 })
               )
