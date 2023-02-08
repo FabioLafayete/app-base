@@ -42,6 +42,7 @@ class NavPage extends BaseWidget<NavController> {
                 controller: controller.miniplayerController,
                 maxHeight: height,
                 builder: (heightPlayer, percentage){
+                  controller.setPercentVideo(percentage);
                   if(controller.videoSelected == null) return const SizedBox.shrink();
                   return VideoPlayerView(
                       dataSourceType: controller.videoSelected!.type,

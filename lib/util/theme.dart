@@ -10,7 +10,6 @@ class Themes extends GetxController{
     isDarkMode = !isDarkMode;
     if (isDarkMode) {
       Get.changeTheme(darkTheme);
-      Get.isDarkMode;
     } else {
       Get.changeTheme(lightTheme);
     }

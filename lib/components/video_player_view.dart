@@ -104,6 +104,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
                         aspectRatio: _videoPlayerController.value.aspectRatio,
                       ),
                     ),
+                    const SizedBox(width: 5),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,18 +114,22 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
                           text(
                               controller.videoSelected!.name,
                               maxLines: 1,
+                              fontWeight: FontWeight.w700,
                               textOverflow: TextOverflow.ellipsis
                           ),
+                          const SizedBox(height: 3),
                           Row(
                             children: [
                               text(
                                   _formatDuration(_videoPlayerController.value.position),
                                   maxLines: 1,
+                                  fontWeight: FontWeight.w700,
                                   textOverflow: TextOverflow.ellipsis
                               ),
                               text(
                                   '/${_formatDuration(_videoPlayerController.value.duration)}',
                                   maxLines: 1,
+                                  fontWeight: FontWeight.w700,
                                   textOverflow: TextOverflow.ellipsis
                               ),
                             ],
@@ -148,7 +153,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
                       onPressed: (){
                         controller.setVideoSelected(null);
                       },
-                      icon: const Icon(Icons.close_rounded),
+                      icon: const Icon(Icons.close_sharp),
                       color: colors.text,
                     )
                   ],
@@ -168,10 +173,8 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
 
 
   String _formatDuration(Duration duration){
-    String hour = duration.inHours > 0 ? '${duration.inHours.toString().padLeft(2, '0')}:' : '';
-    String minute = '${duration.inMinutes.toString().padLeft(2, '0')}:';
-    String sec = duration.inSeconds.toString().padLeft(2, '0');
-    return '$hour$minute$sec';
+    if(duration.inHours >0) return duration.toString().split('.')[0].padLeft(8, '0');
+    return duration.toString().split('.')[0].substring(3).padLeft(5, '0');
   }
 
 }

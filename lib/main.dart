@@ -1,5 +1,6 @@
 import 'package:app/route/pages_name.dart';
 import 'package:app/util/theme.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -19,8 +20,9 @@ void main() async {
         initialRoute: PagesNames.nav,
         getPages: PagesRoutes.pages,
         locale: const Locale('pt', 'BR'),
-        theme: Themes().lightTheme,
-        darkTheme: Themes().darkTheme,
+        theme: FlexThemeData.light(scheme: FlexScheme.mandyRed),
+        darkTheme: FlexThemeData.dark(scheme: FlexScheme.mandyRed),
+        themeMode: ThemeMode.system
       )
   );
 }
@@ -30,10 +32,8 @@ Future _preload() async {
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   Get.put(AppConfig.instance);
-  Get.put(Themes(), permanent: true);
   Get.put(BottomSheetController());
   Get.put(BottomSheetViewModel());
-  Get.changeTheme(Themes().darkTheme);
 
   await Future.wait([
     AppConfig().load(),

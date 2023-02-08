@@ -29,7 +29,7 @@ class HomePage extends BaseWidget<HomeController> {
                           navController.setVideoSelected(
                             const VideoModel(
                               name: 'TESTE DE VIDEO',
-                              url: 'assets/video/bike.mp4',
+                              url: 'assets/video/video.mp4',
                               type: DataSourceType.asset
                             )
                           );
