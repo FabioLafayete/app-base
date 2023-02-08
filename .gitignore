@@ -49,3 +49,5 @@ app.*.map.json
 pubspec.lock
 lib/generated_plugin_registrant.dart
 .vscode/launch.json
+
+assets/
