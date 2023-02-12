@@ -3,6 +3,7 @@ import 'package:app/modules/navigator/controller/nav_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:hidable/hidable.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:miniplayer/miniplayer.dart';
 
@@ -23,11 +24,6 @@ class NavPage extends BaseWidget<NavController> {
       const Scaffold(backgroundColor: Colors.green),
     ];
 
-    final size = MediaQuery.of(context).size;
-
-    print(MediaQuery.of(context).padding.bottom);
-    print(MediaQuery.of(context).padding.top);
-
     return Obx(() => Scaffold(
       body: Stack(
         children: _screens
@@ -47,7 +43,7 @@ class NavPage extends BaseWidget<NavController> {
                 minHeight: 80,
                 backgroundColor: Colors.transparent,
                 controller: controller.miniplayerController,
-                maxHeight: Get.height * 0.7,
+                maxHeight: Get.height,
                 builder: (heightPlayer, percentage){
                   controller.setPercentVideo(percentage);
                   if(controller.videoSelected == null) return const SizedBox.shrink();

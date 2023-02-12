@@ -82,6 +82,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
     controller.chewieController?.dispose();
     controller.setVideoPlayerController(null);
     controller.setChewieController(null);
+    print('CHAMOU AQUI OOO');
     super.dispose();
   }
 
@@ -90,38 +91,41 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
     size = MediaQuery.of(context).size;
     padding = MediaQuery.of(context).padding;
 
-    print(Get.bottomBarHeight);
-    print(Get.statusBarHeight);
-    print(controller.heightPlayer);
-
     return Obx((){
       if(controller.chewieController == null) {
         return const Center(child: CircularProgressIndicator());
       }
-      if(controller.percentVideo <= 0.5){
+      if(controller.percentVideo <= 0.3){
         return Column(
           children: [
             _video(false),
           ],
         );
       }
+
+      if(controller.chewieController!.isFullScreen){
+       return _video(true);
+      }
+
       return Container(
-        height: size.height,
-        color: Colors.pink,
+        color: colors.background,
         child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             _video(true),
             Expanded(
-                child: ListView(
-                  children: [
-                    Container(color: Colors.red, width: size.width, height: size.height,),
-                    SizedBox(height: 100,),
-                    Container(color: Colors.grey, width: size.width, height: size.height,),
-                  ],
-                )
-            )
+              child: GestureDetector(
+                onTap: (){},
+                child: Opacity(
+                  opacity: controller.percentVideo == 1 ? controller.percentVideo : (
+                      controller.percentVideo - 0.3 <= 0 ? 0 : controller.percentVideo - 0.3
+                  ),
+                  child: ListView(
+                    children: List.generate(10, (index) =>
+                        Container(margin: EdgeInsets.all(10),color: Colors.black, width: size.width, height: 200,)),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       );
@@ -142,12 +146,10 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
 
   Widget _video(bool simpleVideo){
     if(simpleVideo){
-      return Flexible(
-        child: AspectRatio(
-          key: videoKey,
-          aspectRatio: controller.videoPlayerController!.value.aspectRatio,
-          child: Chewie(controller: controller.chewieController!),
-        ),
+      return AspectRatio(
+        key: videoKey,
+        aspectRatio: controller.videoPlayerController!.value.aspectRatio,
+        child: Chewie(controller: controller.chewieController!),
       );
     }
     return Flexible(
