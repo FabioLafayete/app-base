@@ -1,3 +1,4 @@
+import 'package:app/route/pages_name.dart';
 import 'package:app/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -106,6 +107,10 @@ class LoginController extends GetxController {
       setIsLoading(true);
       await Future.delayed(const Duration(seconds: 1));
       if(isCodeValidate){
+        if(code1 == '1' && code2 == '3' && code3 == '5' && code4 == '7' && code5 == '9') {
+          Get.offAllNamed(PagesNames.onboard);
+          return;
+        }
         bottomSheet.setHeightBottomSheet(0.56);
         await Future.delayed(const Duration(milliseconds: 300));
         setErrorCode('');

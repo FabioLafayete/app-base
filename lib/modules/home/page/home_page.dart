@@ -21,7 +21,7 @@ class HomePage extends BaseWidget<HomeController> {
     return controller.obx(
             (_) => BasePage(
               padding: 0,
-              backgroundColor: Colors.orange,
+              backgroundColor: colors.background,
               body: Center(
                 child: Column(
                   children: [
@@ -29,14 +29,27 @@ class HomePage extends BaseWidget<HomeController> {
                         onPressed: (){
                           navController.setVideoSelected(
                             const VideoModel(
-                              name: 'TESTE DE VIDEO',
+                              name: 'TESTE DE VIDEO 1',
                               url: 'assets/video/video.mp4',
                               type: DataSourceType.asset
                             )
                           );
                           navController.miniplayerController.animateToHeight(state: PanelState.MAX);
                         },
-                        child: Text('CLIQUE')
+                        child: Text('VIDEO 1')
+                    ),
+                    ElevatedButton(
+                        onPressed: (){
+                          navController.setVideoSelected(
+                              const VideoModel(
+                                  name: 'TESTE DE VIDEO 2',
+                                  url: 'assets/video/video2.mp4',
+                                  type: DataSourceType.asset
+                              )
+                          );
+                          navController.miniplayerController.animateToHeight(state: PanelState.MAX);
+                        },
+                        child: Text('VIDEO 2')
                     ),
                     ElevatedButton(
                         onPressed: (){

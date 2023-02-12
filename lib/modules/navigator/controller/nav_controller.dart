@@ -47,7 +47,15 @@ class NavController extends GetxController with StateMixin {
   setPercentVideo(double value) => _percentVideo.value = value;
   setHeightPlayer(double? value) => _heightPlayer.value = value;
   setPositionVideo(Duration value) => _positionVideo.value = value;
-  setVideoSelected(VideoModel? value) => _videoSelected.value = value;
+  Future setVideoSelected(VideoModel? value) async {
+    if(value == null) {
+      _videoSelected.value = value;
+      return;
+    }
+    _videoSelected.value = null;
+    await Future.delayed(const Duration(milliseconds: 100));
+    _videoSelected.value = value;
+  }
   setChewieController(ChewieController? value) => _chewieController.value = value;
   setVideoPlayerController(VideoPlayerController? value) => _videoPlayerController.value = value;
 

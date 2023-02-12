@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../components/custom_button.dart';
+import '../../../route/pages_name.dart';
 import '../widgets/step_02_widget.dart';
 import '../widgets/step_03_widget.dart';
 import '../widgets/step_04_widget.dart';
@@ -71,6 +72,9 @@ class OnboardPage extends BaseWidget<OnboardController> {
                     iconRight: true,
                     onPress: (){
                       controller.setIndex(controller.index + 1);
+                      if(controller.index == 8){
+                        Get.offAllNamed(PagesNames.nav);
+                      }
                     },
                   ),
                 ),

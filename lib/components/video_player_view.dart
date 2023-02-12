@@ -82,7 +82,6 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
     controller.chewieController?.dispose();
     controller.setVideoPlayerController(null);
     controller.setChewieController(null);
-    print('CHAMOU AQUI OOO');
     super.dispose();
   }
 
@@ -121,7 +120,10 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
                   ),
                   child: ListView(
                     children: List.generate(10, (index) =>
-                        Container(margin: EdgeInsets.all(10),color: Colors.black, width: size.width, height: 200,)),
+                        Container(margin: const EdgeInsets.all(10),
+                          color: colors.secondary.withOpacity(0.9),
+                          width: size.width, height: 200,)
+                    ),
                   ),
                 ),
               ),
@@ -148,7 +150,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
     if(simpleVideo){
       return AspectRatio(
         key: videoKey,
-        aspectRatio: controller.videoPlayerController!.value.aspectRatio,
+        aspectRatio: controller.chewieController!.aspectRatio!,
         child: Chewie(controller: controller.chewieController!),
       );
     }
@@ -162,10 +164,10 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
             children: [
               Flexible(
                 child: AspectRatio(
-                  aspectRatio: controller.videoPlayerController!.value.aspectRatio,
+                  aspectRatio: controller.chewieController!.aspectRatio!,
                 ),
               ),
-              const SizedBox(width: 5),
+              const SizedBox(width: 10),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

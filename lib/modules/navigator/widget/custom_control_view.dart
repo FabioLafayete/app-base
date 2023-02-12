@@ -242,9 +242,9 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                           controllerNav.miniplayerController.animateToHeight(state: PanelState.MIN);
                         },
                         child: Container(
-                          width: 30,
-                          height: 30,
-                          margin: const EdgeInsets.only(left: 5, top: 5),
+                          width: 35,
+                          height: 35,
+                          margin: const EdgeInsets.only(left: 10, top: 10),
                           decoration: BoxDecoration(
                               color: Colors.black.withOpacity(0.5),
                               borderRadius: BorderRadius.circular(1000)
@@ -284,8 +284,9 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(5.0).copyWith(
+                  padding: const EdgeInsets.all(10.0).copyWith(
                     bottom: controllerNav.chewieController!.isFullScreen ? 30 : 16,
+                    top: 0
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -296,11 +297,13 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                           text(
                               _formatDuration(controllerNav.positionVideo ?? const Duration()),
                               maxLines: 1,
+                              fontSize: 16,
                               color: colors.text2,
                               textOverflow: TextOverflow.ellipsis
                           ),
                           text('/${_formatDuration(controllerNav.videoPlayerController!.value.duration)}',
                               maxLines: 1,
+                              fontSize: 16,
                               color: colors.text2.withOpacity(0.8),
                               textOverflow: TextOverflow.ellipsis
                           ),
