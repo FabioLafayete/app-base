@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class AppColors {
 
   final ColorsSchema _light = ColorsSchema(
-    text: Colors.white,
-    textSecondary: Colors.white60,
+    text: Colors.black,
+    textSecondary: Colors.black54,
+    text2: Colors.white,
+    textSecondary2: Colors.grey,
     primary: Colors.pink.shade400,
     secondary: Colors.pink.shade700,
     background: Colors.white,
@@ -13,25 +14,25 @@ class AppColors {
   );
 
   final ColorsSchema _dark = ColorsSchema(
-      text: Colors.black,
-      textSecondary: Colors.black54,
-      primary: Colors.pink.shade400,
-      secondary: Colors.pink.shade700,
-      background: Colors.white,
-      error: const Color(0xFFC21D4F),
+    text: Colors.black,
+    textSecondary: Colors.black54,
+    text2: Colors.white,
+    textSecondary2: Colors.grey,
+    primary: Colors.pink.shade400,
+    secondary: Colors.pink.shade700,
+    background: Colors.white,
+    error: const Color(0xFFC21D4F),
   );
 
 
-
-  ColorsSchema get light => _light;
-  ColorsSchema get dark => _dark;
-
-  Color get text => Get.context!.theme.textTheme.bodyText1!.color!;
-  Color get textSecondary => Get.context!.theme.textTheme.bodyText2!.color!;
-  Color get primary => Get.context!.theme.primaryColor;
-  Color get secondary => Get.context!.theme.primaryColorLight;
-  Color get background => Get.context!.theme.backgroundColor;
-  Color get error => Get.context!.theme.errorColor;
+  Color get text => _light.text;
+  Color get textSecondary => _light.textSecondary;
+  Color get text2 => _light.text2;
+  Color get textSecondary2 => _light.textSecondary2;
+  Color get primary => _light.primary;
+  Color get secondary => _light.secondary;
+  Color get background => _light.background;
+  Color get error => _light.error;
 
 }
 
@@ -42,12 +43,16 @@ class ColorsSchema {
   final Color secondary;
   final Color text;
   final Color textSecondary;
+  final Color text2;
+  final Color textSecondary2;
   final Color error;
 
   ColorsSchema({
+    required this.primary,
     required this.textSecondary,
     required this.text,
-    required this.primary,
+    required this.text2,
+    required this.textSecondary2,
     required this.secondary,
     required this.background,
     required this.error,

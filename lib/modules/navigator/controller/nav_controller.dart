@@ -15,6 +15,7 @@ class NavController extends GetxController with StateMixin {
   final RxBool _enableMore10Seconds = RxBool(false);
   final RxBool _enableLess10Seconds = RxBool(false);
   final RxDouble _percentVideo = RxDouble(0);
+  final Rxn<double> _heightPlayer = Rxn<double>();
   final Rxn<Duration> _positionVideo = Rxn<Duration>();
   final Rxn<VideoModel> _videoSelected = Rxn<VideoModel>();
   final Rxn<ChewieController> _chewieController = Rxn<ChewieController>();
@@ -32,6 +33,7 @@ class NavController extends GetxController with StateMixin {
   bool get enableMore10Seconds => _enableMore10Seconds.value;
   bool get enableLess10Seconds => _enableLess10Seconds.value;
   double get percentVideo => _percentVideo.value;
+  double? get heightPlayer => _heightPlayer.value;
   Duration? get positionVideo => _positionVideo.value;
   VideoModel? get videoSelected => _videoSelected.value;
   ChewieController? get chewieController => _chewieController.value;
@@ -43,6 +45,7 @@ class NavController extends GetxController with StateMixin {
   setEnableMore10Seconds(bool value) => _enableMore10Seconds.value = value;
   setEnableLess10Seconds(bool value) => _enableLess10Seconds.value = value;
   setPercentVideo(double value) => _percentVideo.value = value;
+  setHeightPlayer(double? value) => _heightPlayer.value = value;
   setPositionVideo(Duration value) => _positionVideo.value = value;
   setVideoSelected(VideoModel? value) => _videoSelected.value = value;
   setChewieController(ChewieController? value) => _chewieController.value = value;

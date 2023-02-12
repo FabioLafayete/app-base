@@ -35,6 +35,8 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
   AppColors colors = AppColors();
   final text = AppTheme().text;
   late Size size;
+  late EdgeInsets padding;
+  final videoKey = GlobalKey();
 
   @override
   void initState() {
@@ -71,6 +73,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
     controller.videoPlayerController!.addListener(
             () => controller.setPositionVideo(controller.videoPlayerController!.value.position)
     );
+    getHeightVideo();
   }
 
   @override
@@ -85,92 +88,143 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
+    padding = MediaQuery.of(context).padding;
 
-    return Obx(() => Container(
-      color: colors.background,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if(controller.chewieController != null)
-            Flexible(
-              child: Stack(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Flexible(
-                        child: AspectRatio(
-                          aspectRatio: controller.videoPlayerController!.value.aspectRatio,
-                        ),
-                      ),
-                      const SizedBox(width: 5),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            text(
-                                controller.videoSelected!.name,
-                                maxLines: 1,
-                                fontWeight: FontWeight.w700,
-                                textOverflow: TextOverflow.ellipsis
-                            ),
-                            const SizedBox(height: 3),
-                            Row(
-                              children: [
-                                text(
-                                    _formatDuration(controller.positionVideo ?? const Duration()),
-                                    maxLines: 1,
-                                    fontWeight: FontWeight.w700,
-                                    textOverflow: TextOverflow.ellipsis
-                                ),
-                                text(
-                                    '/${_formatDuration(controller.videoPlayerController!.value.duration)}',
-                                    maxLines: 1,
-                                    fontWeight: FontWeight.w700,
-                                    textOverflow: TextOverflow.ellipsis
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          if(controller.chewieController!.isPlaying){
-                            controller.chewieController!.pause();
-                          } else {
-                            controller.chewieController!.play();
-                          }
-                          setState(() {});
-                        },
-                        icon: Icon(controller.chewieController!.isPlaying ? Icons.pause : Icons.play_arrow_rounded),
-                        color: colors.text,
-                      ),
-                      IconButton(
-                        onPressed: (){
-                          controller.setVideoSelected(null);
-                        },
-                        icon: const Icon(Icons.close_sharp),
-                        color: colors.text,
-                      )
-                    ],
-                  ),
-                  AspectRatio(
-                    aspectRatio: controller.videoPlayerController!.value.aspectRatio,
-                    child: Chewie(controller: controller.chewieController!),
-                  ),
-                ],
-              ),
-            ),
-        ],
-      ),
-    ));
+    print(Get.bottomBarHeight);
+    print(Get.statusBarHeight);
+    print(controller.heightPlayer);
+
+    return Obx((){
+      if(controller.chewieController == null) {
+        return const Center(child: CircularProgressIndicator());
+      }
+      if(controller.percentVideo <= 0.5){
+        return Column(
+          children: [
+            _video(false),
+          ],
+        );
+      }
+      return Container(
+        height: size.height,
+        color: Colors.pink,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            _video(true),
+            Expanded(
+                child: ListView(
+                  children: [
+                    Container(color: Colors.red, width: size.width, height: size.height,),
+                    SizedBox(height: 100,),
+                    Container(color: Colors.grey, width: size.width, height: size.height,),
+                  ],
+                )
+            )
+          ],
+        ),
+      );
+    });
   }
 
+  Future getHeightVideo() async {
+    if(mounted && videoKey.currentContext != null){
+      if(videoKey.currentContext!.size != null){
+        controller.setHeightPlayer(videoKey.currentContext!.size!.height);
+      }
+    }
+    if(controller.heightPlayer == null){
+      await Future.delayed(const Duration(milliseconds: 100));
+      getHeightVideo();
+    }
+  }
+
+  Widget _video(bool simpleVideo){
+    if(simpleVideo){
+      return Flexible(
+        child: AspectRatio(
+          key: videoKey,
+          aspectRatio: controller.videoPlayerController!.value.aspectRatio,
+          child: Chewie(controller: controller.chewieController!),
+        ),
+      );
+    }
+    return Flexible(
+      child: Stack(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Flexible(
+                child: AspectRatio(
+                  aspectRatio: controller.videoPlayerController!.value.aspectRatio,
+                ),
+              ),
+              const SizedBox(width: 5),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    text(
+                        controller.videoSelected!.name,
+                        maxLines: 1,
+                        fontWeight: FontWeight.w700,
+                        textOverflow: TextOverflow.ellipsis
+                    ),
+                    const SizedBox(height: 3),
+                    Row(
+                      children: [
+                        text(
+                            _formatDuration(controller.positionVideo ?? const Duration()),
+                            maxLines: 1,
+                            fontWeight: FontWeight.w700,
+                            textOverflow: TextOverflow.ellipsis
+                        ),
+                        text(
+                            '/${_formatDuration(controller.videoPlayerController!.value.duration)}',
+                            maxLines: 1,
+                            fontWeight: FontWeight.w700,
+                            textOverflow: TextOverflow.ellipsis
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  if(controller.chewieController!.isPlaying){
+                    controller.chewieController!.pause();
+                  } else {
+                    controller.chewieController!.play();
+                  }
+                  setState(() {});
+                },
+                icon: Icon(controller.chewieController!.isPlaying ? Icons.pause : Icons.play_arrow_rounded),
+                color: colors.text,
+              ),
+              IconButton(
+                onPressed: (){
+                  controller.setVideoSelected(null);
+                },
+                icon: const Icon(Icons.close_sharp),
+                color: colors.text,
+              )
+            ],
+          ),
+          AspectRatio(
+            aspectRatio: controller.videoPlayerController!.value.aspectRatio,
+            child: Chewie(controller: controller.chewieController!),
+          ),
+        ],
+      ),
+    );
+  }
 
 
   String _formatDuration(Duration duration){

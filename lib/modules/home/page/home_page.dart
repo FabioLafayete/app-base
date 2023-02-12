@@ -21,6 +21,7 @@ class HomePage extends BaseWidget<HomeController> {
     return controller.obx(
             (_) => BasePage(
               padding: 0,
+              backgroundColor: Colors.orange,
               body: Center(
                 child: Column(
                   children: [
@@ -46,7 +47,6 @@ class HomePage extends BaseWidget<HomeController> {
                   ],
                 )
               ),
-              backgroundColor: Colors.white,
             ),
     );
   }
@@ -61,7 +61,7 @@ class HomePage extends BaseWidget<HomeController> {
         snap: true,
         builder: (_, controller){
           return Card(
-            color: Colors.white,
+            color: Colors.orange,
             child: ListView(
               shrinkWrap: true,
               controller: controller,

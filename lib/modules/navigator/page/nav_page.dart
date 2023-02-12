@@ -3,6 +3,7 @@ import 'package:app/modules/navigator/controller/nav_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:miniplayer/miniplayer.dart';
 
 import '../../../components/base_widget.dart';
@@ -22,6 +23,11 @@ class NavPage extends BaseWidget<NavController> {
       const Scaffold(backgroundColor: Colors.green),
     ];
 
+    final size = MediaQuery.of(context).size;
+
+    print(MediaQuery.of(context).padding.bottom);
+    print(MediaQuery.of(context).padding.top);
+
     return Obx(() => Scaffold(
       body: Stack(
         children: _screens
@@ -36,11 +42,12 @@ class NavPage extends BaseWidget<NavController> {
             Offstage(
               offstage: controller.videoSelected == null,
               child: SafeArea(
+                bottom: false,
                 child: Miniplayer(
                 minHeight: 80,
                 backgroundColor: Colors.transparent,
                 controller: controller.miniplayerController,
-                maxHeight: height,
+                maxHeight: Get.height * 0.7,
                 builder: (heightPlayer, percentage){
                   controller.setPercentVideo(percentage);
                   if(controller.videoSelected == null) return const SizedBox.shrink();
@@ -48,7 +55,7 @@ class NavPage extends BaseWidget<NavController> {
                       dataSourceType: controller.videoSelected!.type,
                       url: controller.videoSelected!.url
                   );
-                })
+                }),
               )
             )
         )
@@ -67,23 +74,19 @@ class NavPage extends BaseWidget<NavController> {
         onTap: (i) => controller.setSelectedIndex(i),
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              activeIcon: Icon(Icons.home),
+              icon: FaIcon(LineIcons.home),
               label: 'Home'
           ),
           BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.utensils),
-              activeIcon: Icon(FontAwesomeIcons.utensils),
+              icon: FaIcon(LineIcons.utensils),
               label: 'Alimentação'
           ),
           BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.dumbbell),
-              activeIcon: Icon(FontAwesomeIcons.dumbbell),
+              icon: FaIcon(LineIcons.dumbbell),
               label: 'Treinos'
           ),
           BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.users),
-              activeIcon: Icon(FontAwesomeIcons.users),
+              icon: FaIcon(LineIcons.users),
               label: 'Comunidade'
           )
         ],

@@ -155,38 +155,76 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
           ),
           Visibility(
             visible: _showProgress(),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              alignment: Alignment.bottomCenter,
-              margin: EdgeInsets.only(bottom: controllerNav.showProgress ? (
-                  controllerNav.chewieController!.isFullScreen ? 12 : 4) : (
-                  controllerNav.chewieController!.isFullScreen ? 12 : 0)),
-              child: ProgressBar(
-                progress: controllerNav.videoPlayerController!.value.position,
-                total:  controllerNav.videoPlayerController!.value.duration,
-                timeLabelLocation: TimeLabelLocation.none,
-                barHeight: controllerNav.showProgress ? 5 : 3,
-                thumbRadius: controllerNav.showProgress || controllerNav.showControl ? (
-                controllerNav.chewieController!.isFullScreen ? 8 : 5) : 0,
-                barCapShape: BarCapShape.square,
-                thumbColor: Colors.white,
-                baseBarColor: colors.text.withOpacity(0.3),
-                onDragStart: (_){
-                  if(controllerNav.percentVideo > 0.8){
-                    controllerNav.setShowProgress(true);
-                  }
-                },
-                onDragEnd: () async {
-                  await Future.delayed(const Duration(milliseconds: 300));
-                  controllerNav.setShowProgress(false);
-                },
-                onSeek: (duration) {
-                  controllerNav.chewieController!.seekTo(duration);
-                  if(!controllerNav.chewieController!.isPlaying){
-                    controllerNav.chewieController!.play();
-                  }
-                },
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ProgressBar(
+                  progress: controllerNav.videoPlayerController!.value.position,
+                  total:  controllerNav.videoPlayerController!.value.duration,
+                  timeLabelLocation: TimeLabelLocation.none,
+                  barHeight: 20,
+                  thumbRadius: 0,
+                  thumbGlowRadius: 0,
+                  barCapShape: BarCapShape.square,
+                  thumbColor: Colors.transparent,
+                  thumbGlowColor: Colors.transparent,
+                  baseBarColor: Colors.transparent,
+                  progressBarColor: Colors.transparent,
+                  bufferedBarColor: Colors.transparent,
+                  onDragStart: (_){
+                    if(controllerNav.percentVideo > 0.8){
+                      controllerNav.setShowProgress(true);
+                    }
+                  },
+                  onDragUpdate: (_){
+                    controllerNav.chewieController!.seekTo(_.timeStamp);
+                  },
+                  onDragEnd: () async {
+                    await Future.delayed(const Duration(milliseconds: 300));
+                    controllerNav.setShowProgress(false);
+                  },
+                  onSeek: (duration) {
+                    controllerNav.chewieController!.seekTo(duration);
+                    if(!controllerNav.chewieController!.isPlaying){
+                      controllerNav.chewieController!.play();
+                    }
+                  },
+                ),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  alignment: Alignment.bottomCenter,
+                  margin: EdgeInsets.only(bottom: controllerNav.showProgress ? (
+                      controllerNav.chewieController!.isFullScreen ? 12 : 4) : (
+                      controllerNav.chewieController!.isFullScreen ? 12 : 0)),
+                  child: ProgressBar(
+                    progress: controllerNav.videoPlayerController!.value.position,
+                    total:  controllerNav.videoPlayerController!.value.duration,
+                    timeLabelLocation: TimeLabelLocation.none,
+                    barHeight: controllerNav.showProgress ? 5 : 3,
+                    thumbRadius: controllerNav.showProgress || controllerNav.showControl ? (
+                    controllerNav.chewieController!.isFullScreen ? 8 : 6) : 0,
+                    barCapShape: BarCapShape.square,
+                    thumbColor: Colors.white,
+                    progressBarColor: colors.primary,
+                    baseBarColor: colors.text2.withOpacity(0.3),
+                    onDragStart: (_){
+                      if(controllerNav.percentVideo > 0.8){
+                        controllerNav.setShowProgress(true);
+                      }
+                    },
+                    onDragEnd: () async {
+                      await Future.delayed(const Duration(milliseconds: 300));
+                      controllerNav.setShowProgress(false);
+                    },
+                    onSeek: (duration) {
+                      controllerNav.chewieController!.seekTo(duration);
+                      if(!controllerNav.chewieController!.isPlaying){
+                        controllerNav.chewieController!.play();
+                      }
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
           Visibility(
@@ -211,7 +249,7 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                               color: Colors.black.withOpacity(0.5),
                               borderRadius: BorderRadius.circular(1000)
                           ),
-                          child: Icon(Icons.keyboard_arrow_down_rounded, color: colors.textSecondary),
+                          child: Icon(Icons.keyboard_arrow_down_rounded, color: colors.text2),
                         ),
                       ),
                     )
@@ -239,7 +277,7 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                             icon: AnimatedIcons.pause_play,
                             progress: animationController,
                             size: 50,
-                            color: Colors.white,
+                            color: colors.text2,
                           )
                       ),
                     ],
@@ -258,12 +296,12 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                           text(
                               _formatDuration(controllerNav.positionVideo ?? const Duration()),
                               maxLines: 1,
-                              color: colors.text,
+                              color: colors.text2,
                               textOverflow: TextOverflow.ellipsis
                           ),
                           text('/${_formatDuration(controllerNav.videoPlayerController!.value.duration)}',
                               maxLines: 1,
-                              color: colors.text.withOpacity(0.8),
+                              color: colors.text2.withOpacity(0.8),
                               textOverflow: TextOverflow.ellipsis
                           ),
                         ],
@@ -292,7 +330,7 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                           ),
                           child: Icon(controllerNav.chewieController!.isFullScreen ?
                           Icons.fullscreen_exit :
-                          Icons.fullscreen, color: colors.textSecondary),
+                          Icons.fullscreen, color: colors.text2),
                         ),
                       )
                     ],
@@ -329,7 +367,7 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
     } else {
       controllerNav.setEnableLess10Seconds(true);
     }
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 700));
     if(moreSeconds){
       controllerNav.setEnableMore10Seconds(false);
     } else {
