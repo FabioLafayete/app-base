@@ -3,7 +3,6 @@ import 'package:app/modules/navigator/controller/nav_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:hidable/hidable.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:miniplayer/miniplayer.dart';
 
