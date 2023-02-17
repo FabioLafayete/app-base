@@ -10,6 +10,7 @@ class BasePage extends BaseWidget {
     this.appBar,
     this.showAppBar = true,
     this.extendBody = true,
+    this.extendBodyBehindAppBar = false,
     this.automaticallyImplyLeading = true,
     this.bottomNavigationBar,
     this.floatingActionButton,
@@ -22,6 +23,7 @@ class BasePage extends BaseWidget {
   final String? title;
   final bool showAppBar;
   final bool extendBody;
+  final bool extendBodyBehindAppBar;
   final PreferredSizeWidget? appBar;
   final bool automaticallyImplyLeading;
   final Widget? bottomNavigationBar;
@@ -38,6 +40,7 @@ class BasePage extends BaseWidget {
         appBar: showAppBar ? (appBar ?? _appBar(context)) : null,
         bottomNavigationBar: bottomNavigationBar,
         extendBody: extendBody,
+        extendBodyBehindAppBar: extendBodyBehindAppBar,
         backgroundColor: backgroundColor ?? colors.background,
         floatingActionButton: floatingActionButton,
         body: Padding(

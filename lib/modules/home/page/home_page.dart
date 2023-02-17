@@ -13,10 +13,10 @@ import '../../../shared/model/video/video_model.dart';
 class HomePage extends BaseWidget<HomeController> {
   HomePage({Key? key}) : super(key: key);
 
+  final navController = Get.find<NavController>();
+
   @override
   Widget build(BuildContext context) {
-
-    final navController = Get.find<NavController>();
 
     return controller.obx(
             (_) => BasePage(
@@ -63,36 +63,4 @@ class HomePage extends BaseWidget<HomeController> {
             ),
     );
   }
-
-  void showModal (){
-    Get.bottomSheet(
-      DraggableScrollableSheet(
-        initialChildSize: 1.0,
-        minChildSize: 0.3,
-        maxChildSize: 1.0,
-        expand: false,
-        snap: true,
-        builder: (_, controller){
-          return Card(
-            color: Colors.orange,
-            child: ListView(
-              shrinkWrap: true,
-              controller: controller,
-              children: const [
-                VideoPlayerView(
-                  dataSourceType: DataSourceType.asset,
-                  url: 'assets/video/drift.mp4',
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-      elevation: 16,
-      backgroundColor: Colors.transparent,
-      isScrollControlled: true,
-      isDismissible: false,
-    );
-  }
-
 }

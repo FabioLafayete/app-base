@@ -68,7 +68,7 @@ class CustomButton extends BaseWidget {
           children: [
             Container(
               width: double.infinity,
-              margin: const EdgeInsets.symmetric(horizontal: 40),
+              //margin: const EdgeInsets.symmetric(horizontal: 40),
               child: text(
                 title,
                 color: colorTitle ?? colors.text,

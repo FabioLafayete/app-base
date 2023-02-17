@@ -36,7 +36,6 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
   final text = AppTheme().text;
   late Size size;
   late EdgeInsets padding;
-  final videoKey = GlobalKey();
 
   @override
   void initState() {
@@ -73,7 +72,6 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
     controller.videoPlayerController!.addListener(
             () => controller.setPositionVideo(controller.videoPlayerController!.value.position)
     );
-    getHeightVideo();
   }
 
   @override
@@ -91,6 +89,9 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
     padding = MediaQuery.of(context).padding;
 
     return Obx((){
+
+      if(controller.videoSelected == null) return const SizedBox.shrink();
+
       if(controller.chewieController == null) {
         return const Center(child: CircularProgressIndicator());
       }
@@ -106,12 +107,14 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
        return _video(true);
       }
 
-      return Container(
+      return AnimatedContainer(
         color: colors.background,
+        duration: const Duration(milliseconds: 200),
+        margin: EdgeInsets.only(top: controller.percentVideo > 0.9 ? MediaQuery.of(context).padding.top : 0),
         child: Column(
           children: [
             _video(true),
-            Expanded(
+            Flexible(
               child: GestureDetector(
                 onTap: (){},
                 child: Opacity(
@@ -119,6 +122,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
                       controller.percentVideo - 0.3 <= 0 ? 0 : controller.percentVideo - 0.3
                   ),
                   child: ListView(
+                    padding: EdgeInsets.zero,
                     children: List.generate(10, (index) =>
                         Container(margin: const EdgeInsets.all(10),
                           color: colors.secondary.withOpacity(0.9),
@@ -134,22 +138,9 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
     });
   }
 
-  Future getHeightVideo() async {
-    if(mounted && videoKey.currentContext != null){
-      if(videoKey.currentContext!.size != null){
-        controller.setHeightPlayer(videoKey.currentContext!.size!.height);
-      }
-    }
-    if(controller.heightPlayer == null){
-      await Future.delayed(const Duration(milliseconds: 100));
-      getHeightVideo();
-    }
-  }
-
   Widget _video(bool simpleVideo){
     if(simpleVideo){
       return AspectRatio(
-        key: videoKey,
         aspectRatio: controller.chewieController!.aspectRatio!,
         child: Chewie(controller: controller.chewieController!),
       );
