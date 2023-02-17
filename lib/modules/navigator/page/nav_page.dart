@@ -74,17 +74,21 @@ class NavPage extends BaseWidget<NavController> {
           builder: (_, snap){
             if(controller.percentVideo < 0.01 ) return _bottom();
 
-            var opacity = 1 - controller.percentVideo;
+            var opacity = (1 - controller.percentVideo) - 0.4;
             if (opacity < 0) opacity = 0;
             if (opacity > 1) opacity = 1;
 
-            return SizedBox(
-              height: kBottomNavigationBarHeight * (1 - controller.percentVideo),
+            return Container(
+              color: colors.background,
+              height: (kBottomNavigationBarHeight + MediaQuery.of(context).padding.bottom) * (1 - controller.percentVideo),
               child: Transform.translate(
-                offset: Offset(0.0, kBottomNavigationBarHeight * (controller.percentVideo * 0.5)),
+                offset: Offset(0.0, (kBottomNavigationBarHeight + MediaQuery.of(context).padding.bottom) * (controller.percentVideo * 0.5)),
                 child: Opacity(
                   opacity: opacity,
-                  child: _bottom(),
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    children: [_bottom()],
+                  ),
                 ),
               ),
             );
