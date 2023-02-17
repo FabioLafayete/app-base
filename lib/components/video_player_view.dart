@@ -110,7 +110,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
       return AnimatedContainer(
         color: colors.background,
         duration: const Duration(milliseconds: 200),
-        margin: EdgeInsets.only(top: controller.percentVideo > 0.9 ? MediaQuery.of(context).padding.top : 0),
+        margin: EdgeInsets.only(top: controller.percentVideo > 0.8 ? MediaQuery.of(context).padding.top : 0),
         child: Column(
           children: [
             _video(true),

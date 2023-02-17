@@ -35,7 +35,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
         CardItemModel(
             title: 'SEI LA 2',
             onPress: openVideo,
-            thumbnail: 'https://images.pexels.com/photos/416778/pexels-photo-416778.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+            thumbnail: 'https://images.pexels.com/photos/863977/pexels-photo-863977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
             description: 'Queime gordura no ritmo',
             typeTraining: 'RESISTENCIA',
             timeTraining: '15 min',
@@ -102,7 +102,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
         body: ListView(
             padding: MediaQuery.of(context).padding.copyWith(top: 0),
             children: [
-              TopPresentation(cardItemModel: _list[2].listItems[0]),
+              TopPresentation(cardItemModel: _list[2].listItems[1]),
               Column(
                 children: List.generate(
                     _list.length,
