@@ -25,6 +25,7 @@ class NavController extends GetxController with StateMixin {
 
   NavController() : super() {
     changeStatus();
+    setSelectedIndex(2);
   }
 
   int get selectedIndex => _selectedIndex.value;
@@ -61,6 +62,13 @@ class NavController extends GetxController with StateMixin {
 
   void changeStatus(){
     change(null, status: RxStatus.success());
+
+    if(Get.arguments != null){
+      if(Get.arguments.contains('index')){
+        setSelectedIndex(Get.arguments['index']);
+      }
+    }
+
   }
 
 }

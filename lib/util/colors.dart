@@ -7,8 +7,10 @@ class AppColors {
     textSecondary: Colors.black54,
     text2: Colors.white,
     textSecondary2: Colors.grey,
-    primary: Colors.pink.shade400,
-    secondary: Colors.pink.shade700,
+    // primary: Colors.pink.shade400,
+    // secondary: Colors.pink.shade700,
+    primary: Colors.purple.shade400,
+    secondary: Colors.purple.shade700,
     background: Colors.white,
     error: const Color(0xFFC21D4F),
   );

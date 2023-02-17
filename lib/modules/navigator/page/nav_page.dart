@@ -8,6 +8,7 @@ import 'package:miniplayer/miniplayer.dart';
 
 import '../../../components/base_widget.dart';
 import '../../../components/video_player_view.dart';
+import '../../workout/page/workout_page.dart';
 
 class NavPage extends BaseWidget<NavController> {
 
@@ -19,7 +20,7 @@ class NavPage extends BaseWidget<NavController> {
     final _screens = [
       HomePage(),
       const Scaffold(backgroundColor: Colors.red),
-      const Scaffold(backgroundColor: Colors.white),
+      WorkoutPage(),
       const Scaffold(backgroundColor: Colors.green),
     ];
 
