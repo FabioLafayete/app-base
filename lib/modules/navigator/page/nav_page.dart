@@ -62,8 +62,8 @@ class NavPage extends BaseWidget<NavController> {
         backgroundColor: colors.background,
         selectedItemColor: colors.primary,
         unselectedItemColor: colors.textSecondary,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
         onTap: (i) => controller.setSelectedIndex(i),
         items: const [
           BottomNavigationBarItem(
