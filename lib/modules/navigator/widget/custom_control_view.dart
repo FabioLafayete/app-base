@@ -1,4 +1,5 @@
 import 'package:app/modules/navigator/controller/nav_controller.dart';
+import 'package:app/shared/full_screen.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -159,8 +160,8 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ProgressBar(
-                  progress: controllerNav.videoPlayerController!.value.position,
-                  total:  controllerNav.videoPlayerController!.value.duration,
+                  progress: controllerNav.positionVideo ?? const Duration(),
+                  total:  controllerNav.chewieController!.videoPlayerController.value.duration,
                   timeLabelLocation: TimeLabelLocation.none,
                   barHeight: 20,
                   thumbRadius: 0,
@@ -194,15 +195,15 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                   duration: const Duration(milliseconds: 300),
                   alignment: Alignment.bottomCenter,
                   margin: EdgeInsets.only(bottom: controllerNav.showProgress ? (
-                      controllerNav.chewieController!.isFullScreen ? 12 : 4) : (
-                      controllerNav.chewieController!.isFullScreen ? 12 : 0)),
+                      controllerNav.isFullScreen ? 12 : 4) : (
+                      controllerNav.isFullScreen ? 12 : 0)),
                   child: ProgressBar(
-                    progress: controllerNav.videoPlayerController!.value.position,
-                    total:  controllerNav.videoPlayerController!.value.duration,
+                    progress: controllerNav.positionVideo ?? const Duration(),
+                    total:  controllerNav.chewieController!.videoPlayerController.value.duration,
                     timeLabelLocation: TimeLabelLocation.none,
                     barHeight: controllerNav.showProgress ? 5 : 3,
                     thumbRadius: controllerNav.showProgress || controllerNav.showControl ? (
-                    controllerNav.chewieController!.isFullScreen ? 8 : 6) : 0,
+                    controllerNav.isFullScreen ? 8 : 6) : 0,
                     barCapShape: BarCapShape.square,
                     thumbColor: Colors.white,
                     progressBarColor: colors.primary,
@@ -236,7 +237,7 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Visibility(
-                      visible: !controllerNav.chewieController!.isFullScreen,
+                      visible: !controllerNav.isFullScreen,
                       child: GestureDetector(
                         onTap: (){
                           controllerNav.miniplayerController.animateToHeight(state: PanelState.MIN);
@@ -285,7 +286,7 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0).copyWith(
-                    bottom: controllerNav.chewieController!.isFullScreen ? 30 : 16,
+                    bottom: controllerNav.isFullScreen ? 30 : 16,
                     top: 0
                   ),
                   child: Row(
@@ -301,7 +302,7 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                               color: colors.text2,
                               textOverflow: TextOverflow.ellipsis
                           ),
-                          text('/${_formatDuration(controllerNav.videoPlayerController!.value.duration)}',
+                          text('/${_formatDuration(controllerNav.chewieController!.videoPlayerController.value.duration)}',
                               maxLines: 1,
                               fontSize: 16,
                               color: colors.text2.withOpacity(0.8),
@@ -311,17 +312,20 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                       ),
                       GestureDetector(
                         onTap: () async {
-                          if(controllerNav.chewieController!.isFullScreen){
+                          if(controllerNav.isFullScreen){
                             controllerNav.chewieController!.exitFullScreen();
-                            SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+                            Get.back();
+                            await Future.delayed(const Duration(milliseconds: 100));
+                            controllerNav.setIsFullScreen(false);
                           } else {
+                            controllerNav.setShowControl(false);
+                            controllerNav.setIsFullScreen(true);
+                            // Get.to(
+                            //       () => FullScreen(navController: controllerNav),
+                            //   duration: Duration.zero,
+                            // );
                             controllerNav.chewieController!.enterFullScreen();
-                            await Future.delayed(const Duration(milliseconds: 400));
-                            if(controllerNav.chewieController!.isPlaying){
-                              controllerNav.setShowControl(false);
-                            }
                           }
-
                         },
                         child: Container(
                           width: 35,
@@ -331,9 +335,8 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                               color: Colors.black.withOpacity(0.5),
                               borderRadius: BorderRadius.circular(1000)
                           ),
-                          child: Icon(controllerNav.chewieController!.isFullScreen ?
-                          Icons.fullscreen_exit :
-                          Icons.fullscreen, color: colors.text2),
+                          child: Icon(controllerNav.isFullScreen ?
+                          Icons.fullscreen_exit : Icons.fullscreen, color: colors.text2),
                         ),
                       )
                     ],
@@ -348,8 +351,9 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
   }
 
   bool _showProgress(){
-    if(controllerNav.chewieController!.isFullScreen && controllerNav.showControl) return true;
-    if(!controllerNav.chewieController!.isFullScreen) return true;
+    if(controllerNav.chewieController == null) return false;
+    if(controllerNav.isFullScreen && controllerNav.showControl) return true;
+    if(!controllerNav.isFullScreen) return true;
     return false;
   }
 

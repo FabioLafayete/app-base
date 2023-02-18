@@ -25,6 +25,7 @@ void main() async {
 
 Future _preload() async {
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
   Get.put(AppConfig.instance);
   Get.put(BottomSheetController());

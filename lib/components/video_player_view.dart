@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:app/modules/navigator/controller/nav_controller.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 import '../modules/navigator/widget/custom_control_view.dart';
@@ -15,13 +16,11 @@ class VideoPlayerView extends StatefulWidget {
     required this.dataSourceType,
     required this.url,
     this.mute = false,
-    this.showController = true
   }) : super(key: key);
 
   final String url;
   final DataSourceType dataSourceType;
   final bool mute;
-  final bool showController;
 
   @override
   State<VideoPlayerView> createState() => _VideoPlayerViewState();
@@ -55,7 +54,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
         controller.setVideoPlayerController(VideoPlayerController.contentUri(Uri.parse(widget.url)));
         break;
     }
-
+    bool wasFullScreen = false;
     controller.videoPlayerController!.initialize().then((_) {
               controller.setChewieController(ChewieController(
                 videoPlayerController: controller.videoPlayerController!,
@@ -68,19 +67,32 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
                 autoInitialize: true,
               ));
               controller.chewieController!.setVolume(0);
+              controller.chewieController?.addListener(() {
+                final isFullScreen = controller.chewieController?.isFullScreen;
+                if (wasFullScreen == true && isFullScreen == false) {
+                  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+                  Future.delayed(const Duration(seconds: 1)).then((_) =>
+                      SystemChrome.setPreferredOrientations(DeviceOrientation.values));
+                }
+                wasFullScreen = isFullScreen ?? false;
+              });
+              controller.videoPlayerController!.addListener(
+                      () => controller.setPositionVideo(controller.videoPlayerController!.value.position)
+              );
     });
-    controller.videoPlayerController!.addListener(
-            () => controller.setPositionVideo(controller.videoPlayerController!.value.position)
-    );
   }
 
   @override
   void dispose() {
-    controller.videoPlayerController?.dispose();
-    controller.chewieController?.dispose();
-    controller.setVideoPlayerController(null);
-    controller.setChewieController(null);
-    super.dispose();
+    print('XIIIIII');
+    if(!controller.isFullScreen){
+      print('DDDDDDDDD');
+      super.dispose();
+      controller.videoPlayerController?.dispose();
+      controller.chewieController?.dispose();
+      controller.setVideoPlayerController(null);
+      controller.setChewieController(null);
+    }
   }
 
   @override
@@ -89,12 +101,16 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
     padding = MediaQuery.of(context).padding;
 
     return Obx((){
-
       if(controller.videoSelected == null) return const SizedBox.shrink();
 
       if(controller.chewieController == null) {
         return const Center(child: CircularProgressIndicator());
       }
+
+      if(controller.isFullScreen){
+        return Container(color: Colors.black,child: _video(true));
+      }
+
       if(controller.percentVideo <= 0.3){
         return Column(
           children: [
@@ -102,11 +118,6 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
           ],
         );
       }
-
-      if(controller.chewieController!.isFullScreen){
-       return _video(true);
-      }
-
       return AnimatedContainer(
         color: colors.background,
         duration: const Duration(milliseconds: 200),
@@ -114,7 +125,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
         child: Column(
           children: [
             _video(true),
-            Flexible(
+            Expanded(
               child: GestureDetector(
                 onTap: (){},
                 child: Opacity(
@@ -141,7 +152,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
   Widget _video(bool simpleVideo){
     if(simpleVideo){
       return AspectRatio(
-        aspectRatio: controller.chewieController!.aspectRatio!,
+        aspectRatio: controller.chewieController!.videoPlayerController.value.aspectRatio,
         child: Chewie(controller: controller.chewieController!),
       );
     }
@@ -155,7 +166,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
             children: [
               Flexible(
                 child: AspectRatio(
-                  aspectRatio: controller.chewieController!.aspectRatio!,
+                  aspectRatio: controller.chewieController!.videoPlayerController.value.aspectRatio,
                 ),
               ),
               const SizedBox(width: 10),
