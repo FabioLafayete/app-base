@@ -1,5 +1,5 @@
 import 'package:app/modules/navigator/controller/nav_controller.dart';
-import 'package:app/shared/full_screen.dart';
+import 'package:app/shared/widgets/full_screen.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -320,10 +320,7 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                           } else {
                             controllerNav.setShowControl(false);
                             controllerNav.setIsFullScreen(true);
-                            // Get.to(
-                            //       () => FullScreen(navController: controllerNav),
-                            //   duration: Duration.zero,
-                            // );
+                            // Get.to(() => FullScreen(navController: controllerNav), duration: Duration.zero);
                             controllerNav.chewieController!.enterFullScreen();
                           }
                         },

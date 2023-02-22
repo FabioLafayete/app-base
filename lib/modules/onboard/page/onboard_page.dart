@@ -73,7 +73,7 @@ class OnboardPage extends BaseWidget<OnboardController> {
                     onPress: (){
                       controller.setIndex(controller.index + 1);
                       if(controller.index == 8){
-                        Get.offAllNamed(PagesNames.nav);
+                        Get.offAllNamed(PagesNames.home);
                       }
                     },
                   ),

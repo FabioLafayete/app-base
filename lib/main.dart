@@ -15,7 +15,7 @@ void main() async {
   runApp(
       GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: PagesNames.nav,
+        initialRoute: PagesNames.food,
         getPages: PagesRoutes.pages,
         locale: const Locale('pt', 'BR'),
       )

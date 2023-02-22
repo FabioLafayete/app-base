@@ -2,7 +2,7 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../modules/navigator/controller/nav_controller.dart';
+import '../../modules/navigator/controller/nav_controller.dart';
 
 class FullScreen extends StatefulWidget {
   const FullScreen({Key? key, required this.navController}) : super(key: key);

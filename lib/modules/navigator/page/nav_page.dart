@@ -8,23 +8,30 @@ import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:miniplayer/miniplayer.dart';
 import '../../../components/video_player_view.dart';
+import '../../food/page/food_page.dart';
 import '../../workout/page/workout_page.dart';
 
 class NavPage extends BaseWidget<NavController> {
-  NavPage({Key? key}) : super(key: key);
+  NavPage({Key? key, required this.index}) : super(key: key);
+
+  final int index;
 
   @override
   Widget build(BuildContext context) {
+    if(controller.selectedIndex == null) {
+      controller.setSelectedIndex(index);
+    }
     final _screens = [
       HomePage(),
-      const Scaffold(backgroundColor: Colors.red),
+      FoodPage(),
       WorkoutPage(),
       const Scaffold(backgroundColor: Colors.green),
+      const Scaffold(backgroundColor: Colors.blue),
     ];
 
     return Obx(() => WillPopScope(
       onWillPop: () async {
-        if(controller.selectedIndex != 0){
+        if(controller.selectedIndex != 0) {
           controller.setSelectedIndex(0);
           return false;
         }
@@ -60,7 +67,7 @@ class NavPage extends BaseWidget<NavController> {
                 )
             )
         ),
-        backgroundColor: colors.background,
+        backgroundColor: colors.text,
         bottomNavigationBar: const BottomNav(),
       ),
     ));
@@ -91,8 +98,6 @@ class _BottomNavState extends State<BottomNav> {
         if (opacity < 0) opacity = 0;
         if (opacity > 1) opacity = 1;
 
-        // if(percentage == 1) return _bottom();
-
         return Container(
           color: colors.background,
           height: (kBottomNavigationBarHeight + MediaQuery.of(context).padding.bottom) * (1 - percentage),
@@ -114,11 +119,10 @@ class _BottomNavState extends State<BottomNav> {
 
   Widget _bottom(){
     return BottomNavigationBar(
-      currentIndex: controller.selectedIndex,
+      currentIndex: controller.selectedIndex!,
       type: BottomNavigationBarType.fixed,
-      elevation: 20,
-      iconSize: 25,
-      backgroundColor: colors.background,
+      elevation: 5,
+      backgroundColor: Colors.white,
       selectedItemColor: colors.primary,
       unselectedItemColor: colors.textSecondary,
       showSelectedLabels: true,
@@ -130,8 +134,8 @@ class _BottomNavState extends State<BottomNav> {
             label: 'Home'
         ),
         BottomNavigationBarItem(
-            icon: FaIcon(LineIcons.utensils),
-            label: 'Alimentação'
+            icon: FaIcon(LineIcons.fruitApple),
+            label: 'Comida'
         ),
         BottomNavigationBarItem(
             icon: FaIcon(LineIcons.dumbbell),
@@ -139,7 +143,11 @@ class _BottomNavState extends State<BottomNav> {
         ),
         BottomNavigationBarItem(
             icon: FaIcon(LineIcons.users),
-            label: 'Comunidade'
+            label: 'Feed'
+        ),
+        BottomNavigationBarItem(
+            icon: FaIcon(LineIcons.user),
+            label: 'Perfil'
         )
       ],
     );

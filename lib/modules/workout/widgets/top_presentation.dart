@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../components/custom_button.dart';
+import '../../../shared/widgets/multiple_users.dart';
 
 class TopPresentation extends BaseWidget {
   TopPresentation({
@@ -19,8 +20,8 @@ class TopPresentation extends BaseWidget {
       height: height * 0.4,
       child: ClipRRect(
         borderRadius: const BorderRadius.only(
-          bottomRight: Radius.circular(80),
-          bottomLeft: Radius.circular(0),
+          bottomRight: Radius.circular(0),
+          bottomLeft: Radius.circular(40),
         ),
         child: Stack(
           children: [
@@ -35,10 +36,7 @@ class TopPresentation extends BaseWidget {
 
   Widget _information(){
     return Container(
-      width: width * 0.9,
-      margin: EdgeInsets.only(bottom: height * 0.015).copyWith(
-        left: 16
-      ),
+      margin: EdgeInsets.only(bottom: height * 0.02).copyWith(left: 16, right: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,17 +66,31 @@ class TopPresentation extends BaseWidget {
                     fontWeight: FontWeight.w300, fontSize: 12, color: colors.background),
             ],
           ),
-          space(0.015),
-          SizedBox(
-            width: 100,
-            child: CustomButton(
-              title: 'INICIAR',
-              heightButton: 30,
-              sizeTitle: 14,
-              colorTitle: colors.primary,
-              colorButton: colors.background,
-              onPress: cardItemModel.onPress,
-            ),
+          space(0.02),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              MultipleUsers(
+                users: [
+                  MultipleUsersModel(name: 'Fabio Lafayete', photo: 'https://www.netliteracy.org/wp-content/uploads/2020/07/Capture-3-768x758.png'),
+                  MultipleUsersModel(name: 'Mariana Cardoso'),
+                  MultipleUsersModel(name: 'Lucas Alves', photo: 'http://ddg.wiki/wp-content/uploads/sites/22/2019/02/thispersondoesnotexist.com_000.jpg'),
+                  MultipleUsersModel(name: 'Vitor Rafael'),
+                ],
+              ),
+              SizedBox(
+                width: 100,
+                child: CustomButton(
+                  title: 'INICIAR',
+                  heightButton: 30,
+                  sizeTitle: 14,
+                  colorTitle: colors.primary,
+                  colorButton: colors.background,
+                  onPress: cardItemModel.onPress,
+                ),
+              ),
+            ],
           ),
         ],
       ),

@@ -27,6 +27,7 @@ dependencies:
   audio_video_progress_bar: 1.0.0
   line_icons: 2.0.1
   rxdart:
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:
@@ -42,3 +43,7 @@ flutter:
 
   assets:
     - assets/video/
+
+flutter_intl:
+  enabled: true # Obrigatório. Deve ser definido como verdadeiro para ativar o pacote. Padrão: falso
+  main_locale: pt # Opcional. Define o local principal usado para gerar arquivos de localização. O valor fornecido deve consistir em código de idioma e script opcional e códigos de país separados por sublinhado (por exemplo, 'en', 'en_GB', 'zh_Hans', 'zh_Hans_CN'). Padrão: en

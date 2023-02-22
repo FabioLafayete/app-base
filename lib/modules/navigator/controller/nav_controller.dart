@@ -10,7 +10,7 @@ import '../../../shared/model/video/video_model.dart';
 class NavController extends GetxController with StateMixin {
 
 
-  final RxInt _selectedIndex = RxInt(0);
+  final Rxn<int> _selectedIndex = Rxn<int>();
   final RxBool _showControl = RxBool(true);
   final RxBool _isFullScreen = RxBool(false);
   final RxBool _showProgress = RxBool(false);
@@ -28,10 +28,10 @@ class NavController extends GetxController with StateMixin {
 
   NavController() : super() {
     changeStatus();
-    setSelectedIndex(2);
+    // setSelectedIndex(2);
   }
 
-  int get selectedIndex => _selectedIndex.value;
+  int? get selectedIndex => _selectedIndex.value;
   bool get showControl => _showControl.value;
   bool get isFullScreen => _isFullScreen.value;
   bool get showProgress => _showProgress.value;
@@ -44,7 +44,7 @@ class NavController extends GetxController with StateMixin {
   ChewieController? get chewieController => _chewieController.value;
   VideoPlayerController? get videoPlayerController => _videoPlayerController.value;
 
-  setSelectedIndex(int value) => _selectedIndex.value = value;
+  setSelectedIndex(int? value) => _selectedIndex.value = value;
   setShowControl(bool value) => _showControl.value = value;
   setIsFullScreen(bool value) => _isFullScreen.value = value;
   setShowProgress(bool value) => _showProgress.value = value;

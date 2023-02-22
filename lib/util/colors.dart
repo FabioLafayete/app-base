@@ -9,9 +9,12 @@ class AppColors {
     textSecondary2: Colors.grey,
     // primary: Colors.pink.shade400,
     // secondary: Colors.pink.shade700,
-    primary: Colors.purple.shade400,
+    // primary: Colors.purple.shade400,
+    // secondary: Colors.purple.shade700,
+    primary: const Color(0xFF6357DD),
     secondary: Colors.purple.shade700,
-    background: Colors.white,
+    background: const Color.fromRGBO(249, 249, 251, 1.0),
+    // background: Colors.white,
     error: const Color(0xFFC21D4F),
   );
 

@@ -84,9 +84,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
 
   @override
   void dispose() {
-    print('XIIIIII');
     if(!controller.isFullScreen){
-      print('DDDDDDDDD');
       super.dispose();
       controller.videoPlayerController?.dispose();
       controller.chewieController?.dispose();

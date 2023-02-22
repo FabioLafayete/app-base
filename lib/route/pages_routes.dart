@@ -3,8 +3,6 @@ import 'package:app/modules/onboard/binding/onboard_bindings.dart';
 import 'package:app/modules/onboard/page/onboard_page.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:get/get.dart';
-import '../modules/home/binding/home_bindings.dart';
-import '../modules/home/page/home_page.dart';
 import '../modules/login/page/login_page.dart';
 import '../modules/navigator/binding/nav_bindings.dart';
 import '../modules/navigator/page/nav_page.dart';
@@ -23,12 +21,17 @@ abstract class PagesRoutes {
     ),
     GetPage(
         name: PagesNames.home,
-        page: () => HomePage(),
-        binding: HomeBindings()
+        page: () => NavPage(index: 0),
+        binding: NavBindings()
     ),
     GetPage(
-        name: PagesNames.nav,
-        page: () => NavPage(),
+        name: PagesNames.food,
+        page: () => NavPage(index: 1),
+        binding: NavBindings()
+    ),
+    GetPage(
+        name: PagesNames.workout,
+        page: () => NavPage(index: 2),
         binding: NavBindings()
     ),
   ];

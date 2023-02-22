@@ -113,7 +113,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   SizedBox(
                       width: width * 0.8,
                       child: text(
-                        'Bem-vinda ao Impullse!',
+                        'Bem-vinda ao FitLab',
                         fontSize: width * 0.1,
                         fontWeight: FontWeight.w600,
                         color: colors.background

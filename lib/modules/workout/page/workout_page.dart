@@ -20,7 +20,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
     navController.setVideoSelected(
         const VideoModel(
             name: 'TESTE DE VIDEO 1',
-            url: 'assets/video/video2.mp4',
+            url: 'assets/video/video.mp4',
             type: DataSourceType.asset
         )
     );

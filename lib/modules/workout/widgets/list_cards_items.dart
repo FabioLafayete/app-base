@@ -65,7 +65,10 @@ class ListCardItems extends BaseWidget {
           children: [
             Flexible(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(13),
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(12),
+                    topRight: Radius.circular(12),
+                ),
                 child: Stack(
                   children: [
                     CachedNetworkImage(
