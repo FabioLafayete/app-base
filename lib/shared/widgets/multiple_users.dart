@@ -13,7 +13,7 @@ class MultipleUsers extends BaseWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 115,
+      width: 110,
       height: 32,
       alignment: Alignment.centerLeft,
       child: Stack(
@@ -26,7 +26,7 @@ class MultipleUsers extends BaseWidget {
 
   Widget _item(int index, BuildContext context, {bool lastItem = false}){
     return Positioned(
-      left: index == 0 ? 0 : (index * 20),
+      left: index == 0 ? 0 : (index * 18),
       child: Container(
         height: 32,
         width: 32,

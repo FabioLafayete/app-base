@@ -1,26 +1,117 @@
 import 'package:app/components/base_page.dart';
 import 'package:app/modules/food/controller/food_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../components/base_widget.dart';
+import '../../navigator/controller/nav_controller.dart';
 import '../widgets/items_wrap.dart';
+import '../widgets/list_cards_food.dart';
 
 class FoodPage extends BaseWidget<FoodController> {
   FoodPage({Key? key}) : super(key: key);
 
+  final navController = Get.find<NavController>();
+
   @override
   Widget build(BuildContext context) {
-    return BasePage(
+
+    List<ItemWrapModel> _items = [
+      ItemWrapModel(
+          image: 'https://images.pexels.com/photos/103124/pexels-photo-103124.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          title: 'Café da manhã',
+          onPress: (){}
+      ),
+      ItemWrapModel(
+          image: 'https://images.pexels.com/photos/5710178/pexels-photo-5710178.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          title: 'Almoço',
+          onPress: (){}
+      ),
+      ItemWrapModel(
+          image: 'https://images.pexels.com/photos/2092906/pexels-photo-2092906.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          title: 'Janta',
+          onPress: (){}
+      ),
+      ItemWrapModel(
+          image: 'https://images.pexels.com/photos/3889844/pexels-photo-3889844.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          title: 'Bebidas',
+          onPress: (){}
+      ),
+      ItemWrapModel(
+          image: 'https://images.pexels.com/photos/257816/pexels-photo-257816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          title: 'Saladas',
+          onPress: (){}
+      ),
+      ItemWrapModel(
+          image: 'https://images.pexels.com/photos/1351238/pexels-photo-1351238.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          title: 'Vegano',
+          onPress: (){}
+      ),
+      ItemWrapModel(
+          image: 'https://images.pexels.com/photos/5836776/pexels-photo-5836776.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          title: 'Lanche',
+          onPress: (){}
+      ),
+      ItemWrapModel(
+          image: 'https://images.pexels.com/photos/3026804/pexels-photo-3026804.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          title: 'Doce',
+          onPress: (){}
+      ),
+
+    ];
+
+    return Obx(() => BasePage(
+        padding: 0,
         body: ListView(
           children: [
+            space(0.05),
+            ListCardFood(
+              title: 'Receitas populares',
+              seeMore: (){},
+              listItems: [
+                CardFoodModel(
+                    title: 'SEI LA 2',
+                    onPress: (){},
+                    thumbnail: 'https://images.pexels.com/photos/103124/pexels-photo-103124.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+                    description: 'Pão com Ovo',
+                    typeTraining: 'RESISTENCIA',
+                    timeTraining: '15 min',
+                    trainer: 'Roberta Souza'
+                ),
+                CardFoodModel(
+                    title: 'SEI LA 2',
+                    onPress: (){},
+                    thumbnail: 'https://images.pexels.com/photos/5710178/pexels-photo-5710178.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+                    description: 'Macarrão com camarão e molho poro e alguma coisa a mais ai',
+                    typeTraining: 'RESISTENCIA',
+                    timeTraining: '15 min',
+                    trainer: 'Roberta Souza'
+                ),
+                CardFoodModel(
+                    title: 'SEI LA 2',
+                    onPress: (){},
+                    thumbnail: 'https://images.pexels.com/photos/1351238/pexels-photo-1351238.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+                    description: 'Macarrão com camarão',
+                    typeTraining: 'RESISTENCIA',
+                    timeTraining: '15 min',
+                    trainer: 'Roberta Souza'
+                )
+              ],
+            ),
+            space(0.03),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: text('Categorias', fontWeight: FontWeight.w700, fontSize: 20),
+            ),
+            space(0.02),
             ItemsWrapWidget(
-              items: List.generate(10, (index) => ItemWrapModel(
-                  image: 'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-                  title: 'TESTE 01',
-                  onPress: (){}
-              ),),
-            )
+              items: List.generate(_items.length, (index) => _items[index]),
+            ),
+            if(navController.videoSelected != null)
+              space(0.12),
+            if(navController.videoSelected == null)
+              space(0.03),
           ],
         )
-    );
+    ));
   }
 }

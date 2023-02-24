@@ -115,7 +115,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
               if(navController.videoSelected != null)
                 space(0.12),
               if(navController.videoSelected == null)
-                space(0.02),
+                space(0.03),
             ]
         ),
       )),
