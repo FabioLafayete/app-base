@@ -64,34 +64,48 @@ class ListCardItems extends BaseWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Flexible(
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(12),
-                    topRight: Radius.circular(12),
-                ),
-                child: Stack(
-                  children: [
-                    CachedNetworkImage(
-                      fadeInDuration: const Duration(milliseconds: 300),
-                      imageUrl: listItems[index].thumbnail,
-                      width: width,
-                      height: height * 0.19,
-                      alignment: Alignment.topCenter,
-                      fit: BoxFit.cover,
-                    ),
-                    Positioned(
-                        top: 5,
-                        right: 5,
-                        child: Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              color: colors.text.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(1000),
-                            ),
-                            child: Icon(Icons.favorite_border, color: colors.background, size: 18,)
-                        )
-                    ),
-                  ],
+              child: Opacity(
+                opacity: item.soon ? 1.0 : 1.0,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12),
+                  ),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      CachedNetworkImage(
+                        fadeInDuration: const Duration(milliseconds: 300),
+                        imageUrl: listItems[index].thumbnail,
+                        width: width,
+                        height: height * 0.19,
+                        alignment: Alignment.bottomCenter,
+                        fit: BoxFit.cover,
+                      ),
+                      if(item.showFavorite)
+                        Positioned(
+                          top: 5,
+                          right: 5,
+                          child: Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                color: colors.text.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(1000),
+                              ),
+                              child: Icon(Icons.favorite_border, color: colors.background, size: 18,)
+                          )
+                      ),
+                      Container(
+                          padding: const EdgeInsets.all(0),
+                          decoration: BoxDecoration(
+                            color: colors.text.withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(1000),
+                            border: Border.all(width: 2, color: colors.text2)
+                          ),
+                          child: Icon(Icons.play_arrow_rounded, color: colors.background, size: 50,)
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -124,6 +138,8 @@ class CardItemModel {
   final String? timeTraining;
   final String? trainer;
   final bool isFavorite;
+  final bool showFavorite;
+  final bool soon;
   final Function() onPress;
 
   CardItemModel({
@@ -134,6 +150,8 @@ class CardItemModel {
     required this.onPress,
     this.timeTraining,
     this.trainer,
-    this.isFavorite = false
+    this.isFavorite = false,
+    this.showFavorite = true,
+    this.soon = false
   });
 }

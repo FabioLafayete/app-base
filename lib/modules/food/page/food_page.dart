@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../components/base_widget.dart';
 import '../../navigator/controller/nav_controller.dart';
+import '../../workout/widgets/list_cards_items.dart';
 import '../widgets/items_wrap.dart';
 import '../widgets/list_cards_food.dart';
 
@@ -97,7 +98,32 @@ class FoodPage extends BaseWidget<FoodController> {
                 )
               ],
             ),
-            space(0.03),
+            space(0.05),
+            ListCardItems(title: 'Em breve', seeMore: (){}, listItems: [
+              CardItemModel(
+                  title: 'SEI LA 2',
+                  onPress: (){},
+                  thumbnail: 'https://images.pexels.com/photos/8629098/pexels-photo-8629098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+                  description: 'Aquela janta rápida e gostosa',
+                  typeTraining: 'JANTA',
+                  timeTraining: '20 min',
+                  showFavorite: false,
+                  soon: true,
+                  trainer: 'Rodrigo Luis'
+              ),
+              CardItemModel(
+                title: 'SEI LA 2',
+                onPress: (){},
+                thumbnail: 'https://images.pexels.com/photos/4259140/pexels-photo-4259140.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+                description: 'Para a família',
+                typeTraining: 'ALMOÇO',
+                timeTraining: '1 hora',
+                showFavorite: false,
+                soon: true,
+                trainer: 'Roberta Souza',
+              ),
+            ]),
+            space(0.05),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: text('Categorias', fontWeight: FontWeight.w700, fontSize: 20),
