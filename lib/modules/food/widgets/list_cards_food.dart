@@ -9,11 +9,13 @@ class ListCardFood extends BaseWidget {
     Key? key,
     required this.title,
     required this.listItems,
-    this.seeMore
+    this.seeMore,
+    this.invertColors = false
   }) : super(key: key);
 
   final String title;
   final Function()? seeMore;
+  final bool invertColors;
   final List<CardFoodModel> listItems;
 
   @override
@@ -30,7 +32,7 @@ class ListCardFood extends BaseWidget {
                   title,
                   maxLines: 1,
                   textOverflow: TextOverflow.ellipsis,
-                  color: colors.text,
+                  color: invertColors ? colors.text2 : colors.text,
                   fontWeight: FontWeight.w700,
                   fontSize: 22
               )),
@@ -39,8 +41,8 @@ class ListCardFood extends BaseWidget {
                   onTap: (){},
                   child: Row(
                     children: [
-                      text('Ver mais ', color: colors.primary, fontWeight: FontWeight.w600, fontSize: 14),
-                      Icon(Icons.arrow_forward_ios_rounded, size: 14, color: colors.primary,)
+                      text('Ver mais ', color: invertColors ? colors.text2 : colors.primary, fontWeight: FontWeight.w600, fontSize: 14),
+                      Icon(Icons.arrow_forward_ios_rounded, size: 14, color: invertColors ? colors.text2 : colors.primary)
                     ],
                   ),
                 )

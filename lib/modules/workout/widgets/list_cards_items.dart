@@ -7,11 +7,13 @@ class ListCardItems extends BaseWidget {
     Key? key,
     required this.title,
     required this.listItems,
-    this.seeMore
+    this.seeMore,
+    this.invertColors = false
   }) : super(key: key);
 
   final String title;
   final Function()? seeMore;
+  final bool invertColors;
   final List<CardItemModel> listItems;
 
   @override
@@ -24,14 +26,19 @@ class ListCardItems extends BaseWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              text(title, color: colors.text, fontWeight: FontWeight.w700, fontSize: 22),
+              text(title, color: invertColors ? colors.text2 : colors.text, fontWeight: FontWeight.w700, fontSize: 22),
               if(seeMore != null)
                 GestureDetector(
                   onTap: (){},
                   child: Row(
                     children: [
-                      text('Ver mais ', color: colors.textSecondary, fontWeight: FontWeight.w500),
-                      Icon(Icons.arrow_forward_ios_rounded, size: 16, color: colors.primary,)
+                      text(
+                          'Ver mais ',
+                          color: invertColors ? colors.text2 : colors.primary,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14
+                      ),
+                      Icon(Icons.arrow_forward_ios_rounded, size: 14, color: invertColors ? colors.text2 : colors.primary,)
                     ],
                   ),
                 )
@@ -67,10 +74,7 @@ class ListCardItems extends BaseWidget {
               child: Opacity(
                 opacity: item.soon ? 1.0 : 1.0,
                 child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(12),
-                      topRight: Radius.circular(12),
-                  ),
+                  borderRadius: BorderRadius.circular(12),
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
@@ -100,26 +104,41 @@ class ListCardItems extends BaseWidget {
                           decoration: BoxDecoration(
                             color: colors.text.withOpacity(0.5),
                             borderRadius: BorderRadius.circular(1000),
-                            border: Border.all(width: 2, color: colors.text2)
+                            border: Border.all(width: 1.5, color: colors.text2)
                           ),
-                          child: Icon(Icons.play_arrow_rounded, color: colors.background, size: 50,)
+                          child: Icon(Icons.play_arrow_rounded, color: colors.background, size: 50)
                       ),
                     ],
                   ),
                 ),
               ),
             ),
+            space(0.01),
+            text(item.typeTraining,
+                fontSize: 10,
+                fontWeight: FontWeight.w700,
+                color: invertColors ? colors.text2 : colors.primary),
             space(0.005),
-            text(item.typeTraining, fontSize: 10, fontWeight: FontWeight.w600, color: colors.primary),
-            space(0.005),
-            text(item.description, fontWeight: FontWeight.w600, maxLines: 2, textOverflow: TextOverflow.ellipsis),
+            text(item.description,
+                fontWeight: FontWeight.w600,
+                maxLines: 2,
+                textOverflow: TextOverflow.ellipsis,
+                color: invertColors ? colors.text2 : colors.text),
             space(0.005),
             Row(
               children: [
                 if(item.trainer != null)
-                  text(item.trainer!, fontWeight: FontWeight.w300, fontSize: 12),
+                  text(item.trainer!,
+                      fontWeight: FontWeight.w300,
+                      fontSize: 12,
+                      color: invertColors ? colors.text2 : colors.text
+                  ),
                 if(item.timeTraining != null)
-                  text('${item.trainer != null ? ' | ' : ''}${item.timeTraining!}', fontWeight: FontWeight.w300, fontSize: 12),
+                  text('${item.trainer != null ? ' | ' : ''}${item.timeTraining!}',
+                      fontWeight: FontWeight.w300,
+                      fontSize: 12,
+                    color: invertColors ? colors.text2 : colors.text
+                  ),
               ],
             )
           ],

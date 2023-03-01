@@ -9,10 +9,12 @@ import '../../../shared/widgets/multiple_users.dart';
 class TopPresentation extends BaseWidget {
   TopPresentation({
     Key? key,
-    required this.cardItemModel
+    required this.cardItemModel,
+    this.titleButton
   }) : super(key: key);
 
   final CardItemModel cardItemModel;
+  final String? titleButton;
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +84,7 @@ class TopPresentation extends BaseWidget {
               SizedBox(
                 width: 100,
                 child: CustomButton(
-                  title: 'INICIAR',
+                  title: titleButton ?? 'INICIAR',
                   heightButton: 30,
                   sizeTitle: 14,
                   colorTitle: colors.primary,
@@ -116,7 +118,7 @@ class TopPresentation extends BaseWidget {
               begin: FractionalOffset.topCenter,
               end: FractionalOffset.bottomCenter,
               colors: [
-                Colors.black.withOpacity(0.3),
+                Colors.transparent,
                 colors.primary,
               ],
               stops: const [0.1, 1]
