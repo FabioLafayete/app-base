@@ -9,12 +9,13 @@ class VisualDisplay {
 
   static bottomSheet(Widget child, {
     bool dismissible = true,
+    bool hasHeight = true,
     Duration? exitBottomSheetDuration,
     Duration? enterBottomSheetDuration,
     Function()? onClose
   }){
     Get.bottomSheet(
-      CustomBottomSheet(child: child),
+      CustomBottomSheet(hasHeight: hasHeight, child: child),
       elevation: 16,
       backgroundColor: Colors.transparent,
       isScrollControlled: true,

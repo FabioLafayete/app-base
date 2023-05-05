@@ -34,5 +34,10 @@ abstract class PagesRoutes {
         page: () => NavPage(index: 2),
         binding: NavBindings()
     ),
+    GetPage(
+        name: PagesNames.profile,
+        page: () => NavPage(index: 4),
+        binding: NavBindings()
+    ),
   ];
 }

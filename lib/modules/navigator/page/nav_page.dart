@@ -9,6 +9,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:miniplayer/miniplayer.dart';
 import '../../../components/video_player_view.dart';
 import '../../food/page/food_page.dart';
+import '../../profile/page/profile_page.dart';
 import '../../workout/page/workout_page.dart';
 
 class NavPage extends BaseWidget<NavController> {
@@ -26,7 +27,7 @@ class NavPage extends BaseWidget<NavController> {
       FoodPage(),
       WorkoutPage(),
       const Scaffold(backgroundColor: Colors.green),
-      const Scaffold(backgroundColor: Colors.blue),
+      ProfilePage(),
     ];
 
     return Obx(() => WillPopScope(
@@ -127,6 +128,8 @@ class _BottomNavState extends State<BottomNav> {
       unselectedItemColor: colors.textSecondary,
       showSelectedLabels: true,
       showUnselectedLabels: true,
+      selectedFontSize: 12,
+      unselectedFontSize: 10,
       onTap: controller.setSelectedIndex,
       items: const [
         BottomNavigationBarItem(

@@ -1,6 +1,7 @@
 import 'package:app/modules/home/binding/home_bindings.dart';
 import 'package:get/get.dart';
 import '../../food/binding/food_bindings.dart';
+import '../../profile/binding/profile_binding.dart';
 import '../../workout/binding/workout_bindings.dart';
 import '../controller/nav_controller.dart';
 
@@ -12,5 +13,6 @@ class NavBindings extends Bindings {
     HomeBindings().dependencies();
     WorkoutBindings().dependencies();
     FoodBindings().dependencies();
+    ProfileBindings().dependencies();
   }
 }
