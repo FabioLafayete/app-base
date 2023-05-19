@@ -1,5 +1,8 @@
+import 'package:app/config/app_config.dart';
+import 'package:app/modules/login/repository/impl/login_repository_impl.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/util/util.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,6 +10,11 @@ import '../../../components/bottom_sheet/botto_sheet_view_model.dart';
 
 class LoginController extends GetxController {
 
+  LoginController({
+    required this.repositoryImpl
+  });
+
+  final LoginRepositoryImpl repositoryImpl;
 
   final RxString _email = RxString('');
   final Rxn<String> _errorEmail = Rxn<String>();
@@ -102,25 +110,32 @@ class LoginController extends GetxController {
   TextEditingController controllerCode5 = TextEditingController();
 
 
-  Future<void> onPress({bool isCodeValidate = false}) async {
+  Future<void> onPress() async {
     try{
       setIsLoading(true);
-      await Future.delayed(const Duration(seconds: 1));
-      if(isCodeValidate){
-        if(code1 == '1' && code2 == '3' && code3 == '5' && code4 == '7' && code5 == '9') {
+      if(showCode) {
+        final data = await repositoryImpl.postLogin(
+            email, '$code1$code2$code3$code4$code5'
+        );
+        if(data.isNotEmpty && data.containsKey('token')){
+          AppConfig().setBearerToken(data['token']);
+
           Get.offAllNamed(PagesNames.onboard);
           return;
         }
-        bottomSheet.setHeightBottomSheet(0.56);
-        await Future.delayed(const Duration(milliseconds: 300));
-        setErrorCode('');
-        cleanCode();
-        Get.focusScope?.unfocus();
       } else {
+        await repositoryImpl.postTokenEmail(email);
         bottomSheet.setHeightBottomSheet(0.53);
-        await Future.delayed(const Duration(milliseconds: 300));
         setShowCode(true);
         Get.focusScope?.unfocus();
+      }
+    } catch(e){
+      bottomSheet.setHeightBottomSheet(0.56);
+      setErrorCode('');
+      cleanCode();
+      Get.focusScope?.unfocus();
+      if (kDebugMode) {
+        print(e);
       }
     } finally{
       setIsLoading(false);
@@ -131,7 +146,7 @@ class LoginController extends GetxController {
     try{
       setIsLoadingSendCode(true);
       Get.focusScope?.unfocus();
-      await Future.delayed(const Duration(seconds: 1));
+      await repositoryImpl.postTokenEmail(email);
       cleanCode();
       setErrorCode(null);
       bottomSheet.setHeightBottomSheet(0.53);
@@ -149,8 +164,8 @@ class LoginController extends GetxController {
     setErrorCode(null);
   }
 
-  bool enableButton({bool isCodeValidate = false}) {
-    if(isCodeValidate){
+  bool enableButton() {
+    if(showCode){
       if(code1.isNotEmpty &&
           code2.isNotEmpty &&
           code3.isNotEmpty &&
@@ -183,7 +198,7 @@ class LoginController extends GetxController {
         code3.isNotEmpty &&
         code4.isNotEmpty &&
         code5.isNotEmpty) {
-      onPress(isCodeValidate: true);
+      onPress();
     }
   }
 
@@ -192,7 +207,6 @@ class LoginController extends GetxController {
     super.onInit();
     bottomSheet.setHeightBottomSheet(0.35);
   }
-
 
   void cleanLogin(){
     setEmail('');
@@ -204,5 +218,4 @@ class LoginController extends GetxController {
     setErrorEmail(null);
     setErrorCode(null);
   }
-
 }

@@ -1,5 +1,7 @@
+import 'package:app/shared/flavor/impl/flavor_impl.dart';
 import 'package:get/get.dart';
-import 'config.dart' show environment;
+import '../shared/constants/endpoints.dart';
+import '../shared/constants/string_contants.dart';
 
 class AppConfig {
 
@@ -10,13 +12,18 @@ class AppConfig {
   static final AppConfig instance = AppConfig._();
 
   late String _baseUrl;
+  late FlavorsImpl flavors;
   String? _bearerToken;
 
-  final Map<String, dynamic> _config = environment;
-
   Future load() async {
-    _baseUrl = _config['baseUrl'];
+    flavors = FlavorsImpl();
+    flavors.initialize(endpoints);
+    _baseUrl = flavors.getEndpoint(StringConstants.hostKey);
+    print('Ambiente de ${flavors.getCurrentFlavor()}');
+    print(_baseUrl);
   }
+
+  setBearerToken(String? value) => _bearerToken = value;
 
   String get baseUrl => _baseUrl;
   String? get bearerToken => _bearerToken;

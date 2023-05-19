@@ -1,4 +1,0 @@
-final environment = {
-  "baseUrl": "",
-  "bearerToken": ""
-};

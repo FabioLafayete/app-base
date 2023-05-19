@@ -120,8 +120,8 @@ class LoginPage extends BaseWidget<LoginController> {
              colorButton: colors.primary,
              iconRight: controller.showCode ? false :  true,
              loading: controller.isLoading,
-             onPress: controller.enableButton(isCodeValidate: controller.showCode) ?
-                 () => controller.onPress(isCodeValidate: controller.showCode) : null,
+             onPress: controller.enableButton() ?
+                 () => controller.onPress() : null,
            ),
            space(0.02)
          ],
