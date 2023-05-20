@@ -1,11 +1,13 @@
 import 'package:app/config/app_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
+import 'package:mobx/mobx.dart';
 
 import '../util/colors.dart';
 import 'app_theme_widget.dart';
 
-abstract class BaseWidget<T extends GetxController> extends StatelessWidget {
+abstract class BaseWidget<T extends Store> extends StatelessWidget {
 
   BaseWidget({Key? key}) : super(key: key);
 
@@ -27,7 +29,7 @@ abstract class BaseWidget<T extends GetxController> extends StatelessWidget {
   }
 
   T get controller {
-    if (_value.isEmpty) _value.add(Get.find<T>());
+    if (_value.isEmpty) _value.add(Modular.get<T>());
     return _value.first;
   }
 

@@ -5,14 +5,21 @@ import 'package:app/util/util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobx/mobx.dart';
 
 import '../../../components/bottom_sheet/botto_sheet_view_model.dart';
 
-class LoginController extends GetxController {
+part 'login_controller.g.dart';
 
-  LoginController({
+class LoginController = _LoginController with _$LoginController;
+
+abstract class _LoginController with Store {
+
+  _LoginController({
     required this.repositoryImpl
-  });
+  }) : super(){
+    bottomSheet.setHeightBottomSheet(0.35);
+  }
 
   final LoginRepositoryImpl repositoryImpl;
 
@@ -202,11 +209,6 @@ class LoginController extends GetxController {
     }
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-    bottomSheet.setHeightBottomSheet(0.35);
-  }
 
   void cleanLogin(){
     setEmail('');

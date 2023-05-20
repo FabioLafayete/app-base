@@ -20,6 +20,8 @@ class OnboardPage extends BaseWidget<OnboardController> {
 
   OnboardPage({Key? key}) : super(key: key);
 
+  String get route => '${PagesNames.onboard}/';
+
   @override
   Widget build(BuildContext context) {
 

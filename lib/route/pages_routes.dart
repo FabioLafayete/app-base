@@ -10,11 +10,6 @@ import '../modules/navigator/page/nav_page.dart';
 abstract class PagesRoutes {
   static final pages = [
     GetPage(
-        name: PagesNames.login,
-        page: () => LoginPage(),
-        binding: LoginBindings()
-    ),
-    GetPage(
         name: PagesNames.onboard,
         page: () => OnboardPage(),
         binding: OnboardBindings()

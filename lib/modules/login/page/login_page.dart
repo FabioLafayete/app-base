@@ -2,6 +2,7 @@ import 'package:app/components/custom_button.dart';
 import 'package:app/components/visual_display.dart';
 import 'package:app/modules/login/controller/login_controller.dart';
 import 'package:app/modules/login/widgets/welcome_widget.dart';
+import 'package:app/route/pages_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../components/base_widget.dart';
@@ -9,6 +10,8 @@ import '../../../components/base_widget.dart';
 class LoginPage extends BaseWidget<LoginController> {
 
   LoginPage({Key? key}) : super(key: key);
+
+  String get route => '${PagesNames.login}/';
 
   @override
   Widget build(BuildContext context) {
