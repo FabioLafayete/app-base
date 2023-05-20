@@ -1,5 +1,9 @@
-import 'package:get/get.dart';
+import 'package:mobx/mobx.dart';
 
-class FoodController extends GetxController with StateMixin {
+part 'food_controller.g.dart';
+
+class FoodController = FoodControllerBase with _$FoodController;
+
+abstract class FoodControllerBase with Store {
 
 }

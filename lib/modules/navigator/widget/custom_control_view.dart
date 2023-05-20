@@ -1,10 +1,8 @@
 import 'package:app/modules/navigator/controller/nav_controller.dart';
-import 'package:app/shared/widgets/full_screen.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'dart:math' as math;
-import 'package:get/get.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:miniplayer/miniplayer.dart';
 import '../../../components/app_theme_widget.dart';
 import '../../../util/colors.dart';
@@ -28,7 +26,7 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
   bool turnOffControl = false;
   final text = AppTheme().text;
   AppColors colors = AppColors();
-  final controllerNav = Get.find<NavController>();
+  final controllerNav = Modular.get<NavController>();
 
   @override
   void initState() {
@@ -49,7 +47,7 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
 
-    return Obx((){
+    return Observer(builder: (_){
       if(controllerNav.percentVideo > 0.8) {
         enableControl = true;
       } else {
@@ -90,7 +88,6 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                 controllerNav.setShowControl(!controllerNav.showControl);
                 if(controllerNav.showControl){
                   turnOffControl = false;
-                  _closeControlAfterPlaying();
                 }
               } else {
                 controllerNav.miniplayerController.animateToHeight(state: PanelState.MAX);
@@ -129,7 +126,6 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                 controllerNav.setShowControl(!controllerNav.showControl);
                 if(controllerNav.showControl){
                   turnOffControl = false;
-                  _closeControlAfterPlaying();
                 }
               } else {
                 controllerNav.miniplayerController.animateToHeight(state: PanelState.MAX);
@@ -203,7 +199,7 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                     timeLabelLocation: TimeLabelLocation.none,
                     barHeight: controllerNav.showProgress ? 5 : 3,
                     thumbRadius: controllerNav.showProgress || controllerNav.showControl ? (
-                    controllerNav.isFullScreen ? 8 : 6) : 0,
+                        controllerNav.isFullScreen ? 8 : 6) : 0,
                     barCapShape: BarCapShape.square,
                     thumbColor: Colors.white,
                     progressBarColor: colors.primary,
@@ -271,7 +267,6 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                               animationController.animateBack(0);
                               controllerNav.chewieController!.play();
                               turnOffControl = false;
-                              _closeControlAfterPlaying();
                             }
                           },
                           icon: AnimatedIcon(
@@ -286,8 +281,8 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0).copyWith(
-                    bottom: controllerNav.isFullScreen ? 30 : 16,
-                    top: 0
+                      bottom: controllerNav.isFullScreen ? 30 : 16,
+                      top: 0
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -314,7 +309,7 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
                         onTap: () async {
                           if(controllerNav.isFullScreen){
                             controllerNav.chewieController!.exitFullScreen();
-                            Get.back();
+                            Modular.to.pop();
                             await Future.delayed(const Duration(milliseconds: 100));
                             controllerNav.setIsFullScreen(false);
                           } else {
@@ -352,17 +347,6 @@ class _CustomControlViewState extends State<CustomControlView> with SingleTicker
     if(controllerNav.isFullScreen && controllerNav.showControl) return true;
     if(!controllerNav.isFullScreen) return true;
     return false;
-  }
-
-  Future<void> _closeControlAfterPlaying() async {
-    return;
-    turnOffControl = true;
-    await Future.delayed(const Duration(seconds: 3));
-    if(controllerNav.showControl && enableControl && turnOffControl){
-      if(controllerNav.chewieController!.isPlaying){
-        controllerNav.setShowControl(false);
-      }
-    }
   }
 
   Future<void> _enableSeconds(bool moreSeconds) async {

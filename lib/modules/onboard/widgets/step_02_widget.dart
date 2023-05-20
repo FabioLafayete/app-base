@@ -1,8 +1,7 @@
 import 'package:app/components/base_widget.dart';
 import 'package:app/modules/onboard/controller/onboard_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
+import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../components/select_item/select_item.dart';
 
 class Step02Widget extends BaseWidget<OnboardController> {
@@ -23,7 +22,7 @@ class Step02Widget extends BaseWidget<OnboardController> {
         const Spacer(),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Obx(() => SelectItem(
+          child: Observer(builder: (_) => SelectItem(
             initialValue: controller.gender,
             items: [
               SelectItemMenu(

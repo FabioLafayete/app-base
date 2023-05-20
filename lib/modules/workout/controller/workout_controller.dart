@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobx/mobx.dart';
 
+part 'workout_controller.g.dart';
 
-class WorkoutController extends GetxController with StateMixin {
+class WorkoutController = WorkoutControllerBase with _$WorkoutController;
 
-  WorkoutController() : super() {
-    change(null, status: RxStatus.success());
-  }
+abstract class WorkoutControllerBase with Store {
 
+  WorkoutControllerBase();
 
 }

@@ -1,32 +1,36 @@
 import 'package:app/components/base_page.dart';
 import 'package:app/modules/food/controller/food_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../components/base_widget.dart';
+import '../../../route/pages_name.dart';
 import '../../navigator/controller/nav_controller.dart';
 import '../../workout/widgets/list_cards_items.dart';
-import '../../workout/widgets/top_presentation.dart';
 import '../widgets/items_wrap.dart';
 import '../widgets/list_cards_food.dart';
 
 class FoodPage extends BaseWidget<FoodController> {
   FoodPage({Key? key}) : super(key: key);
 
-  final navController = Get.find<NavController>();
+  final navController = Modular.get<NavController>();
+
+  static const router = '${PagesNames.food}/';
 
   @override
   Widget build(BuildContext context) {
 
-    return Obx(() => BasePage(
+    return Observer(
+        builder: (_) => BasePage(
         padding: 0,
         showAppBar: false,
         body: ListView(
           children: [
             space(0.03),
             ListCardFood(
-              title: 'Receitas populares',
-              seeMore: (){},
-              listItems: _items3
+                title: 'Receitas populares',
+                seeMore: (){},
+                listItems: _items3
             ),
             space(0.03),
             Container(

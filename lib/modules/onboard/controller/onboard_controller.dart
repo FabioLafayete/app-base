@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobx/mobx.dart';
 
+part 'onboard_controller.g.dart';
 
-class OnboardController extends GetxController {
+class OnboardController = OnboardControllerBase with _$OnboardController;
+
+abstract class OnboardControllerBase with Store {
 
   final RxInt _index = RxInt(0);
   final Rxn<String> _name = Rxn();

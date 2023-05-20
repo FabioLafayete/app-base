@@ -21,7 +21,8 @@ class FlavorsImpl implements Flavors {
       _currentFlavor = _getFlavor();
       _endpoints = endpoints[_currentFlavor]!;
     } catch (e) {
-      throw Exception(invalidFlavorMessage);
+      _currentFlavor = FlavorType.dev;
+      _endpoints = endpoints[_currentFlavor]!;
     }
   }
 

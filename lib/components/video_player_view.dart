@@ -4,7 +4,8 @@ import 'package:app/modules/navigator/controller/nav_controller.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:video_player/video_player.dart';
 import '../modules/navigator/widget/custom_control_view.dart';
 import '../util/colors.dart';
@@ -39,7 +40,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
   @override
   void initState() {
     super.initState();
-    controller = Get.find<NavController>();
+    controller = Modular.get<NavController>();
     switch (widget.dataSourceType) {
       case DataSourceType.asset:
         controller.setVideoPlayerController(VideoPlayerController.asset(widget.url));
@@ -98,7 +99,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
     size = MediaQuery.of(context).size;
     padding = MediaQuery.of(context).padding;
 
-    return Obx((){
+    return Observer(builder: (_){
       if(controller.videoSelected == null) return const SizedBox.shrink();
 
       if(controller.chewieController == null) {

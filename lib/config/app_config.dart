@@ -1,11 +1,12 @@
+import 'package:app/shared/flavor/flavor_types.dart';
 import 'package:app/shared/flavor/impl/flavor_impl.dart';
-import 'package:get/get.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import '../shared/constants/endpoints.dart';
 import '../shared/constants/string_contants.dart';
 
 class AppConfig {
 
-  factory AppConfig() => Get.find<AppConfig>();
+  factory AppConfig() => Modular.get<AppConfig>();
 
   AppConfig._();
 
@@ -19,8 +20,7 @@ class AppConfig {
     flavors = FlavorsImpl();
     flavors.initialize(endpoints);
     _baseUrl = flavors.getEndpoint(StringConstants.hostKey);
-    print('Ambiente de ${flavors.getCurrentFlavor()}');
-    print(_baseUrl);
+    print('Ambiente de ${flavors.getCurrentFlavor() == FlavorType.dev ? 'dev' : 'prod'}');
   }
 
   setBearerToken(String? value) => _bearerToken = value;

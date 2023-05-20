@@ -1,91 +1,101 @@
 import 'package:app/config/app_config.dart';
+import 'package:app/modules/home/page/home_page.dart';
 import 'package:app/modules/login/repository/impl/login_repository_impl.dart';
-import 'package:app/route/pages_name.dart';
 import 'package:app/util/util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
+import 'package:mobx/mobx.dart';
 
-import '../../../components/bottom_sheet/botto_sheet_view_model.dart';
+import '../../../components/bottom_sheet/bottom_sheet_controller.dart';
 
-class LoginController extends GetxController {
+part 'login_controller.g.dart';
 
-  LoginController({
+class LoginController = LoginControllerBase with _$LoginController;
+
+abstract class LoginControllerBase with Store {
+
+  LoginControllerBase({
     required this.repositoryImpl
-  });
+  }) : super(){
+    bottomSheet.setHeightBottomSheet(0.35);
+  }
 
   final LoginRepositoryImpl repositoryImpl;
 
-  final RxString _email = RxString('');
-  final Rxn<String> _errorEmail = Rxn<String>();
-  final Rxn<String> _errorCode = Rxn<String>();
-  final RxBool _isLoading = RxBool(false);
-  final RxBool _isLoadingSendCode = RxBool(false);
+  @observable
+  bool isLoading = false;
+  @observable
+  bool isLoadingSendCode = false;
+  @observable
+  String? email;
+  @observable
+  String? errorEmail;
+  @observable
+  String? errorCode;
+  @observable
+  bool showCode = false;
+  @observable
+  String code1 = '';
+  @observable
+  String code2 = '';
+  @observable
+  String code3 = '';
+  @observable
+  String code4 = '';
+  @observable
+  String code5 = '';
 
-  final RxBool _showCode = RxBool(false);
-  bool get isLoading => _isLoading.value;
-  bool get isLoadingSendCode => _isLoadingSendCode.value;
-  final Rx<String> _code1 = Rx('');
-  final Rx<String> _code2 = Rx('');
-  final Rx<String> _code3 = Rx('');
-  final Rx<String> _code4 = Rx('');
-  final Rx<String> _code5 = Rx('');
+  final bottomSheet = Modular.get<BottomSheetController>();
 
-  final bottomSheet = Get.find<BottomSheetViewModel>();
-
-  String get email => _email.value;
-  String? get errorEmail => _errorEmail.value;
-  String? get errorCode => _errorCode.value;
-  bool get showCode => _showCode.value;
-  bool isEmail(String email) => Util.isEmail(email);
-
-  String get code1 => _code1.value;
-  String get code2 => _code2.value;
-  String get code3 => _code3.value;
-  String get code4 => _code4.value;
-  String get code5 => _code5.value;
-
-  setIsLoading(bool value) => _isLoading.value = value;
-  setIsLoadingSendCode(bool value) => _isLoadingSendCode.value = value;
-  setEmail(String value) => _email.value = value;
-  setErrorEmail(String? value) => _errorEmail.value = value;
-  setErrorCode(String? value) => _errorCode.value = value;
-  setShowCode(bool value) => _showCode.value = value;
-
+  @action
+  setIsLoading(bool value) => isLoading = value;
+  @action
+  setIsLoadingSendCode(bool value) => isLoadingSendCode = value;
+  @action
+  setEmail(String value) => email = value;
+  @action
+  setErrorEmail(String? value) => errorEmail = value;
+  @action
+  setErrorCode(String? value) => errorCode = value;
+  @action
+  setShowCode(bool value) => showCode = value;
+  @action
   void setCode1(String value) {
-    _code1.value = value;
+    code1 = value;
     if (value.isNotEmpty) codePart2FocusNode.requestFocus();
   }
-
+  @action
   void setCode2(String value) {
-    _code2.value = value;
+    code2 = value;
     if (value.isNotEmpty) {
       codePart3FocusNode.requestFocus();
     } else {
       codePart1FocusNode.requestFocus();
     }
   }
-
+  @action
   void setCode3(String value) {
-    _code3.value = value;
+    code3 = value;
     if (value.isNotEmpty) {
       codePart4FocusNode.nextFocus();
     } else {
       codePart2FocusNode.requestFocus();
     }
   }
-
+  @action
   void setCode4(String value) {
-    _code4.value = value;
+    code4 = value;
     if (value.isNotEmpty) {
       codePart5FocusNode.nextFocus();
     } else {
       codePart3FocusNode.requestFocus();
     }
   }
-
+  @action
   void setCode5(String value) {
-    _code5.value = value;
+    code5 = value;
     if (value.isNotEmpty) {
       Get.focusScope?.unfocus();
       callLogin();
@@ -93,8 +103,6 @@ class LoginController extends GetxController {
       codePart4FocusNode.requestFocus();
     }
   }
-
-
 
   final FocusNode codePart1FocusNode = FocusNode();
   final FocusNode codePart2FocusNode = FocusNode();
@@ -109,23 +117,22 @@ class LoginController extends GetxController {
   TextEditingController controllerCode4 = TextEditingController();
   TextEditingController controllerCode5 = TextEditingController();
 
-
   Future<void> onPress() async {
     try{
       setIsLoading(true);
       if(showCode) {
         final data = await repositoryImpl.postLogin(
-            email, '$code1$code2$code3$code4$code5'
+            email!, '$code1$code2$code3$code4$code5'
         );
         if(data.isNotEmpty && data.containsKey('token')){
           AppConfig().setBearerToken(data['token']);
-
-          Get.offAllNamed(PagesNames.onboard);
+          Modular.to.pushReplacementNamed(HomePage.router);
           return;
         }
       } else {
-        await repositoryImpl.postTokenEmail(email);
+        await repositoryImpl.postTokenEmail(email!);
         bottomSheet.setHeightBottomSheet(0.53);
+        await Future.delayed(const Duration(milliseconds: 350));
         setShowCode(true);
         Get.focusScope?.unfocus();
       }
@@ -146,7 +153,7 @@ class LoginController extends GetxController {
     try{
       setIsLoadingSendCode(true);
       Get.focusScope?.unfocus();
-      await repositoryImpl.postTokenEmail(email);
+      await repositoryImpl.postTokenEmail(email!);
       cleanCode();
       setErrorCode(null);
       bottomSheet.setHeightBottomSheet(0.53);
@@ -164,7 +171,8 @@ class LoginController extends GetxController {
     setErrorCode(null);
   }
 
-  bool enableButton() {
+  @computed
+  bool get enableButton {
     if(showCode){
       if(code1.isNotEmpty &&
           code2.isNotEmpty &&
@@ -174,7 +182,7 @@ class LoginController extends GetxController {
         return true;
       }
     } else {
-      if(email.isNotEmpty) if(isEmail(email)) return true;
+      if(email != null && email!.isNotEmpty && Util.isEmail(email!)) return true;
     }
     return false;
   }
@@ -185,11 +193,11 @@ class LoginController extends GetxController {
     controllerCode3.clear();
     controllerCode4.clear();
     controllerCode5.clear();
-    _code1.value = '';
-    _code2.value = '';
-    _code3.value = '';
-    _code4.value = '';
-    _code5.value = '';
+    code1 = '';
+    code2 = '';
+    code3 = '';
+    code4 = '';
+    code5 = '';
   }
 
   callLogin(){
@@ -200,12 +208,6 @@ class LoginController extends GetxController {
         code5.isNotEmpty) {
       onPress();
     }
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-    bottomSheet.setHeightBottomSheet(0.35);
   }
 
   void cleanLogin(){

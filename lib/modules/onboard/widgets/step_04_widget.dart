@@ -2,8 +2,7 @@ import 'package:app/components/base_widget.dart';
 import 'package:app/modules/onboard/controller/onboard_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
-import 'package:get/get.dart';
-
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class Step04Widget extends BaseWidget<OnboardController> {
   Step04Widget({Key? key}) : super(key: key);
@@ -25,7 +24,7 @@ class Step04Widget extends BaseWidget<OnboardController> {
         space(0.2),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Obx(() => DatePickerWidget(
+          child: Observer(builder: (_) => DatePickerWidget(
             dateFormat: 'dd/MMMM/yyyy',
             firstDate: DateTime(1900),
             initialDate: controller.birthday ??
