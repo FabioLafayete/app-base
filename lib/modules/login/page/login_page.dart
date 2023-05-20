@@ -104,7 +104,7 @@ class LoginPage extends BaseWidget<LoginController> {
                       ),
                     if(controller.showCode)
                       Padding(
-                        padding: const EdgeInsets.only(top: 5),
+                        padding: const EdgeInsets.only(top: 10),
                         child: CustomButton(
                             title: 'Enviar novo código',
                             colorTitle: colors.primary,

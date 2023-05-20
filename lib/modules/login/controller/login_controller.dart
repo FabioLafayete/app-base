@@ -133,6 +133,7 @@ abstract class LoginControllerBase with Store {
       } else {
         await repositoryImpl.postTokenEmail(email!);
         bottomSheet.setHeightBottomSheet(0.53);
+        await Future.delayed(const Duration(milliseconds: 350));
         setShowCode(true);
         Get.focusScope?.unfocus();
       }
