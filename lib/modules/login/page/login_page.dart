@@ -17,11 +17,11 @@ class LoginPage extends BaseWidget<LoginController> {
   @override
   Widget build(BuildContext context) {
     return WelcomeWidget(
-        signInOnPress: _login
+        signInOnPress: () => _login(context)
     );
   }
 
-  void _login(){
+  void _login(BuildContext context){
     VisualDisplay.bottomSheet(
         Observer(builder: (_) => Column(
           children: [
@@ -46,7 +46,7 @@ class LoginPage extends BaseWidget<LoginController> {
               readOnly: controller.showCode,
               errorText: controller.errorEmail,
               onEditingComplete: (){
-                if(controller.enableButton()){
+                if(controller.enableButton){
                   controller.onPress();
                 } else {
                   controller.setErrorEmail('Digite um e-mail válido');
@@ -118,19 +118,20 @@ class LoginPage extends BaseWidget<LoginController> {
                 ),
               ),
             const Spacer(),
-            CustomButton(
+            Observer(builder: (_) => CustomButton(
               title: controller.showCode ? 'VALIDAR CÓDIGO' : 'AVANÇAR',
               colorTitle: colors.background,
               colorButton: colors.primary,
               iconRight: controller.showCode ? false :  true,
               loading: controller.isLoading,
-              onPress: controller.enableButton() ?
+              onPress: controller.enableButton ?
                   () => controller.onPress() : null,
-            ),
+            )),
             space(0.02)
           ],
         )),
         dismissible: false,
+        context: context,
         onClose: (){
           controller.cleanLogin();
         }

@@ -1,6 +1,7 @@
 import 'package:app/components/base_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import '../../util/colors.dart';
 import 'bottom_sheet_controller.dart';
@@ -21,7 +22,6 @@ class CustomBottomSheet extends BaseWidget<BottomSheetController> {
     return GestureDetector(
       onTap: () => Get.focusScope?.unfocus(),
       child: Observer(builder: (_){
-        controller.heightBottomSheet;
         return SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -59,7 +59,7 @@ class CustomBottomSheet extends BaseWidget<BottomSheetController> {
                       icon: const Icon(Icons.close),
                       color: AppColors().text,
                       iconSize: 25,
-                      onPressed: () => Get.back(),
+                      onPressed: Modular.to.pop,
                     ),
                   )
                 ],

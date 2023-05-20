@@ -1,3 +1,4 @@
+import 'package:app/modules/splash/module/splash_module.dart';
 import 'package:app/modules/workout/module/workout_module.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -44,6 +45,10 @@ class AppModule extends Module {
     ModuleRoute(
       PagesNames.profile,
       module: ProfileModule(),
+    ),
+    ModuleRoute(
+      PagesNames.splash,
+      module: SplashModule(),
     ),
   ];
 }

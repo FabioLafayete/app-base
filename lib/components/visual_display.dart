@@ -12,17 +12,19 @@ class VisualDisplay {
     bool hasHeight = true,
     Duration? exitBottomSheetDuration,
     Duration? enterBottomSheetDuration,
-    Function()? onClose
+    Function()? onClose,
+    required BuildContext context
   }){
-    Get.bottomSheet(
-      CustomBottomSheet(hasHeight: hasHeight, child: child),
+    showModalBottomSheet(
+      context: context,
+      builder: (_){
+       return CustomBottomSheet(hasHeight: hasHeight, child: child);
+      },
       elevation: 16,
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
       isDismissible: dismissible,
       enableDrag: dismissible,
-      exitBottomSheetDuration: exitBottomSheetDuration,
-      enterBottomSheetDuration: enterBottomSheetDuration,
     ).whenComplete((){
       if(onClose != null) onClose();
     });

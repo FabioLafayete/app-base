@@ -61,7 +61,7 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
       }
     }
     return GestureDetector(
-      onTap: widget.onPress ?? _openOptions,
+      onTap: widget.onPress ?? () => _openOptions(context),
       child: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: 16, vertical: 16
@@ -136,7 +136,7 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
     );
   }
 
-  void _openOptions(){
+  void _openOptions(BuildContext context){
     VisualDisplay.bottomSheet(
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,6 +172,7 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
         ),
         hasHeight: false,
         dismissible: true,
+        context: context,
         onClose: (){}
     );
   }

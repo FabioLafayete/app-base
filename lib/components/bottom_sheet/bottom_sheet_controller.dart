@@ -9,13 +9,10 @@ class BottomSheetController = BottomSheetControllerBase with _$BottomSheetContro
 abstract class BottomSheetControllerBase with Store {
 
   @observable
-  RxDouble _heightBottomSheet = RxDouble(0.5);
-
-  @computed
-  double get heightBottomSheet => _heightBottomSheet.value;
+  double heightBottomSheet = 0.35;
 
   @action
-  setHeightBottomSheet(double value) => _heightBottomSheet.value = value;
+  setHeightBottomSheet(double value) => heightBottomSheet = value;
 
   // @override
   // void dispose() {

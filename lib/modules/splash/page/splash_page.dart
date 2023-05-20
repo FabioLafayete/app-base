@@ -21,7 +21,8 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    AppConfig().load().then((value){
+    AppConfig().load().then((value) async {
+      await Future.delayed(const Duration(seconds: 1));
       if(AppConfig().bearerToken != null){
         Modular.to.pushReplacementNamed(OnboardPage.router);
       } else {
@@ -34,6 +35,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return BasePage(
       showAppBar: false,
+      padding: 0,
       body: Stack(
         alignment: Alignment.center,
         children: [

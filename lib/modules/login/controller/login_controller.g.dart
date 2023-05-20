@@ -9,251 +9,187 @@ part of 'login_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$LoginController on LoginControllerBase, Store {
-  Computed<bool>? _$isLoadingComputed;
+  Computed<bool>? _$enableButtonComputed;
 
   @override
-  bool get isLoading =>
-      (_$isLoadingComputed ??= Computed<bool>(() => super.isLoading,
-              name: 'LoginControllerBase.isLoading'))
+  bool get enableButton =>
+      (_$enableButtonComputed ??= Computed<bool>(() => super.enableButton,
+              name: 'LoginControllerBase.enableButton'))
           .value;
-  Computed<bool>? _$isLoadingSendCodeComputed;
+
+  late final _$isLoadingAtom =
+      Atom(name: 'LoginControllerBase.isLoading', context: context);
 
   @override
-  bool get isLoadingSendCode => (_$isLoadingSendCodeComputed ??= Computed<bool>(
-          () => super.isLoadingSendCode,
-          name: 'LoginControllerBase.isLoadingSendCode'))
-      .value;
-  Computed<String>? _$emailComputed;
-
-  @override
-  String get email => (_$emailComputed ??= Computed<String>(() => super.email,
-          name: 'LoginControllerBase.email'))
-      .value;
-  Computed<String?>? _$errorEmailComputed;
-
-  @override
-  String? get errorEmail =>
-      (_$errorEmailComputed ??= Computed<String?>(() => super.errorEmail,
-              name: 'LoginControllerBase.errorEmail'))
-          .value;
-  Computed<String?>? _$errorCodeComputed;
-
-  @override
-  String? get errorCode =>
-      (_$errorCodeComputed ??= Computed<String?>(() => super.errorCode,
-              name: 'LoginControllerBase.errorCode'))
-          .value;
-  Computed<bool>? _$showCodeComputed;
-
-  @override
-  bool get showCode =>
-      (_$showCodeComputed ??= Computed<bool>(() => super.showCode,
-              name: 'LoginControllerBase.showCode'))
-          .value;
-  Computed<String>? _$code1Computed;
-
-  @override
-  String get code1 => (_$code1Computed ??= Computed<String>(() => super.code1,
-          name: 'LoginControllerBase.code1'))
-      .value;
-  Computed<String>? _$code2Computed;
-
-  @override
-  String get code2 => (_$code2Computed ??= Computed<String>(() => super.code2,
-          name: 'LoginControllerBase.code2'))
-      .value;
-  Computed<String>? _$code3Computed;
-
-  @override
-  String get code3 => (_$code3Computed ??= Computed<String>(() => super.code3,
-          name: 'LoginControllerBase.code3'))
-      .value;
-  Computed<String>? _$code4Computed;
-
-  @override
-  String get code4 => (_$code4Computed ??= Computed<String>(() => super.code4,
-          name: 'LoginControllerBase.code4'))
-      .value;
-  Computed<String>? _$code5Computed;
-
-  @override
-  String get code5 => (_$code5Computed ??= Computed<String>(() => super.code5,
-          name: 'LoginControllerBase.code5'))
-      .value;
-
-  late final _$_emailAtom =
-      Atom(name: 'LoginControllerBase._email', context: context);
-
-  @override
-  Rx<String> get _email {
-    _$_emailAtom.reportRead();
-    return super._email;
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
   }
 
   @override
-  set _email(Rx<String> value) {
-    _$_emailAtom.reportWrite(value, super._email, () {
-      super._email = value;
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
     });
   }
 
-  late final _$_errorEmailAtom =
-      Atom(name: 'LoginControllerBase._errorEmail', context: context);
+  late final _$isLoadingSendCodeAtom =
+      Atom(name: 'LoginControllerBase.isLoadingSendCode', context: context);
 
   @override
-  Rxn<String> get _errorEmail {
-    _$_errorEmailAtom.reportRead();
-    return super._errorEmail;
+  bool get isLoadingSendCode {
+    _$isLoadingSendCodeAtom.reportRead();
+    return super.isLoadingSendCode;
   }
 
   @override
-  set _errorEmail(Rxn<String> value) {
-    _$_errorEmailAtom.reportWrite(value, super._errorEmail, () {
-      super._errorEmail = value;
+  set isLoadingSendCode(bool value) {
+    _$isLoadingSendCodeAtom.reportWrite(value, super.isLoadingSendCode, () {
+      super.isLoadingSendCode = value;
     });
   }
 
-  late final _$_errorCodeAtom =
-      Atom(name: 'LoginControllerBase._errorCode', context: context);
+  late final _$emailAtom =
+      Atom(name: 'LoginControllerBase.email', context: context);
 
   @override
-  Rxn<String> get _errorCode {
-    _$_errorCodeAtom.reportRead();
-    return super._errorCode;
+  String? get email {
+    _$emailAtom.reportRead();
+    return super.email;
   }
 
   @override
-  set _errorCode(Rxn<String> value) {
-    _$_errorCodeAtom.reportWrite(value, super._errorCode, () {
-      super._errorCode = value;
+  set email(String? value) {
+    _$emailAtom.reportWrite(value, super.email, () {
+      super.email = value;
     });
   }
 
-  late final _$_isLoadingAtom =
-      Atom(name: 'LoginControllerBase._isLoading', context: context);
+  late final _$errorEmailAtom =
+      Atom(name: 'LoginControllerBase.errorEmail', context: context);
 
   @override
-  RxBool get _isLoading {
-    _$_isLoadingAtom.reportRead();
-    return super._isLoading;
+  String? get errorEmail {
+    _$errorEmailAtom.reportRead();
+    return super.errorEmail;
   }
 
   @override
-  set _isLoading(RxBool value) {
-    _$_isLoadingAtom.reportWrite(value, super._isLoading, () {
-      super._isLoading = value;
+  set errorEmail(String? value) {
+    _$errorEmailAtom.reportWrite(value, super.errorEmail, () {
+      super.errorEmail = value;
     });
   }
 
-  late final _$_isLoadingSendCodeAtom =
-      Atom(name: 'LoginControllerBase._isLoadingSendCode', context: context);
+  late final _$errorCodeAtom =
+      Atom(name: 'LoginControllerBase.errorCode', context: context);
 
   @override
-  RxBool get _isLoadingSendCode {
-    _$_isLoadingSendCodeAtom.reportRead();
-    return super._isLoadingSendCode;
+  String? get errorCode {
+    _$errorCodeAtom.reportRead();
+    return super.errorCode;
   }
 
   @override
-  set _isLoadingSendCode(RxBool value) {
-    _$_isLoadingSendCodeAtom.reportWrite(value, super._isLoadingSendCode, () {
-      super._isLoadingSendCode = value;
+  set errorCode(String? value) {
+    _$errorCodeAtom.reportWrite(value, super.errorCode, () {
+      super.errorCode = value;
     });
   }
 
-  late final _$_showCodeAtom =
-      Atom(name: 'LoginControllerBase._showCode', context: context);
+  late final _$showCodeAtom =
+      Atom(name: 'LoginControllerBase.showCode', context: context);
 
   @override
-  RxBool get _showCode {
-    _$_showCodeAtom.reportRead();
-    return super._showCode;
+  bool get showCode {
+    _$showCodeAtom.reportRead();
+    return super.showCode;
   }
 
   @override
-  set _showCode(RxBool value) {
-    _$_showCodeAtom.reportWrite(value, super._showCode, () {
-      super._showCode = value;
+  set showCode(bool value) {
+    _$showCodeAtom.reportWrite(value, super.showCode, () {
+      super.showCode = value;
     });
   }
 
-  late final _$_code1Atom =
-      Atom(name: 'LoginControllerBase._code1', context: context);
+  late final _$code1Atom =
+      Atom(name: 'LoginControllerBase.code1', context: context);
 
   @override
-  Rx<String> get _code1 {
-    _$_code1Atom.reportRead();
-    return super._code1;
+  String get code1 {
+    _$code1Atom.reportRead();
+    return super.code1;
   }
 
   @override
-  set _code1(Rx<String> value) {
-    _$_code1Atom.reportWrite(value, super._code1, () {
-      super._code1 = value;
+  set code1(String value) {
+    _$code1Atom.reportWrite(value, super.code1, () {
+      super.code1 = value;
     });
   }
 
-  late final _$_code2Atom =
-      Atom(name: 'LoginControllerBase._code2', context: context);
+  late final _$code2Atom =
+      Atom(name: 'LoginControllerBase.code2', context: context);
 
   @override
-  Rx<String> get _code2 {
-    _$_code2Atom.reportRead();
-    return super._code2;
+  String get code2 {
+    _$code2Atom.reportRead();
+    return super.code2;
   }
 
   @override
-  set _code2(Rx<String> value) {
-    _$_code2Atom.reportWrite(value, super._code2, () {
-      super._code2 = value;
+  set code2(String value) {
+    _$code2Atom.reportWrite(value, super.code2, () {
+      super.code2 = value;
     });
   }
 
-  late final _$_code3Atom =
-      Atom(name: 'LoginControllerBase._code3', context: context);
+  late final _$code3Atom =
+      Atom(name: 'LoginControllerBase.code3', context: context);
 
   @override
-  Rx<String> get _code3 {
-    _$_code3Atom.reportRead();
-    return super._code3;
+  String get code3 {
+    _$code3Atom.reportRead();
+    return super.code3;
   }
 
   @override
-  set _code3(Rx<String> value) {
-    _$_code3Atom.reportWrite(value, super._code3, () {
-      super._code3 = value;
+  set code3(String value) {
+    _$code3Atom.reportWrite(value, super.code3, () {
+      super.code3 = value;
     });
   }
 
-  late final _$_code4Atom =
-      Atom(name: 'LoginControllerBase._code4', context: context);
+  late final _$code4Atom =
+      Atom(name: 'LoginControllerBase.code4', context: context);
 
   @override
-  Rx<String> get _code4 {
-    _$_code4Atom.reportRead();
-    return super._code4;
+  String get code4 {
+    _$code4Atom.reportRead();
+    return super.code4;
   }
 
   @override
-  set _code4(Rx<String> value) {
-    _$_code4Atom.reportWrite(value, super._code4, () {
-      super._code4 = value;
+  set code4(String value) {
+    _$code4Atom.reportWrite(value, super.code4, () {
+      super.code4 = value;
     });
   }
 
-  late final _$_code5Atom =
-      Atom(name: 'LoginControllerBase._code5', context: context);
+  late final _$code5Atom =
+      Atom(name: 'LoginControllerBase.code5', context: context);
 
   @override
-  Rx<String> get _code5 {
-    _$_code5Atom.reportRead();
-    return super._code5;
+  String get code5 {
+    _$code5Atom.reportRead();
+    return super.code5;
   }
 
   @override
-  set _code5(Rx<String> value) {
-    _$_code5Atom.reportWrite(value, super._code5, () {
-      super._code5 = value;
+  set code5(String value) {
+    _$code5Atom.reportWrite(value, super.code5, () {
+      super.code5 = value;
     });
   }
 
@@ -394,7 +330,8 @@ code1: ${code1},
 code2: ${code2},
 code3: ${code3},
 code4: ${code4},
-code5: ${code5}
+code5: ${code5},
+enableButton: ${enableButton}
     ''';
   }
 }
