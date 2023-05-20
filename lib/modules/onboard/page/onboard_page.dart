@@ -19,8 +19,7 @@ import '../widgets/step_08_widget.dart';
 class OnboardPage extends BaseWidget<OnboardController> {
 
   OnboardPage({Key? key}) : super(key: key);
-
-  String get route => '${PagesNames.onboard}/';
+  static const router = '${PagesNames.onboard}/';
 
   @override
   Widget build(BuildContext context) {

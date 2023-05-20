@@ -1,10 +1,11 @@
 import 'package:app/components/base_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get/get.dart';
 import '../../util/colors.dart';
-import 'botto_sheet_view_model.dart';
+import 'bottom_sheet_controller.dart';
 
-class CustomBottomSheet extends BaseWidget {
+class CustomBottomSheet extends BaseWidget<BottomSheetController> {
 
   CustomBottomSheet({
     Key? key,
@@ -19,8 +20,8 @@ class CustomBottomSheet extends BaseWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Get.focusScope?.unfocus(),
-      child: Obx((){
-        // controller.heightBottomSheet;
+      child: Observer(builder: (_){
+        controller.heightBottomSheet;
         return SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -38,7 +39,7 @@ class CustomBottomSheet extends BaseWidget {
                 children: [
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
-                    // height: !hasHeight ? null : (height * controller.heightBottomSheet),
+                    height: !hasHeight ? null : (height * controller.heightBottomSheet),
                     padding: const EdgeInsets.all(16).copyWith(
                         top: 30
                     ),

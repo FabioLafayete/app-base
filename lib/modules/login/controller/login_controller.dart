@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../../components/bottom_sheet/botto_sheet_view_model.dart';
+import '../../../components/bottom_sheet/bottom_sheet_controller.dart';
 
 part 'login_controller.g.dart';
 
@@ -18,52 +18,78 @@ abstract class LoginControllerBase with Store {
   LoginControllerBase({
     required this.repositoryImpl
   }) : super(){
-    bottomSheet.setHeightBottomSheet(0.35);
+    // bottomSheet.setHeightBottomSheet(0.35);
   }
 
   final LoginRepositoryImpl repositoryImpl;
 
-  final RxString _email = RxString('');
-  final Rxn<String> _errorEmail = Rxn<String>();
-  final Rxn<String> _errorCode = Rxn<String>();
-  final RxBool _isLoading = RxBool(false);
-  final RxBool _isLoadingSendCode = RxBool(false);
+  @observable
+  Rx<String> _email = Rx('');
+  @observable
+  Rxn<String> _errorEmail = Rxn<String>();
+  @observable
+  Rxn<String> _errorCode = Rxn<String>();
+  @observable
+  RxBool _isLoading = RxBool(false);
+  @observable
+  RxBool _isLoadingSendCode = RxBool(false);
+  @observable
+  RxBool _showCode = RxBool(false);
+  @observable
+  Rx<String> _code1 = Rx('');
+  @observable
+  Rx<String> _code2 = Rx('');
+  @observable
+  Rx<String> _code3 = Rx('');
+  @observable
+  Rx<String> _code4 = Rx('');
+  @observable
+  Rx<String> _code5 = Rx('');
 
-  final RxBool _showCode = RxBool(false);
+  @computed
   bool get isLoading => _isLoading.value;
+  @computed
   bool get isLoadingSendCode => _isLoadingSendCode.value;
-  final Rx<String> _code1 = Rx('');
-  final Rx<String> _code2 = Rx('');
-  final Rx<String> _code3 = Rx('');
-  final Rx<String> _code4 = Rx('');
-  final Rx<String> _code5 = Rx('');
-
-  final bottomSheet = Get.find<BottomSheetViewModel>();
-
+  @computed
   String get email => _email.value;
+  @computed
   String? get errorEmail => _errorEmail.value;
+  @computed
   String? get errorCode => _errorCode.value;
+  @computed
   bool get showCode => _showCode.value;
-  bool isEmail(String email) => Util.isEmail(email);
-
+  @computed
   String get code1 => _code1.value;
+  @computed
   String get code2 => _code2.value;
+  @computed
   String get code3 => _code3.value;
+  @computed
   String get code4 => _code4.value;
+  @computed
   String get code5 => _code5.value;
 
-  setIsLoading(bool value) => _isLoading.value = value;
-  setIsLoadingSendCode(bool value) => _isLoadingSendCode.value = value;
-  setEmail(String value) => _email.value = value;
-  setErrorEmail(String? value) => _errorEmail.value = value;
-  setErrorCode(String? value) => _errorCode.value = value;
-  setShowCode(bool value) => _showCode.value = value;
+  final bottomSheet = Get.find<BottomSheetController>();
+  bool isEmail(String email) => Util.isEmail(email);
 
+  @action
+  setIsLoading(bool value) => _isLoading.value = value;
+  @action
+  setIsLoadingSendCode(bool value) => _isLoadingSendCode.value = value;
+  @action
+  setEmail(String value) => _email.value = value;
+  @action
+  setErrorEmail(String? value) => _errorEmail.value = value;
+  @action
+  setErrorCode(String? value) => _errorCode.value = value;
+  @action
+  setShowCode(bool value) => _showCode.value = value;
+  @action
   void setCode1(String value) {
     _code1.value = value;
     if (value.isNotEmpty) codePart2FocusNode.requestFocus();
   }
-
+  @action
   void setCode2(String value) {
     _code2.value = value;
     if (value.isNotEmpty) {
@@ -72,7 +98,7 @@ abstract class LoginControllerBase with Store {
       codePart1FocusNode.requestFocus();
     }
   }
-
+  @action
   void setCode3(String value) {
     _code3.value = value;
     if (value.isNotEmpty) {
@@ -81,7 +107,7 @@ abstract class LoginControllerBase with Store {
       codePart2FocusNode.requestFocus();
     }
   }
-
+  @action
   void setCode4(String value) {
     _code4.value = value;
     if (value.isNotEmpty) {
@@ -90,7 +116,7 @@ abstract class LoginControllerBase with Store {
       codePart3FocusNode.requestFocus();
     }
   }
-
+  @action
   void setCode5(String value) {
     _code5.value = value;
     if (value.isNotEmpty) {
@@ -100,8 +126,6 @@ abstract class LoginControllerBase with Store {
       codePart4FocusNode.requestFocus();
     }
   }
-
-
 
   final FocusNode codePart1FocusNode = FocusNode();
   final FocusNode codePart2FocusNode = FocusNode();
@@ -115,7 +139,6 @@ abstract class LoginControllerBase with Store {
   TextEditingController controllerCode3 = TextEditingController();
   TextEditingController controllerCode4 = TextEditingController();
   TextEditingController controllerCode5 = TextEditingController();
-
 
   Future<void> onPress() async {
     try{
@@ -208,7 +231,6 @@ abstract class LoginControllerBase with Store {
       onPress();
     }
   }
-
 
   void cleanLogin(){
     setEmail('');

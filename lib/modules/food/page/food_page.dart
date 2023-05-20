@@ -15,7 +15,7 @@ class FoodPage extends BaseWidget<FoodController> {
 
   final navController = Modular.get<NavController>();
 
-  String get route => '${PagesNames.food}/';
+  static const router = '${PagesNames.food}/';
 
   @override
   Widget build(BuildContext context) {

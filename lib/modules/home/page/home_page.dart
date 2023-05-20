@@ -14,8 +14,7 @@ class HomePage extends BaseWidget<HomeController> {
   HomePage({Key? key}) : super(key: key);
 
   final navController = Modular.get<NavController>();
-
-  String get route => '${PagesNames.login}/';
+  static const router = '${PagesNames.home}/';
 
   @override
   Widget build(BuildContext context) {

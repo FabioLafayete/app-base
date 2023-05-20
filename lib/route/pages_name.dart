@@ -5,4 +5,5 @@ class PagesNames {
   static const String food = '/food';
   static const String workout = '/workout';
   static const String profile = '/profile';
+  static const String splash = '/splash';
 }

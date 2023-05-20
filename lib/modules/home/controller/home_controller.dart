@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../../components/bottom_sheet/botto_sheet_view_model.dart';
+import '../../../components/bottom_sheet/bottom_sheet_controller.dart';
 
 part 'home_controller.g.dart';
 
