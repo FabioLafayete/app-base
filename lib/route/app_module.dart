@@ -6,6 +6,7 @@ import '../modules/food/controller/food_controller.dart';
 import '../modules/home/controller/home_controller.dart';
 import '../modules/login/module/login_module.dart';
 import '../modules/navigator/controller/nav_controller.dart';
+import '../modules/onboard/module/onboard_module.dart';
 import '../modules/profile/controller/profile_controller.dart';
 import '../modules/workout/controller/workout_controller.dart';
 
@@ -24,7 +25,7 @@ class AppModule extends Module {
   List<ModuleRoute> get routes => [
     ModuleRoute(
         PagesNames.onboard,
-        module: LoginModule(),
+        module: OnboardModule(),
     ),
     ModuleRoute(
       PagesNames.login,

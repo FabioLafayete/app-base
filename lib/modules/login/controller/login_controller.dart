@@ -11,11 +11,11 @@ import '../../../components/bottom_sheet/botto_sheet_view_model.dart';
 
 part 'login_controller.g.dart';
 
-class LoginController = _LoginController with _$LoginController;
+class LoginController = LoginControllerBase with _$LoginController;
 
-abstract class _LoginController with Store {
+abstract class LoginControllerBase with Store {
 
-  _LoginController({
+  LoginControllerBase({
     required this.repositoryImpl
   }) : super(){
     bottomSheet.setHeightBottomSheet(0.35);
