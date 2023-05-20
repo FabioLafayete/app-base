@@ -1,5 +1,4 @@
 import 'package:chewie/chewie.dart';
-import 'package:get/get.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:mobx/mobx.dart';
 import 'package:rxdart/rxdart.dart';
@@ -13,71 +12,67 @@ class NavController = NavControllerBase with _$NavController;
 
 abstract class NavControllerBase with Store {
 
-
-  final Rxn<int> _selectedIndex = Rxn<int>();
-  final RxBool _showControl = RxBool(true);
-  final RxBool _isFullScreen = RxBool(false);
-  final RxBool _showProgress = RxBool(false);
-  final RxBool _enableMore10Seconds = RxBool(false);
-  final RxBool _enableLess10Seconds = RxBool(false);
-  final RxDouble _percentVideo = RxDouble(0);
-  final Rxn<double> _heightPlayer = Rxn<double>();
-  final Rxn<Duration> _positionVideo = Rxn<Duration>();
-  final Rxn<VideoModel> _videoSelected = Rxn<VideoModel>();
-  final Rxn<ChewieController> _chewieController = Rxn<ChewieController>();
-  final Rxn<VideoPlayerController> _videoPlayerController = Rxn<VideoPlayerController>();
+  @observable
+  int? selectedIndex;
+  @observable
+  bool showControl = true;
+  @observable
+  bool isFullScreen = false;
+  @observable
+  bool showProgress = false;
+  @observable
+  bool enableMore10Seconds = false;
+  @observable
+  bool enableLess10Seconds = false;
+  @observable
+  double percentVideo = 0;
+  @observable
+  double? heightPlayer;
+  @observable
+  Duration? positionVideo;
+  @observable
+  VideoModel? videoSelected;
+  @observable
+  ChewieController? chewieController;
+  @observable
+  VideoPlayerController? videoPlayerController;
 
   final MiniplayerController miniplayerController = MiniplayerController();
   BehaviorSubject<double> percent = BehaviorSubject.seeded(0.0);
 
-  NavControllerBase() : super() {
-    changeStatus();
-    // setSelectedIndex(2);
-  }
+  NavControllerBase();
 
-  int? get selectedIndex => _selectedIndex.value;
-  bool get showControl => _showControl.value;
-  bool get isFullScreen => _isFullScreen.value;
-  bool get showProgress => _showProgress.value;
-  bool get enableMore10Seconds => _enableMore10Seconds.value;
-  bool get enableLess10Seconds => _enableLess10Seconds.value;
-  double get percentVideo => _percentVideo.value;
-  double? get heightPlayer => _heightPlayer.value;
-  Duration? get positionVideo => _positionVideo.value;
-  VideoModel? get videoSelected => _videoSelected.value;
-  ChewieController? get chewieController => _chewieController.value;
-  VideoPlayerController? get videoPlayerController => _videoPlayerController.value;
-
-  setSelectedIndex(int? value) => _selectedIndex.value = value;
-  setShowControl(bool value) => _showControl.value = value;
-  setIsFullScreen(bool value) => _isFullScreen.value = value;
-  setShowProgress(bool value) => _showProgress.value = value;
-  setEnableMore10Seconds(bool value) => _enableMore10Seconds.value = value;
-  setEnableLess10Seconds(bool value) => _enableLess10Seconds.value = value;
-  setPercentVideo(double value) => _percentVideo.value = value;
-  setHeightPlayer(double? value) => _heightPlayer.value = value;
-  setPositionVideo(Duration value) => _positionVideo.value = value;
+  @action
+  setSelectedIndex(int? value) => selectedIndex = value;
+  @action
+  setShowControl(bool value) => showControl = value;
+  @action
+  setIsFullScreen(bool value) => isFullScreen = value;
+  @action
+  setShowProgress(bool value) => showProgress = value;
+  @action
+  setEnableMore10Seconds(bool value) => enableMore10Seconds = value;
+  @action
+  setEnableLess10Seconds(bool value) => enableLess10Seconds = value;
+  @action
+  setPercentVideo(double value) => percentVideo = value;
+  @action
+  setHeightPlayer(double? value) => heightPlayer = value;
+  @action
+  setPositionVideo(Duration value) => positionVideo = value;
+  @action
   Future setVideoSelected(VideoModel? value) async {
     if(value == null) {
-      _videoSelected.value = value;
+      videoSelected = value;
       return;
     }
-    _videoSelected.value = null;
+    videoSelected = null;
     await Future.delayed(const Duration(milliseconds: 100));
-    _videoSelected.value = value;
+    videoSelected = value;
   }
-  setChewieController(ChewieController? value) => _chewieController.value = value;
-  setVideoPlayerController(VideoPlayerController? value) => _videoPlayerController.value = value;
-
-  void changeStatus(){
-    // change(null, status: RxStatus.success());
-
-    if(Get.arguments != null){
-      if(Get.arguments.contains('index')){
-        setSelectedIndex(Get.arguments['index']);
-      }
-    }
-
-  }
+  @action
+  setChewieController(ChewieController? value) => chewieController = value;
+  @action
+  setVideoPlayerController(VideoPlayerController? value) => videoPlayerController = value;
 
 }

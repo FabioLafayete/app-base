@@ -1,5 +1,6 @@
 import 'package:app/components/base_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
@@ -29,7 +30,7 @@ class SelectItem extends BaseWidget {
     }
     return Column(
       children: List.generate(items.length,
-              (index) => Obx(() => _item(items[index]))),
+              (index) => Observer(builder: (_) => _item(items[index]))),
     );
   }
 

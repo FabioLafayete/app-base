@@ -1,5 +1,3 @@
-import 'package:app/components/base_view_model.dart';
-import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 
 part 'bottom_sheet_controller.g.dart';

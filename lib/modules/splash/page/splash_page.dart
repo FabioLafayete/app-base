@@ -1,5 +1,6 @@
 import 'package:app/components/app_theme_widget.dart';
 import 'package:app/config/app_config.dart';
+import 'package:app/modules/home/page/home_page.dart';
 import 'package:app/modules/onboard/page/onboard_page.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class _SplashPageState extends State<SplashPage> {
     AppConfig().load().then((value) async {
       await Future.delayed(const Duration(seconds: 1));
       if(AppConfig().bearerToken != null){
-        Modular.to.pushReplacementNamed(OnboardPage.router);
+        Modular.to.pushReplacementNamed(HomePage.router);
       } else {
         Modular.to.pushReplacementNamed(LoginPage.router);
       }

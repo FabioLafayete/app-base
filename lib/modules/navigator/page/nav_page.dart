@@ -3,6 +3,8 @@ import 'package:app/modules/home/page/home_page.dart';
 import 'package:app/modules/navigator/controller/nav_controller.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
@@ -22,7 +24,7 @@ class NavPage extends BaseWidget<NavController> {
     if(controller.selectedIndex == null) {
       controller.setSelectedIndex(index);
     }
-    final _screens = [
+    final screens = [
       HomePage(),
       FoodPage(),
       WorkoutPage(),
@@ -30,7 +32,7 @@ class NavPage extends BaseWidget<NavController> {
       ProfilePage(),
     ];
 
-    return Obx(() => WillPopScope(
+    return Observer(builder: (_) => WillPopScope(
       onWillPop: () async {
         if(controller.selectedIndex != 0) {
           controller.setSelectedIndex(0);
@@ -40,7 +42,7 @@ class NavPage extends BaseWidget<NavController> {
       },
       child: Scaffold(
         body: Stack(
-            children: _screens
+            children: screens
                 .asMap()
                 .map((i, screen) => MapEntry(
                 i,
@@ -85,7 +87,7 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
 
-  final controller = Get.find<NavController>();
+  final controller = Modular.get<NavController>();
   final colors = AppColors();
 
   @override

@@ -1,7 +1,6 @@
 import 'package:app/modules/workout/controller/workout_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:get/get.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:video_player/video_player.dart';
 

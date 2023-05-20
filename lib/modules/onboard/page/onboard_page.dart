@@ -1,11 +1,12 @@
 import 'package:app/components/base_page.dart';
 import 'package:app/components/base_widget.dart';
 import 'package:app/components/visual_display.dart';
+import 'package:app/modules/home/page/home_page.dart';
 import 'package:app/modules/onboard/controller/onboard_controller.dart';
 import 'package:app/modules/onboard/widgets/step_01_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import '../../../components/custom_button.dart';
 import '../../../route/pages_name.dart';
 import '../widgets/step_02_widget.dart';
@@ -40,7 +41,7 @@ class OnboardPage extends BaseWidget<OnboardController> {
       padding: 0,
       showAppBar: false,
       body: SafeArea(
-        child: Obx(() => SingleChildScrollView(
+        child: Observer(builder: (_) => SingleChildScrollView(
           child: SizedBox(
             height: height * 0.9,
             child: Column(
@@ -74,7 +75,7 @@ class OnboardPage extends BaseWidget<OnboardController> {
                     onPress: (){
                       controller.setIndex(controller.index + 1);
                       if(controller.index == 8){
-                        Get.offAllNamed(PagesNames.home);
+                        Modular.to.pushReplacementNamed(HomePage.router);
                       }
                     },
                   ),

@@ -8,9 +8,6 @@ class WorkoutController = WorkoutControllerBase with _$WorkoutController;
 
 abstract class WorkoutControllerBase with Store {
 
-  WorkoutControllerBase() : super() {
-    // change(null, status: RxStatus.success());
-  }
-
+  WorkoutControllerBase();
 
 }

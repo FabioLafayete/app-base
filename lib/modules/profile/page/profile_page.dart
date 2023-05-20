@@ -3,10 +3,8 @@ import 'dart:io';
 import 'package:app/components/base_page.dart';
 import 'package:app/components/base_widget.dart';
 import 'package:app/shared/model/user/user_model.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-
 import '../../../route/pages_name.dart';
 import '../../../shared/widgets/image_cropper.dart';
 import '../controller/profile_controller.dart';
