@@ -1,3 +1,5 @@
+import 'package:app/service/storage/storage_service.dart';
+import 'package:app/shared/constants/storage_constants.dart';
 import 'package:app/shared/flavor/flavor_types.dart';
 import 'package:app/shared/flavor/impl/flavor_impl.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -19,11 +21,23 @@ class AppConfig {
   Future load() async {
     flavors = FlavorsImpl();
     flavors.initialize(endpoints);
+
     _baseUrl = flavors.getEndpoint(StringConstants.hostKey);
+
+    final secure = Modular.get<SecureStorageService>();
+    String? bearer = await secure.get(StorageConstants.bearerToken);
+    if(bearer != null) {
+      _bearerToken = bearer;
+    }
+
     print('Ambiente de ${flavors.getCurrentFlavor() == FlavorType.dev ? 'dev' : 'prod'}');
   }
 
-  setBearerToken(String? value) => _bearerToken = value;
+  Future setBearerToken(String? value) async {
+    _bearerToken = value;
+    final secure = Modular.get<SecureStorageService>();
+    secure.put(StorageConstants.bearerToken, bearerToken);
+  }
 
   String get baseUrl => _baseUrl;
   String? get bearerToken => _bearerToken;

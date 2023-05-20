@@ -8,7 +8,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../../components/bottom_sheet/bottom_sheet_controller.dart';
+import '../../navigator/controller/nav_controller.dart';
 
 part 'login_controller.g.dart';
 
@@ -47,7 +47,7 @@ abstract class LoginControllerBase with Store {
   @observable
   String code5 = '';
 
-  final bottomSheet = Modular.get<BottomSheetController>();
+  final bottomSheet = Modular.get<NavController>();
 
   @action
   setIsLoading(bool value) => isLoading = value;
@@ -125,7 +125,7 @@ abstract class LoginControllerBase with Store {
             email!, '$code1$code2$code3$code4$code5'
         );
         if(data.isNotEmpty && data.containsKey('token')){
-          AppConfig().setBearerToken(data['token']);
+          await AppConfig().setBearerToken(data['token']);
           Modular.to.pushReplacementNamed(HomePage.router);
           return;
         }

@@ -13,13 +13,13 @@ mixin _$NavController on NavControllerBase, Store {
       Atom(name: 'NavControllerBase.selectedIndex', context: context);
 
   @override
-  int? get selectedIndex {
+  int get selectedIndex {
     _$selectedIndexAtom.reportRead();
     return super.selectedIndex;
   }
 
   @override
-  set selectedIndex(int? value) {
+  set selectedIndex(int value) {
     _$selectedIndexAtom.reportWrite(value, super.selectedIndex, () {
       super.selectedIndex = value;
     });
@@ -202,6 +202,22 @@ mixin _$NavController on NavControllerBase, Store {
     });
   }
 
+  late final _$heightBottomSheetAtom =
+      Atom(name: 'NavControllerBase.heightBottomSheet', context: context);
+
+  @override
+  double get heightBottomSheet {
+    _$heightBottomSheetAtom.reportRead();
+    return super.heightBottomSheet;
+  }
+
+  @override
+  set heightBottomSheet(double value) {
+    _$heightBottomSheetAtom.reportWrite(value, super.heightBottomSheet, () {
+      super.heightBottomSheet = value;
+    });
+  }
+
   late final _$setVideoSelectedAsyncAction =
       AsyncAction('NavControllerBase.setVideoSelected', context: context);
 
@@ -215,7 +231,18 @@ mixin _$NavController on NavControllerBase, Store {
       ActionController(name: 'NavControllerBase', context: context);
 
   @override
-  dynamic setSelectedIndex(int? value) {
+  dynamic setHeightBottomSheet(double value) {
+    final _$actionInfo = _$NavControllerBaseActionController.startAction(
+        name: 'NavControllerBase.setHeightBottomSheet');
+    try {
+      return super.setHeightBottomSheet(value);
+    } finally {
+      _$NavControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setSelectedIndex(int value) {
     final _$actionInfo = _$NavControllerBaseActionController.startAction(
         name: 'NavControllerBase.setSelectedIndex');
     try {
@@ -349,7 +376,8 @@ heightPlayer: ${heightPlayer},
 positionVideo: ${positionVideo},
 videoSelected: ${videoSelected},
 chewieController: ${chewieController},
-videoPlayerController: ${videoPlayerController}
+videoPlayerController: ${videoPlayerController},
+heightBottomSheet: ${heightBottomSheet}
     ''';
   }
 }

@@ -53,7 +53,7 @@ class ProfilePage extends BaseWidget<ProfileController> {
                       ListButtonItem(title: 'Meu perfil', icon: LineIcons.user, onPress: (){}),
                       ListButtonItem(title: 'Ajuda', icon: LineIcons.questionCircle, onPress: (){}),
                       ListButtonItem(title: 'Sobre', icon: LineIcons.exclamationCircle, onPress: (){}),
-                      ListButtonItem(title: 'Sair', icon: LineIcons.powerOff, onPress: (){}),
+                      ListButtonItem(title: 'Sair', icon: LineIcons.powerOff, onPress: controller.logout),
                     ],
                   ),
                 ],
