@@ -3,11 +3,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../config/app_config.dart';
 import '../modules/food/controller/food_controller.dart';
-import '../modules/home/controller/home_controller.dart';
+import '../modules/food/module/food_module.dart';
+import '../modules/home/module/home_module.dart';
 import '../modules/login/module/login_module.dart';
 import '../modules/navigator/controller/nav_controller.dart';
 import '../modules/onboard/module/onboard_module.dart';
 import '../modules/profile/controller/profile_controller.dart';
+import '../modules/profile/module/profile_module.dart';
 import '../modules/workout/controller/workout_controller.dart';
 
 class AppModule extends Module {
@@ -15,10 +17,7 @@ class AppModule extends Module {
   List<Bind> get binds => [
     Bind.singleton((i) => AppConfig.instance),
     Bind.singleton((i) => NavController()),
-    Bind.singleton((i) => HomeController()),
     Bind.singleton((i) => WorkoutController()),
-    Bind.singleton((i) => FoodController()),
-    Bind.singleton((i) => ProfileController()),
   ];
 
   @override
@@ -33,11 +32,11 @@ class AppModule extends Module {
     ),
     ModuleRoute(
       PagesNames.home,
-      module: LoginModule(),
+      module: HomeModule(),
     ),
     ModuleRoute(
       PagesNames.food,
-      module: LoginModule(),
+      module: FoodModule(),
     ),
     ModuleRoute(
       PagesNames.workout,
@@ -45,7 +44,7 @@ class AppModule extends Module {
     ),
     ModuleRoute(
       PagesNames.profile,
-      module: LoginModule(),
+      module: ProfileModule(),
     ),
   ];
 }

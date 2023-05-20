@@ -1,10 +1,15 @@
 import 'package:app/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mobx/mobx.dart';
 
 import '../../../components/bottom_sheet/botto_sheet_view_model.dart';
 
-class HomeController extends GetxController with StateMixin {
+part 'home_controller.g.dart';
+
+class HomeController = HomeControllerBase with _$HomeController;
+
+abstract class HomeControllerBase with Store {
 
 
   final RxString _email = RxString('');
@@ -13,12 +18,10 @@ class HomeController extends GetxController with StateMixin {
   final RxBool _isLoading = RxBool(false);
   final RxBool _isLoadingSendCode = RxBool(false);
 
-  HomeController() : super() {
+  HomeControllerBase() : super() {
     changeStatus();
   }
 
-  void changeStatus(){
-    change(null, status: RxStatus.success());
-  }
+  void changeStatus(){}
 
 }

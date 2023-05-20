@@ -1,5 +1,6 @@
 import 'package:app/modules/workout/controller/workout_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:video_player/video_player.dart';
@@ -14,7 +15,7 @@ import '../widgets/top_presentation.dart';
 class WorkoutPage extends BaseWidget<WorkoutController> {
   WorkoutPage({Key? key}) : super(key: key);
 
-  final navController = Get.find<NavController>();
+  final navController = Modular.get<NavController>();
 
   void openVideo (){
     navController.setVideoSelected(
@@ -93,32 +94,30 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
       ]),
     ];
 
-    return controller.obx(
-      (_) => Obx(() => BasePage(
-        backgroundColor: colors.background,
-        showAppBar: false,
-        padding: 0,
-        extendBodyBehindAppBar: true,
-        body: ListView(
-            padding: MediaQuery.of(context).padding.copyWith(top: 0),
-            children: [
-              TopPresentation(cardItemModel: _list[2].listItems[1]),
-              Column(
-                children: List.generate(
-                    _list.length,
-                        (index) => Container(
-                      margin: const EdgeInsets.only(top: 30),
-                      child: _list[index],
-                    )
-                ),
+    return BasePage(
+      backgroundColor: colors.background,
+      showAppBar: false,
+      padding: 0,
+      extendBodyBehindAppBar: true,
+      body: ListView(
+          padding: MediaQuery.of(context).padding.copyWith(top: 0),
+          children: [
+            TopPresentation(cardItemModel: _list[2].listItems[1]),
+            Column(
+              children: List.generate(
+                  _list.length,
+                      (index) => Container(
+                    margin: const EdgeInsets.only(top: 30),
+                    child: _list[index],
+                  )
               ),
-              if(navController.videoSelected != null)
-                space(0.12),
-              if(navController.videoSelected == null)
-                space(0.03),
-            ]
-        ),
-      )),
+            ),
+            if(navController.videoSelected != null)
+              space(0.12),
+            if(navController.videoSelected == null)
+              space(0.03),
+          ]
+      ),
     );
   }
 

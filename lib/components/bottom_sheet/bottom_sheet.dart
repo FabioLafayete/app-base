@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../util/colors.dart';
 import 'botto_sheet_view_model.dart';
 
-class CustomBottomSheet extends BaseWidget<BottomSheetViewModel> {
+class CustomBottomSheet extends BaseWidget {
 
   CustomBottomSheet({
     Key? key,
@@ -20,7 +20,7 @@ class CustomBottomSheet extends BaseWidget<BottomSheetViewModel> {
     return GestureDetector(
       onTap: () => Get.focusScope?.unfocus(),
       child: Obx((){
-        controller.heightBottomSheet;
+        // controller.heightBottomSheet;
         return SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -38,7 +38,7 @@ class CustomBottomSheet extends BaseWidget<BottomSheetViewModel> {
                 children: [
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
-                    height: !hasHeight ? null : (height * controller.heightBottomSheet),
+                    // height: !hasHeight ? null : (height * controller.heightBottomSheet),
                     padding: const EdgeInsets.all(16).copyWith(
                         top: 30
                     ),

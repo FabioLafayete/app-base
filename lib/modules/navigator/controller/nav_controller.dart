@@ -1,13 +1,17 @@
 import 'package:chewie/chewie.dart';
 import 'package:get/get.dart';
 import 'package:miniplayer/miniplayer.dart';
+import 'package:mobx/mobx.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../shared/model/video/video_model.dart';
 
+part 'nav_controller.g.dart';
 
-class NavController extends GetxController with StateMixin {
+class NavController = NavControllerBase with _$NavController;
+
+abstract class NavControllerBase with Store {
 
 
   final Rxn<int> _selectedIndex = Rxn<int>();
@@ -26,7 +30,7 @@ class NavController extends GetxController with StateMixin {
   final MiniplayerController miniplayerController = MiniplayerController();
   BehaviorSubject<double> percent = BehaviorSubject.seeded(0.0);
 
-  NavController() : super() {
+  NavControllerBase() : super() {
     changeStatus();
     // setSelectedIndex(2);
   }
@@ -66,7 +70,7 @@ class NavController extends GetxController with StateMixin {
   setVideoPlayerController(VideoPlayerController? value) => _videoPlayerController.value = value;
 
   void changeStatus(){
-    change(null, status: RxStatus.success());
+    // change(null, status: RxStatus.success());
 
     if(Get.arguments != null){
       if(Get.arguments.contains('index')){
