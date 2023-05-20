@@ -1,7 +1,9 @@
-import 'package:app/interface/base_model_interface.dart';
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import '../../config/app_config.dart';
 
+// ignore: constant_identifier_names
 enum RequestType { GET, POST, PUT, PATCH, DELETE }
 
 class HttpService {
@@ -13,21 +15,20 @@ class HttpService {
     configInitApi();
   }
 
-  Future<T> request<T>({
+  Future<Response> request({
     required RequestType type,
     required String path,
-    BaseModelInterface? dataResponse,
-    BaseModelInterface? dataRequest,
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? dataRequest,
     Options? options,
     CancelToken? cancelToken,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      Response res = await dio.request(
+      return dio.request(
         path,
-        data: dataRequest?.toJson(),
+        data: dataRequest,
         queryParameters: queryParameters,
         options: _checkOptions(type.toString().split('.').last, options),
         cancelToken: cancelToken,
@@ -35,20 +36,14 @@ class HttpService {
         onReceiveProgress: onReceiveProgress,
       );
 
-      if (dataResponse == null) {
-        return res.data;
-      }
-      if (res.data is List) {
-        return dataResponse.fromJsonArray(res.data) as T ?? res.data as T;
-      }
-      return dataResponse.fromJson(res.data) as T ?? res.data as T;
     } catch (error) {
       if(error is DioError){
         print(error.message);
         print(error.response?.statusCode);
         print(error.requestOptions.uri);
+      } else {
+        print(error);
       }
-      print(error);
       throw(error.toString());
     }
   }
@@ -57,6 +52,7 @@ class HttpService {
     dio = Dio(
       BaseOptions(
         baseUrl: appConfig.baseUrl,
+        headers: {HttpHeaders.authorizationHeader: 'Bearer ${appConfig.bearerToken}'},
         validateStatus: (status) => status!  < 400,
         receiveTimeout: 10000,
         connectTimeout: 5000,

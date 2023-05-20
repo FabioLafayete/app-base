@@ -1,39 +1,28 @@
-import 'package:app/route/pages_name.dart';
-import 'package:app/util/theme.dart';
+import 'package:app/route/app_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-import 'config/app_config.dart';
-import 'route/pages_routes.dart';
-
-
+import 'modules/splash/page/splash_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _preload();
-  Get.isDarkMode;
+  Modular.setInitialRoute(SplashPage.router);
   runApp(
-      GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: PagesNames.home,
-        getPages: PagesRoutes.pages,
-        locale: const Locale('pt', 'BR'),
-        theme: Themes().lightTheme,
-        darkTheme: Themes().darkTheme,
+      ModularApp(
+        module: AppModule(),
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          locale: const Locale('pt', 'BR'),
+          routeInformationParser: Modular.routeInformationParser,
+          routerDelegate: Modular.routerDelegate,
+        ),
       )
   );
 }
 
-
 Future _preload() async {
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
-  Get.put(AppConfig.instance);
-  Get.put(Themes(), permanent: true);
-  Get.changeTheme(Themes().darkTheme);
-
-  await Future.wait([
-    AppConfig().load(),
-  ]);
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 }

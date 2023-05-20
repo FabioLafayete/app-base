@@ -1,29 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class AppColors {
 
   final ColorsSchema _light = ColorsSchema(
-      text: Colors.black,
-      textSecondary: Colors.black38,
-      primary: const Color.fromRGBO(246, 83, 32, 1),
-      background: Colors.white,
+    text: Colors.black,
+    textSecondary: Colors.black54,
+    text2: Colors.white,
+    textSecondary2: Colors.grey,
+    // primary: Colors.pink.shade400,
+    // secondary: Colors.pink.shade700,
+    // primary: Colors.purple.shade400,
+    // secondary: Colors.purple.shade700,
+    primary: const Color(0xFF6357DD),
+    secondary: Colors.purple.shade700,
+    background: const Color.fromRGBO(249, 249, 251, 1.0),
+    // background: Colors.white,
+    error: const Color(0xFFC21D4F),
   );
 
   final ColorsSchema _dark = ColorsSchema(
-      text: Colors.white,
-      textSecondary: Colors.white60,
-      primary: const Color.fromRGBO(246, 83, 32, 1),
-      background: const Color.fromRGBO(25, 25, 57, 1),
+    text: Colors.black,
+    textSecondary: Colors.black54,
+    text2: Colors.white,
+    textSecondary2: Colors.grey,
+    primary: Colors.pink.shade400,
+    secondary: Colors.pink.shade700,
+    background: Colors.white,
+    error: const Color(0xFFC21D4F),
   );
 
-  ColorsSchema get light => _light;
-  ColorsSchema get dark => _dark;
 
-  Color get text => Get.context!.theme.textTheme.bodyText1!.color!;
-  Color get textSecondary => Get.context!.theme.textTheme.bodyText2!.color!;
-  Color get primary => Get.context!.theme.primaryColor;
-  Color get background => Get.context!.theme.backgroundColor;
+  Color get text => _light.text;
+  Color get textSecondary => _light.textSecondary;
+  Color get text2 => _light.text2;
+  Color get textSecondary2 => _light.textSecondary2;
+  Color get primary => _light.primary;
+  Color get secondary => _light.secondary;
+  Color get background => _light.background;
+  Color get error => _light.error;
 
 }
 
@@ -31,14 +45,22 @@ class ColorsSchema {
 
   final Color background;
   final Color primary;
+  final Color secondary;
   final Color text;
   final Color textSecondary;
+  final Color text2;
+  final Color textSecondary2;
+  final Color error;
 
   ColorsSchema({
+    required this.primary,
     required this.textSecondary,
     required this.text,
-    required this.primary,
-    required this.background
+    required this.text2,
+    required this.textSecondary2,
+    required this.secondary,
+    required this.background,
+    required this.error,
   });
 
 }

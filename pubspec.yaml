@@ -15,13 +15,45 @@ dependencies:
   get:
   dio:
   mockito:
+  cached_network_image: 3.2.1
+  flutter_spinkit: 5.1.0
+  easy_mask: 2.0.1
+  flutter_holo_date_picker: 1.0.6
+  font_awesome_flutter: 10.3.0
+  video_player: 2.5.1
+  chewie: 1.4.0
+  miniplayer: 1.0.1
+  freezed_annotation: 2.2.0
+  audio_video_progress_bar: 1.0.0
+  line_icons: 2.0.1
+  rxdart:
+  intl: ^0.18.0
+  crop: 0.5.4
+  file_picker: 5.2.5
+  image_picker: 0.8.6+4
+  flutter_image_compress: 1.1.3
+  flutter_secure_storage: 8.0.0
+  flutter_modular: 5.0.3
+  mobx: 2.2.0
+  flutter_mobx: 2.0.6+5
+  rx_notifier: 2.2.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  freezed: 2.3.2
+  mobx_codegen: 2.3.0
+  build_runner: 2.3.3
+  json_serializable: 6.6.1
   flutter_lints: ^2.0.0
 
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - assets/video/
+
+flutter_intl:
+  enabled: true # Obrigatório. Deve ser definido como verdadeiro para ativar o pacote. Padrão: falso
+  main_locale: pt # Opcional. Define o local principal usado para gerar arquivos de localização. O valor fornecido deve consistir em código de idioma e script opcional e códigos de país separados por sublinhado (por exemplo, 'en', 'en_GB', 'zh_Hans', 'zh_Hans_CN'). Padrão: en

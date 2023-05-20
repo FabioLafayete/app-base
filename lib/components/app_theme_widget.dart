@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class AppTheme {
 
   Widget text (String text, {
-    double? size,
     int? maxLines,
     TextAlign? textAlign,
     TextOverflow? textOverflow,
