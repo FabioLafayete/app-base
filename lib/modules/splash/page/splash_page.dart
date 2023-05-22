@@ -42,7 +42,7 @@ class _SplashPageState extends State<SplashPage> {
         children: [
           _background(),
           AppTheme().text(
-              'Bem-vinda ao FitLab',
+              'Bem-vinda ao iBetter',
               fontSize: 25,
               fontWeight: FontWeight.w600,
               color: AppColors().background

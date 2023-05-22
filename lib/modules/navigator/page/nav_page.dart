@@ -130,8 +130,8 @@ class _BottomNavState extends State<BottomNav> {
       unselectedItemColor: colors.textSecondary,
       showSelectedLabels: true,
       showUnselectedLabels: true,
-      selectedFontSize: 12,
-      unselectedFontSize: 10,
+      selectedFontSize: 14,
+      unselectedFontSize: 12,
       onTap: controller.setSelectedIndex,
       items: const [
         BottomNavigationBarItem(

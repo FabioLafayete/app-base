@@ -4,6 +4,7 @@ import 'package:app/components/base_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../../../components/app_theme_widget.dart';
 import '../../../components/custom_button.dart';
@@ -27,25 +28,28 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
   final List<String> _images01 = [
     'https://images.pexels.com/photos/1128678/pexels-photo-1128678.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     // 'https://images.pexels.com/photos/4051252/pexels-photo-4051252.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/66346/pexels-photo-66346.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/1153369/pexels-photo-1153369.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+    // 'https://images.pexels.com/photos/66346/pexels-photo-66346.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/7346634/pexels-photo-7346634.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    // 'https://images.pexels.com/photos/1153369/pexels-photo-1153369.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+    'https://images.pexels.com/photos/3622643/pexels-photo-3622643.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
   ];
   final List<String> _images02 = [
     'https://images.pexels.com/photos/992819/pexels-photo-992819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     // 'https://images.pexels.com/photos/1310777/pexels-photo-1310777.jpeg?auto=compress&cs=tinysrgb&w=800',
     // 'https://images.pexels.com/photos/8852027/pexels-photo-8852027.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/3297882/pexels-photo-3297882.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/2543270/pexels-photo-2543270.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     'https://images.pexels.com/photos/416809/pexels-photo-416809.jpeg?auto=compress&cs=tinysrgb&w=1600'
   ];
   final List<String> _images03 = [
     'https://images.pexels.com/photos/66346/pexels-photo-66346.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     'https://images.pexels.com/photos/4057738/pexels-photo-4057738.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/3059981/pexels-photo-3059981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+    // 'https://images.pexels.com/photos/3059981/pexels-photo-3059981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+    'https://images.pexels.com/photos/936075/pexels-photo-936075.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
   ];
   final List<String> _images04 = [
     'https://images.pexels.com/photos/4057738/pexels-photo-4057738.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     // 'https://images.pexels.com/photos/5946045/pexels-photo-5946045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-    'https://images.pexels.com/photos/4051252/pexels-photo-4051252.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    'https://images.pexels.com/photos/15071264/pexels-photo-15071264/free-photo-of-garrafa-frasco-jarra-bebida.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     'https://images.pexels.com/photos/4944978/pexels-photo-4944978.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
   ];
 
@@ -113,7 +117,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   SizedBox(
                       width: width * 0.8,
                       child: text(
-                        'Bem-vinda ao FitLab',
+                        'Bem-vinda ao iBetter',
                         fontSize: width * 0.1,
                         fontWeight: FontWeight.w600,
                         color: colors.background
@@ -133,7 +137,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     colorButton: colors.background,
                     onPress: widget.signInOnPress,
                   ),
-                  SizedBox(height: height * 0.01),
+                  const SizedBox(height: 20),
                   CustomButton(
                     title: 'Não tem cadastro? Adquira aqui',
                     sizeTitle: 16,
@@ -163,17 +167,17 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
-                    width: 0,
+                    width: 2,
                     color: _showLogo ? Colors.transparent : colors.background.withOpacity(0.8)
                 )
             ),
             child: _showLogo ? Center(
-              child: Icon(Icons.flash_on, size: 50, color: colors.background),
+              child: Icon(LineIcons.heartAlt, size: 50, color: colors.background),
             ) :
             ClipRRect(
               borderRadius: BorderRadius.circular(13),
               child: CachedNetworkImage(
-                fadeInDuration: const Duration(milliseconds: 300),
+                fadeInDuration: const Duration(milliseconds: 200),
                 imageUrl: images[index],
                 fit: BoxFit.cover,
               ),

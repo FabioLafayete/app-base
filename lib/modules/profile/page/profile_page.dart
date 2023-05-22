@@ -23,6 +23,7 @@ class ProfilePage extends BaseWidget<ProfileController> {
         showAppBar: false,
         padding: 0,
         body: ListView(
+          physics: const ClampingScrollPhysics(),
           padding: MediaQuery.of(context).padding.copyWith(top: 0),
           children: [
             Container(

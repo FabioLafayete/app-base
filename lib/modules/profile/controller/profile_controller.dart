@@ -1,3 +1,4 @@
+import 'package:app/modules/navigator/controller/nav_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
@@ -14,7 +15,9 @@ abstract class ProfileControllerBase with Store {
     try{
       final storage = Modular.get<SecureStorageService>();
       await storage.clearAll();
-      Modular.to.pushReplacementNamed(LoginPage.router);
+      Modular.to.pushReplacementNamed(LoginPage.router).then((value){
+        Modular.get<NavController>().setSelectedIndex(0);
+      });
     }catch(_){
       print(_);
     }
