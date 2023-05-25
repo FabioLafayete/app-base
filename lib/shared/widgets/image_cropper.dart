@@ -24,6 +24,7 @@ class ImageCropperWidget extends StatefulWidget {
     this.subTitle,
     this.onPress,
     this.interactive = false,
+    this.simpleView = false,
     required this.onChange,
   });
 
@@ -32,6 +33,7 @@ class ImageCropperWidget extends StatefulWidget {
   final String? subTitle;
   final File? image;
   final String? imageUrl;
+  final bool simpleView;
   final Function(File?) onChange;
   final Function()? onPress;
   final bool interactive;
@@ -60,79 +62,128 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
         textLength = 2;
       }
     }
-    return GestureDetector(
-      onTap: widget.onPress ?? () => _openOptions(context),
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16, vertical: 16
-        ),
-        decoration: BoxDecoration(
-          color: const Color(0xFFF2F4F8),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Row(
-          children: [
-            if (image != null && (imageUrl == null || imageUrl!.isEmpty)) _image(),
-            if (imageUrl != null && imageUrl!.isNotEmpty) _imageUrl(),
-            if (!hasImage) Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1000),
-                  color: const Color(0xFFE4E7EC),
-                ),
-                child: Center(
-                  child: (widget.textImage != null && widget.textImage!.isNotEmpty) ? SizedBox(
-                    height: 30,
-                    width: 30,
-                    child: Center(
-                      child: Text(
-                        widget.textImage!.substring(0, textLength).toUpperCase(),
-                        style: const TextStyle(
+    return widget.simpleView ? _simpleview(textLength) : Card(
+      elevation: 1.5,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10)
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Material(
+          type: MaterialType.transparency,
+          child: InkWell(
+            onTap: widget.onPress ?? () => _openOptions(context),
+            splashColor: Colors.black54.withOpacity(0.05),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  if (image != null && (imageUrl == null || imageUrl!.isEmpty)) _image(),
+                  if (imageUrl != null && imageUrl!.isNotEmpty) _imageUrl(),
+                  if (!hasImage) Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(1000),
+                        color: const Color(0xFFE4E7EC),
+                      ),
+                      child: Center(
+                        child: (widget.textImage != null && widget.textImage!.isNotEmpty) ? SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Center(
+                            child: Text(
+                              widget.textImage!.substring(0, textLength).toUpperCase(),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              )
+                            ),
+                          ),
+                        )
+                            : const Icon(Icons.person,
+                          color: Colors.white, size: 18,),
+                      ),
+                    ),
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        text(
+                          widget.title ?? (hasImage ? 'Editar foto' : 'Carregar foto'),
+                          maxLines: 1,
+                          textOverflow: TextOverflow.ellipsis,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
-                        )
-                      ),
+                        ),
+                        if (widget.subTitle != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4),
+                            child: text(
+                              widget.subTitle!,
+                              maxLines: 1,
+                              textOverflow: TextOverflow.ellipsis,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black54,
+                              fontSize: 12
+                            ),
+                          ),
+                      ],
                     ),
-                  )
-                      : const Icon(Icons.person,
-                    color: Colors.white, size: 18,),
-                ),
-              ),
-            const SizedBox(width: 20),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  text(
-                    widget.title ?? (hasImage ? 'Editar foto' : 'Carregar foto'),
-                    maxLines: 1,
-                    textOverflow: TextOverflow.ellipsis,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
                   ),
-                  if (widget.subTitle != null)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4),
-                      child: text(
-                        widget.subTitle!,
-                        maxLines: 1,
-                        textOverflow: TextOverflow.ellipsis,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black54,
-                        fontSize: 12
-                      ),
-                    ),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: colors.primary,
+                    size: 18,
+                  )
                 ],
               ),
             ),
-            Icon(
-              Icons.arrow_forward_ios_rounded,
-              color: colors.primary,
-              size: 18,
-            )
-          ],
+          ),
         ),
       ),
+    );
+  }
+
+  Widget _simpleview(int textLength){
+    return Column(
+      children: [
+        if (image != null && (imageUrl == null || imageUrl!.isEmpty)) _image(),
+        if (imageUrl != null && imageUrl!.isNotEmpty) _imageUrl(),
+        if (!hasImage) Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(1000),
+            color: const Color(0xFFE4E7EC),
+          ),
+          height: 80, width: 80,
+          child: Center(
+            child: (widget.textImage != null && widget.textImage!.isNotEmpty) ? SizedBox(
+              height: 30,
+              width: 30,
+              child: Center(
+                child: text(
+                  widget.textImage!.substring(0, textLength).toUpperCase(),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
+              ),
+            )
+                : const Icon(Icons.person,
+              color: Colors.white, size: 18,),
+          ),
+        ),
+        const SizedBox(height: 20),
+        if(widget.title != null)
+          text(
+            widget.title!,
+            maxLines: 1,
+            textOverflow: TextOverflow.ellipsis,
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+          ),
+      ],
     );
   }
 

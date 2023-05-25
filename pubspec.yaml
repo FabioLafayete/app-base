@@ -37,6 +37,8 @@ dependencies:
   mobx: 2.2.0
   flutter_mobx: 2.0.6+5
   rx_notifier: 2.2.2
+  package_info_plus:
+  firebase_core:
 
 dev_dependencies:
   flutter_test:

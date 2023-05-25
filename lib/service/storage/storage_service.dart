@@ -1,8 +1,12 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../util/async_mutex.dart';
 
 class SecureStorageService {
+
+  factory SecureStorageService() => Modular.get<SecureStorageService>();
+
   SecureStorageService._();
 
   static final SecureStorageService instance = SecureStorageService._();

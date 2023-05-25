@@ -1,4 +1,5 @@
 import 'package:app/modules/login/page/login_page.dart';
+import 'package:app/route/pages_name.dart';
 import 'package:app/service/storage/storage_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -15,7 +16,7 @@ abstract class HomeControllerBase with Store {
     try{
       final storage = Modular.get<SecureStorageService>();
       await storage.clearAll();
-      Modular.to.pushReplacementNamed(LoginPage.router);
+      Modular.to.pushReplacementNamed(PagesNames.login);
     }catch(_){
       print(_);
     }

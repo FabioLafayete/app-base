@@ -19,10 +19,10 @@ class ListButton extends BaseWidget {
         itemBuilder: (_, index){
           ListButtonItem item = list[index];
           return Container(
-            margin: const EdgeInsets.only(top: 15),
+            margin: EdgeInsets.only(top: item.isLogout ? 40 : 12),
             child: Card(
               margin: const EdgeInsets.only(bottom: 1),
-              elevation: 1,
+              elevation: 0.8,
               color: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10)
@@ -44,18 +44,17 @@ class ListButton extends BaseWidget {
                               Expanded(
                                 child: Row(
                                   children: [
-                                    Icon(item.icon),
-                                    space(0.03, width: true),
+                                    Icon(item.icon, size: 28),
+                                    const SizedBox(width: 14),
                                     Expanded(
                                       child: text(
                                         item.title,
                                         maxLines: 1,
                                         textOverflow: TextOverflow.ellipsis,
                                         fontSize: 16,
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                     ),
-                                    space(0.03, width: true),
                                   ],
                                 ),
                               ),
@@ -85,10 +84,12 @@ class ListButtonItem {
   final Color? background;
   final Color? iconColor;
   final Color? titleColor;
+  final bool isLogout;
 
   ListButtonItem({
     required this.title,
     required this.onPress,
+    this.isLogout = false,
     this.icon,
     this.background,
     this.iconColor,

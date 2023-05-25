@@ -15,7 +15,7 @@ import '../../profile/page/profile_page.dart';
 import '../../workout/page/workout_page.dart';
 
 class NavPage extends BaseWidget<NavController> {
-  NavPage({Key? key, required this.index}) : super(key: key);
+  NavPage({Key? key, this.index = 0}) : super(key: key);
 
   final int index;
 

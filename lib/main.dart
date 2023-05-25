@@ -1,14 +1,14 @@
 import 'package:app/route/app_module.dart';
+import 'package:app/route/pages_name.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'modules/splash/page/splash_page.dart';
+import 'firebase_options.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   await _preload();
-  Modular.setInitialRoute(SplashPage.router);
   runApp(
       ModularApp(
         module: AppModule(),
@@ -23,6 +23,11 @@ void main() async {
 }
 
 Future _preload() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  Modular.setInitialRoute(PagesNames.profile);
 }

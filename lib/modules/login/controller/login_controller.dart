@@ -1,6 +1,7 @@
 import 'package:app/config/app_config.dart';
 import 'package:app/modules/home/page/home_page.dart';
 import 'package:app/modules/login/repository/impl/login_repository_impl.dart';
+import 'package:app/route/pages_name.dart';
 import 'package:app/util/util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -126,7 +127,7 @@ abstract class LoginControllerBase with Store {
         );
         if(data.isNotEmpty && data.containsKey('token')){
           await AppConfig().setBearerToken(data['token']);
-          Modular.to.pushReplacementNamed(HomePage.router);
+          Modular.to.pushReplacementNamed(PagesNames.home);
           return;
         }
       } else {

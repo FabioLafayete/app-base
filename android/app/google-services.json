@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "737112738490",
+    "project_id": "ibetther-325d1",
+    "storage_bucket": "ibetther-325d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737112738490:android:7497097f3c8fa515fd1083",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "737112738490-bpnd9mh1crdct40663eafqab4nbk8utk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKoajxwRkE337OnzOCKxLxWFAJx9KOmi0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "737112738490-bpnd9mh1crdct40663eafqab4nbk8utk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "737112738490-f2nsf7274rp0kgdq00sonp7nsjd1jf5o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

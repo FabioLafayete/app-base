@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../components/base_widget.dart';
-import '../../../route/pages_name.dart';
 import '../../navigator/controller/nav_controller.dart';
 import '../../workout/widgets/list_cards_items.dart';
 import '../widgets/items_wrap.dart';
@@ -14,8 +13,6 @@ class FoodPage extends BaseWidget<FoodController> {
   FoodPage({Key? key}) : super(key: key);
 
   final navController = Modular.get<NavController>();
-
-  static const router = '${PagesNames.food}/';
 
   @override
   Widget build(BuildContext context) {

@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:video_player/video_player.dart';
-
 import '../../../components/base_page.dart';
 import '../../../components/base_widget.dart';
-import '../../../route/pages_name.dart';
 import '../../../shared/model/video/video_model.dart';
 import '../../navigator/controller/nav_controller.dart';
 import '../widgets/list_cards_items.dart';
@@ -16,7 +14,6 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
   WorkoutPage({Key? key}) : super(key: key);
 
   final navController = Modular.get<NavController>();
-  static const router = '${PagesNames.workout}/';
 
   void openVideo (){
     navController.setVideoSelected(
