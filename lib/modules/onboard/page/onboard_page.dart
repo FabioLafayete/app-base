@@ -74,7 +74,7 @@ class OnboardPage extends BaseWidget<OnboardController> {
                     onPress: (){
                       controller.setIndex(controller.index + 1);
                       if(controller.index == 8){
-                        Modular.to.pushReplacementNamed(PagesNames.home);
+                        router.pushReplacementNamed(PagesNames.home);
                       }
                     },
                   ),

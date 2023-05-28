@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:app/components/app_theme_widget.dart';
+import 'package:app/route/my_router.dart';
 import 'package:app/util/colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crop/crop.dart';
@@ -48,6 +49,7 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
   late bool hasImage;
   final colors = AppColors();
   final text = AppTheme().text;
+  final MyRouter router = MyRouter();
 
   @override
   Widget build(BuildContext context) {
@@ -203,22 +205,23 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
             const SizedBox(height: 32),
             _itemCard(Icons.photo, 'Escolher nova foto', (){
               getPhoto(onGallery: true);
-              Get.back();
+              router.pop();
             }),
             const SizedBox(height: 32),
             _itemCard(Icons.photo_camera, 'Tirar nova foto', (){
               getPhoto(onGallery: false);
-              Get.back();
+              router.pop();
             }),
             const SizedBox(height: 32),
-            _itemCard(Icons.delete, 'Remover foto', () {
-              setState(() {
-                image = null;
-              });
-              widget.onChange(null);
-              Get.back();
-            }),
-            const SizedBox(height: 64),
+            if(hasImage)
+              _itemCard(Icons.delete, 'Remover foto', () {
+                setState(() {
+                  image = null;
+                });
+                widget.onChange(null);
+                router.pop();
+              }),
+            const SizedBox(height: 30),
           ],
         ),
         hasHeight: false,
@@ -344,7 +347,7 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
   Future<void> getPhoto({required bool onGallery}) async {
     final File? file = await pickImage(onGallery: onGallery);
     if (file != null) {
-      Get.to(() => ImageCrop(
+      router.push(ImageCrop(
         imageOriginal: file,
         interactive: widget.interactive,
         onCropped: (value) {
@@ -400,6 +403,7 @@ class _ImageCropState extends State<ImageCrop> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final MyRouter router = MyRouter();
     return StreamBuilder<bool>(
       stream: isLoadingStream,
       initialData: false,
@@ -460,12 +464,12 @@ class _ImageCropState extends State<ImageCrop> {
                         file.writeAsBytesSync(compressImage);
                         widget.onCropped(file);
                         isLoadingStream.add(false);
-                        Get.back();
+                        router.pop();
                       }
                     }catch(e){
                       widget.onCropped(null);
                       isLoadingStream.add(false);
-                      Get.back();
+                      router.pop();
                     }
                   },
                 )

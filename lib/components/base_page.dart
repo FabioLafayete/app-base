@@ -16,7 +16,8 @@ class BasePage extends BaseWidget {
     this.floatingActionButton,
     this.backgroundColor,
     this.padding,
-    this.actions
+    this.actions,
+    this.elevation
   }) : super(key: key);
 
   final Widget body;
@@ -31,6 +32,7 @@ class BasePage extends BaseWidget {
   final Color? backgroundColor;
   final double? padding;
   final List<Widget>? actions;
+  final double? elevation;
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +56,10 @@ class BasePage extends BaseWidget {
   PreferredSizeWidget _appBar(BuildContext context){
     return AppBar(
       title: title == null ? Container() :
-      text(title!, color: colors.text, fontWeight: FontWeight.w600),
-      backgroundColor: colors.background,
+      text(title!, color: colors.text2, fontWeight: FontWeight.w600),
+      backgroundColor: colors.primary,
       automaticallyImplyLeading: automaticallyImplyLeading,
+      elevation: elevation,
       actions: actions,
     );
   }

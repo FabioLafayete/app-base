@@ -1,5 +1,4 @@
 import 'package:app/config/app_config.dart';
-import 'package:app/modules/home/page/home_page.dart';
 import 'package:app/modules/login/repository/impl/login_repository_impl.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/util/util.dart';
@@ -9,13 +8,14 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 
+import '../../../components/base_controller.dart';
 import '../../navigator/controller/nav_controller.dart';
 
 part 'login_controller.g.dart';
 
 class LoginController = LoginControllerBase with _$LoginController;
 
-abstract class LoginControllerBase with Store {
+abstract class LoginControllerBase extends BaseController with Store {
 
   LoginControllerBase({
     required this.repositoryImpl
@@ -127,7 +127,7 @@ abstract class LoginControllerBase with Store {
         );
         if(data.isNotEmpty && data.containsKey('token')){
           await AppConfig().setBearerToken(data['token']);
-          Modular.to.pushReplacementNamed(PagesNames.home);
+          router.pushReplacementNamed(PagesNames.home);
           return;
         }
       } else {

@@ -1,9 +1,13 @@
+import 'package:app/components/base_controller.dart';
 import 'package:app/config/app_config.dart';
+import 'package:app/route/my_router.dart';
+import 'package:app/shared/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 
+import '../shared/model/user/user_model.dart';
 import '../util/colors.dart';
 import 'app_theme_widget.dart';
 
@@ -12,9 +16,11 @@ abstract class BaseWidget<T extends Store> extends StatelessWidget {
   BaseWidget({Key? key}) : super(key: key);
 
   final Set<T> _value = <T>{};
+  final MyRouter router = MyRouter();
   final AppColors colors = AppColors();
   final AppConfig config = AppConfig();
   final AppTheme appTheme = AppTheme();
+  UserModel get user => Modular.get<UserController>().user;
 
   final text = AppTheme().text;
 

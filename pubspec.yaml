@@ -39,6 +39,7 @@ dependencies:
   rx_notifier: 2.2.2
   package_info_plus:
   firebase_core:
+  brasil_fields: 1.12.0
 
 dev_dependencies:
   flutter_test:

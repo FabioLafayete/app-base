@@ -1,9 +1,9 @@
 import 'package:app/components/app_theme_widget.dart';
 import 'package:app/config/app_config.dart';
+import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import '../../../components/base_page.dart';
 
 class SplashPage extends StatefulWidget {
@@ -19,11 +19,12 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     AppConfig().load().then((value) async {
       await Future.delayed(const Duration(seconds: 1));
-      if(AppConfig().bearerToken != null){
-        Modular.to.pushReplacementNamed(PagesNames.home);
-      } else {
-        Modular.to.pushReplacementNamed(PagesNames.login);
-      }
+      MyRouter().pushReplacementNamed(PagesNames.profileData);
+      // if(AppConfig().bearerToken != null){
+      //   MyRouter().pushReplacementNamed(PagesNames.home);
+      // } else {
+      //   MyRouter().pushReplacementNamed(PagesNames.login);
+      // }
     });
   }
 

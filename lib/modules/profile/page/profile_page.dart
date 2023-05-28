@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:app/components/base_page.dart';
 import 'package:app/components/base_widget.dart';
-import 'package:app/shared/model/user/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:line_icons/line_icons.dart';
 import '../../../shared/widgets/image_cropper.dart';
 import '../controller/profile_controller.dart';
@@ -12,8 +12,6 @@ import '../widgets/list_button.dart';
 
 class ProfilePage extends BaseWidget<ProfileController> {
   ProfilePage({Key? key}) : super(key: key);
-
-  UserModel user = const UserModel(name: 'Mariana Cardoso', age: 22);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +42,9 @@ class ProfilePage extends BaseWidget<ProfileController> {
                   space(0.03),
                   ListButton(
                     list: [
-                      ListButtonItem(title: 'Meus dados', icon: LineIcons.user, onPress: (){}),
+                      ListButtonItem(title: 'Meus dados', icon: LineIcons.user, onPress: (){
+                        print(Modular.to.navigateHistory.first.name);
+                      }),
                       ListButtonItem(title: 'Ajuda e suporte', icon: LineIcons.questionCircle, onPress: (){}),
                       ListButtonItem(title: 'Indicar amigo(a)', icon: LineIcons.laughFaceWithBeamingEyes, onPress: (){}),
                       ListButtonItem(title: 'Feedback', icon: LineIcons.redo, onPress: (){}),
