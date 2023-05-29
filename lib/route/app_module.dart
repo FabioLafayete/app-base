@@ -3,7 +3,7 @@ import 'package:app/modules/splash/module/splash_module.dart';
 import 'package:app/modules/workout/controller/workout_controller.dart';
 import 'package:app/modules/workout/module/workout_module.dart';
 import 'package:app/route/pages_name.dart';
-import 'package:app/shared/controller/user_controller.dart';
+import 'package:app/shared/modules/user/repository/impl/user_repository_impl.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../config/app_config.dart';
 import '../modules/food/controller/food_controller.dart';
@@ -15,8 +15,10 @@ import '../modules/navigator/controller/nav_controller.dart';
 import '../modules/onboard/module/onboard_module.dart';
 import '../modules/profile/controller/profile_controller.dart';
 import '../modules/profile/module/profile_module.dart';
+import '../service/http/http_service.dart';
 import '../service/storage/storage_service.dart';
-import '../shared/model/user/user_model.dart';
+import '../shared/modules/user/controller/user_controller.dart';
+import '../shared/modules/user/service/impl/user_service_impl.dart';
 import 'my_router.dart';
 import 'my_router_controller.dart';
 
@@ -29,7 +31,9 @@ class AppModule extends Module {
     Bind.singleton((i) => SecureStorageService.instance),
     Bind.singleton((i) => AppConfig.instance),
     Bind.singleton((i) => NavController()),
-    Bind.singleton((i) => UserController()),
+    Bind.singleton((i) => UserController(UserRepositoryImpl(
+        UserServiceImpl(HttpService())
+    ))),
     Bind.singleton((i) => HomeController()),
     Bind.singleton((i) => FoodController()),
     Bind.singleton((i) => WorkoutController()),

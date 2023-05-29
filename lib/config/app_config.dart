@@ -1,13 +1,11 @@
-import 'package:app/components/base_controller.dart';
 import 'package:app/service/storage/storage_service.dart';
 import 'package:app/shared/constants/storage_constants.dart';
 import 'package:app/shared/flavor/flavor_types.dart';
 import 'package:app/shared/flavor/impl/flavor_impl.dart';
-import 'package:app/shared/model/user/user_model.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../shared/constants/endpoints.dart';
 import '../shared/constants/string_contants.dart';
-import '../shared/controller/user_controller.dart';
+import '../shared/modules/user/controller/user_controller.dart';
 
 class AppConfig {
 
@@ -17,29 +15,31 @@ class AppConfig {
 
   static final AppConfig instance = AppConfig._();
 
-  late String _baseUrl;
-  late FlavorsImpl flavors;
+  String? _baseUrl;
+  FlavorsImpl? flavors;
   String? _bearerToken;
-  UserController controller = Modular.get<UserController>();
+
 
   Future load() async {
+    /// FLAVORS
     flavors = FlavorsImpl();
-    flavors.initialize(endpoints);
+    flavors?.initialize(endpoints);
+    _baseUrl = flavors?.getEndpoint(StringConstants.hostKey);
 
-    _baseUrl = flavors.getEndpoint(StringConstants.hostKey);
-
+    /// BEARER TOKEN
     final secure = Modular.get<SecureStorageService>();
     String? bearer = await secure.get(StorageConstants.bearerToken);
     if(bearer != null) {
       _bearerToken = bearer;
     }
-    controller.setUser(const UserModel(
-        name: 'Fabio Lafayete',
-        email: 'f.lafayete@gmail.com',
-        phone: '11969693160'
-    ));
 
-    print('Ambiente de ${flavors.getCurrentFlavor() == FlavorType.dev ? 'dev' : 'prod'}');
+    if(_bearerToken != null) {
+      /// INIT-USER
+      UserController controller = Modular.get<UserController>();
+      await controller.setInitUser();
+    }
+
+    print('Ambiente de ${flavors?.getCurrentFlavor() == FlavorType.dev ? 'dev' : 'prod'}');
   }
 
   Future setBearerToken(String? value) async {
@@ -48,6 +48,6 @@ class AppConfig {
     secure.put(StorageConstants.bearerToken, bearerToken);
   }
 
-  String get baseUrl => _baseUrl;
+  String get baseUrl => _baseUrl ?? '';
   String? get bearerToken => _bearerToken;
 }

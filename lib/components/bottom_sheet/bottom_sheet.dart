@@ -43,6 +43,7 @@ class CustomBottomSheet extends BaseWidget<NavController> {
                   Observer(builder: (_) => AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
                     height: !hasHeight ? null : (height * controller.heightBottomSheet),
+                    width: Get.width,
                     padding: const EdgeInsets.all(16).copyWith(
                         top: 30
                     ),

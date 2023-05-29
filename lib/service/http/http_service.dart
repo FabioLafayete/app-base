@@ -11,10 +11,6 @@ class HttpService {
 
   AppConfig appConfig = AppConfig();
 
-  HttpService() {
-    configInitApi();
-  }
-
   Future<Response> request({
     required RequestType type,
     required String path,
@@ -25,6 +21,7 @@ class HttpService {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
+    await configInitApi();
     try {
       return dio.request(
         path,

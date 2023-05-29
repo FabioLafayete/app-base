@@ -66,9 +66,8 @@ class CustomButton extends BaseWidget {
         child: !loading ? Stack(
           alignment: Alignment.center,
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
-              //margin: const EdgeInsets.symmetric(horizontal: 40),
               child: text(
                 title,
                 color: colorTitle ?? colors.text,

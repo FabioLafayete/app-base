@@ -7,11 +7,13 @@ part 'user_model.g.dart';
 class UserModel with _$UserModel {
   const UserModel._();
   const factory UserModel({
+    String? id,
     String? name,
     String? email,
     int? age,
-    String? phone,
+    String? cellphone,
     String? photoUrl,
+    String? gender,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

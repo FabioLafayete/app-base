@@ -23,6 +23,13 @@ mixin _$ProfileController on ProfileControllerBase, Store {
           () => super.enableButtonEmail,
           name: 'ProfileControllerBase.enableButtonEmail'))
       .value;
+  Computed<bool>? _$enableButtonPhoneComputed;
+
+  @override
+  bool get enableButtonPhone => (_$enableButtonPhoneComputed ??= Computed<bool>(
+          () => super.enableButtonPhone,
+          name: 'ProfileControllerBase.enableButtonPhone'))
+      .value;
 
   late final _$versionAtom =
       Atom(name: 'ProfileControllerBase.version', context: context);
@@ -152,8 +159,57 @@ mixin _$ProfileController on ProfileControllerBase, Store {
     });
   }
 
+  late final _$loadingAtom =
+      Atom(name: 'ProfileControllerBase.loading', context: context);
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
   late final _$ProfileControllerBaseActionController =
       ActionController(name: 'ProfileControllerBase', context: context);
+
+  @override
+  dynamic setName(String? value) {
+    final _$actionInfo = _$ProfileControllerBaseActionController.startAction(
+        name: 'ProfileControllerBase.setName');
+    try {
+      return super.setName(value);
+    } finally {
+      _$ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setEmail(String? value) {
+    final _$actionInfo = _$ProfileControllerBaseActionController.startAction(
+        name: 'ProfileControllerBase.setEmail');
+    try {
+      return super.setEmail(value);
+    } finally {
+      _$ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setPhone(String? value) {
+    final _$actionInfo = _$ProfileControllerBaseActionController.startAction(
+        name: 'ProfileControllerBase.setPhone');
+    try {
+      return super.setPhone(value);
+    } finally {
+      _$ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic setErrorName(String? value) {
@@ -161,6 +217,17 @@ mixin _$ProfileController on ProfileControllerBase, Store {
         name: 'ProfileControllerBase.setErrorName');
     try {
       return super.setErrorName(value);
+    } finally {
+      _$ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setErrorPhone(String? value) {
+    final _$actionInfo = _$ProfileControllerBaseActionController.startAction(
+        name: 'ProfileControllerBase.setErrorPhone');
+    try {
+      return super.setErrorPhone(value);
     } finally {
       _$ProfileControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -189,6 +256,17 @@ mixin _$ProfileController on ProfileControllerBase, Store {
   }
 
   @override
+  dynamic setLoading(bool value) {
+    final _$actionInfo = _$ProfileControllerBaseActionController.startAction(
+        name: 'ProfileControllerBase.setLoading');
+    try {
+      return super.setLoading(value);
+    } finally {
+      _$ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 version: ${version},
@@ -199,8 +277,10 @@ phone: ${phone},
 errorName: ${errorName},
 errorEmail: ${errorEmail},
 errorPhone: ${errorPhone},
+loading: ${loading},
 enableButtonName: ${enableButtonName},
-enableButtonEmail: ${enableButtonEmail}
+enableButtonEmail: ${enableButtonEmail},
+enableButtonPhone: ${enableButtonPhone}
     ''';
   }
 }

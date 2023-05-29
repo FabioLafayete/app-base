@@ -64,7 +64,11 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
         textLength = 2;
       }
     }
-    return widget.simpleView ? _simpleview(textLength) : Card(
+    return widget.simpleView ? _simpleview(textLength) : _body(textLength);
+  }
+
+  Widget _body(int textLength){
+    return Card(
       elevation: 1.5,
       color: Colors.white,
       shape: RoundedRectangleBorder(
@@ -81,32 +85,34 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
               padding: const EdgeInsets.all(16),
               child: Row(
                 children: [
-                  if (image != null && (imageUrl == null || imageUrl!.isEmpty)) _image(),
-                  if (imageUrl != null && imageUrl!.isNotEmpty) _imageUrl(),
+                  if (image != null && (imageUrl == null || imageUrl!.isEmpty))
+                    _image(),
+                  if (imageUrl != null && imageUrl!.isNotEmpty)
+                    _imageUrl(),
                   if (!hasImage) Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(1000),
-                        color: const Color(0xFFE4E7EC),
-                      ),
-                      child: Center(
-                        child: (widget.textImage != null && widget.textImage!.isNotEmpty) ? SizedBox(
-                          height: 30,
-                          width: 30,
-                          child: Center(
-                            child: Text(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(1000),
+                      color: const Color(0xFFE4E7EC),
+                    ),
+                    child: Center(
+                      child: (widget.textImage != null && widget.textImage!.isNotEmpty) ? SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: Center(
+                          child: Text(
                               widget.textImage!.substring(0, textLength).toUpperCase(),
                               style: const TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,
                               )
-                            ),
                           ),
-                        )
-                            : const Icon(Icons.person,
-                          color: Colors.white, size: 18,),
-                      ),
+                        ),
+                      )
+                          : const Icon(Icons.person,
+                        color: Colors.white, size: 18,),
                     ),
+                  ),
                   const SizedBox(width: 20),
                   Expanded(
                     child: Column(
@@ -123,12 +129,12 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
                           Padding(
                             padding: const EdgeInsets.only(top: 4),
                             child: text(
-                              widget.subTitle!,
-                              maxLines: 1,
-                              textOverflow: TextOverflow.ellipsis,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black54,
-                              fontSize: 12
+                                widget.subTitle!,
+                                maxLines: 1,
+                                textOverflow: TextOverflow.ellipsis,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black54,
+                                fontSize: 12
                             ),
                           ),
                       ],

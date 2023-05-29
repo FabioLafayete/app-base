@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:app/modules/navigator/controller/nav_controller.dart';
 import 'package:app/route/pages_name.dart';
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:mobx/mobx.dart';
@@ -43,8 +44,23 @@ abstract class ProfileControllerBase extends BaseController with Store {
   @observable
   String? errorPhone;
 
+  @observable
+  bool loading = false;
+
+  @action
+  setName(String? value) => name = value;
+
+  @action
+  setEmail(String? value) => email = value;
+
+  @action
+  setPhone(String? value) => phone = value;
+
   @action
   setErrorName(String? value) => errorName = value;
+
+  @action
+  setErrorPhone(String? value) => errorPhone = value;
 
   @action
   setVersion(String value) => version = value;
@@ -52,16 +68,61 @@ abstract class ProfileControllerBase extends BaseController with Store {
   @action
   setPhotoProfile(File? value) => photoProfile = value;
 
+  @action
+  setLoading(bool value) => loading = value;
+
   @computed
   bool get enableButtonName {
-    if(email != null && email!.isNotEmpty && GetUtils.isEmail(email!)) return true;
-    return false;
+    if (name == null) return false;
+    if (name!.isEmpty) return false;
+    if (!name!.trim().contains(' ')) return false;
+    if (name!.trim().split(' ').toList().length < 2) return false;
+    if (name == user.name) return false;
+    return true;
   }
 
   @computed
   bool get enableButtonEmail {
     if(email != null && email!.isNotEmpty && GetUtils.isEmail(email!)) return true;
     return false;
+  }
+
+  @computed
+  bool get enableButtonPhone {
+    if (phone == null) return false;
+    if (phone!.isEmpty) return false;
+    if(user.cellphone != null && user.cellphone!.length >= 11){
+      if(UtilBrasilFields.obterTelefone(user.cellphone!) == phone){
+        return false;
+      }
+    }
+    if (phone == user.cellphone) return false;
+    if (phone!.length <= 14) return false;
+    return true;
+  }
+
+  Future changeName() async {
+    try{
+      setLoading(true);
+      await updateUser(user.copyWith(name: name));
+      setName(null);
+    }catch(_){
+      print(_);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  Future changePhone() async {
+    try{
+      setLoading(true);
+      await updateUser(user.copyWith(cellphone: UtilBrasilFields.obterTelefone(phone!, mascara: false)));
+      setPhone(null);
+    }catch(_){
+      print(_);
+    } finally {
+      setLoading(false);
+    }
   }
 
   Future checkVersion() async {

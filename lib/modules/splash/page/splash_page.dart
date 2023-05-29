@@ -19,12 +19,12 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     AppConfig().load().then((value) async {
       await Future.delayed(const Duration(seconds: 1));
-      MyRouter().pushReplacementNamed(PagesNames.profileData);
-      // if(AppConfig().bearerToken != null){
-      //   MyRouter().pushReplacementNamed(PagesNames.home);
-      // } else {
-      //   MyRouter().pushReplacementNamed(PagesNames.login);
-      // }
+      // MyRouter().pushReplacementNamed(PagesNames.profileData);
+      if(AppConfig().bearerToken != null){
+        MyRouter().pushReplacementNamed(PagesNames.home);
+      } else {
+        MyRouter().pushReplacementNamed(PagesNames.login);
+      }
     });
   }
 

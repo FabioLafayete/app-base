@@ -2,9 +2,10 @@ import 'dart:io';
 
 import 'package:app/components/base_page.dart';
 import 'package:app/components/base_widget.dart';
+import 'package:app/modules/profile/view/profile_data_view.dart';
+import 'package:app/route/pages_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:line_icons/line_icons.dart';
 import '../../../shared/widgets/image_cropper.dart';
 import '../controller/profile_controller.dart';
@@ -43,7 +44,7 @@ class ProfilePage extends BaseWidget<ProfileController> {
                   ListButton(
                     list: [
                       ListButtonItem(title: 'Meus dados', icon: LineIcons.user, onPress: (){
-                        print(Modular.to.navigateHistory.first.name);
+                        router.pushNamed(PagesNames.profileData);
                       }),
                       ListButtonItem(title: 'Ajuda e suporte', icon: LineIcons.questionCircle, onPress: (){}),
                       ListButtonItem(title: 'Indicar amigo(a)', icon: LineIcons.laughFaceWithBeamingEyes, onPress: (){}),
@@ -55,7 +56,7 @@ class ProfilePage extends BaseWidget<ProfileController> {
               ),
             ),
             Observer(builder: (_) {
-              if(controller.version != null){
+              if(controller.version != null) {
                 return Container(
                   margin: const EdgeInsets.only(top: 30),
                   child: Row(

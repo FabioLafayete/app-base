@@ -1,13 +1,12 @@
-import 'package:app/components/base_controller.dart';
 import 'package:app/config/app_config.dart';
 import 'package:app/route/my_router.dart';
-import 'package:app/shared/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 
 import '../shared/model/user/user_model.dart';
+import '../shared/modules/user/controller/user_controller.dart';
 import '../util/colors.dart';
 import 'app_theme_widget.dart';
 

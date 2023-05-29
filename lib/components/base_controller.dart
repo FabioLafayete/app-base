@@ -1,8 +1,8 @@
-import 'package:app/shared/controller/user_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../route/my_router.dart';
 import '../service/storage/storage_service.dart';
 import '../shared/model/user/user_model.dart';
+import '../shared/modules/user/controller/user_controller.dart';
 
 class BaseController {
   BaseController();
@@ -26,5 +26,13 @@ class BaseController {
   setAgeProfile(int? value) => userController.setAgeProfile(value);
 
   setUser(UserModel value) => userController.setUser(value);
+
+  Future updateUser(UserModel value) async {
+    try{
+      await userController.updateUser(value);
+    }catch(_){
+
+    }
+  }
 
 }
