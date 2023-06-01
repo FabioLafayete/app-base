@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../components/visual_display.dart';
 import '../../util/util.dart';
 import 'package:path_provider/path_provider.dart';
@@ -26,6 +27,7 @@ class ImageCropperWidget extends StatefulWidget {
     this.onPress,
     this.interactive = false,
     this.simpleView = false,
+    this.loading = false,
     required this.onChange,
   });
 
@@ -35,6 +37,7 @@ class ImageCropperWidget extends StatefulWidget {
   final File? image;
   final String? imageUrl;
   final bool simpleView;
+  final bool loading;
   final Function(File?) onChange;
   final Function()? onPress;
   final bool interactive;
@@ -79,11 +82,11 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
         child: Material(
           type: MaterialType.transparency,
           child: InkWell(
-            onTap: widget.onPress ?? () => _openOptions(context),
+            onTap: widget.loading ? null : widget.onPress ?? () => _openOptions(context),
             splashColor: Colors.black54.withOpacity(0.05),
             child: Padding(
               padding: const EdgeInsets.all(16),
-              child: Row(
+              child: widget.loading ? _loading() : Row(
                 children: [
                   if (image != null && (imageUrl == null || imageUrl!.isEmpty))
                     _image(),
@@ -150,6 +153,41 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _loading(){
+    return SizedBox(
+      width: double.infinity,
+      height: 40,
+      child: Shimmer.fromColors(
+          baseColor: Colors.grey.withOpacity(0.2),
+          highlightColor: Colors.grey.withOpacity(0.1),
+        child: Row(
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(1000)
+              ),
+            ),
+            const SizedBox(width: 30),
+            Container(
+              width: 120,
+              height: 20,
+              color: Colors.black,
+            ),
+            Spacer(),
+            Icon(
+              Icons.arrow_forward_ios_rounded,
+              color: colors.primary,
+              size: 18,
+            )
+          ],
+        )
       ),
     );
   }
@@ -257,8 +295,8 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
   Widget _imageUrl() {
     return CachedNetworkImage(
       imageUrl: imageUrl!,
-      height: 45,
-      width: 45,
+      height: widget.simpleView ? 80 : 45,
+      width: widget.simpleView ? 80 : 45,
       fit: BoxFit.cover,
       imageBuilder: (_, img) {
         return ClipRRect(
@@ -274,7 +312,7 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
       placeholder: (context, url) => const SizedBox(
         height: 24,
         width: 24,
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(strokeWidth: 2),
       ),
       errorWidget: (context, url, error) {
         int textLength = 0;

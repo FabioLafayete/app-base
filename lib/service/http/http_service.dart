@@ -15,7 +15,7 @@ class HttpService {
     required RequestType type,
     required String path,
     Map<String, dynamic>? queryParameters,
-    Map<String, dynamic>? dataRequest,
+    dynamic dataRequest,
     Options? options,
     CancelToken? cancelToken,
     ProgressCallback? onSendProgress,

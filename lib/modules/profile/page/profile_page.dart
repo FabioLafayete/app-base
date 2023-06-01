@@ -28,12 +28,14 @@ class ProfilePage extends BaseWidget<ProfileController> {
                 top: MediaQuery.of(context).padding.top + 50,
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ImageCropperWidget(
+              child: Observer(builder: (_) => ImageCropperWidget(
                 textImage: 'FL',
                 title: 'Fabio Lafayete',
-                onChange: (File? image) {},
+                imageUrl: user.photoUrl,
+                loading: controller.loading,
+                onChange: (_){},
                 simpleView: true,
-              ),
+              )),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),

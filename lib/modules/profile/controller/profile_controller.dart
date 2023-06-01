@@ -1,14 +1,10 @@
 import 'dart:io';
 
-import 'package:app/modules/navigator/controller/nav_controller.dart';
-import 'package:app/route/pages_name.dart';
 import 'package:brasil_fields/brasil_fields.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:mobx/mobx.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '../../../components/base_controller.dart';
-import '../../../service/storage/storage_service.dart';
 
 part 'profile_controller.g.dart';
 
@@ -125,22 +121,21 @@ abstract class ProfileControllerBase extends BaseController with Store {
     }
   }
 
+  Future changePhoto(File file) async {
+    try{
+      setLoading(true);
+      await userController.addPhotoUser(file);
+    }catch(_){
+      print(_);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   Future checkVersion() async {
     try{
       PackageInfo packageInfo = await PackageInfo.fromPlatform();
       setVersion('Versão ${packageInfo.version} (${packageInfo.buildNumber}) (Beta)');
-    }catch(_){
-      print(_);
-    }
-  }
-
-  Future logout() async {
-    try{
-      final storage = Modular.get<SecureStorageService>();
-      await storage.clearAll();
-      router.pushReplacementNamed(PagesNames.login).then((value){
-        Modular.get<NavController>().setSelectedIndex(0);
-      });
     }catch(_){
       print(_);
     }

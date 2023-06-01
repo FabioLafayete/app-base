@@ -1,22 +1,20 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class MyRouter {
 
   factory MyRouter() => Modular.get<MyRouter>();
 
-  dynamic routeControl;
+  MyRouter._();
 
-  MyRouter._({this.routeControl});
+  static MyRouter instance() => MyRouter._();
 
-  static MyRouter instance({routeControl}) => MyRouter._(routeControl: routeControl);
-
-  Future push(Widget page) => routeControl.push(page);
-  Future pushNamed(String page, {dynamic payload}) => routeControl.pushNamed(page, payload: payload);
-  Future pushReplacementNamed(String page, {dynamic payload}) => routeControl.pushReplacementNamed(page, payload: payload);
-  Future pushNamedAndRemoveUntil(String page, [RoutePredicate? predicate]) => routeControl.pushNamedAndRemoveUntil(page, predicate);
-  Future popAndPushNamed(String page, {dynamic payload}) => routeControl.popAndPushNamed(page, payload: payload);
-  void pop([dynamic result]) => routeControl.pop(result);
-  void popUntil(String routeName) => routeControl.popUntil(routeName);
+  Future push(Widget page) =>  Modular.to.push(MaterialPageRoute(builder: (_) => page));
+  Future pushNamed(String page, {dynamic arguments}) => Modular.to.pushNamed(page, arguments: arguments);
+  Future pushReplacementNamed(String page, {dynamic arguments}) => Modular.to.pushReplacementNamed(page, arguments: arguments);
+  Future pushNamedAndRemoveUntil(String page, [RoutePredicate? predicate]) => Modular.to.pushNamedAndRemoveUntil(page, predicate ?? (_) => false);
+  Future popAndPushNamed(String page, {dynamic arguments}) => Modular.to.popAndPushNamed(page, arguments: arguments);
+  void pop([dynamic result]) => Modular.to.pop(result);
+  void popUntil(String routeName) => Modular.to.popUntil((route) => Modular.to.navigateHistory.first.name == routeName);
 
 }

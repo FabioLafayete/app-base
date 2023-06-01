@@ -20,14 +20,11 @@ import '../service/storage/storage_service.dart';
 import '../shared/modules/user/controller/user_controller.dart';
 import '../shared/modules/user/service/impl/user_service_impl.dart';
 import 'my_router.dart';
-import 'my_router_controller.dart';
 
 class AppModule extends Module {
   @override
   List<Bind> get binds => [
-    Bind.singleton((i) => MyRouter.instance(
-        routeControl: MyRouterController()
-    )),
+    Bind.singleton((i) => MyRouter.instance()),
     Bind.singleton((i) => SecureStorageService.instance),
     Bind.singleton((i) => AppConfig.instance),
     Bind.singleton((i) => NavController()),

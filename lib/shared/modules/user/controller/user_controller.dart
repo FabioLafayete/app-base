@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app/shared/model/user/user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
@@ -40,6 +42,34 @@ abstract class UserControllerBase with Store{
       setUser(userModel);
     }catch(_){
 
+    }
+  }
+
+  Future deletePhotoUser() async {
+    try{
+      setPhotoUrlProfile(null);
+      await userRepositoryImpl.deletePhoto();
+    }catch(_){
+      if(_ is DioError){
+        print(_.message);
+        print(_.error);
+      } else {
+        print(_);
+      }
+    }
+  }
+
+  Future addPhotoUser(File file) async {
+    try{
+      String urlPhoto = await userRepositoryImpl.addPhoto(file);
+      setPhotoUrlProfile(urlPhoto);
+    }catch(_){
+      if(_ is DioError){
+        print(_.message);
+        print(_.error);
+      } else {
+        print(_);
+      }
     }
   }
 
