@@ -52,7 +52,7 @@ class HttpService {
         headers: {HttpHeaders.authorizationHeader: 'Bearer ${appConfig.bearerToken}'},
         validateStatus: (status) => status!  < 400,
         receiveTimeout: const Duration(seconds: 10),
-        connectTimeout: const Duration(seconds: 10),
+        connectTimeout: const Duration(seconds: 30),
       ),
     );
   }

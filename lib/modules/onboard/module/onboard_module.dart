@@ -6,7 +6,7 @@ import '../controller/onboard_controller.dart';
 class OnboardModule extends Module {
   @override
   List<Bind> get binds => [
-    Bind.factory((i) => OnboardController())
+    Bind.singleton((i) => OnboardController())
   ];
 
   @override

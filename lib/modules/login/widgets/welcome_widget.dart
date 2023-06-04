@@ -75,7 +75,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
   Widget build(BuildContext context) {
 
     return BasePage(
-      padding: 0,
+      paddingPage: 0,
       showAppBar: false,
       body: Stack(
         children: [

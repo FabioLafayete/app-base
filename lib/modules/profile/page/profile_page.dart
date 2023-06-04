@@ -18,7 +18,7 @@ class ProfilePage extends BaseWidget<ProfileController> {
   Widget build(BuildContext context) {
     return BasePage(
         showAppBar: false,
-        padding: 0,
+        paddingPage: 0,
         body: ListView(
           physics: const ClampingScrollPhysics(),
           padding: MediaQuery.of(context).padding.copyWith(top: 0),

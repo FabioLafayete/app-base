@@ -15,7 +15,7 @@ class BasePage extends BaseWidget {
     this.bottomNavigationBar,
     this.floatingActionButton,
     this.backgroundColor,
-    this.padding,
+    this.paddingPage,
     this.actions,
     this.elevation
   }) : super(key: key);
@@ -30,7 +30,7 @@ class BasePage extends BaseWidget {
   final Widget? bottomNavigationBar;
   final Widget? floatingActionButton;
   final Color? backgroundColor;
-  final double? padding;
+  final double? paddingPage;
   final List<Widget>? actions;
   final double? elevation;
 
@@ -46,7 +46,7 @@ class BasePage extends BaseWidget {
         backgroundColor: backgroundColor ?? colors.background,
         floatingActionButton: floatingActionButton,
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: padding ?? 16.0),
+          padding: EdgeInsets.symmetric(horizontal: paddingPage ?? 16.0),
           child: body,
         ),
       ),

@@ -95,7 +95,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
     return BasePage(
       backgroundColor: colors.background,
       showAppBar: false,
-      padding: 0,
+      paddingPage: 0,
       extendBodyBehindAppBar: true,
       body: ListView(
           padding: MediaQuery.of(context).padding.copyWith(top: 0),

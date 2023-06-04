@@ -32,7 +32,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return BasePage(
       showAppBar: false,
-      padding: 0,
+      paddingPage: 0,
       body: Stack(
         alignment: Alignment.center,
         children: [

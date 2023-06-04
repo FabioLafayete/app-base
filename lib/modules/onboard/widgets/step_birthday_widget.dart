@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class Step04Widget extends BaseWidget<OnboardController> {
-  Step04Widget({Key? key}) : super(key: key);
+class StepBirthdayWidget extends BaseWidget<OnboardController> {
+  StepBirthdayWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class Step04Widget extends BaseWidget<OnboardController> {
             dateFormat: 'dd/MMMM/yyyy',
             firstDate: DateTime(1900),
             initialDate: controller.birthday ??
-                DateTime(_now.year - 18, _now.month, _now.day),
+                DateTime(_now.year - 35, _now.month, _now.day),
             lastDate: _now,
             locale: DateTimePickerLocale.pt_br,
             pickerTheme: DateTimePickerTheme(

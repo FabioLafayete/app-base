@@ -18,7 +18,7 @@ class HomePage extends BaseWidget<HomeController> {
   Widget build(BuildContext context) {
 
     return BasePage(
-      padding: 0,
+      paddingPage: 0,
       backgroundColor: colors.background,
       body: Center(
           child: Column(

@@ -19,7 +19,7 @@ class FoodPage extends BaseWidget<FoodController> {
 
     return Observer(
         builder: (_) => BasePage(
-        padding: 0,
+        paddingPage: 0,
         showAppBar: false,
         body: ListView(
           children: [

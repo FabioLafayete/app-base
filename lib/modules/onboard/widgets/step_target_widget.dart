@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../components/select_item/select_item.dart';
 
-
-class Step05Widget extends BaseWidget<OnboardController> {
-  Step05Widget({Key? key}) : super(key: key);
+class StepTargetWidget extends BaseWidget<OnboardController> {
+  StepTargetWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class Step05Widget extends BaseWidget<OnboardController> {
       children: [
         space(0.05),
         text(
-          'Tem alguma limitação física?',
+          'Qual o seu principal objetivo?',
           fontSize: 25,
           color: colors.text,
           fontWeight: FontWeight.w700,
@@ -28,24 +27,16 @@ class Step05Widget extends BaseWidget<OnboardController> {
             initialValue: controller.target,
             items: [
               SelectItemMenu(
-                  title: 'Nenhuma',
-                  icon: text('🙅‍♀️', fontSize: 24)
+                  title: 'Perder peso',
+                  icon: text('🏋️‍♀️', fontSize: 24)
               ),
               SelectItemMenu(
-                  title: 'Dores nas costas',
-                  icon: text('🚶‍♀️', fontSize: 24)
+                  title: 'Ganhar massa muscular',
+                  icon: text('💪️', fontSize: 24)
               ),
               SelectItemMenu(
-                  title: 'Dores no joelho',
-                  icon: text('🦵', fontSize: 24)
-              ),
-              SelectItemMenu(
-                  title: 'Mobilidade resuzida (cadeira de rodas)',
-                  icon: text('👩‍🦽', fontSize: 24)
-              ),
-              SelectItemMenu(
-                  title: 'Outros',
-                  icon: text('🤷‍♀️', fontSize: 24)
+                  title: 'Definir e manter o peso',
+                  icon: text('🏃‍♀️', fontSize: 24)
               ),
             ],
             onChange: (value) => controller.setTarget(value?.title),

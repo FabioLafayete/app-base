@@ -7,10 +7,11 @@ import 'package:get/get.dart';
 
 import '../../../components/select_item/select_item.dart';
 import '../../../components/visual_display.dart';
+import '../../../route/pages_name.dart';
 
 
-class Step06Widget extends BaseWidget<OnboardController> {
-  Step06Widget({Key? key}) : super(key: key);
+class StepTargetWeightWidget extends BaseWidget<OnboardController> {
+  StepTargetWeightWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class Step06Widget extends BaseWidget<OnboardController> {
       children: [
         space(0.05),
         text(
-          'Qual o seu peso atual?',
+          'Qual seu peso desejado?',
           fontSize: 25,
           color: colors.text,
           fontWeight: FontWeight.w700,
@@ -36,7 +37,15 @@ class Step06Widget extends BaseWidget<OnboardController> {
                   colorHint: Colors.black.withOpacity(0.4),
                   colorCursor: Colors.black,
                   textInputType: TextInputType.number,
-                  inputMask: [TextInputMask(mask: '999')]
+                  inputMask: [TextInputMask(mask: '999')],
+                  onChanged: (value){
+                    controller.setTargetWeight(double.parse(value));
+                  },
+                  onEditingComplete: (){
+                    if(controller.enableButton){
+                      router.pushReplacementNamed(PagesNames.home);
+                    }
+                  }
                 ),
               ),
               space(0.03, width: true),

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../../../components/visual_display.dart';
 
-class Step01Widget extends BaseWidget<OnboardController> {
-  Step01Widget({Key? key}) : super(key: key);
+class StepName extends BaseWidget<OnboardController> {
+  StepName({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,14 @@ class Step01Widget extends BaseWidget<OnboardController> {
             colorBorderFocus: colors.secondary.withOpacity(0.7),
             colorLabel: colors.textSecondary,
             colorLabelFocus: colors.textSecondary,
-            onChanged: controller.setName
+            onEditingComplete: (){
+              if(controller.enableButton){
+                controller.setIndex(controller.index + 1);
+              }
+            },
+            onChanged: (value){
+              controller.setName(value);
+            }
           ),
         )
       ],
