@@ -25,7 +25,7 @@ class BaseController {
 
   setPhotoUrlProfile(String? value) => userController.setPhotoUrlProfile(value);
 
-  setAgeProfile(int? value) => userController.setAgeProfile(value);
+  setAgeProfile(DateTime? value) => userController.setAgeProfile(value);
 
   setUser(UserModel value) => userController.setUser(value);
 

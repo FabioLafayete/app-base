@@ -32,4 +32,12 @@ class Util {
     );
   }
 
+  static int getYearDifference(DateTime from, DateTime to) {
+    var diff = to.year - from.year;
+    if (to.month < from.month || (to.month == from.month && to.day < from.day)) {
+      diff--;
+    }
+    return diff;
+  }
+
 }

@@ -31,15 +31,19 @@ abstract class UserControllerBase with Store{
   setPhotoUrlProfile(String? value) => user = user.copyWith(photoUrl: value);
 
   @action
-  setAgeProfile(int? value) => user = user.copyWith(age: value);
+  setAgeProfile(DateTime? value) => user = user.copyWith(age: value);
 
   @action
   setUser(UserModel value) => user = value;
 
-  Future<void> setInitUser() async {
+  Future<void> setInitUser({UserModel? userModel}) async {
     try{
-      final userModel = await userRepositoryImpl.getUser();
-      setUser(userModel);
+      if(userModel != null){
+        setUser(userModel);
+      } else {
+        final data = await userRepositoryImpl.getUser();
+        setUser(data);
+      }
     }catch(_){
 
     }

@@ -1,3 +1,4 @@
+// ignore_for_file: invalid_annotation_target
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_model.freezed.dart';
@@ -10,10 +11,17 @@ class UserModel with _$UserModel {
     String? id,
     String? name,
     String? email,
-    int? age,
+    DateTime? age,
     String? cellphone,
     String? photoUrl,
     String? gender,
+    String? limitation,
+    int? height,
+    int? weight,
+    int? targetWeight,
+    String? target,
+    @Default(true) bool activated,
+    @Default(true) bool newUser
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

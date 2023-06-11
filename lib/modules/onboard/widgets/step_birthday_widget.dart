@@ -37,7 +37,7 @@ class StepBirthdayWidget extends BaseWidget<OnboardController> {
             ),
             onChange: (value, _){
               controller.setBirthday(value);
-            },
+              },
           )),
         )
       ],

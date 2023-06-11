@@ -8,6 +8,10 @@ class OnboardController = OnboardControllerBase with _$OnboardController;
 
 abstract class OnboardControllerBase extends BaseController with Store {
 
+  OnboardControllerBase(){
+    _init();
+  }
+
   @observable
   int index = 0;
   @observable
@@ -76,6 +80,37 @@ abstract class OnboardControllerBase extends BaseController with Store {
     return true;
   }
 
+  _init(){
+    if(user.name != null) setName(user.name);
+    if(user.gender != null) setGender(user.gender);
+    if(user.age != null) setBirthday(user.age);
+  }
+
+  void onPressButton(){
+    try{
+      if(index == 0){
+        addName();
+      } else if (index == 1){
+        addBirthday();
+      } else if (index == 2){
+
+      } else if (index == 3){
+
+      } else if (index == 4){
+
+      } else if (index == 5){
+
+      } else if (index == 6){
+
+      } else if (index == 7){
+
+      }
+      setIndex(index + 1);
+    }catch(_){
+      print(_);
+    }
+  }
+
   bool verifyName() {
     if (name == null) return false;
     if (!name!.trim().contains(' ')) return false;
@@ -84,5 +119,23 @@ abstract class OnboardControllerBase extends BaseController with Store {
   }
 
 
+  Future<void> addName() async {
+    try{
+      if(user.name != null && user.name == name) return;
+      await setNameProfile(name);
+      updateUser(user);
+    }catch(_){
+      print(_);
+    }
+  }
 
+  Future<void> addBirthday() async {
+    try{
+      if(user.age != null && user.age == birthday) return;
+      await setAgeProfile(birthday);
+      updateUser(user);
+    }catch(_){
+      print(_);
+    }
+  }
 }

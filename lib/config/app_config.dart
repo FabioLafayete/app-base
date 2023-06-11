@@ -1,3 +1,4 @@
+import 'package:app/modules/login/model/auth_model.dart';
 import 'package:app/service/storage/storage_service.dart';
 import 'package:app/shared/constants/storage_constants.dart';
 import 'package:app/shared/flavor/flavor_types.dart';
@@ -39,13 +40,19 @@ class AppConfig {
       await controller.setInitUser();
     }
 
-    print('Ambiente de ${flavors?.getCurrentFlavor() == FlavorType.dev ? 'dev' : 'prod'}');
+    print('Ambiente de ${flavors?.getCurrentFlavor() == FlavorType.dev ? 'dev'
+        : flavors?.getCurrentFlavor() == FlavorType.local ? 'local'
+        :  'prod'}'
+    );
   }
 
-  Future setBearerToken(String? value) async {
-    _bearerToken = value;
+  Future setBearerToken(AuthModel value) async {
+    _bearerToken = value.token;
     final secure = Modular.get<SecureStorageService>();
     secure.put(StorageConstants.bearerToken, bearerToken);
+
+    UserController controller = Modular.get<UserController>();
+    await controller.setInitUser(userModel: value.user);
   }
 
   String get baseUrl => _baseUrl ?? '';

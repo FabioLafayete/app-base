@@ -4,7 +4,9 @@ import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import '../../../components/base_page.dart';
+import '../../../shared/modules/user/controller/user_controller.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -18,10 +20,15 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     AppConfig().load().then((value) async {
-      await Future.delayed(const Duration(seconds: 1));
-      // MyRouter().pushReplacementNamed(PagesNames.profileData);
+      // await Future.delayed(const Duration(seconds: 1));
+      // MyRouter().pushReplacementNamed(PagesNames.login);
       if(AppConfig().bearerToken != null){
-        MyRouter().pushReplacementNamed(PagesNames.home);
+        UserController controller = Modular.get<UserController>();
+        if(controller.user.newUser){
+          MyRouter().pushReplacementNamed(PagesNames.onboard);
+        } else {
+          MyRouter().pushReplacementNamed(PagesNames.home);
+        }
       } else {
         MyRouter().pushReplacementNamed(PagesNames.login);
       }

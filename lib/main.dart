@@ -29,5 +29,5 @@ Future _preload() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  Modular.setInitialRoute(PagesNames.onboard);
+  Modular.setInitialRoute(PagesNames.splash);
 }

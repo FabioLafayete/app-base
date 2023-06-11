@@ -83,12 +83,7 @@ class OnboardPage extends BaseWidget<OnboardController> {
                     colorTitle: colors.background,
                     colorButton: colors.primary,
                     iconRight: true,
-                    onPress: controller.enableButton ? (){
-                      controller.setIndex(controller.index + 1);
-                      if(controller.index == 8){
-                        router.pushReplacementNamed(PagesNames.home);
-                      }
-                    } : null,
+                    onPress: controller.enableButton ? controller.onPressButton : null,
                   )),
                 ),
                 space(0.01),

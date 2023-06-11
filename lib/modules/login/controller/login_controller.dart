@@ -10,6 +10,7 @@ import 'package:mobx/mobx.dart';
 
 import '../../../components/base_controller.dart';
 import '../../navigator/controller/nav_controller.dart';
+import '../model/auth_model.dart';
 
 part 'login_controller.g.dart';
 
@@ -122,14 +123,14 @@ abstract class LoginControllerBase extends BaseController with Store {
     try{
       setIsLoading(true);
       if(showCode) {
-        final data = await repositoryImpl.postLogin(
-            email!, '$code1$code2$code3$code4$code5'
-        );
-        if(data.isNotEmpty && data.containsKey('token')){
-          await AppConfig().setBearerToken(data['token']);
+        AuthModel data = await repositoryImpl.postLogin(email!, fullCode);
+        await AppConfig().setBearerToken(data);
+        if(data.user.newUser) {
+          router.pushReplacementNamed(PagesNames.onboard);
+        } else {
           router.pushReplacementNamed(PagesNames.home);
-          return;
         }
+        return;
       } else {
         await repositoryImpl.postTokenEmail(email!);
         bottomSheet.setHeightBottomSheet(0.53);
@@ -149,6 +150,8 @@ abstract class LoginControllerBase extends BaseController with Store {
       setIsLoading(false);
     }
   }
+
+  String get fullCode => '$code1$code2$code3$code4$code5';
 
   Future<void> resendCode() async {
     try{

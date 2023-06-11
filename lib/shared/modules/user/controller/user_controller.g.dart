@@ -73,7 +73,7 @@ mixin _$UserController on UserControllerBase, Store {
   }
 
   @override
-  dynamic setAgeProfile(int? value) {
+  dynamic setAgeProfile(DateTime? value) {
     final _$actionInfo = _$UserControllerBaseActionController.startAction(
         name: 'UserControllerBase.setAgeProfile');
     try {
