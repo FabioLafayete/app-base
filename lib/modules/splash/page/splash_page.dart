@@ -19,20 +19,21 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    AppConfig().load().then((value) async {
-      // await Future.delayed(const Duration(seconds: 1));
-      // MyRouter().pushReplacementNamed(PagesNames.login);
-      if(AppConfig().bearerToken != null){
-        UserController controller = Modular.get<UserController>();
-        if(controller.user.newUser){
-          MyRouter().pushReplacementNamed(PagesNames.onboard);
-        } else {
-          MyRouter().pushReplacementNamed(PagesNames.home);
-        }
+    _init();
+  }
+
+  Future _init() async {
+    await AppConfig().load();
+    if(AppConfig().bearerToken != null) {
+      UserController controller = Modular.get<UserController>();
+      if(controller.user.newUser){
+        MyRouter().pushReplacementNamed(PagesNames.onboard);
       } else {
-        MyRouter().pushReplacementNamed(PagesNames.login);
+        MyRouter().pushReplacementNamed(PagesNames.home);
       }
-    });
+    } else {
+      MyRouter().pushReplacementNamed(PagesNames.login);
+    }
   }
 
   @override

@@ -31,7 +31,7 @@ abstract class OnboardControllerBase extends BaseController with Store {
   @observable
   double? targetWeight;
 
-  PageController pageController = PageController();
+  late PageController pageController;
 
   @action
   setName(String? value) => name = value;
@@ -84,6 +84,34 @@ abstract class OnboardControllerBase extends BaseController with Store {
     if(user.name != null) setName(user.name);
     if(user.gender != null) setGender(user.gender);
     if(user.age != null) setBirthday(user.age);
+
+    if(user.targetWeight != null) {
+      index = 7;
+      pageController = PageController(initialPage: 7);
+    } else if (user.weight != null) {
+      index = 7;
+      pageController = PageController(initialPage: 7);
+    } else if (user.target != null) {
+      index = 6;
+      pageController = PageController(initialPage: 6);
+    } else if (user.height != null) {
+      index = 5;
+      pageController = PageController(initialPage: 5);
+    } else if (user.limitation != null) {
+      index = 4;
+      pageController = PageController(initialPage: 4);
+    } else if (user.gender != null) {
+      index = 3;
+      pageController = PageController(initialPage: 3);
+    } else if (user.age != null) {
+      index = 2;
+      pageController = PageController(initialPage: 2);
+    } else if (user.name != null) {
+      index = 1;
+      pageController = PageController(initialPage: 1);
+    } else {
+      pageController = PageController();
+    }
   }
 
   void onPressButton(){
@@ -117,7 +145,6 @@ abstract class OnboardControllerBase extends BaseController with Store {
     if (name!.trim().split(' ').toList().length < 2) return false;
     return true;
   }
-
 
   Future<void> addName() async {
     try{

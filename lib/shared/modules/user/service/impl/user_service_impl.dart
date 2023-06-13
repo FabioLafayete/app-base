@@ -15,7 +15,6 @@ class UserServiceImpl implements UserService {
 
   @override
   Future<Response> updateUser(UserModel user) {
-    print(user.toJson());
     return _service.request(
         type: RequestType.PUT,
         path: UserConstants.updateUser,

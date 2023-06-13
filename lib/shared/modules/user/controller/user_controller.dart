@@ -82,9 +82,10 @@ abstract class UserControllerBase with Store{
       final userModel = await userRepositoryImpl.updateUser(value);
       setUser(userModel);
     }catch(_){
-      if(_ is DioError){
+      if(_ is DioException){
         print(_.message);
         print(_.error);
+        print(_.response?.data);
       } else {
         print(_);
       }
