@@ -34,6 +34,24 @@ abstract class UserControllerBase with Store{
   setAgeProfile(DateTime? value) => user = user.copyWith(age: value);
 
   @action
+  setGenderProfile(String? value) => user = user.copyWith(gender: value);
+
+  @action
+  setLimitationProfile(String? value) => user = user.copyWith(limitation: value);
+
+  @action
+  setHeightProfile(int? value) => user = user.copyWith(height: value);
+
+  @action
+  setTargetProfile(String? value) => user = user.copyWith(target: value);
+
+  @action
+  setWeightProfile(int? value) => user = user.copyWith(weight: value);
+
+  @action
+  setTargetWeightProfile(int? value) => user = user.copyWith(targetWeight: value);
+
+  @action
   setUser(UserModel value) => user = value;
 
   Future<void> setInitUser({UserModel? userModel}) async {

@@ -18,14 +18,16 @@ class BaseController {
   UserModel get user => userController.user;
 
   setNameProfile(String? value) => userController.setNameProfile(value);
-
   setEmailProfile(String? value) => userController.setEmailProfile(value);
-
   setPhoneProfile(String? value) => userController.setPhoneProfile(value);
-
   setPhotoUrlProfile(String? value) => userController.setPhotoUrlProfile(value);
-
   setAgeProfile(DateTime? value) => userController.setAgeProfile(value);
+  setGenderProfile(String? value) => userController.setGenderProfile(value);
+  setWeightProfile(int? value) => userController.setWeightProfile(value);
+  setHeightProfile(int? value) => userController.setHeightProfile(value);
+  setLimitationProfile(String? value) => userController.setLimitationProfile(value);
+  setTargetProfile(String? value) => userController.setTargetProfile(value);
+  setTargetWeightProfile(int? value) => userController.setTargetWeightProfile(value);
 
   setUser(UserModel value) => userController.setUser(value);
 

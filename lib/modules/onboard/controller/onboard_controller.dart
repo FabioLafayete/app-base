@@ -121,7 +121,7 @@ abstract class OnboardControllerBase extends BaseController with Store {
       } else if (index == 1){
         addBirthday();
       } else if (index == 2){
-
+        addGender();
       } else if (index == 3){
 
       } else if (index == 4){
@@ -160,6 +160,16 @@ abstract class OnboardControllerBase extends BaseController with Store {
     try{
       if(user.age != null && user.age == birthday) return;
       await setAgeProfile(birthday);
+      updateUser(user);
+    }catch(_){
+      print(_);
+    }
+  }
+
+  Future<void> addGender() async {
+    try{
+      if(user.gender != null && user.gender == gender) return;
+      await setGenderProfile(gender);
       updateUser(user);
     }catch(_){
       print(_);
