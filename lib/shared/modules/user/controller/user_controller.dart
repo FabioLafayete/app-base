@@ -49,7 +49,9 @@ abstract class UserControllerBase with Store{
   setWeightProfile(int? value) => user = user.copyWith(weight: value);
 
   @action
-  setTargetWeightProfile(int? value) => user = user.copyWith(targetWeight: value);
+  setTargetWeightProfile(int? value) => user = user.copyWith(
+      targetWeight: value, newUser: false,
+  );
 
   @action
   setUser(UserModel value) => user = value;

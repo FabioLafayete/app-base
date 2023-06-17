@@ -26,19 +26,19 @@ class StepGender extends BaseWidget<OnboardController> {
             initialValue: controller.gender,
             items: [
               SelectItemMenu(
-                  title: 'Masculino',
-                  icon: text('👱‍♂️', fontSize: 24)
-              ),
-              SelectItemMenu(
                   title: 'Feminino',
                   icon: text('👩', fontSize: 24)
+              ),
+              SelectItemMenu(
+                  title: 'Masculino',
+                  icon: text('👱‍♂️', fontSize: 24)
               ),
               SelectItemMenu(
                   title: 'Outro',
                   icon: text('👱‍️', fontSize: 24)
               ),
             ],
-            onChange: (value) => controller.setGender(value?.title),
+            onChange: (value) => controller.setGender(value.title),
           )),
         )
       ],

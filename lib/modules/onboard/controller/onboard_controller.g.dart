@@ -133,13 +133,13 @@ mixin _$OnboardController on OnboardControllerBase, Store {
       Atom(name: 'OnboardControllerBase.personalWeight', context: context);
 
   @override
-  double? get personalWeight {
+  int? get personalWeight {
     _$personalWeightAtom.reportRead();
     return super.personalWeight;
   }
 
   @override
-  set personalWeight(double? value) {
+  set personalWeight(int? value) {
     _$personalWeightAtom.reportWrite(value, super.personalWeight, () {
       super.personalWeight = value;
     });
@@ -149,13 +149,13 @@ mixin _$OnboardController on OnboardControllerBase, Store {
       Atom(name: 'OnboardControllerBase.targetWeight', context: context);
 
   @override
-  double? get targetWeight {
+  int? get targetWeight {
     _$targetWeightAtom.reportRead();
     return super.targetWeight;
   }
 
   @override
-  set targetWeight(double? value) {
+  set targetWeight(int? value) {
     _$targetWeightAtom.reportWrite(value, super.targetWeight, () {
       super.targetWeight = value;
     });
@@ -231,7 +231,7 @@ mixin _$OnboardController on OnboardControllerBase, Store {
   }
 
   @override
-  dynamic setPersonalWeight(double? value) {
+  dynamic setPersonalWeight(int? value) {
     final _$actionInfo = _$OnboardControllerBaseActionController.startAction(
         name: 'OnboardControllerBase.setPersonalWeight');
     try {
@@ -242,7 +242,7 @@ mixin _$OnboardController on OnboardControllerBase, Store {
   }
 
   @override
-  dynamic setTargetWeight(double? value) {
+  dynamic setTargetWeight(int? value) {
     final _$actionInfo = _$OnboardControllerBaseActionController.startAction(
         name: 'OnboardControllerBase.setTargetWeight');
     try {

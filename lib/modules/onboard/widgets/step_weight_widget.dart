@@ -36,9 +36,10 @@ class StepWeightWidget extends BaseWidget<OnboardController> {
                   colorHint: Colors.black.withOpacity(0.4),
                   colorCursor: Colors.black,
                   textInputType: TextInputType.number,
+                  initialValue: user.weight.toString(),
                   inputMask: [TextInputMask(mask: '999')],
                   onChanged: (value){
-                    controller.setPersonalWeight(double.parse(value));
+                    controller.setPersonalWeight(int.parse(value));
                   },
                   onEditingComplete: (){
                     if(controller.enableButton){

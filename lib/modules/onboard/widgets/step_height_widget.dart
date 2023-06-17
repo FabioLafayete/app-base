@@ -37,6 +37,7 @@ class StepHeightWidget extends BaseWidget<OnboardController> {
                   colorCursor: Colors.black,
                   textInputType: TextInputType.number,
                   inputMask: [TextInputMask(mask: '999')],
+                  initialValue: user.height.toString(),
                   onChanged: (value) {
                     controller.setPersonalHeight(int.parse(value));
                   },

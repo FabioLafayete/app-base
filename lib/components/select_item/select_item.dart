@@ -14,7 +14,7 @@ class SelectItem extends BaseWidget {
   }) : super(key: key);
 
   final List<SelectItemMenu> items;
-  final Function(SelectItemMenu?) onChange;
+  final Function(SelectItemMenu) onChange;
   final Color? backgroundColor;
   final String? initialValue;
 
@@ -23,14 +23,13 @@ class SelectItem extends BaseWidget {
   @override
   Widget build(BuildContext context) {
     if(initialValue != null){
-      print(initialValue);
       itemSelected.value = items.firstWhereOrNull(
               (element) => element.title == initialValue
       );
     }
     return Column(
       children: List.generate(items.length,
-              (index) => Observer(builder: (_) => _item(items[index]))),
+              (index) => _item(items[index])),
     );
   }
 

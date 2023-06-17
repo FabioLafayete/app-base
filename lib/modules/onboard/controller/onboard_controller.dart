@@ -1,4 +1,5 @@
 import 'package:app/components/base_controller.dart';
+import 'package:app/route/pages_name.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
@@ -27,9 +28,9 @@ abstract class OnboardControllerBase extends BaseController with Store {
   @observable
   int? personalHeight;
   @observable
-  double? personalWeight;
+  int? personalWeight;
   @observable
-  double? targetWeight;
+  int? targetWeight;
 
   late PageController pageController;
 
@@ -46,9 +47,9 @@ abstract class OnboardControllerBase extends BaseController with Store {
   @action
   setPersonalHeight(int? value) => personalHeight = value;
   @action
-  setPersonalWeight(double? value) => personalWeight = value;
+  setPersonalWeight(int? value) => personalWeight = value;
   @action
-  setTargetWeight(double? value) => targetWeight = value;
+  setTargetWeight(int? value) => targetWeight = value;
 
   @action
   setIndex(int value) {
@@ -84,6 +85,12 @@ abstract class OnboardControllerBase extends BaseController with Store {
     if(user.name != null) setName(user.name);
     if(user.gender != null) setGender(user.gender);
     if(user.age != null) setBirthday(user.age);
+    if(user.gender != null) setGender(user.gender);
+    if(user.limitation != null) setLimitation(user.limitation);
+    if(user.height != null) setPersonalHeight(user.height);
+    if(user.target != null) setTarget(user.target);
+    if(user.weight != null) setPersonalWeight(user.weight);
+    if(user.targetWeight != null) setTargetWeight(user.weight);
 
     if(user.targetWeight != null) {
       index = 7;
@@ -123,15 +130,16 @@ abstract class OnboardControllerBase extends BaseController with Store {
       } else if (index == 2){
         addGender();
       } else if (index == 3){
-
+        addLimitation();
       } else if (index == 4){
-
+        addHeight();
       } else if (index == 5){
-
+        addTarget();
       } else if (index == 6){
-
+        addWeight();
       } else if (index == 7){
-
+        addTargetWeight();
+        router.pushReplacementNamed(PagesNames.home);
       }
       setIndex(index + 1);
     }catch(_){
@@ -170,6 +178,56 @@ abstract class OnboardControllerBase extends BaseController with Store {
     try{
       if(user.gender != null && user.gender == gender) return;
       await setGenderProfile(gender);
+      updateUser(user);
+    }catch(_){
+      print(_);
+    }
+  }
+
+  Future<void> addLimitation() async {
+    try{
+      if(user.limitation != null && user.limitation == limitation) return;
+      await setLimitationProfile(limitation);
+      updateUser(user);
+    }catch(_){
+      print(_);
+    }
+  }
+
+  Future<void> addHeight() async {
+    try{
+      if(user.height != null && user.height == personalHeight) return;
+      await setHeightProfile(personalHeight);
+      updateUser(user);
+    }catch(_){
+      print(_);
+    }
+  }
+
+  Future<void> addTarget() async {
+    try{
+      if(user.target != null && user.target == target) return;
+      await setTargetProfile(target);
+      updateUser(user);
+    }catch(_){
+      print(_);
+    }
+  }
+
+  Future<void> addWeight() async {
+    try{
+      if(user.weight != null && user.weight == personalWeight) return;
+      await setWeightProfile(personalWeight);
+      updateUser(user);
+    }catch(_){
+      print(_);
+    }
+  }
+
+  Future<void> addTargetWeight() async {
+    try{
+      if(user.targetWeight != null && user.targetWeight == targetWeight) return;
+      await setTargetWeightProfile(targetWeight);
       updateUser(user);
     }catch(_){
       print(_);
