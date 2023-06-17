@@ -138,11 +138,15 @@ abstract class LoginControllerBase extends BaseController with Store {
         setShowCode(true);
         Get.focusScope?.unfocus();
       }
-    } catch(e){
-      bottomSheet.setHeightBottomSheet(0.56);
-      setErrorCode('');
-      cleanCode();
-      Get.focusScope?.unfocus();
+    } catch(e) {
+      if(showCode) {
+        bottomSheet.setHeightBottomSheet(0.56);
+        setErrorCode('');
+        cleanCode();
+        Get.focusScope?.unfocus();
+      } else {
+        setErrorEmail('Erro ao enviar token, tente novamente');
+      }
       if (kDebugMode) {
         print(e);
       }
