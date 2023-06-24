@@ -72,22 +72,22 @@ class CustomInterceptors extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    final logger = Logger(
-      printer: PrettyPrinter(
-          methodCount: 0,
-          lineLength: 110,
-          errorMethodCount: 0,
-          colors: true,
-          printEmojis: true
-      ),
-    );
-    logger.d(
-        '====== R E Q U E S T ======\n\n'
-        '[METHOD] => ${options.method}\n'
-        '[PATH] => ${options.path}\n'
-        '[BODY] => ${options.data}\n'
-        '[DATE] => ${DateTime.now()}'
-    );
+    // final logger = Logger(
+    //   printer: PrettyPrinter(
+    //       methodCount: 0,
+    //       lineLength: 110,
+    //       errorMethodCount: 0,
+    //       colors: true,
+    //       printEmojis: true
+    //   ),
+    // );
+    // logger.d(
+    //     '====== R E Q U E S T ======\n\n'
+    //     '[DATE] => ${DateTime.now()}\n'
+    //     '[METHOD] => ${options.method}\n'
+    //     '[PATH] => ${options.path}\n'
+    //     '[BODY] => ${options.data}'
+    // );
     super.onRequest(options, handler);
   }
 
@@ -104,12 +104,12 @@ class CustomInterceptors extends Interceptor {
     );
     logger.d(
         '====== R E S P O N S E ======\n\n'
+        '[DATE] => ${DateTime.now()}\n'
         '[METHOD] => ${response.requestOptions.method}\n'
         '[STATUS] => ${response.statusCode}\n'
         '[PATH] => ${response.requestOptions.path}\n'
         '[BODY] => ${response.requestOptions.data}\n'
-        '[RESPONSE] => ${response.data}\n'
-        '[DATE] => ${DateTime.now()}'
+        '[RESPONSE] => ${response.data}'
     );
     super.onResponse(response, handler);
   }
@@ -118,22 +118,22 @@ class CustomInterceptors extends Interceptor {
   Future onError(DioException err, ErrorInterceptorHandler handler) async {
     final logger = Logger(
       printer: PrettyPrinter(
-          methodCount: 0,
+          methodCount: 1,
           lineLength: 110,
-          errorMethodCount: 0,
+          errorMethodCount: 5,
           colors: true,
           printEmojis: true
       ),
     );
-    logger.d(
+    logger.e(
         '====== E R R O R ======\n\n'
+        '[DATE] => ${DateTime.now()}\n'
         '[METHOD] => ${err.requestOptions.method}\n'
-        '[STATUS] => ${err.response?.statusCode}\n'
+        '[STATUS] => ${err.response?.statusCode ?? 500}\n'
         '[PATH] => ${err.requestOptions.path}\n'
-        '[BODY] => ${err.requestOptions.data}'
-        '[RESPONSE] => ${err.response}\n'
+        '[BODY] => ${err.requestOptions.data}\n'
         '[MESSAGE] => ${err.message}\n'
-        '[DATE] => ${DateTime.now()}'
+        '[ERROR] => ${err.error}'
     );
     super.onError(err, handler);
   }
