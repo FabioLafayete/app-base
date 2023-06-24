@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app/route/app_module.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,8 +28,10 @@ Future _preload() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  if (!Platform.isMacOS) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
   Modular.setInitialRoute(PagesNames.splash);
 }

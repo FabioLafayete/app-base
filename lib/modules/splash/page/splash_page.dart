@@ -32,6 +32,7 @@ class _SplashPageState extends State<SplashPage> {
         MyRouter().pushReplacementNamed(PagesNames.home);
       }
     } else {
+      await Future.delayed(const Duration(seconds: 1));
       MyRouter().pushReplacementNamed(PagesNames.login);
     }
   }
@@ -46,8 +47,8 @@ class _SplashPageState extends State<SplashPage> {
         children: [
           _background(),
           AppTheme().text(
-              'Bem-vinda ao iBetter',
-              fontSize: 25,
+              'iBetter',
+              fontSize: 35,
               fontWeight: FontWeight.w600,
               color: AppColors().background
           )
@@ -61,12 +62,12 @@ class _SplashPageState extends State<SplashPage> {
       decoration: BoxDecoration(
           gradient: LinearGradient(
               tileMode: TileMode.repeated,
-              begin: Alignment.topLeft,
+              begin: Alignment.topRight,
               end: Alignment.bottomRight,
               colors: [
-                Colors.white,
-                AppColors().primary,
                 AppColors().secondary,
+                AppColors().primary,
+                AppColors().primary,
               ]
           )
       ),

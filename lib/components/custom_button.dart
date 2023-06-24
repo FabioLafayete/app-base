@@ -113,12 +113,12 @@ class CustomButton extends BaseWidget {
     return ButtonStyle(
         overlayColor: MaterialStateProperty.all<Color>(colors.primary.withOpacity(0.1)),
         backgroundColor: MaterialStateProperty.all<Color>(
-            colorButton?.withOpacity(0.4) ?? colors.primary.withOpacity(0.4)
+            colorButton?.withOpacity(0.6) ?? colors.primary.withOpacity(0.6)
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(1000.0),
-                side: colorBorder != null ? BorderSide(color: colorBorder!) : BorderSide.none
+                side: BorderSide(color: colorBorder ?? colors.primary.withOpacity(0.6), width: 1.5)
             )
         )
     );

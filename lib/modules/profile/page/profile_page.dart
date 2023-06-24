@@ -29,8 +29,8 @@ class ProfilePage extends BaseWidget<ProfileController> {
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Observer(builder: (_) => ImageCropperWidget(
-                textImage: 'FL',
-                title: 'Fabio Lafayete',
+                textImage: user.name,
+                title: user.name,
                 imageUrl: user.photoUrl,
                 loading: controller.loading,
                 onChange: (_){},

@@ -56,7 +56,7 @@ abstract class LoginControllerBase extends BaseController with Store {
   @action
   setIsLoadingSendCode(bool value) => isLoadingSendCode = value;
   @action
-  setEmail(String value) => email = value;
+  setEmail(String value) => email = value.toLowerCase().trim();
   @action
   setErrorEmail(String? value) => errorEmail = value;
   @action

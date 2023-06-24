@@ -19,8 +19,8 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
     navController.setVideoSelected(
         const VideoModel(
             name: 'TESTE DE VIDEO 1',
-            url: 'assets/video/video.mp4',
-            type: DataSourceType.asset
+            url: 'https://stream.mux.com/Fz9TDH4f13E2rtwMMW4TGEgF4vioyKmi32I8IVKgENg.m3u8',
+            type: DataSourceType.network
         )
     );
     navController.miniplayerController.animateToHeight(state: PanelState.MAX);

@@ -143,7 +143,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     sizeTitle: 16,
                     colorTitle: Colors.white,
                     cleanButton: true,
-                    onPress: (){},
+                    onPress: widget.signInOnPress,
                   )
                 ],
               ),
@@ -167,8 +167,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
-                    width: 2,
-                    color: _showLogo ? Colors.transparent : colors.background.withOpacity(0.8)
+                    width: 1,
+                    color: _showLogo ? Colors.transparent : colors.background.withOpacity(0.0)
                 )
             ),
             child: _showLogo ? Center(
@@ -193,12 +193,13 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
       decoration: BoxDecoration(
           gradient: LinearGradient(
               tileMode: TileMode.repeated,
-              begin: Alignment.topLeft,
+              begin: Alignment.topRight,
               end: Alignment.bottomRight,
               colors: [
-                Colors.white,
-                colors.primary,
+                // Colors.white,
                 colors.secondary,
+                colors.primary,
+                colors.primary,
               ]
           )
       ),
