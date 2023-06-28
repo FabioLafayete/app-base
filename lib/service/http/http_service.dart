@@ -104,12 +104,12 @@ class CustomInterceptors extends Interceptor {
     );
     logger.d(
         '====== R E S P O N S E ======\n\n'
-        '[DATE] => ${DateTime.now()}\n'
-        '[METHOD] => ${response.requestOptions.method}\n'
-        '[STATUS] => ${response.statusCode}\n'
-        '[PATH] => ${response.requestOptions.path}\n'
-        '[BODY] => ${response.requestOptions.data}\n'
-        '[RESPONSE] => ${response.data}'
+        '[DATE] -----> ${DateTime.now()}\n'
+        '[METHOD] ---> ${response.requestOptions.method}\n'
+        '[STATUS] ---> ${response.statusCode}\n'
+        '[PATH] -----> ${response.requestOptions.path}\n'
+        '[BODY] -----> ${response.requestOptions.data}\n'
+        '[RESPONSE] -> ${response.data}'
     );
     super.onResponse(response, handler);
   }
@@ -127,13 +127,13 @@ class CustomInterceptors extends Interceptor {
     );
     logger.e(
         '====== E R R O R ======\n\n'
-        '[DATE] => ${DateTime.now()}\n'
-        '[METHOD] => ${err.requestOptions.method}\n'
-        '[STATUS] => ${err.response?.statusCode ?? 500}\n'
-        '[PATH] => ${err.requestOptions.path}\n'
-        '[BODY] => ${err.requestOptions.data}\n'
-        '[MESSAGE] => ${err.message}\n'
-        '[ERROR] => ${err.error}'
+        '[DATE]     -> ${DateTime.now()}\n'
+        '[METHOD]   -> ${err.requestOptions.method}\n'
+        '[STATUS]   -> ${err.response?.statusCode ?? 500}\n'
+        '[PATH]     -> ${err.requestOptions.path}\n'
+        '[BODY]     -> ${err.requestOptions.data}\n'
+        '[MESSAGE]  -> ${err.message}\n'
+        '[ERROR]    -> ${err.error}'
     );
     super.onError(err, handler);
   }
