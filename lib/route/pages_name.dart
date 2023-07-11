@@ -2,7 +2,6 @@ class PagesNames {
   /// HOME
   static const String home = '/home/';
 
-
   /// LOGIN
   static const String splash = '/splash/';
   static const String login = '/login/';
