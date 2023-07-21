@@ -28,7 +28,7 @@ class NavPage extends BaseWidget<NavController> {
       HomePage(),
       FoodPage(),
       WorkoutPage(),
-      const Scaffold(backgroundColor: Colors.green),
+      // const Scaffold(backgroundColor: Colors.green),
       ProfilePage(),
     ];
 
@@ -146,10 +146,10 @@ class _BottomNavState extends State<BottomNav> {
             icon: FaIcon(LineIcons.dumbbell),
             label: 'Treinos'
         ),
-        BottomNavigationBarItem(
-            icon: FaIcon(LineIcons.users),
-            label: 'Feed'
-        ),
+        // BottomNavigationBarItem(
+        //     icon: FaIcon(LineIcons.users),
+        //     label: 'Feed'
+        // ),
         BottomNavigationBarItem(
             icon: FaIcon(LineIcons.user),
             label: 'Perfil'

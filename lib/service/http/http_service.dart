@@ -1,7 +1,4 @@
-// import 'dart:io';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import '../../config/app_config.dart';
 
@@ -70,6 +67,8 @@ class HttpService {
 
 class CustomInterceptors extends Interceptor {
 
+  late DateTime timeRequest;
+
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     // final logger = Logger(
@@ -89,24 +88,27 @@ class CustomInterceptors extends Interceptor {
     //     '[BODY] => ${options.data}'
     // );
     super.onRequest(options, handler);
+    timeRequest = DateTime.now();
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
+    Duration duration = DateTime.now().difference(timeRequest);
+    String time = '${duration.inSeconds}.${duration.inMilliseconds.toString().substring(duration.inSeconds.toString().length)}s';
     final logger = Logger(
-        printer: PrettyPrinter(
-            methodCount: 0,
-            lineLength: 110,
-            errorMethodCount: 0,
-            colors: true,
-            printEmojis: true
-        ),
+      printer: PrettyPrinter(
+          methodCount: 0,
+          lineLength: 110,
+          errorMethodCount: 0,
+          colors: true,
+          printEmojis: true
+      ),
     );
-    logger.d(
-        '====== R E S P O N S E ======\n\n'
+    logger.d('====== R E S P O N S E ======\n\n'
         '[DATE] -----> ${DateTime.now()}\n'
         '[METHOD] ---> ${response.requestOptions.method}\n'
         '[STATUS] ---> ${response.statusCode}\n'
+        '[TIME] -----> $time\n'
         '[PATH] -----> ${response.requestOptions.path}\n'
         '[BODY] -----> ${response.requestOptions.data}\n'
         '[RESPONSE] -> ${response.data}'
@@ -125,8 +127,7 @@ class CustomInterceptors extends Interceptor {
           printEmojis: true
       ),
     );
-    logger.e(
-        '====== E R R O R ======\n\n'
+    logger.e('====== E R R O R ======\n\n'
         '[DATE]     -> ${DateTime.now()}\n'
         '[METHOD]   -> ${err.requestOptions.method}\n'
         '[STATUS]   -> ${err.response?.statusCode ?? 500}\n'

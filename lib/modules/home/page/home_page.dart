@@ -1,4 +1,5 @@
 import 'package:app/components/base_widget.dart';
+import 'package:app/components/custom_button.dart';
 import 'package:app/modules/home/controller/home_controller.dart';
 import 'package:app/modules/navigator/controller/nav_controller.dart';
 import 'package:flutter/material.dart';
@@ -45,8 +46,50 @@ class HomePage extends BaseWidget<HomeController> {
               )
           ),
           const SizedBox(height: 60),
+          _bottomCard(
+              'Precisa de ajuda?',
+              'Envie uma mensagem para nossa equipe de suporte',
+              'Entrar em contato conosco',
+                  (){}
+          ),
         ],
       )
     );
   }
+
+  Widget _bottomCard(
+      String title,
+      String description,
+      String buttonName,
+      Function() onPress){
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
+      color: colors.primary,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          text(
+              title,
+              color: colors.text2,
+              fontWeight: FontWeight.w700,
+              fontSize: 24
+          ),
+          const SizedBox(height: 30),
+          text(
+              description,
+              color: colors.text2,
+              fontWeight: FontWeight.w400,
+          ),
+          const SizedBox(height: 30),
+          CustomButton(
+            title: buttonName,
+            onPress: onPress,
+            colorButton: colors.text2,
+            colorTitle: colors.primary,
+          ),
+        ],
+      ),
+    );
+  }
+
 }
