@@ -8,6 +8,7 @@ import '../../../components/base_page.dart';
 import '../../food/widgets/list_cards_food.dart';
 import '../../workout/widgets/list_cards_items.dart';
 import '../../workout/widgets/top_presentation.dart';
+import '../widgets/list_images_widget.dart';
 import 'home_mock.dart';
 
 
@@ -28,8 +29,8 @@ class HomePage extends BaseWidget<HomeController> {
         children: [
           TopPresentation(cardItemModel: HomeMock.listWorkout[2].listItems[1]),
           const SizedBox(height: 40),
-          HomeMock.listWorkout[1],
-          const SizedBox(height: 60),
+          HomeMock.listWorkout[0],
+          const SizedBox(height: 40),
           ListCardFood(
               title: 'Receitas populares',
               seeMore: (){},
@@ -44,6 +45,20 @@ class HomePage extends BaseWidget<HomeController> {
                   listItems: HomeMock.listFoodSoon,
                   invertColors: true
               )
+          ),
+          const SizedBox(height: 60),
+          HomeMock.listWorkout[1],
+          const SizedBox(height: 60),
+          ListImagesWidget(
+            title: 'Programas',
+            onPress: (){},
+            listImages: List.generate(15, (index) =>
+                ListImagesModel(
+                    title: 'Teste',
+                    image: 'https://images.pexels.com/photos/4327133/pexels-photo-4327133.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+                    days: 8,
+                    onPress: (){}
+                )),
           ),
           const SizedBox(height: 60),
           _bottomCard(
