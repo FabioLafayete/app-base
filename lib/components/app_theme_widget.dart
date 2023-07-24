@@ -10,6 +10,7 @@ class AppTheme {
     double? fontSize,
     double? letterSpacing,
     FontWeight? fontWeight,
+    double? height,
     TextDecoration? decoration
   }){
     return Text(
@@ -22,6 +23,7 @@ class AppTheme {
         fontSize: fontSize,
         fontWeight: fontWeight,
         letterSpacing: letterSpacing,
+        height: height,
         decoration: decoration,
       ),
     );

@@ -6,12 +6,14 @@ class ListCardItems extends BaseWidget {
   ListCardItems({
     Key? key,
     required this.title,
+    this.description,
     required this.listItems,
     this.seeMore,
     this.invertColors = false
   }) : super(key: key);
 
   final String title;
+  final String? description;
   final Function()? seeMore;
   final bool invertColors;
   final List<CardItemModel> listItems;
@@ -26,7 +28,27 @@ class ListCardItems extends BaseWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              text(title, color: invertColors ? colors.text2 : colors.text, fontWeight: FontWeight.w700, fontSize: 22),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  text(
+                      title,
+                      color: invertColors ? colors.text2 : colors.text,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 22
+                  ),
+                  if(description != null)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: text(
+                          description!,
+                          color: invertColors ? colors.text2 : colors.text,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16
+                      ),
+                    ),
+                ],
+              ),
               if(seeMore != null)
                 GestureDetector(
                   onTap: (){},

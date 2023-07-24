@@ -97,24 +97,59 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
       showAppBar: false,
       paddingPage: 0,
       extendBodyBehindAppBar: true,
-      body: ListView(
-          padding: MediaQuery.of(context).padding.copyWith(top: 0),
-          children: [
-            TopPresentation(cardItemModel: _list[2].listItems[1]),
-            Column(
-              children: List.generate(
-                  _list.length,
-                      (index) => Container(
-                    margin: const EdgeInsets.only(top: 30),
-                    child: _list[index],
-                  )
+      body: Stack(
+        children: [
+          ListView(
+              padding: MediaQuery.of(context).padding.copyWith(top: 0),
+              children: [
+                TopPresentation(
+                  cardItemModel: _list[2].listItems[1],
+                  showUsers: false,
+                ),
+                Column(
+                  children: List.generate(
+                      _list.length,
+                          (index) => Container(
+                        margin: const EdgeInsets.only(top: 30),
+                        child: _list[index],
+                      )
+                  ),
+                ),
+                if(navController.videoSelected != null)
+                  space(0.12),
+                if(navController.videoSelected == null)
+                  space(0.03),
+              ]
+          ),
+          Container(
+            color: colors.primary.withOpacity(0.9),
+            width: width,
+            height: height,
+            child: Padding(
+              padding: const EdgeInsets.all(30),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  text(
+                      'Quase la...',
+                      fontSize: 40,
+                      fontWeight: FontWeight.w700,
+                      color: colors.background
+                  ),
+                  const SizedBox(height: 20),
+                  text(
+                      'Estamos terminando de gravar as aulas de treinamentos, avisaremos assim que estiver pronto',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      textAlign: TextAlign.center,
+                      height: 1.5,
+                      color: colors.background,
+                  ),
+                ],
               ),
             ),
-            if(navController.videoSelected != null)
-              space(0.12),
-            if(navController.videoSelected == null)
-              space(0.03),
-          ]
+          )
+        ],
       ),
     );
   }

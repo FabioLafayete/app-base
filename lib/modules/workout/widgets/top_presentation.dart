@@ -10,11 +10,13 @@ class TopPresentation extends BaseWidget {
   TopPresentation({
     Key? key,
     required this.cardItemModel,
-    this.titleButton
+    this.titleButton,
+    this.showUsers = true
   }) : super(key: key);
 
   final CardItemModel cardItemModel;
   final String? titleButton;
+  final bool? showUsers;
 
   @override
   Widget build(BuildContext context) {
@@ -73,14 +75,15 @@ class TopPresentation extends BaseWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              MultipleUsers(
-                users: [
-                  MultipleUsersModel(name: 'Fabio Lafayete', photo: 'https://www.netliteracy.org/wp-content/uploads/2020/07/Capture-3-768x758.png'),
-                  MultipleUsersModel(name: 'Mariana Cardoso'),
-                  MultipleUsersModel(name: 'Lucas Alves', photo: 'https://ddg.wiki/wp-content/uploads/sites/22/2019/02/thispersondoesnotexist.com_000.jpg'),
-                  MultipleUsersModel(name: 'Vitor Rafael'),
-                ],
-              ),
+              if(showUsers!)
+                MultipleUsers(
+                  users: [
+                    MultipleUsersModel(name: 'Fabio Lafayete', photo: 'https://www.netliteracy.org/wp-content/uploads/2020/07/Capture-3-768x758.png'),
+                    MultipleUsersModel(name: 'Mariana Cardoso'),
+                    MultipleUsersModel(name: 'Lucas Alves', photo: 'https://ddg.wiki/wp-content/uploads/sites/22/2019/02/thispersondoesnotexist.com_000.jpg'),
+                    MultipleUsersModel(name: 'Vitor Rafael'),
+                  ],
+                ),
               SizedBox(
                 width: 100,
                 child: CustomButton(

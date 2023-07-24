@@ -33,7 +33,12 @@ class FoodPage extends BaseWidget<FoodController> {
             Container(
                 color: colors.primary,
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: ListCardItems(title: 'Em breve', listItems: _items2, invertColors: true)
+                child: ListCardItems(
+                    title: 'Em breve',
+                    description: 'Aulas de culinária estão sendo finalizadas',
+                    listItems: _items2,
+                    invertColors: true
+                )
             ),
             space(0.03),
             Padding(
