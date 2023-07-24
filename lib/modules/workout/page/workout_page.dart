@@ -130,6 +130,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const SizedBox(height: 100),
                   text(
                       'Quase la...',
                       fontSize: 40,
@@ -138,10 +139,10 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
                   ),
                   const SizedBox(height: 20),
                   text(
-                      'Estamos terminando de gravar as aulas de treinamentos, avisaremos assim que estiver pronto',
+                      'Estamos terminando de gravar as aulas de treinamentos.\n\nAvisaremos assim que estiver pronto',
                       fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      textAlign: TextAlign.center,
+                      fontWeight: FontWeight.w600,
+                      textAlign: TextAlign.left,
                       height: 1.5,
                       color: colors.background,
                   ),
