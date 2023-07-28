@@ -1,6 +1,7 @@
-import 'package:app/components/base_page.dart';
-import 'package:app/components/base_widget.dart';
 import 'package:app/modules/food/models/food_detail_model/food_detail_model.dart';
+import 'package:app/shared/widgets/base_page.dart';
+import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/shared/widgets/border_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -30,10 +31,11 @@ class FoodDetailPage extends BaseWidget {
                   children: [
                     text(
                         model.name!,
-                        fontSize: 24,
+                        fontSize: 28,
                         fontWeight: FontWeight.w600
                     ),
-                    
+                    const SizedBox(height: 18),
+                    _info()
                   ],
                 ),
               ),
@@ -42,6 +44,52 @@ class FoodDetailPage extends BaseWidget {
           _buttonBack()
         ],
       ),
+    );
+  }
+
+  Widget _info(){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        BorderWidget(
+          backgroundColor: Colors.white,
+          margin: const EdgeInsets.only(right: 15),
+          child: Row(
+            children: [
+              const Icon(Icons.local_fire_department_outlined, color: Colors.red),
+              const SizedBox(width: 5),
+              text(model.kcal.toString(), fontWeight: FontWeight.w700),
+              text(' Kcal', fontSize: 10, )
+            ],
+          ),
+        ),
+        if(model.duration != null)
+          BorderWidget(
+            backgroundColor: Colors.white,
+            margin: const EdgeInsets.only(right: 15),
+            child: Row(
+              children: [
+                const Icon(Icons.access_time_sharp, color: Colors.grey),
+                const SizedBox(width: 5),
+                text(model.duration!, fontWeight: FontWeight.w700),
+                text(' min', fontSize: 10, )
+              ],
+            ),
+          ),
+        if(model.difficulty != null)
+          BorderWidget(
+            backgroundColor: Colors.white,
+            margin: const EdgeInsets.only(right: 15),
+            child: Row(
+              children: [
+                text('👩‍🍳', fontSize: 16),
+                const SizedBox(width: 5),
+                text(model.duration!, fontWeight: FontWeight.w700),
+                text(' min', fontSize: 10, )
+              ],
+            ),
+          )
+      ],
     );
   }
 

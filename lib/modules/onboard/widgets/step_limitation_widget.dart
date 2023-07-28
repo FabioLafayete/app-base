@@ -1,8 +1,8 @@
-import 'package:app/components/base_widget.dart';
 import 'package:app/modules/onboard/controller/onboard_controller.dart';
+import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/shared/widgets/select_item/select_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../../components/select_item/select_item.dart';
 
 
 class StepLimitationWidget extends BaseWidget<OnboardController> {
@@ -48,7 +48,7 @@ class StepLimitationWidget extends BaseWidget<OnboardController> {
                   icon: text('🤷‍♀️', fontSize: 24)
               ),
             ],
-            onChange: (value) => controller.setLimitation(value?.title),
+            onChange: (value) => controller.setLimitation(value.title),
           )),
         )
       ],

@@ -1,10 +1,9 @@
 import 'dart:io';
-
+import 'package:app/shared/widgets/base_controller.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:mobx/mobx.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import '../../../components/base_controller.dart';
 
 part 'profile_controller.g.dart';
 

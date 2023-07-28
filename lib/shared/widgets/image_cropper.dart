@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:app/components/app_theme_widget.dart';
+import 'package:app/shared/widgets/app_theme_widget.dart';
 import 'package:app/route/my_router.dart';
+import 'package:app/shared/widgets/visual_display.dart';
 import 'package:app/util/colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crop/crop.dart';
@@ -12,7 +13,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shimmer/shimmer.dart';
-import '../../components/visual_display.dart';
 import '../../util/util.dart';
 import 'package:path_provider/path_provider.dart';
 

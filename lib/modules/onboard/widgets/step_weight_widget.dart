@@ -1,13 +1,8 @@
-import 'package:app/components/base_widget.dart';
 import 'package:app/modules/onboard/controller/onboard_controller.dart';
+import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/shared/widgets/visual_display.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
-import 'package:get/get.dart';
-
-import '../../../components/select_item/select_item.dart';
-import '../../../components/visual_display.dart';
-
 
 class StepWeightWidget extends BaseWidget<OnboardController> {
   StepWeightWidget({Key? key}) : super(key: key);

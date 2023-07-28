@@ -1,6 +1,7 @@
-import 'package:app/components/base_widget.dart';
 import 'package:app/modules/home/page/home_page.dart';
 import 'package:app/modules/navigator/controller/nav_controller.dart';
+import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/shared/widgets/video_player_view.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -9,7 +10,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:miniplayer/miniplayer.dart';
-import '../../../components/video_player_view.dart';
 import '../../food/page/food_page.dart';
 import '../../profile/page/profile_page.dart';
 import '../../workout/page/workout_page.dart';

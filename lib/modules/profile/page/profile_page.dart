@@ -1,9 +1,6 @@
-import 'dart:io';
-
-import 'package:app/components/base_page.dart';
-import 'package:app/components/base_widget.dart';
-import 'package:app/modules/profile/view/profile_data_view.dart';
 import 'package:app/route/pages_name.dart';
+import 'package:app/shared/widgets/base_page.dart';
+import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:line_icons/line_icons.dart';

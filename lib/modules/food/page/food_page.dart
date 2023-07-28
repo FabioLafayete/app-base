@@ -1,12 +1,12 @@
-import 'package:app/components/base_page.dart';
 import 'package:app/modules/food/controller/food_controller.dart';
 import 'package:app/modules/food/mock/food_detail_mock.dart';
 import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
+import 'package:app/shared/widgets/base_page.dart';
+import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../../components/base_widget.dart';
 import '../../navigator/controller/nav_controller.dart';
 import '../../workout/widgets/list_cards_items.dart';
 import '../widgets/items_wrap.dart';

@@ -1,12 +1,11 @@
-import 'package:app/components/app_theme_widget.dart';
+import 'package:app/shared/widgets/app_theme_widget.dart';
 import 'package:app/config/app_config.dart';
 import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
+import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../../components/base_page.dart';
-import '../../../service/storage/storage_service.dart';
 import '../../../shared/modules/user/controller/user_controller.dart';
 
 class SplashPage extends StatefulWidget {

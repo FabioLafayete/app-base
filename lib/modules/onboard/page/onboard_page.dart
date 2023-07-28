@@ -1,12 +1,11 @@
-import 'package:app/components/base_page.dart';
-import 'package:app/components/base_widget.dart';
-import 'package:app/components/visual_display.dart';
 import 'package:app/modules/onboard/controller/onboard_controller.dart';
 import 'package:app/modules/onboard/widgets/step_name_widget.dart';
-import 'package:app/route/pages_name.dart';
+import 'package:app/shared/widgets/base_page.dart';
+import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/shared/widgets/custom_button.dart';
+import 'package:app/shared/widgets/visual_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../../components/custom_button.dart';
 import '../widgets/step_gender_widget.dart';
 import '../widgets/step_target_widget.dart';
 import '../widgets/step_birthday_widget.dart';

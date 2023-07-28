@@ -1,4 +1,4 @@
-import 'package:app/components/base_controller.dart';
+import 'package:app/shared/widgets/base_controller.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';

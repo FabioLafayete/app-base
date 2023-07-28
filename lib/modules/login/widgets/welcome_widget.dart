@@ -1,13 +1,12 @@
 import 'dart:async';
-
-import 'package:app/components/base_page.dart';
+import 'package:app/shared/widgets/base_page.dart';
+import 'package:app/shared/widgets/custom_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 
-import '../../../components/app_theme_widget.dart';
-import '../../../components/custom_button.dart';
+import '../../../shared/widgets/app_theme_widget.dart';
 import '../../../util/colors.dart';
 
 class WelcomeWidget extends StatefulWidget {

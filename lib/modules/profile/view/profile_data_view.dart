@@ -1,13 +1,13 @@
 import 'package:app/modules/profile/controller/profile_controller.dart';
+import 'package:app/shared/widgets/base_page.dart';
+import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/shared/widgets/custom_button.dart';
+import 'package:app/shared/widgets/visual_display.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
-import '../../../components/base_page.dart';
-import '../../../components/base_widget.dart';
-import '../../../components/custom_button.dart';
-import '../../../components/visual_display.dart';
 import '../../../shared/widgets/image_cropper.dart';
 import '../widgets/list_button.dart';
 

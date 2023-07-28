@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
-
-import '../../../components/base_controller.dart';
+import 'package:app/shared/widgets/base_controller.dart';
 import '../../navigator/controller/nav_controller.dart';
 import '../model/auth_model.dart';
 

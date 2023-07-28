@@ -1,8 +1,8 @@
-import 'package:app/components/base_widget.dart';
 import 'package:app/modules/onboard/controller/onboard_controller.dart';
+import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/shared/widgets/visual_display.dart';
 import 'package:flutter/material.dart';
 
-import '../../../components/visual_display.dart';
 
 class StepName extends BaseWidget<OnboardController> {
   StepName({Key? key}) : super(key: key);

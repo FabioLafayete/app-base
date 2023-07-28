@@ -1,10 +1,10 @@
 import 'package:app/modules/workout/controller/workout_controller.dart';
+import 'package:app/shared/widgets/base_page.dart';
+import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:video_player/video_player.dart';
-import '../../../components/base_page.dart';
-import '../../../components/base_widget.dart';
 import '../../../shared/model/video/video_model.dart';
 import '../../navigator/controller/nav_controller.dart';
 import '../widgets/list_cards_items.dart';

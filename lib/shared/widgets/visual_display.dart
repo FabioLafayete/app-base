@@ -1,8 +1,8 @@
+import 'package:app/util/colors.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../util/colors.dart';
 import 'bottom_sheet/bottom_sheet.dart';
 
 class VisualDisplay {

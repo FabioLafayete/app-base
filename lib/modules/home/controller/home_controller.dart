@@ -2,9 +2,7 @@ import 'package:app/route/pages_name.dart';
 import 'package:app/service/storage/storage_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-
-import '../../../components/base_controller.dart';
-
+import 'package:app/shared/widgets/base_controller.dart';
 part 'home_controller.g.dart';
 
 class HomeController = HomeControllerBase with _$HomeController;

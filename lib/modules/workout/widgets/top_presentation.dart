@@ -1,9 +1,9 @@
-import 'package:app/components/base_widget.dart';
 import 'package:app/modules/workout/widgets/list_cards_items.dart';
+import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/shared/widgets/custom_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../components/custom_button.dart';
 import '../../../shared/widgets/multiple_users.dart';
 
 class TopPresentation extends BaseWidget {

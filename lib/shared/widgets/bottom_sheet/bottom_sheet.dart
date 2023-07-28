@@ -1,10 +1,10 @@
-import 'package:app/components/base_widget.dart';
 import 'package:app/modules/navigator/controller/nav_controller.dart';
+import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
-import '../../util/colors.dart';
 
 class CustomBottomSheet extends BaseWidget<NavController> {
 

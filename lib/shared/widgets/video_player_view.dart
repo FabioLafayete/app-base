@@ -7,8 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:video_player/video_player.dart';
-import '../modules/navigator/widget/custom_control_view.dart';
-import '../util/colors.dart';
+import '../../modules/navigator/widget/custom_control_view.dart';
+import '../../util/colors.dart';
 import 'app_theme_widget.dart';
 
 class VideoPlayerView extends StatefulWidget {

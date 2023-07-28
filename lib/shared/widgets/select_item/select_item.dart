@@ -1,6 +1,5 @@
-import 'package:app/components/base_widget.dart';
+import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable

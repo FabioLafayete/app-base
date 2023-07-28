@@ -1,10 +1,10 @@
+import 'package:app/modules/navigator/controller/nav_controller.dart';
+import 'package:app/route/my_router.dart';
+import 'package:app/route/pages_name.dart';
+import 'package:app/service/storage/storage_service.dart';
+import 'package:app/shared/model/user/user_model.dart';
+import 'package:app/shared/modules/user/controller/user_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../modules/navigator/controller/nav_controller.dart';
-import '../route/my_router.dart';
-import '../route/pages_name.dart';
-import '../service/storage/storage_service.dart';
-import '../shared/model/user/user_model.dart';
-import '../shared/modules/user/controller/user_controller.dart';
 
 class BaseController {
   BaseController();

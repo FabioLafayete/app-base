@@ -1,4 +1,4 @@
-import 'package:app/components/base_widget.dart';
+import 'package:app/shared/widgets/base_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 

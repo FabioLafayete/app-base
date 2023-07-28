@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:miniplayer/miniplayer.dart';
-import '../../../components/app_theme_widget.dart';
+import '../../../shared/widgets/app_theme_widget.dart';
 import '../../../util/colors.dart';
 
 class CustomControlView extends StatefulWidget {

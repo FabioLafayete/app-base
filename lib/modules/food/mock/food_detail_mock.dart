@@ -8,7 +8,7 @@ abstract class FoodDetailMock{
       name: 'Omelete de legumes com batata e guacamole',
       description: '',
       type: 'Almoço',
-      duration: '30 min',
+      duration: '30',
       difficulty: 'Média',
       servings: 2,
       isFavorite: true,
