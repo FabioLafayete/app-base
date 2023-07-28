@@ -9,6 +9,7 @@ class PagesNames {
 
   /// FOOD
   static const String food = '/food/';
+  static const String foodDetail = '/food/detail';
 
   /// WORKOUT
   static const String workout = '/workout/';

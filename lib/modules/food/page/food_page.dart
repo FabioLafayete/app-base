@@ -1,5 +1,8 @@
 import 'package:app/components/base_page.dart';
 import 'package:app/modules/food/controller/food_controller.dart';
+import 'package:app/modules/food/mock/food_detail_mock.dart';
+import 'package:app/route/my_router.dart';
+import 'package:app/route/pages_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -58,10 +61,15 @@ class FoodPage extends BaseWidget<FoodController> {
     ));
   }
 
-  List<CardFoodModel> _items3 = [
+  final List<CardFoodModel> _items3 = [
     CardFoodModel(
         title: 'SEI LA 2',
-        onPress: (){},
+        onPress: (){
+          MyRouter().pushNamed(
+              PagesNames.foodDetail,
+              arguments: FoodDetailMock.mockDetail()
+          );
+        },
         thumbnail: 'https://images.pexels.com/photos/103124/pexels-photo-103124.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         description: 'Pão com Ovo',
         typeTraining: 'RESISTENCIA',

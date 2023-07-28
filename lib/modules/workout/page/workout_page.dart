@@ -100,7 +100,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
       body: Stack(
         children: [
           ListView(
-              padding: MediaQuery.of(context).padding.copyWith(top: 0),
+              padding: MediaQuery.maybeOf(context)?.padding.copyWith(top: 0),
               children: [
                 TopPresentation(
                   cardItemModel: _list[2].listItems[1],
