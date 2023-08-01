@@ -20,14 +20,26 @@ class FoodDetailPage extends BaseWidget {
       paddingPage: 0,
       body: Stack(
         children: [
+          _imageTop(),
           ListView(
-            padding: MediaQuery.maybeOf(context)?.padding.copyWith(top: 0),
+            // padding: MediaQuery.maybeOf(context)?.padding.copyWith(top: 0),
+            physics: const ClampingScrollPhysics(),
             children: [
-              _imageTop(),
-              Padding(
+              SizedBox(height: MediaQuery.maybeOf(context)!.size.height * 0.32),
+              Container(
+                height: height * 0.82,
                 padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                decoration: BoxDecoration(
+                  color: colors.background,
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(10),
+                    topLeft: Radius.circular(10),
+                  )
+                ),
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: const ClampingScrollPhysics(),
+                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     text(
                         model.name!,
@@ -84,8 +96,7 @@ class FoodDetailPage extends BaseWidget {
               children: [
                 text('👩‍🍳', fontSize: 16),
                 const SizedBox(width: 5),
-                text(model.duration!, fontWeight: FontWeight.w700),
-                text(' min', fontSize: 10, )
+                text(model.difficulty!, fontWeight: FontWeight.w700),
               ],
             ),
           )
