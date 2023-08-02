@@ -60,47 +60,63 @@ class FoodDetailPage extends BaseWidget {
   }
 
   Widget _info(){
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        BorderWidget(
-          backgroundColor: Colors.white,
-          margin: const EdgeInsets.only(right: 15),
-          child: Row(
-            children: [
-              const Icon(Icons.local_fire_department_outlined, color: Colors.red),
-              const SizedBox(width: 5),
-              text(model.kcal.toString(), fontWeight: FontWeight.w700),
-              text(' Kcal', fontSize: 10, )
-            ],
-          ),
-        ),
-        if(model.duration != null)
+    return SizedBox(
+      height: 40,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        children: [
           BorderWidget(
             backgroundColor: Colors.white,
-            margin: const EdgeInsets.only(right: 15),
+            margin: const EdgeInsets.only(right: 10),
             child: Row(
               children: [
-                const Icon(Icons.access_time_sharp, color: Colors.grey),
+                const Icon(Icons.local_fire_department_outlined, color: Colors.red),
                 const SizedBox(width: 5),
-                text(model.duration!, fontWeight: FontWeight.w700),
-                text(' min', fontSize: 10, )
+                text(model.kcal.toString(), fontWeight: FontWeight.w700),
+                text(' Kcal', fontSize: 10, )
               ],
             ),
           ),
-        if(model.difficulty != null)
-          BorderWidget(
-            backgroundColor: Colors.white,
-            margin: const EdgeInsets.only(right: 15),
-            child: Row(
-              children: [
-                text('👩‍🍳', fontSize: 16),
-                const SizedBox(width: 5),
-                text(model.difficulty!, fontWeight: FontWeight.w700),
-              ],
+          if(model.duration != null)
+            BorderWidget(
+              backgroundColor: Colors.white,
+              margin: const EdgeInsets.only(right: 10),
+              child: Row(
+                children: [
+                  const Icon(Icons.access_time_sharp, color: Colors.grey),
+                  const SizedBox(width: 5),
+                  text(model.duration!, fontWeight: FontWeight.w700),
+                  text(' min', fontSize: 10, )
+                ],
+              ),
             ),
-          )
-      ],
+          if(model.difficulty != null)
+            BorderWidget(
+              backgroundColor: Colors.white,
+              margin: const EdgeInsets.only(right: 10),
+              child: Row(
+                children: [
+                  text('👩‍🍳', fontSize: 14),
+                  const SizedBox(width: 5),
+                  text(model.difficulty!, fontWeight: FontWeight.w700),
+                ],
+              ),
+            ),
+          if(model.servings != null)
+            BorderWidget(
+              backgroundColor: Colors.white,
+              margin: const EdgeInsets.only(right: 10),
+              child: Row(
+                children: [
+                  text('Porções:', fontSize: 14),
+                  const SizedBox(width: 5),
+                  text(model.servings.toString()!, fontWeight: FontWeight.w700),
+                ],
+              ),
+            )
+        ],
+      ),
     );
   }
 
