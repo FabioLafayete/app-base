@@ -25,8 +25,8 @@ abstract class FoodDetailMock{
         '1 pitada sal',
         '1 xícara, raladas cenoura',
       ],
-      preparation: 'Numa tigela, bata os ovos com o sal. Acrescente os legumes ralados e a salsinha picadinha.\n'
-          'Em fogo baixo, numa frigideira anti aderente, acrescente o óleo.\n'
+      preparation: 'Em uma tigela, bata os ovos com o sal. Acrescente os legumes ralados e a salsinha picadinha.\n\n'
+          'Em fogo baixo, numa frigideira anti aderente, acrescente o óleo.\n\n'
           'Coloque da receita, deixe dourar, vire e frite do outro lado. Sirva com alface picada e tomate.'
     );
   }

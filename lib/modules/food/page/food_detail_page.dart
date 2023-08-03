@@ -20,20 +20,7 @@ class FoodDetailPage extends BaseWidget {
       showAppBar: false,
       paddingPage: 0,
       body: SlidingUpPanel(
-        header: Container(
-          margin: EdgeInsets.only(top: height * 0.015),
-          width: width,
-          child: Center(
-              child: Container(
-                width: width * 0.1,
-                height: 5,
-                decoration: BoxDecoration(
-                    color: colors.primary,
-                    borderRadius: const BorderRadius.all(Radius.circular(10))
-                ),
-              )
-          ),
-        ),
+        renderPanelSheet: true,
         minHeight: height * 0.62,
         maxHeight: height * 0.86,
         borderRadius: const BorderRadius.only(
@@ -46,31 +33,109 @@ class FoodDetailPage extends BaseWidget {
             alignment: Alignment.topCenter,
             child: _imageTop()
         ),
+        margin: EdgeInsets.zero,
         panelBuilder: (_) => ClipRRect(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
             ),
             child: Container(
+              alignment: Alignment.topCenter,
               color: colors.background,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ListView(
                 controller: _,
-                shrinkWrap: true,
-                physics: const ClampingScrollPhysics(),
+                padding: const EdgeInsets.only(top: 20),
                 children: [
-                  text(
-                      model.name!,
-                      fontSize: 28,
-                      fontWeight: FontWeight.w600
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: text(
+                        model.name!,
+                        fontSize: 28,
+                        fontWeight: FontWeight.w600
+                    ),
                   ),
                   const SizedBox(height: 18),
-                  _info()
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: _info(),
+                  ),
+                  const SizedBox(height: 45),
+                  _ingredients(),
+                  const SizedBox(height: 45),
+                  _preparation(),
                 ]
               ),
             )
         ),
       ),
+    );
+  }
+
+  Widget _ingredients(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          alignment: Alignment.centerRight,
+          width: 150,
+          padding: const EdgeInsets.all(10),
+          margin: const EdgeInsets.only(bottom: 20),
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(10),
+              bottomRight: Radius.circular(10),
+            ),
+            border: Border(
+              top: BorderSide(color: colors.primary, width: 2),
+              bottom: BorderSide(color: colors.primary, width: 2),
+              right: BorderSide(color: colors.primary, width: 2.1),
+              left: BorderSide(color: colors.primary, width: 0),
+            )
+          ),
+          child: text('Ingredientes', fontWeight: FontWeight.w600, fontSize: 16),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: List.generate(model.ingredients.length, (index){
+            final item = model.ingredients[index];
+            return Container(
+              margin: const EdgeInsets.only(top: 15, left: 16),
+              child: text(item, fontSize: 18, fontWeight: FontWeight.w600),
+            );
+          }),
+        )
+      ],
+    );
+  }
+
+  Widget _preparation(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          alignment: Alignment.centerRight,
+          width: 200,
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(10),
+                bottomRight: Radius.circular(10),
+              ),
+              border: Border(
+                top: BorderSide(color: colors.primary, width: 2),
+                bottom: BorderSide(color: colors.primary, width: 2),
+                right: BorderSide(color: colors.primary, width: 2.1),
+                left: BorderSide(color: colors.primary, width: 0),
+              )
+          ),
+          child: text('Preparação', fontWeight: FontWeight.w600, fontSize: 16),
+        ),
+        const SizedBox(height: 40),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 80),
+          child: text(model.preparation!, fontSize: 16, fontWeight: FontWeight.w500),
+        )
+      ],
     );
   }
 
