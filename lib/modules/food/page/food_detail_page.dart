@@ -140,15 +140,13 @@ class FoodDetailPage extends BaseWidget {
       child: GestureDetector(
         onTap: router.pop,
         child: Container(
+          margin: const EdgeInsets.only(left: 10, top: 10),
           decoration: BoxDecoration(
             color: colors.primary.withOpacity(1),
-            borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(1000),
-              bottomRight: Radius.circular(1000),
-            ),
+            borderRadius: BorderRadius.circular(10)
           ),
-          padding: const EdgeInsets.all(10).copyWith(
-            left: 30
+          padding: const EdgeInsets.only(
+            left: 20, right: 10, top: 15, bottom: 15
           ),
           child: Icon(
               Icons.arrow_back_ios,
@@ -160,13 +158,18 @@ class FoodDetailPage extends BaseWidget {
   }
 
   Widget _imageTop(){
-    return CachedNetworkImage(
-      fadeInDuration: const Duration(milliseconds: 400),
-      imageUrl: model.image ?? '',
-      width: width,
-      height: height * 0.4,
-      alignment: Alignment.bottomCenter,
-      fit: BoxFit.cover,
+    return Stack(
+      children: [
+        CachedNetworkImage(
+          fadeInDuration: const Duration(milliseconds: 400),
+          imageUrl: model.image ?? '',
+          width: width,
+          height: height * 0.4,
+          alignment: Alignment.bottomCenter,
+          fit: BoxFit.cover,
+        ),
+        _buttonBack()
+      ],
     );
   }
 
