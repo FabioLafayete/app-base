@@ -30,5 +30,4 @@ abstract class FoodDetailMock{
           'Coloque da receita, deixe dourar, vire e frite do outro lado. Sirva com alface picada e tomate.'
     );
   }
-
 }

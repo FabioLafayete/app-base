@@ -77,7 +77,7 @@ class FoodDetailPage extends BaseWidget {
       children: [
         Container(
           alignment: Alignment.centerRight,
-          width: 150,
+          width: 170,
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.only(bottom: 20),
           decoration: BoxDecoration(
@@ -114,7 +114,7 @@ class FoodDetailPage extends BaseWidget {
       children: [
         Container(
           alignment: Alignment.centerRight,
-          width: 200,
+          width: 170,
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
