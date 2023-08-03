@@ -46,7 +46,7 @@ class FoodDetailPage extends BaseWidget {
             alignment: Alignment.topCenter,
             child: _imageTop()
         ),
-        panel: ClipRRect(
+        panelBuilder: (_) => ClipRRect(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
@@ -55,6 +55,7 @@ class FoodDetailPage extends BaseWidget {
               color: colors.background,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ListView(
+                controller: _,
                 shrinkWrap: true,
                 physics: const ClampingScrollPhysics(),
                 children: [
@@ -65,7 +66,7 @@ class FoodDetailPage extends BaseWidget {
                   ),
                   const SizedBox(height: 18),
                   _info()
-                ],
+                ]
               ),
             )
         ),
