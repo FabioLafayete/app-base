@@ -4,6 +4,7 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/border_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class FoodDetailPage extends BaseWidget {
   FoodDetailPage({
@@ -18,43 +19,56 @@ class FoodDetailPage extends BaseWidget {
     return BasePage(
       showAppBar: false,
       paddingPage: 0,
-      body: Stack(
-        children: [
-          _imageTop(),
-          ListView(
-            // padding: MediaQuery.maybeOf(context)?.padding.copyWith(top: 0),
-            physics: const ClampingScrollPhysics(),
-            children: [
-              SizedBox(height: MediaQuery.maybeOf(context)!.size.height * 0.32),
-              Container(
-                height: height * 0.82,
-                padding: const EdgeInsets.all(10.0),
+      body: SlidingUpPanel(
+        header: Container(
+          margin: EdgeInsets.only(top: height * 0.015),
+          width: width,
+          child: Center(
+              child: Container(
+                width: width * 0.1,
+                height: 5,
                 decoration: BoxDecoration(
-                  color: colors.background,
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(10),
-                    topLeft: Radius.circular(10),
-                  )
+                    color: colors.primary,
+                    borderRadius: const BorderRadius.all(Radius.circular(10))
                 ),
-                child: ListView(
-                  shrinkWrap: true,
-                  physics: const ClampingScrollPhysics(),
-                  // crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    text(
-                        model.name!,
-                        fontSize: 28,
-                        fontWeight: FontWeight.w600
-                    ),
-                    const SizedBox(height: 18),
-                    _info()
-                  ],
-                ),
-              ),
-            ],
+              )
           ),
-          _buttonBack()
-        ],
+        ),
+        minHeight: height * 0.62,
+        maxHeight: height * 0.86,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(15),
+          topRight: Radius.circular(15),
+        ),
+        body: Container(
+            height: height,
+            width: width,
+            alignment: Alignment.topCenter,
+            child: _imageTop()
+        ),
+        panel: ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+            child: Container(
+              color: colors.background,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: ListView(
+                shrinkWrap: true,
+                physics: const ClampingScrollPhysics(),
+                children: [
+                  text(
+                      model.name!,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w600
+                  ),
+                  const SizedBox(height: 18),
+                  _info()
+                ],
+              ),
+            )
+        ),
       ),
     );
   }
@@ -145,29 +159,13 @@ class FoodDetailPage extends BaseWidget {
   }
 
   Widget _imageTop(){
-    return Stack(
+    return CachedNetworkImage(
+      fadeInDuration: const Duration(milliseconds: 400),
+      imageUrl: model.image ?? '',
+      width: width,
+      height: height * 0.4,
       alignment: Alignment.bottomCenter,
-      children: [
-        CachedNetworkImage(
-          fadeInDuration: const Duration(milliseconds: 400),
-          imageUrl: model.image ?? '',
-          width: width,
-          height: height * 0.4,
-          alignment: Alignment.bottomCenter,
-          fit: BoxFit.cover,
-        ),
-        Container(
-          height: 10,
-          width: width,
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(10),
-              topLeft: Radius.circular(10),
-            ),
-            color: colors.background
-          ),
-        )
-      ],
+      fit: BoxFit.cover,
     );
   }
 

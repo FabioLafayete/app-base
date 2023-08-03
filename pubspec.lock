@@ -269,10 +269,10 @@ packages:
     dependency: "direct main"
     description:
       name: dio
-      sha256: "9d6445da1caf8412070670c03c39ad5b12a78cc8c2361417b220905a2bcbdd2f"
+      sha256: ce75a1b40947fea0a0e16ce73337122a86762e38b982e1ccb909daa3b9bc4197
       url: "https://pub.dev"
     source: hosted
-    version: "5.3.1"
+    version: "5.3.2"
   easy_mask:
     dependency: "direct main"
     description:
@@ -965,6 +965,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sliding_up_panel:
+    dependency: "direct main"
+    description:
+      name: sliding_up_panel
+      sha256: "578e90956a6212d1e406373250b2436a0f3afece29aee3c24c8360094d6cf968"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0+1"
   source_gen:
     dependency: transitive
     description:
