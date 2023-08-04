@@ -41,7 +41,7 @@ class FoodDetailPage extends BaseWidget {
             ),
             child: Container(
               alignment: Alignment.topCenter,
-              color: colors.background,
+              color: Colors.white,
               child: ListView(
                 controller: _,
                 padding: const EdgeInsets.only(top: 20),
@@ -59,7 +59,7 @@ class FoodDetailPage extends BaseWidget {
                     padding: const EdgeInsets.only(left: 16),
                     child: _info(),
                   ),
-                  const SizedBox(height: 45),
+                  const SizedBox(height: 30),
                   _ingredients(),
                   const SizedBox(height: 45),
                   _preparation(),
@@ -77,7 +77,7 @@ class FoodDetailPage extends BaseWidget {
       children: [
         Container(
           alignment: Alignment.centerRight,
-          width: 170,
+          width: 200,
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.only(bottom: 20),
           decoration: BoxDecoration(
@@ -86,13 +86,13 @@ class FoodDetailPage extends BaseWidget {
               bottomRight: Radius.circular(10),
             ),
             border: Border(
-              top: BorderSide(color: colors.primary, width: 2),
-              bottom: BorderSide(color: colors.primary, width: 2),
-              right: BorderSide(color: colors.primary, width: 2.1),
+              top: BorderSide(color: colors.primary, width: 1),
+              bottom: BorderSide(color: colors.primary, width: 1),
+              right: BorderSide(color: colors.primary, width: 1.1),
               left: BorderSide(color: colors.primary, width: 0),
             )
           ),
-          child: text('Ingredientes', fontWeight: FontWeight.w600, fontSize: 16),
+          child: text('Ingredientes', fontWeight: FontWeight.w600, fontSize: 18),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,7 +114,7 @@ class FoodDetailPage extends BaseWidget {
       children: [
         Container(
           alignment: Alignment.centerRight,
-          width: 170,
+          width: 200,
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
@@ -122,15 +122,15 @@ class FoodDetailPage extends BaseWidget {
                 bottomRight: Radius.circular(10),
               ),
               border: Border(
-                top: BorderSide(color: colors.primary, width: 2),
-                bottom: BorderSide(color: colors.primary, width: 2),
-                right: BorderSide(color: colors.primary, width: 2.1),
+                top: BorderSide(color: colors.primary, width: 1),
+                bottom: BorderSide(color: colors.primary, width: 1),
+                right: BorderSide(color: colors.primary, width: 1.1),
                 left: BorderSide(color: colors.primary, width: 0),
               )
           ),
-          child: text('Preparação', fontWeight: FontWeight.w600, fontSize: 16),
+          child: text('Modo de preparo', fontWeight: FontWeight.w600, fontSize: 18),
         ),
-        const SizedBox(height: 40),
+        const SizedBox(height: 35),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 80),
           child: text(model.preparation!, fontSize: 16, fontWeight: FontWeight.w500),
@@ -146,55 +146,41 @@ class FoodDetailPage extends BaseWidget {
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
         children: [
-          BorderWidget(
-            backgroundColor: Colors.white,
-            margin: const EdgeInsets.only(right: 10),
-            child: Row(
+          if(model.duration != null)
+            Row(
               children: [
-                const Icon(Icons.local_fire_department_outlined, color: Colors.red),
+                const Icon(Icons.access_time_sharp, color: Colors.grey, size: 20,),
                 const SizedBox(width: 5),
-                text(model.kcal.toString(), fontWeight: FontWeight.w700),
-                text(' Kcal', fontSize: 10, )
+                text(model.duration!, fontWeight: FontWeight.w400),
+                text(' min', fontSize: 10)
               ],
             ),
-          ),
-          if(model.duration != null)
-            BorderWidget(
-              backgroundColor: Colors.white,
-              margin: const EdgeInsets.only(right: 10),
-              child: Row(
-                children: [
-                  const Icon(Icons.access_time_sharp, color: Colors.grey),
-                  const SizedBox(width: 5),
-                  text(model.duration!, fontWeight: FontWeight.w700),
-                  text(' min', fontSize: 10, )
-                ],
-              ),
+            Row(
+              children: [
+                const SizedBox(width: 20),
+                const Icon(Icons.local_fire_department_outlined, color: Colors.grey),
+                const SizedBox(width: 5),
+                text(model.kcal.toString(), fontWeight: FontWeight.w400),
+                text(' Kcal', fontSize: 10)
+              ],
             ),
           if(model.difficulty != null)
-            BorderWidget(
-              backgroundColor: Colors.white,
-              margin: const EdgeInsets.only(right: 10),
-              child: Row(
-                children: [
-                  text('👩‍🍳', fontSize: 14),
-                  const SizedBox(width: 5),
-                  text(model.difficulty!, fontWeight: FontWeight.w700),
-                ],
-              ),
+            Row(
+              children: [
+                const SizedBox(width: 20),
+                const Icon(Icons.bar_chart_rounded, color: Colors.grey, size: 20),
+                const SizedBox(width: 5),
+                text(model.difficulty!, fontWeight: FontWeight.w400),
+              ],
             ),
-          if(model.servings != null)
-            BorderWidget(
-              backgroundColor: Colors.white,
-              margin: const EdgeInsets.only(right: 10),
-              child: Row(
-                children: [
-                  text('Porções:', fontSize: 14),
-                  const SizedBox(width: 5),
-                  text(model.servings.toString()!, fontWeight: FontWeight.w700),
-                ],
-              ),
-            )
+          // if(model.servings != null)
+          //   Row(
+          //     children: [
+          //       text('Porções:', fontSize: 14),
+          //       const SizedBox(width: 5),
+          //       text(model.servings.toString()!, fontWeight: FontWeight.w700),
+          //     ],
+          //   )
         ],
       ),
     );
@@ -207,7 +193,7 @@ class FoodDetailPage extends BaseWidget {
         child: Container(
           margin: const EdgeInsets.only(left: 10, top: 10),
           decoration: BoxDecoration(
-            color: colors.primary.withOpacity(1),
+            color: colors.primary,
             borderRadius: BorderRadius.circular(10)
           ),
           padding: const EdgeInsets.only(

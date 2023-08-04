@@ -55,12 +55,12 @@ class ListCardItems extends BaseWidget {
                   child: Row(
                     children: [
                       text(
-                          'Ver mais ',
+                          'Ver mais',
                           color: invertColors ? colors.text2 : colors.primary,
                           fontWeight: FontWeight.w600,
                           fontSize: 14
                       ),
-                      Icon(Icons.arrow_forward_ios_rounded, size: 14, color: invertColors ? colors.text2 : colors.primary,)
+                      // Icon(Icons.arrow_forward_ios_rounded, size: 14, color: invertColors ? colors.text2 : colors.primary,)
                     ],
                   ),
                 )

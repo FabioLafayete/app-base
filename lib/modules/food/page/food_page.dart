@@ -4,6 +4,7 @@ import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/shared/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -26,6 +27,42 @@ class FoodPage extends BaseWidget<FoodController> {
         showAppBar: false,
         body: ListView(
           children: [
+            space(0.03),
+            Container(
+              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: colors.text
+                )
+              ),
+              child: Row(
+                children: [
+                  Flexible(
+                    flex: 7,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        text('Encontre uma receita', fontWeight: FontWeight.w600),
+                        const SizedBox(height: 5),
+                        text('Nós te ajudamos a encontrar uma receita para fazer.'),
+                      ],
+                    ),
+                  ),
+                  Flexible(
+                    flex: 4,
+                    child: CustomButton(
+                      title: 'Ver receita',
+                      colorTitle: colors.background,
+                      sizeTitle: 14,
+                      onPress: (){},
+                    ),
+                  )
+                ],
+              ),
+            ),
             space(0.03),
             ListCardFood(
                 title: 'Receitas populares',

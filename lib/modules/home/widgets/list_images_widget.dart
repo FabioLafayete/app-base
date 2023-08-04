@@ -29,15 +29,15 @@ class ListImagesWidget extends BaseWidget {
               Row(
                 children: [
                   text(
-                      'Ver mais ',
+                      'Ver mais',
                       color: colors.primary,
                       fontWeight: FontWeight.w600,
                       fontSize: 14
                   ),
-                  Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: 14, color: colors.primary
-                  )
+                  // Icon(
+                  //     Icons.arrow_forward_ios_rounded,
+                  //     size: 14, color: colors.primary
+                  // )
                 ],
               )
             ],
