@@ -25,7 +25,7 @@ class NavPage extends BaseWidget<NavController> {
       controller.setSelectedIndex(index);
     }
     final screens = [
-      HomePage(),
+      // HomePage(),
       FoodPage(),
       WorkoutPage(),
       // const Scaffold(backgroundColor: Colors.green),
@@ -134,13 +134,13 @@ class _BottomNavState extends State<BottomNav> {
       unselectedFontSize: 12,
       onTap: controller.setSelectedIndex,
       items: const [
-        BottomNavigationBarItem(
-            icon: FaIcon(LineIcons.home),
-            label: 'Home'
-        ),
+        // BottomNavigationBarItem(
+        //     icon: FaIcon(LineIcons.home),
+        //     label: 'Home'
+        // ),
         BottomNavigationBarItem(
             icon: FaIcon(LineIcons.fruitApple),
-            label: 'Comida'
+            label: 'Home'
         ),
         BottomNavigationBarItem(
             icon: FaIcon(LineIcons.dumbbell),

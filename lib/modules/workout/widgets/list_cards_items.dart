@@ -88,7 +88,7 @@ class ListCardItems extends BaseWidget {
       onTap: item.onPress,
       child: Container(
         margin: EdgeInsets.only(left: index == 0 ? 16 : 0, right: index + 1 == listItems.length ? 16 : 10),
-        width: width * 0.65,
+        width: width * 0.7,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -104,7 +104,6 @@ class ListCardItems extends BaseWidget {
                         fadeInDuration: const Duration(milliseconds: 300),
                         imageUrl: listItems[index].thumbnail,
                         width: width,
-                        height: height * 0.19,
                         alignment: Alignment.bottomCenter,
                         fit: BoxFit.cover,
                       ),

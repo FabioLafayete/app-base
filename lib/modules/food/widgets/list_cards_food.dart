@@ -10,12 +10,14 @@ class ListCardFood extends BaseWidget {
     required this.title,
     required this.listItems,
     this.seeMore,
-    this.invertColors = false
+    this.invertColors = false,
+    this.showFavorite = false
   }) : super(key: key);
 
   final String title;
   final Function()? seeMore;
   final bool invertColors;
+  final bool showFavorite;
   final List<CardFoodModel> listItems;
 
   @override
@@ -74,16 +76,16 @@ class ListCardFood extends BaseWidget {
         width: width * 0.55,
         child: Card(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16)
+            borderRadius: BorderRadius.circular(10)
           ),
-          elevation: 5,
+          elevation: 4,
           child: Column(
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0).copyWith(bottom: 0),
+                  padding: const EdgeInsets.all(5.0).copyWith(bottom: 0),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(8),
                     child: Stack(
                       children: [
                         CachedNetworkImage(
@@ -94,18 +96,19 @@ class ListCardFood extends BaseWidget {
                           height: height,
                           fit: BoxFit.cover,
                         ),
-                        Positioned(
-                            top: 10,
-                            right: 10,
-                            child: Container(
-                                padding: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                  color: colors.text.withOpacity(0.6),
-                                  borderRadius: BorderRadius.circular(1000),
-                                ),
-                                child: Icon(Icons.favorite_border, color: colors.background, size: 24,)
-                            )
-                        ),
+                        if(showFavorite)
+                          Positioned(
+                              top: 10,
+                              right: 10,
+                              child: Container(
+                                  padding: const EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                    color: colors.text.withOpacity(0.6),
+                                    borderRadius: BorderRadius.circular(1000),
+                                  ),
+                                  child: Icon(Icons.favorite_border, color: colors.background, size: 24,)
+                              )
+                          ),
                       ],
                     ),
                   ),

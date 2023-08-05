@@ -27,7 +27,16 @@ class FoodPage extends BaseWidget<FoodController> {
         showAppBar: false,
         body: ListView(
           children: [
-            space(0.03),
+            const SizedBox(height: 40),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: text(
+                  'O que você gostaria de cozinhar hoje?',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 30
+              ),
+            ),
+            const SizedBox(height: 40),
             Container(
               padding: const EdgeInsets.all(16),
               margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -54,8 +63,9 @@ class FoodPage extends BaseWidget<FoodController> {
                   Flexible(
                     flex: 4,
                     child: CustomButton(
+                      cleanButton: true,
                       title: 'Ver receita',
-                      colorTitle: colors.background,
+                      colorTitle: colors.primary,
                       sizeTitle: 14,
                       onPress: (){},
                     ),
@@ -63,16 +73,16 @@ class FoodPage extends BaseWidget<FoodController> {
                 ],
               ),
             ),
-            space(0.03),
+            const SizedBox(height: 40),
             ListCardFood(
                 title: 'Receitas populares',
                 seeMore: (){},
                 listItems: _items3
             ),
-            space(0.03),
+            const SizedBox(height: 40),
             Container(
                 color: colors.primary,
-                padding: const EdgeInsets.symmetric(vertical: 20),
+                padding: const EdgeInsets.symmetric(vertical: 30),
                 child: ListCardItems(
                     title: 'Em breve',
                     description: 'Aulas de culinária estão sendo finalizadas',
@@ -80,19 +90,19 @@ class FoodPage extends BaseWidget<FoodController> {
                     invertColors: true
                 )
             ),
-            space(0.03),
+            const SizedBox(height: 40),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: text('Categorias', fontWeight: FontWeight.w700, fontSize: 20),
+              child: text('Categorias', fontWeight: FontWeight.w700, fontSize: 24),
             ),
-            space(0.02),
+            const SizedBox(height: 20),
             ItemsWrapWidget(
               items: List.generate(_items.length, (index) => _items[index]),
             ),
             if(navController.videoSelected != null)
               space(0.12),
             if(navController.videoSelected == null)
-              space(0.03),
+              const SizedBox(height: 40),
           ],
         )
     ));
