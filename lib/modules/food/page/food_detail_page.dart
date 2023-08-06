@@ -22,7 +22,7 @@ class FoodDetailPage extends BaseWidget {
       body: SlidingUpPanel(
         renderPanelSheet: true,
         minHeight: height * 0.62,
-        maxHeight: height * 0.86,
+        maxHeight: ((height * 0.9) - MediaQuery.of(context).padding.top),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(15),
           topRight: Radius.circular(15),

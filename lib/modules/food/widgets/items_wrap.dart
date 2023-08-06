@@ -1,6 +1,7 @@
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ItemsWrapWidget extends BaseWidget {
 
@@ -30,7 +31,7 @@ class ItemsWrapWidget extends BaseWidget {
     return GestureDetector(
       onTap: item.onPress,
       child: Card(
-        elevation: 3,
+        elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
@@ -40,7 +41,7 @@ class ItemsWrapWidget extends BaseWidget {
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(5.0).copyWith(bottom: 0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
                   child: CachedNetworkImage(
@@ -56,10 +57,12 @@ class ItemsWrapWidget extends BaseWidget {
                           fit: BoxFit.cover,
                         );
                       },
-                      placeholder: (context, url) => SizedBox(
-                        height: 32,
-                        width: 32,
-                        child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(colors.primary)),
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: Colors.grey.withOpacity(0.8),
+                        highlightColor: Colors.grey.withOpacity(0.6),
+                        child: Container(
+                          color: Colors.black,
+                        ),
                       ),
                       errorWidget: (context, url, error) => const Center(
                         child: Icon(Icons.no_photography_sharp, color: Colors.grey),
@@ -68,9 +71,22 @@ class ItemsWrapWidget extends BaseWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10).copyWith(bottom: 10, top: 5),
-              child: text(item.title, fontWeight: FontWeight.w700, maxLines: 1, textOverflow: TextOverflow.ellipsis, fontSize: 12),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              height: 40,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  text(
+                      item.title,
+                      fontWeight: FontWeight.w600,
+                      maxLines: 2,
+                      textOverflow: TextOverflow.ellipsis,
+                      fontSize: 12
+                  ),
+                ],
+              ),
             )
           ],
         ),

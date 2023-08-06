@@ -1,5 +1,7 @@
 import 'package:app/modules/food/controller/food_controller.dart';
 import 'package:app/modules/food/mock/food_detail_mock.dart';
+import 'package:app/modules/food/models/food_detail_model/food_detail_model.dart';
+import 'package:app/modules/food/page/food_list_by_category.dart';
 import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/widgets/base_page.dart';
@@ -168,11 +170,16 @@ class FoodPage extends BaseWidget<FoodController> {
     ),
   ];
 
-  List<ItemWrapModel> _items = [
+  final List<ItemWrapModel> _items = [
     ItemWrapModel(
         image: 'https://images.pexels.com/photos/103124/pexels-photo-103124.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         title: 'Café da manhã',
-        onPress: (){}
+        onPress: (){
+          MyRouter().push(FoodListByCategory(
+            nameCategory: 'Café da manhã',
+            listFoodDetailModel: List.generate(50, (index) => FoodDetailMock.mockDetail()),
+          ));
+        }
     ),
     ItemWrapModel(
         image: 'https://images.pexels.com/photos/5710178/pexels-photo-5710178.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',

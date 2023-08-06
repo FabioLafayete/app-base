@@ -53,7 +53,7 @@ class ListCardFood extends BaseWidget {
         ),
         space(0.01),
         SizedBox(
-          height:  width * 0.7,
+          height:  280,
           child: ListView(
             padding: EdgeInsets.zero,
             scrollDirection: Axis.horizontal,
@@ -73,7 +73,7 @@ class ListCardFood extends BaseWidget {
       onTap: item.onPress,
       child: Container(
         margin: EdgeInsets.only(left: index == 0 ? 16 : 0, right: index + 1 == listItems.length ? 16 : 10, bottom: 6),
-        width: width * 0.55,
+        width: 200,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10)
