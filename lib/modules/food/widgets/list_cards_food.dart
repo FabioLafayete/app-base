@@ -53,7 +53,7 @@ class ListCardFood extends BaseWidget {
         ),
         space(0.01),
         SizedBox(
-          height:  280,
+          height:  270,
           child: ListView(
             padding: EdgeInsets.zero,
             scrollDirection: Axis.horizontal,
@@ -73,7 +73,7 @@ class ListCardFood extends BaseWidget {
       onTap: item.onPress,
       child: Container(
         margin: EdgeInsets.only(left: index == 0 ? 16 : 0, right: index + 1 == listItems.length ? 16 : 10, bottom: 6),
-        width: 200,
+        width: 180,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10)
@@ -115,7 +115,7 @@ class ListCardFood extends BaseWidget {
                 ),
               ),
               Container(
-                height: width * 0.2,
+                height: 80,
                 width: width,
                 padding: const EdgeInsets.all(12).copyWith(top: 8, bottom: 8),
                 child: Column(
@@ -131,7 +131,7 @@ class ListCardFood extends BaseWidget {
                         color: colors.text
                     ),
                     text(
-                        '320 Kcal | 25% AKG',
+                        '320 Kcal',
                         maxLines: 1,
                         textOverflow: TextOverflow.ellipsis,
                         fontWeight: FontWeight.w400,

@@ -40,12 +40,13 @@ class FoodPage extends BaseWidget<FoodController> {
             ),
             const SizedBox(height: 40),
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16).copyWith(right: 0),
               margin: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
+                  width: 1.5,
                   color: colors.text
                 )
               ),

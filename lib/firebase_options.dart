@@ -64,6 +64,6 @@ class DefaultFirebaseOptions {
     projectId: 'ibetther-325d1',
     storageBucket: 'ibetther-325d1.appspot.com',
     iosClientId: '737112738490-f2nsf7274rp0kgdq00sonp7nsjd1jf5o.apps.googleusercontent.com',
-    iosBundleId: 'com.example.app',
+    iosBundleId: 'com.ibetter.app',
   );
 }

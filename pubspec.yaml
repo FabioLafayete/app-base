@@ -43,6 +43,7 @@ dependencies:
   brasil_fields: 1.12.0
   shimmer: 2.0.0
   sliding_up_panel: ^2.0.0+1
+  flutter_launcher_icons: 0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -58,7 +59,19 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/
     - assets/video/
+    - assets/images/
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo-icon.png"
+  min_sdk_android: 19
+  macos:
+    generate: true
+    image_path: "assets/logo-icon.png"
+
 
 flutter_intl:
   enabled: true # Obrigatório. Deve ser definido como verdadeiro para ativar o pacote. Padrão: falso

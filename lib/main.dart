@@ -33,5 +33,5 @@ Future _preload() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
   }
-  Modular.setInitialRoute(PagesNames.home);
+  Modular.setInitialRoute(PagesNames.splash);
 }

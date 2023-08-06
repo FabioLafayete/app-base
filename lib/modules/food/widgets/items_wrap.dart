@@ -17,7 +17,7 @@ class ItemsWrapWidget extends BaseWidget {
     return GridView.count(
       shrinkWrap: true,
       crossAxisCount: 2,
-      crossAxisSpacing: 16,
+      crossAxisSpacing: 20,
       mainAxisSpacing: 30,
       childAspectRatio: 0.85,
       padding: const EdgeInsets.symmetric(horizontal: 16),
