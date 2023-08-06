@@ -11,7 +11,7 @@ _$_FoodDetailModel _$$_FoodDetailModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String?,
       name: json['name'] as String?,
       description: json['description'] as String?,
-      type: json['type'] as String?,
+      category: json['category'] as String?,
       image: json['image'] as String?,
       duration: json['duration'] as String?,
       preparation: json['preparation'] as String?,
@@ -19,6 +19,9 @@ _$_FoodDetailModel _$$_FoodDetailModelFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           const [],
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              const [],
       difficulty: json['difficulty'] as String?,
       servings: json['servings'] as int?,
       isFavorite: json['isFavorite'] as bool? ?? false,
@@ -33,11 +36,12 @@ Map<String, dynamic> _$$_FoodDetailModelToJson(_$_FoodDetailModel instance) =>
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
-      'type': instance.type,
+      'category': instance.category,
       'image': instance.image,
       'duration': instance.duration,
       'preparation': instance.preparation,
       'ingredients': instance.ingredients,
+      'tags': instance.tags,
       'difficulty': instance.difficulty,
       'servings': instance.servings,
       'isFavorite': instance.isFavorite,

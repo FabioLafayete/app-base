@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ListCardFood extends BaseWidget {
   ListCardFood({
@@ -95,6 +96,22 @@ class ListCardFood extends BaseWidget {
                           width: width,
                           height: height,
                           fit: BoxFit.cover,
+                          imageBuilder: (_, img) {
+                            return Image(
+                              image: img,
+                              fit: BoxFit.cover,
+                            );
+                          },
+                          placeholder: (context, url) => Shimmer.fromColors(
+                            baseColor: Colors.grey.withOpacity(0.8),
+                            highlightColor: Colors.grey.withOpacity(0.6),
+                            child: Container(
+                              color: Colors.black,
+                            ),
+                          ),
+                          errorWidget: (context, url, error) => const Center(
+                            child: Icon(Icons.no_photography_sharp, color: Colors.grey),
+                          )
                         ),
                         if(showFavorite)
                           Positioned(
@@ -123,7 +140,7 @@ class ListCardFood extends BaseWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     text(
-                        item.description,
+                        item.title,
                         maxLines: 2,
                         fontSize: 16,
                         textOverflow: TextOverflow.ellipsis,
@@ -131,7 +148,7 @@ class ListCardFood extends BaseWidget {
                         color: colors.text
                     ),
                     text(
-                        '320 Kcal',
+                        '${item.kcal} kcal',
                         maxLines: 1,
                         textOverflow: TextOverflow.ellipsis,
                         fontWeight: FontWeight.w400,
@@ -152,21 +169,15 @@ class ListCardFood extends BaseWidget {
 class CardFoodModel {
   final String title;
   final String thumbnail;
-  final String description;
-  final String typeTraining;
-  final String? timeTraining;
-  final String? trainer;
+  final String? kcal;
   final bool isFavorite;
   final Function() onPress;
 
   CardFoodModel({
     required this.title,
     required this.thumbnail,
-    required this.description,
-    required this.typeTraining,
     required this.onPress,
-    this.timeTraining,
-    this.trainer,
+    this.kcal,
     this.isFavorite = false
   });
 }

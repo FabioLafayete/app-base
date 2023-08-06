@@ -1,6 +1,7 @@
+import 'dart:math';
+
 import 'package:app/modules/food/controller/food_controller.dart';
 import 'package:app/modules/food/mock/food_detail_mock.dart';
-import 'package:app/modules/food/models/food_detail_model/food_detail_model.dart';
 import 'package:app/modules/food/page/food_list_by_category.dart';
 import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
@@ -22,7 +23,6 @@ class FoodPage extends BaseWidget<FoodController> {
 
   @override
   Widget build(BuildContext context) {
-
     return Observer(
         builder: (_) => BasePage(
         paddingPage: 0,
@@ -39,48 +39,23 @@ class FoodPage extends BaseWidget<FoodController> {
               ),
             ),
             const SizedBox(height: 40),
-            Container(
-              padding: const EdgeInsets.all(16).copyWith(right: 0),
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(
-                  width: 1.5,
-                  color: colors.text
-                )
-              ),
-              child: Row(
-                children: [
-                  Flexible(
-                    flex: 7,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        text('Encontre uma receita', fontWeight: FontWeight.w600),
-                        const SizedBox(height: 5),
-                        text('Nós te ajudamos a encontrar uma receita para fazer.'),
-                      ],
-                    ),
-                  ),
-                  Flexible(
-                    flex: 4,
-                    child: CustomButton(
-                      cleanButton: true,
-                      title: 'Ver receita',
-                      colorTitle: colors.primary,
-                      sizeTitle: 14,
-                      onPress: (){},
-                    ),
-                  )
-                ],
-              ),
-            ),
+            _randomFood(),
             const SizedBox(height: 40),
             ListCardFood(
                 title: 'Receitas populares',
-                seeMore: (){},
-                listItems: _items3
+                listItems: controller.listFoodDetail.map((e){
+                  return CardFoodModel(
+                    title: e.name!,
+                    kcal: e.kcal.toString(),
+                    onPress: (){
+                      router.pushNamed(
+                          PagesNames.foodDetail,
+                          arguments: e
+                      );
+                    },
+                    thumbnail: e.image!,
+                  );
+                }).toList()
             ),
             const SizedBox(height: 40),
             Container(
@@ -89,7 +64,7 @@ class FoodPage extends BaseWidget<FoodController> {
                 child: ListCardItems(
                     title: 'Em breve',
                     description: 'Aulas de culinária estão sendo finalizadas',
-                    listItems: _items2,
+                    listItems: _soonVideos,
                     invertColors: true
                 )
             ),
@@ -100,7 +75,7 @@ class FoodPage extends BaseWidget<FoodController> {
             ),
             const SizedBox(height: 20),
             ItemsWrapWidget(
-              items: List.generate(_items.length, (index) => _items[index]),
+              items: List.generate(_categories.length, (index) => _categories[index]),
             ),
             if(navController.videoSelected != null)
               space(0.12),
@@ -111,42 +86,52 @@ class FoodPage extends BaseWidget<FoodController> {
     ));
   }
 
-  final List<CardFoodModel> _items3 = [
-    CardFoodModel(
-        title: 'SEI LA 2',
-        onPress: (){
-          MyRouter().pushNamed(
-              PagesNames.foodDetail,
-              arguments: FoodDetailMock.mockDetail()
-          );
-        },
-        thumbnail: 'https://images.pexels.com/photos/103124/pexels-photo-103124.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        description: 'Pão com Ovo',
-        typeTraining: 'RESISTENCIA',
-        timeTraining: '15 min',
-        trainer: 'Roberta Souza'
-    ),
-    CardFoodModel(
-        title: 'SEI LA 2',
-        onPress: (){},
-        thumbnail: 'https://images.pexels.com/photos/5710178/pexels-photo-5710178.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        description: 'Macarrão com camarão e molho poro e alguma coisa a mais ai',
-        typeTraining: 'RESISTENCIA',
-        timeTraining: '15 min',
-        trainer: 'Roberta Souza'
-    ),
-    CardFoodModel(
-        title: 'SEI LA 2',
-        onPress: (){},
-        thumbnail: 'https://images.pexels.com/photos/1351238/pexels-photo-1351238.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        description: 'Macarrão com camarão',
-        typeTraining: 'RESISTENCIA',
-        timeTraining: '15 min',
-        trainer: 'Roberta Souza'
-    )
-  ];
+  Widget _randomFood(){
+    return Container(
+      padding: const EdgeInsets.all(16).copyWith(right: 0),
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+              width: 1.5,
+              color: colors.text
+          )
+      ),
+      child: Row(
+        children: [
+          Flexible(
+            flex: 7,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                text('Encontre uma receita', fontWeight: FontWeight.w600),
+                const SizedBox(height: 5),
+                text('Nós te ajudamos a encontrar uma receita para fazer.'),
+              ],
+            ),
+          ),
+          Flexible(
+            flex: 4,
+            child: CustomButton(
+              cleanButton: true,
+              title: 'Ver receita',
+              colorTitle: colors.primary,
+              onPress: (){
+                final item = Random().nextInt(controller.listFoodDetail.length);
+                router.pushNamed(
+                    PagesNames.foodDetail,
+                    arguments: controller.listFoodDetail[item]
+                );
+              },
+            ),
+          )
+        ],
+      ),
+    );
+  }
 
-  List<CardItemModel> _items2 = [
+  final List<CardItemModel> _soonVideos = [
     CardItemModel(
         title: 'SEI LA 2',
         onPress: (){},
@@ -171,21 +156,28 @@ class FoodPage extends BaseWidget<FoodController> {
     ),
   ];
 
-  final List<ItemWrapModel> _items = [
+  final List<ItemWrapModel> _categories = [
     ItemWrapModel(
         image: 'https://images.pexels.com/photos/103124/pexels-photo-103124.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         title: 'Café da manhã',
         onPress: (){
+          final item = Modular.get<FoodController>().listFoodDetail;
           MyRouter().push(FoodListByCategory(
             nameCategory: 'Café da manhã',
-            listFoodDetailModel: List.generate(50, (index) => FoodDetailMock.mockDetail()),
+            listFoodDetailModel: item.where((e) => e.category == 'Café da manhã').toList(),
           ));
         }
     ),
     ItemWrapModel(
         image: 'https://images.pexels.com/photos/5710178/pexels-photo-5710178.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         title: 'Almoço',
-        onPress: (){}
+        onPress: (){
+          final item = Modular.get<FoodController>().listFoodDetail;
+          MyRouter().push(FoodListByCategory(
+            nameCategory: 'Almoço',
+            listFoodDetailModel: item.where((e) => e.category == 'Almoço').toList(),
+          ));
+        }
     ),
     ItemWrapModel(
         image: 'https://images.pexels.com/photos/2092906/pexels-photo-2092906.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',

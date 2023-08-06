@@ -4,6 +4,7 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/border_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class FoodDetailPage extends BaseWidget {
@@ -54,14 +55,20 @@ class FoodDetailPage extends BaseWidget {
                         fontWeight: FontWeight.w600
                     ),
                   ),
-                  const SizedBox(height: 18),
+                  if(model.description != null)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(top: 10),
+                      child: text(model.description!, fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                  const SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.only(left: 16),
                     child: _info(),
                   ),
-                  const SizedBox(height: 30),
+
+                  const SizedBox(height: 20),
                   _ingredients(),
-                  const SizedBox(height: 45),
+                  const SizedBox(height: 35),
                   _preparation(),
                 ]
               ),
@@ -79,7 +86,7 @@ class FoodDetailPage extends BaseWidget {
           alignment: Alignment.centerRight,
           width: 200,
           padding: const EdgeInsets.all(10),
-          margin: const EdgeInsets.only(bottom: 20),
+          margin: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
               topRight: Radius.circular(10),
@@ -130,7 +137,7 @@ class FoodDetailPage extends BaseWidget {
           ),
           child: text('Modo de preparo', fontWeight: FontWeight.w600, fontSize: 18),
         ),
-        const SizedBox(height: 35),
+        const SizedBox(height: 25),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 80),
           child: text(model.preparation!, fontSize: 16, fontWeight: FontWeight.w500),
@@ -173,14 +180,6 @@ class FoodDetailPage extends BaseWidget {
                 text(model.difficulty!, fontWeight: FontWeight.w400),
               ],
             ),
-          // if(model.servings != null)
-          //   Row(
-          //     children: [
-          //       text('Porções:', fontSize: 14),
-          //       const SizedBox(width: 5),
-          //       text(model.servings.toString()!, fontWeight: FontWeight.w700),
-          //     ],
-          //   )
         ],
       ),
     );
@@ -218,6 +217,22 @@ class FoodDetailPage extends BaseWidget {
           height: height * 0.4,
           alignment: Alignment.bottomCenter,
           fit: BoxFit.cover,
+          imageBuilder: (_, img) {
+            return Image(
+              image: img,
+              fit: BoxFit.cover,
+            );
+          },
+          placeholder: (context, url) => Shimmer.fromColors(
+            baseColor: Colors.grey.withOpacity(0.8),
+            highlightColor: Colors.grey.withOpacity(0.6),
+            child: Container(
+              color: Colors.black,
+            ),
+          ),
+          errorWidget: (context, url, error) => const Center(
+            child: Icon(Icons.no_photography_sharp, color: Colors.grey),
+          )
         ),
         _buttonBack()
       ],

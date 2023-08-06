@@ -23,11 +23,12 @@ mixin _$FoodDetailModel {
   String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  String? get type => throw _privateConstructorUsedError;
+  String? get category => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
   String? get duration => throw _privateConstructorUsedError;
   String? get preparation => throw _privateConstructorUsedError;
   List<String> get ingredients => throw _privateConstructorUsedError;
+  List<String> get tags => throw _privateConstructorUsedError;
   String? get difficulty => throw _privateConstructorUsedError;
   int? get servings => throw _privateConstructorUsedError;
   bool get isFavorite => throw _privateConstructorUsedError;
@@ -52,11 +53,12 @@ abstract class $FoodDetailModelCopyWith<$Res> {
       {String? id,
       String? name,
       String? description,
-      String? type,
+      String? category,
       String? image,
       String? duration,
       String? preparation,
       List<String> ingredients,
+      List<String> tags,
       String? difficulty,
       int? servings,
       bool isFavorite,
@@ -82,11 +84,12 @@ class _$FoodDetailModelCopyWithImpl<$Res, $Val extends FoodDetailModel>
     Object? id = freezed,
     Object? name = freezed,
     Object? description = freezed,
-    Object? type = freezed,
+    Object? category = freezed,
     Object? image = freezed,
     Object? duration = freezed,
     Object? preparation = freezed,
     Object? ingredients = null,
+    Object? tags = null,
     Object? difficulty = freezed,
     Object? servings = freezed,
     Object? isFavorite = null,
@@ -108,9 +111,9 @@ class _$FoodDetailModelCopyWithImpl<$Res, $Val extends FoodDetailModel>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      type: freezed == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
               as String?,
       image: freezed == image
           ? _value.image
@@ -127,6 +130,10 @@ class _$FoodDetailModelCopyWithImpl<$Res, $Val extends FoodDetailModel>
       ingredients: null == ingredients
           ? _value.ingredients
           : ingredients // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      tags: null == tags
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
       difficulty: freezed == difficulty
           ? _value.difficulty
@@ -172,11 +179,12 @@ abstract class _$$_FoodDetailModelCopyWith<$Res>
       {String? id,
       String? name,
       String? description,
-      String? type,
+      String? category,
       String? image,
       String? duration,
       String? preparation,
       List<String> ingredients,
+      List<String> tags,
       String? difficulty,
       int? servings,
       bool isFavorite,
@@ -200,11 +208,12 @@ class __$$_FoodDetailModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? description = freezed,
-    Object? type = freezed,
+    Object? category = freezed,
     Object? image = freezed,
     Object? duration = freezed,
     Object? preparation = freezed,
     Object? ingredients = null,
+    Object? tags = null,
     Object? difficulty = freezed,
     Object? servings = freezed,
     Object? isFavorite = null,
@@ -226,9 +235,9 @@ class __$$_FoodDetailModelCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      type: freezed == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
               as String?,
       image: freezed == image
           ? _value.image
@@ -245,6 +254,10 @@ class __$$_FoodDetailModelCopyWithImpl<$Res>
       ingredients: null == ingredients
           ? _value._ingredients
           : ingredients // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      tags: null == tags
+          ? _value._tags
+          : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
       difficulty: freezed == difficulty
           ? _value.difficulty
@@ -285,11 +298,12 @@ class _$_FoodDetailModel extends _FoodDetailModel {
       {this.id,
       this.name,
       this.description,
-      this.type,
+      this.category,
       this.image,
       this.duration,
       this.preparation,
       final List<String> ingredients = const [],
+      final List<String> tags = const [],
       this.difficulty,
       this.servings,
       this.isFavorite = false,
@@ -298,6 +312,7 @@ class _$_FoodDetailModel extends _FoodDetailModel {
       this.carbs = 0,
       this.proteins = 0})
       : _ingredients = ingredients,
+        _tags = tags,
         super._();
 
   factory _$_FoodDetailModel.fromJson(Map<String, dynamic> json) =>
@@ -310,7 +325,7 @@ class _$_FoodDetailModel extends _FoodDetailModel {
   @override
   final String? description;
   @override
-  final String? type;
+  final String? category;
   @override
   final String? image;
   @override
@@ -324,6 +339,15 @@ class _$_FoodDetailModel extends _FoodDetailModel {
     if (_ingredients is EqualUnmodifiableListView) return _ingredients;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_ingredients);
+  }
+
+  final List<String> _tags;
+  @override
+  @JsonKey()
+  List<String> get tags {
+    if (_tags is EqualUnmodifiableListView) return _tags;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tags);
   }
 
   @override
@@ -348,7 +372,7 @@ class _$_FoodDetailModel extends _FoodDetailModel {
 
   @override
   String toString() {
-    return 'FoodDetailModel(id: $id, name: $name, description: $description, type: $type, image: $image, duration: $duration, preparation: $preparation, ingredients: $ingredients, difficulty: $difficulty, servings: $servings, isFavorite: $isFavorite, kcal: $kcal, fats: $fats, carbs: $carbs, proteins: $proteins)';
+    return 'FoodDetailModel(id: $id, name: $name, description: $description, category: $category, image: $image, duration: $duration, preparation: $preparation, ingredients: $ingredients, tags: $tags, difficulty: $difficulty, servings: $servings, isFavorite: $isFavorite, kcal: $kcal, fats: $fats, carbs: $carbs, proteins: $proteins)';
   }
 
   @override
@@ -360,7 +384,8 @@ class _$_FoodDetailModel extends _FoodDetailModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.type, type) || other.type == type) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.duration, duration) ||
                 other.duration == duration) &&
@@ -368,6 +393,7 @@ class _$_FoodDetailModel extends _FoodDetailModel {
                 other.preparation == preparation) &&
             const DeepCollectionEquality()
                 .equals(other._ingredients, _ingredients) &&
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
             (identical(other.difficulty, difficulty) ||
                 other.difficulty == difficulty) &&
             (identical(other.servings, servings) ||
@@ -388,11 +414,12 @@ class _$_FoodDetailModel extends _FoodDetailModel {
       id,
       name,
       description,
-      type,
+      category,
       image,
       duration,
       preparation,
       const DeepCollectionEquality().hash(_ingredients),
+      const DeepCollectionEquality().hash(_tags),
       difficulty,
       servings,
       isFavorite,
@@ -420,11 +447,12 @@ abstract class _FoodDetailModel extends FoodDetailModel {
       {final String? id,
       final String? name,
       final String? description,
-      final String? type,
+      final String? category,
       final String? image,
       final String? duration,
       final String? preparation,
       final List<String> ingredients,
+      final List<String> tags,
       final String? difficulty,
       final int? servings,
       final bool isFavorite,
@@ -444,7 +472,7 @@ abstract class _FoodDetailModel extends FoodDetailModel {
   @override
   String? get description;
   @override
-  String? get type;
+  String? get category;
   @override
   String? get image;
   @override
@@ -453,6 +481,8 @@ abstract class _FoodDetailModel extends FoodDetailModel {
   String? get preparation;
   @override
   List<String> get ingredients;
+  @override
+  List<String> get tags;
   @override
   String? get difficulty;
   @override

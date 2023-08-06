@@ -96,28 +96,16 @@ class HomeMock {
         title: 'SEI LA 2',
         onPress: (){},
         thumbnail: 'https://images.pexels.com/photos/103124/pexels-photo-103124.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        description: 'Pão com Ovo',
-        typeTraining: 'RESISTENCIA',
-        timeTraining: '15 min',
-        trainer: 'Roberta Souza'
     ),
     CardFoodModel(
         title: 'SEI LA 2',
         onPress: (){},
         thumbnail: 'https://images.pexels.com/photos/5710178/pexels-photo-5710178.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        description: 'Macarrão com camarão e molho poro e alguma coisa a mais ai',
-        typeTraining: 'RESISTENCIA',
-        timeTraining: '15 min',
-        trainer: 'Roberta Souza'
     ),
     CardFoodModel(
         title: 'SEI LA 2',
         onPress: (){},
         thumbnail: 'https://images.pexels.com/photos/1351238/pexels-photo-1351238.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        description: 'Macarrão com camarão',
-        typeTraining: 'RESISTENCIA',
-        timeTraining: '15 min',
-        trainer: 'Roberta Souza'
     )
   ];
 }
