@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:app/modules/food/controller/food_controller.dart';
-import 'package:app/modules/food/mock/food_detail_mock.dart';
 import 'package:app/modules/food/page/food_list_by_category.dart';
 import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
@@ -43,7 +42,7 @@ class FoodPage extends BaseWidget<FoodController> {
             const SizedBox(height: 40),
             ListCardFood(
                 title: 'Receitas populares',
-                listItems: controller.listFoodDetail.map((e){
+                listItems: controller.listFoodDetail.take(20).map((e){
                   return CardFoodModel(
                     title: e.name!,
                     kcal: e.kcal.toString(),
@@ -181,33 +180,69 @@ class FoodPage extends BaseWidget<FoodController> {
     ),
     ItemWrapModel(
         image: 'https://images.pexels.com/photos/2092906/pexels-photo-2092906.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        title: 'Janta',
-        onPress: (){}
+        title: 'Jantar',
+        onPress: (){
+          final item = Modular.get<FoodController>().listFoodDetail;
+          MyRouter().push(FoodListByCategory(
+            nameCategory: 'Jantar',
+            listFoodDetailModel: item.where((e) => e.category == 'Jantar').toList(),
+          ));
+        }
     ),
     ItemWrapModel(
         image: 'https://images.pexels.com/photos/3889844/pexels-photo-3889844.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         title: 'Bebidas',
-        onPress: (){}
+        onPress: (){
+          final item = Modular.get<FoodController>().listFoodDetail;
+          MyRouter().push(FoodListByCategory(
+            nameCategory: 'Bebidas',
+            listFoodDetailModel: item.where((e) => e.category == 'Bebidas').toList(),
+          ));
+        }
     ),
     ItemWrapModel(
         image: 'https://images.pexels.com/photos/257816/pexels-photo-257816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         title: 'Saladas',
-        onPress: (){}
+        onPress: (){
+          final item = Modular.get<FoodController>().listFoodDetail;
+          MyRouter().push(FoodListByCategory(
+            nameCategory: 'Saladas',
+            listFoodDetailModel: item.where((e) => e.category == 'Saladas').toList(),
+          ));
+        }
     ),
     ItemWrapModel(
         image: 'https://images.pexels.com/photos/1351238/pexels-photo-1351238.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         title: 'Vegano',
-        onPress: (){}
+        onPress: (){
+          final item = Modular.get<FoodController>().listFoodDetail;
+          MyRouter().push(FoodListByCategory(
+            nameCategory: 'Vegano',
+            listFoodDetailModel: item.where((e) => e.category == 'Vegano').toList(),
+          ));
+        }
     ),
     ItemWrapModel(
         image: 'https://images.pexels.com/photos/5836776/pexels-photo-5836776.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        title: 'Lanche',
-        onPress: (){}
+        title: 'Lanches',
+        onPress: (){
+          final item = Modular.get<FoodController>().listFoodDetail;
+          MyRouter().push(FoodListByCategory(
+            nameCategory: 'Lanches',
+            listFoodDetailModel: item.where((e) => e.category == 'Lanches').toList(),
+          ));
+        }
     ),
     ItemWrapModel(
         image: 'https://images.pexels.com/photos/3026804/pexels-photo-3026804.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        title: 'Doce',
-        onPress: (){}
+        title: 'Doces',
+        onPress: (){
+          final item = Modular.get<FoodController>().listFoodDetail;
+          MyRouter().push(FoodListByCategory(
+            nameCategory: 'Doces',
+            listFoodDetailModel: item.where((e) => e.category == 'Doces').toList(),
+          ));
+        }
     ),
 
   ];
