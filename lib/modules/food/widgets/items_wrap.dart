@@ -44,19 +44,21 @@ class ItemsWrapWidget extends BaseWidget {
                 padding: const EdgeInsets.all(5.0).copyWith(bottom: 0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
-                  child: CachedNetworkImage(
+                  child: item.image.contains('assets/image') ?
+                  Image.asset(
+                    item.image,
+                    alignment: Alignment.center,
+                    fit: BoxFit.cover,
+                    width: width,
+                    height: height,
+                  ) :
+                  CachedNetworkImage(
                       fadeInDuration: const Duration(milliseconds: 300),
                       imageUrl: item.image,
                       alignment: Alignment.center,
                       fit: BoxFit.cover,
                       width: width,
                       height: height,
-                      imageBuilder: (_, img) {
-                        return Image(
-                          image: img,
-                          fit: BoxFit.cover,
-                        );
-                      },
                       placeholder: (context, url) => Shimmer.fromColors(
                         baseColor: Colors.grey.withOpacity(0.8),
                         highlightColor: Colors.grey.withOpacity(0.6),

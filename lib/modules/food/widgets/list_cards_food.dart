@@ -54,7 +54,7 @@ class ListCardFood extends BaseWidget {
         ),
         space(0.01),
         SizedBox(
-          height:  270,
+          height:  250,
           child: ListView(
             padding: EdgeInsets.zero,
             scrollDirection: Axis.horizontal,
@@ -73,7 +73,11 @@ class ListCardFood extends BaseWidget {
     return GestureDetector(
       onTap: item.onPress,
       child: Container(
-        margin: EdgeInsets.only(left: index == 0 ? 16 : 0, right: index + 1 == listItems.length ? 16 : 10, bottom: 6),
+        margin: EdgeInsets.only(
+            left: index == 0 ? 16 : 0,
+            right: index + 1 == listItems.length ? 16 : 4,
+            bottom: 6
+        ),
         width: 180,
         child: Card(
           shape: RoundedRectangleBorder(
