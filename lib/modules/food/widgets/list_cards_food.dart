@@ -89,30 +89,33 @@ class ListCardFood extends BaseWidget {
                     borderRadius: BorderRadius.circular(8),
                     child: Stack(
                       children: [
-                        CachedNetworkImage(
-                          fadeInDuration: const Duration(milliseconds: 300),
-                          imageUrl: listItems[index].thumbnail,
-                          alignment: Alignment.center,
-                          width: width,
-                          height: height,
-                          fit: BoxFit.cover,
-                          imageBuilder: (_, img) {
-                            return Image(
-                              image: img,
-                              fit: BoxFit.cover,
-                            );
-                          },
-                          placeholder: (context, url) => Shimmer.fromColors(
-                            baseColor: Colors.grey.withOpacity(0.8),
-                            highlightColor: Colors.grey.withOpacity(0.6),
-                            child: Container(
-                              color: Colors.black,
+                        if(!listItems[index].thumbnail.contains('assets/images'))
+                          CachedNetworkImage(
+                            fadeInDuration: const Duration(milliseconds: 300),
+                            imageUrl: listItems[index].thumbnail,
+                            alignment: Alignment.center,
+                            width: width,
+                            height: height,
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) => Shimmer.fromColors(
+                              baseColor: Colors.grey.withOpacity(0.8),
+                              highlightColor: Colors.grey.withOpacity(0.6),
+                              child: Container(
+                                color: Colors.black,
+                              ),
                             ),
+                            errorWidget: (context, url, error) => const Center(
+                              child: Icon(Icons.no_photography_sharp, color: Colors.grey),
+                            )
                           ),
-                          errorWidget: (context, url, error) => const Center(
-                            child: Icon(Icons.no_photography_sharp, color: Colors.grey),
-                          )
-                        ),
+                        if(listItems[index].thumbnail.contains('assets/images'))
+                          Image.asset(
+                            listItems[index].thumbnail,
+                            alignment: Alignment.center,
+                            width: width,
+                            height: height,
+                            fit: BoxFit.cover,
+                          ),
                         if(showFavorite)
                           Positioned(
                               top: 10,

@@ -210,6 +210,15 @@ class FoodDetailPage extends BaseWidget {
   Widget _imageTop(){
     return Stack(
       children: [
+        if(model.image!.contains('assets/image'))
+          Image.asset(
+            model.image!,
+            width: width,
+            height: height * 0.4,
+            alignment: Alignment.bottomCenter,
+            fit: BoxFit.cover,
+          )
+          else
         CachedNetworkImage(
           fadeInDuration: const Duration(milliseconds: 400),
           imageUrl: model.image ?? '',

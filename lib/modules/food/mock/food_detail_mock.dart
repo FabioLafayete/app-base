@@ -38,7 +38,7 @@ abstract class FoodDetailMock{
         "name": "Panquecas de Aveia e Banana",
         "description": "Panquecas saudáveis feitas com aveia e banana.",
         "category": "Café da manhã",
-        "image": "https://images.pexels.com/photos/2097096/pexels-photo-2097096.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "image": "assets/images/foods/cafe_da_manha_01.jpeg",
         "duration": "20",
         "preparation": "Em um liquidificador, bata a aveia, bananas, leite e ovos até obter uma massa homogênea.\n\nAqueça uma frigideira antiaderente e despeje pequenas porções da massa para formar as panquecas.\n\nCozinhe por 2-3 minutos de cada lado ou até dourar.\n\nSirva com fatias de banana e mel.",
         "ingredients": [
@@ -68,7 +68,7 @@ abstract class FoodDetailMock{
         "name": "Smoothie de Frutas Vermelhas",
         "description": "Um delicioso smoothie refrescante feito com frutas vermelhas.",
         "category": "Café da manhã",
-        "image": "https://images.pexels.com/photos/3732897/pexels-photo-3732897.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "image": "assets/images/foods/cafe_da_manha_02.jpeg",
         "duration": "10",
         "preparation": "Em um liquidificador, adicione as frutas vermelhas, iogurte e mel.\n\nBata até obter uma mistura suave e homogênea.\n\nSirva em copos altos e decore com algumas frutas vermelhas frescas.",
         "ingredients": [
@@ -97,7 +97,7 @@ abstract class FoodDetailMock{
         "name": "Tapioca Recheada com Queijo e Tomate",
         "description": "Uma opção deliciosa e rápida para o café da manhã.",
         "category": "Café da manhã",
-        "image": "https://images.pexels.com/photos/607386/pexels-photo-607386.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "image": "assets/images/foods/cafe_da_manha_03.jpeg",
         "duration": "15",
         "preparation": "Em uma frigideira antiaderente, espalhe a goma de tapioca formando um círculo.\n\nQuando a tapioca estiver unida e firme, adicione o queijo e tomate picados de um lado.\n\nDobre a tapioca ao meio e pressione levemente para grudar o recheio.\n\nDeixe cozinhar por mais alguns minutos até o queijo derreter.\n\nSirva quente.",
         "ingredients": [
@@ -126,7 +126,7 @@ abstract class FoodDetailMock{
         "name": "Omelete de Espinafre e Queijo Cottage",
         "description": "Omelete leve e nutritiva com espinafre e queijo cottage.",
         "category": "Café da manhã",
-        "image": "https://images.pexels.com/photos/811738/pexels-photo-811738.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "image": "assets/images/foods/cafe_da_manha_04.jpeg",
         "duration": "20",
         "preparation": "Em uma tigela, bata os ovos com uma pitada de sal e pimenta.\n\nAdicione o espinafre picado e o queijo cottage à mistura de ovos.\n\nAqueça uma frigideira com um pouco de azeite e despeje a mistura.\n\nCozinhe em fogo médio até que os ovos estejam firmes.\n\nDobre a omelete ao meio e sirva.",
         "ingredients": [
@@ -156,7 +156,7 @@ abstract class FoodDetailMock{
         "name": "Pão Integral com Abacate e Ovo",
         "description": "Uma combinação deliciosa e nutritiva para começar o dia.",
         "category": "Café da manhã",
-        "image": "https://images.pexels.com/photos/3788939/pexels-photo-3788939.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "image": "assets/images/foods/cafe_da_manha_05.jpeg",
         "duration": "15",
         "preparation": "Toste o pão integral até ficar crocante.\n\nAmasse o abacate e tempere com limão, sal e pimenta a gosto.\n\nEspalhe o abacate amassado sobre o pão torrado.\n\nEm uma frigideira, frite o ovo com um pouco de azeite até a gema ficar no ponto desejado.\n\nColoque o ovo sobre o abacate e tempere com mais sal e pimenta, se necessário.",
         "ingredients": [
@@ -188,7 +188,7 @@ abstract class FoodDetailMock{
         "name": "Iogurte com Granola e Frutas",
         "description": "Uma opção leve e saborosa para o café da manhã.",
         "category": "Café da manhã",
-        "image": "https://images.pexels.com/photos/952343/pexels-photo-952343.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "image": "assets/images/foods/cafe_da_manha_06.jpeg",
         "duration": "5",
         "preparation": "Em uma tigela, coloque o iogurte natural.\n\nAcrescente granola e frutas frescas por cima.\n\nFinalize com um fio de mel ou maple syrup.",
         "ingredients": [
@@ -218,7 +218,7 @@ abstract class FoodDetailMock{
         "name": "Crepioca com Queijo e Tomate",
         "description": "Uma versão saudável da crepioca tradicional.",
         "category": "Café da manhã",
-        "image": "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "image": "assets/images/foods/cafe_da_manha_07.jpeg",
         "duration": "15",
         "preparation": "Em uma tigela, misture a goma de tapioca com o ovo e uma pitada de sal.\n\nDespeje a mistura em uma frigideira quente e espalhe para formar a crepioca.\n\nQuando a massa estiver firme, adicione o queijo e tomate picados de um lado.\n\nDobre a crepioca ao meio e pressione levemente para grudar o recheio.\n\nDeixe cozinhar por mais alguns minutos até o queijo derreter.\n\nSirva quente.",
         "ingredients": [
@@ -247,7 +247,7 @@ abstract class FoodDetailMock{
         "name": "Açaí Bowl com Granola e Frutas",
         "description": "Uma opção refrescante e nutritiva para o café da manhã.",
         "category": "Café da manhã",
-        "image": "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "image": "assets/images/foods/cafe_da_manha_08.jpeg",
         "duration": "10",
         "preparation": "No liquidificador, bata a polpa de açaí com um pouco de água até obter uma consistência cremosa.\n\nDespeje o açaí em uma tigela.\n\nAdicione granola, fatias de banana, mirtilos e outras frutas de sua preferência por cima.\n\nFinalize com algumas folhas de hortelã.",
         "ingredients": [
@@ -280,7 +280,7 @@ abstract class FoodDetailMock{
         "name": "Torrada de Abacate com Ovo Poche",
         "description": "Uma torrada saudável e deliciosa com abacate e ovo pochê.",
         "category": "Café da manhã",
-        "image": "https://images.pexels.com/photos/2599491/pexels-photo-2599491.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "image": "assets/images/foods/cafe_da_manha_09.jpeg",
         "duration": "15",
         "preparation": "Amasse o abacate e tempere com limão, sal e pimenta a gosto.\n\nEm uma panela com água fervente e vinagre, faça um redemoinho e coloque o ovo para cozinhar por 3-4 minutos.\n\nToste o pão integral.\n\nEspalhe o abacate amassado sobre a torrada e coloque o ovo pochê por cima.\n\nFinalize com um pouco de sal e pimenta.",
         "ingredients": [
@@ -311,7 +311,7 @@ abstract class FoodDetailMock{
         "name": "Mingau de Aveia com Canela e Maçã",
         "description": "Um mingau cremoso e reconfortante para o café da manhã.",
         "category": "Café da manhã",
-        "image": "https://images.pexels.com/photos/1514920/pexels-photo-1514920.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "image": "assets/images/foods/cafe_da_manha_10.jpeg",
         "duration": "15",
         "preparation": "Em uma panela, aqueça o leite com a aveia em flocos e a canela.\n\nCozinhe em fogo médio, mexendo sempre, até que a aveia fique bem cremosa.\n\nAdicione mel ou adoçante a gosto.\n\nCorte a maçã em cubos e coloque por cima do mingau.\n\nSirva quente.",
         "ingredients": [
@@ -338,6 +338,7 @@ abstract class FoodDetailMock{
         "carbs": 45,
         "proteins": 10
       },
+
       {
         "id": null,
         "name": "Salada de Quinoa com Legumes Assados",

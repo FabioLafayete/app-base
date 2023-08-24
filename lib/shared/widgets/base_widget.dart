@@ -7,9 +7,8 @@ import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
-import 'package:mobx/mobx.dart';
 
-abstract class BaseWidget<T extends Store> extends StatelessWidget {
+abstract class BaseWidget<T extends Object> extends StatelessWidget {
 
   BaseWidget({Key? key}) : super(key: key);
 
@@ -36,7 +35,4 @@ abstract class BaseWidget<T extends Store> extends StatelessWidget {
     if (_value.isEmpty) _value.add(Modular.get<T>());
     return _value.first;
   }
-
-  @override
-  Widget build(BuildContext context);
 }
