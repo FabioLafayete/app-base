@@ -28,6 +28,7 @@ class AppColors {
     // secondary: Color(0xFFf752c0),
 
     background: const Color.fromRGBO(246, 246, 246, 1.0),
+    // background: const Color.fromRGBO(150, 150, 150, 1.0),
     // background: Colors.white,
     error: const Color(0xFFC21D4F),
   );

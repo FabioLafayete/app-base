@@ -56,7 +56,11 @@ class VisualDisplay {
     String? Function(String?)? validator,
     Widget? prefix,
     Widget? suffix,
-    TextEditingController? controller
+    TextEditingController? controller,
+    int? helperMaxLines,
+    int? maxLength,
+    int? maxLines,
+    int? minLines,
   }){
     return Stack(
       children: [
@@ -67,7 +71,7 @@ class VisualDisplay {
           ),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(
-              Radius.circular(15),
+              Radius.circular(10),
             ),
             boxShadow: [
               BoxShadow(
@@ -88,6 +92,7 @@ class VisualDisplay {
               fontWeight: FontWeight.w400
           ),
           obscureText: obscure ?? false,
+          maxLength: maxLength,
           readOnly: readOnly,
           keyboardType: textInputType,
           autovalidateMode: autoValidateMode,
@@ -97,6 +102,8 @@ class VisualDisplay {
           inputFormatters: inputMask,
           validator: validator,
           autocorrect: false,
+          maxLines: maxLines,
+          minLines: minLines,
           decoration: InputDecoration(
             isDense: true,
             errorText: errorText,
@@ -122,23 +129,24 @@ class VisualDisplay {
                 fontSize: 16,
                 fontWeight: FontWeight.w400
             ),
+            helperMaxLines: helperMaxLines,
             hoverColor: Colors.transparent,
             floatingLabelStyle: colorLabelFocus != null ?
             TextStyle(color: colorLabelFocus, fontSize: 16, fontWeight: FontWeight.w600) : null,
             errorStyle: TextStyle(fontWeight: FontWeight.w600, color: AppColors().error),
             errorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors().error, width: 2),
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(10),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors().error, width: 2),
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(10),
             ),
             focusedBorder: !readOnly ? OutlineInputBorder(
               borderSide: BorderSide(color: (colorBorderFocus ?? colorBorder) ?? AppColors().secondary, width: 2),
-              borderRadius: BorderRadius.circular(15),
-            ) : OutlineInputBorder(borderSide:  BorderSide(color: colorBorder ?? AppColors().secondary), borderRadius: BorderRadius.circular(15)),
-            enabledBorder: OutlineInputBorder(borderSide:  BorderSide(color: colorBorder ?? AppColors().secondary), borderRadius: BorderRadius.circular(15)),
+              borderRadius: BorderRadius.circular(10),
+            ) : OutlineInputBorder(borderSide:  BorderSide(color: colorBorder ?? AppColors().secondary), borderRadius: BorderRadius.circular(10)),
+            enabledBorder: OutlineInputBorder(borderSide:  BorderSide(color: colorBorder ?? AppColors().secondary), borderRadius: BorderRadius.circular(10)),
           ),
         ),
       ],
@@ -296,7 +304,6 @@ class VisualDisplay {
   }){
     return Container(
       height: 3,
-      width: Get.width,
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
@@ -305,7 +312,7 @@ class VisualDisplay {
       child: AnimatedContainer(
           duration: const Duration(milliseconds: 500),
           color: AppColors().primary,
-          width: Get.width * ((index == 0 ? 1 : index + 1) / totalItems),
+          width: (Get.width * 0.55) * ((index == 0 ? 1 : index + 1) / totalItems),
       ),
     );
   }

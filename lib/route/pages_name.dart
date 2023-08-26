@@ -17,4 +17,5 @@ class PagesNames {
   /// PROFILE
   static const String profile = '/profile/';
   static const String profileData = '/profile/data';
+  static const String profileHelp = '/profile/help';
 }

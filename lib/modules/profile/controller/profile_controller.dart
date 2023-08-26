@@ -42,6 +42,32 @@ abstract class ProfileControllerBase extends BaseController with Store {
   @observable
   bool loading = false;
 
+  @observable
+  String? optionHelp;
+
+  @observable
+  String? titleHelp;
+
+  @observable
+  String? messageHelp;
+
+  List<String> listOptionsHelp = [
+    'Problema',
+    'Dúvida',
+    'Elogio',
+    'Parceria',
+    'Reembolso',
+  ];
+
+  @action
+  setOptionHelp(String? value) => optionHelp = value;
+
+  @action
+  setTitleHelp(String? value) => titleHelp = value;
+
+  @action
+  setMessageHelp(String? value) => messageHelp = value;
+
   @action
   setName(String? value) => name = value;
 
@@ -138,6 +164,19 @@ abstract class ProfileControllerBase extends BaseController with Store {
     }catch(_){
       print(_);
     }
+  }
+
+  void clearHelpPage(){
+    setOptionHelp(null);
+    setMessageHelp(null);
+    setTitleHelp(null);
+  }
+
+  bool enableButtonSendHelp(){
+    if(messageHelp == null || messageHelp!.isEmpty) return false;
+    if(titleHelp == null || titleHelp!.isEmpty) return false;
+    if(optionHelp == null || optionHelp!.isEmpty) return false;
+    return true;
   }
 
 }

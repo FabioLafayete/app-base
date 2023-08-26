@@ -175,8 +175,89 @@ mixin _$ProfileController on ProfileControllerBase, Store {
     });
   }
 
+  late final _$optionHelpAtom =
+      Atom(name: 'ProfileControllerBase.optionHelp', context: context);
+
+  @override
+  String? get optionHelp {
+    _$optionHelpAtom.reportRead();
+    return super.optionHelp;
+  }
+
+  @override
+  set optionHelp(String? value) {
+    _$optionHelpAtom.reportWrite(value, super.optionHelp, () {
+      super.optionHelp = value;
+    });
+  }
+
+  late final _$titleHelpAtom =
+      Atom(name: 'ProfileControllerBase.titleHelp', context: context);
+
+  @override
+  String? get titleHelp {
+    _$titleHelpAtom.reportRead();
+    return super.titleHelp;
+  }
+
+  @override
+  set titleHelp(String? value) {
+    _$titleHelpAtom.reportWrite(value, super.titleHelp, () {
+      super.titleHelp = value;
+    });
+  }
+
+  late final _$messageHelpAtom =
+      Atom(name: 'ProfileControllerBase.messageHelp', context: context);
+
+  @override
+  String? get messageHelp {
+    _$messageHelpAtom.reportRead();
+    return super.messageHelp;
+  }
+
+  @override
+  set messageHelp(String? value) {
+    _$messageHelpAtom.reportWrite(value, super.messageHelp, () {
+      super.messageHelp = value;
+    });
+  }
+
   late final _$ProfileControllerBaseActionController =
       ActionController(name: 'ProfileControllerBase', context: context);
+
+  @override
+  dynamic setOptionHelp(String? value) {
+    final _$actionInfo = _$ProfileControllerBaseActionController.startAction(
+        name: 'ProfileControllerBase.setOptionHelp');
+    try {
+      return super.setOptionHelp(value);
+    } finally {
+      _$ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setTitleHelp(String? value) {
+    final _$actionInfo = _$ProfileControllerBaseActionController.startAction(
+        name: 'ProfileControllerBase.setTitleHelp');
+    try {
+      return super.setTitleHelp(value);
+    } finally {
+      _$ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setMessageHelp(String? value) {
+    final _$actionInfo = _$ProfileControllerBaseActionController.startAction(
+        name: 'ProfileControllerBase.setMessageHelp');
+    try {
+      return super.setMessageHelp(value);
+    } finally {
+      _$ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic setName(String? value) {
@@ -278,6 +359,9 @@ errorName: ${errorName},
 errorEmail: ${errorEmail},
 errorPhone: ${errorPhone},
 loading: ${loading},
+optionHelp: ${optionHelp},
+titleHelp: ${titleHelp},
+messageHelp: ${messageHelp},
 enableButtonName: ${enableButtonName},
 enableButtonEmail: ${enableButtonEmail},
 enableButtonPhone: ${enableButtonPhone}

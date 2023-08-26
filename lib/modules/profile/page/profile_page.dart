@@ -45,7 +45,9 @@ class ProfilePage extends BaseWidget<ProfileController> {
                       ListButtonItem(title: 'Meus dados', icon: LineIcons.user, onPress: (){
                         router.pushNamed(PagesNames.profileData);
                       }),
-                      ListButtonItem(title: 'Ajuda e suporte', icon: LineIcons.questionCircle, onPress: (){}),
+                      ListButtonItem(title: 'Ajuda e suporte', icon: LineIcons.questionCircle, onPress: (){
+                        router.pushNamed(PagesNames.profileHelp);
+                      }),
                       ListButtonItem(title: 'Indicar amigo(a)', icon: LineIcons.laughFaceWithBeamingEyes, onPress: (){}),
                       ListButtonItem(title: 'Feedback', icon: LineIcons.redo, onPress: (){}),
                       ListButtonItem(title: 'Sair da conta', icon: LineIcons.powerOff, onPress: controller.logout, isLogout: true),

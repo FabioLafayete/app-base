@@ -43,23 +43,35 @@ class OnboardPage extends BaseWidget<OnboardController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                space(0.01),
-                VisualDisplay.progressBar(
-                    totalItems: _items.length,
-                    index: controller.index
-                ),
-                Container(
-                  height: height * 0.07,
-                  alignment: Alignment.bottomLeft,
-                  child: Visibility(
-                    visible: controller.index > 0,
-                    child: IconButton(
-                        onPressed: (){
-                          controller.setIndex(controller.index - 1);
-                        },
-                        icon: const Icon(Icons.arrow_back_ios_new_outlined)
+                space(0.02),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      alignment: Alignment.bottomLeft,
+                      margin: const EdgeInsets.only(left: 16),
+                      child: Opacity(
+                        opacity: controller.index > 0 ? 1 : 0,
+                        child: GestureDetector(
+                          onTap: (){
+                            if(controller.index > 0){
+                              controller.setIndex(controller.index - 1);
+                            }
+                          },
+                          child: const Icon(Icons.arrow_back_ios_new_outlined),
+                        ),
+                      ),
                     ),
-                  ),
+                    SizedBox(
+                      width: width * 0.55,
+                      child: VisualDisplay.progressBar(
+                          totalItems: _items.length,
+                          index: controller.index
+                      ),
+                    ),
+                    const SizedBox(width: 50)
+                  ],
                 ),
                 SizedBox(
                   height: height * 0.7,
