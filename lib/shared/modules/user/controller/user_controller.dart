@@ -57,15 +57,11 @@ abstract class UserControllerBase with Store{
   setUser(UserModel value) => user = value;
 
   Future<void> setInitUser({UserModel? userModel}) async {
-    try{
-      if(userModel != null){
-        setUser(userModel);
-      } else {
-        final data = await userRepositoryImpl.getUser();
-        setUser(data);
-      }
-    }catch(_){
-
+    if(userModel != null){
+      setUser(userModel);
+    } else {
+      final data = await userRepositoryImpl.getUser();
+      setUser(data);
     }
   }
 

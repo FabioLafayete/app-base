@@ -37,7 +37,9 @@ class AppConfig {
     if(_bearerToken != null) {
       /// INIT-USER
       UserController controller = Modular.get<UserController>();
-      await controller.setInitUser();
+      await controller.setInitUser().catchError((e){
+        _bearerToken = null;
+      });
     }
 
     print('Ambiente de ${flavors?.getCurrentFlavor() == FlavorType.dev ? 'dev'

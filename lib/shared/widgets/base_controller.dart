@@ -14,6 +14,7 @@ class BaseController {
   final SecureStorageService storage = SecureStorageService();
 
   UserController userController = Modular.get<UserController>();
+  NavController navController = Modular.get<NavController>();
 
   UserModel get user => userController.user;
 
@@ -43,9 +44,8 @@ class BaseController {
     try{
       final storage = Modular.get<SecureStorageService>();
       await storage.clearAll();
-      router.pushReplacementNamed(PagesNames.login).then((value){
-        Modular.get<NavController>().setSelectedIndex(0);
-      });
+      Modular.get<NavController>().setSelectedIndex(0);
+      router.pushReplacementNamed(PagesNames.login);
     }catch(_){
       print(_);
     }

@@ -77,7 +77,7 @@ class HelpPage extends BaseWidget<ProfileController> {
                     return text(
                         controller.optionHelp ?? 'Escolha o motivo do contato',
                         fontSize: 18,
-                        fontWeight: FontWeight.w600
+                        fontWeight: FontWeight.w500
                     );
                   }),
                   Icon(Icons.arrow_forward_ios_rounded, color: colors.primary,)
