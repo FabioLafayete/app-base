@@ -29,7 +29,7 @@ class LoginPage extends BaseWidget<LoginController> {
                 fontWeight: FontWeight.w600,
                 textAlign: TextAlign.start
             ),
-            space(0.05),
+            space(0.03),
             VisualDisplay.textField(
               controller: controller.controllerEmail,
               labelText: 'E-mail',
@@ -114,7 +114,6 @@ class LoginPage extends BaseWidget<LoginController> {
                   ],
                 ),
               ),
-            const Spacer(),
             Observer(builder: (_) => CustomButton(
               title: controller.showCode ? 'VALIDAR CÓDIGO' : 'AVANÇAR',
               colorTitle: colors.background,
@@ -128,6 +127,7 @@ class LoginPage extends BaseWidget<LoginController> {
           ],
         )),
         dismissible: false,
+        hasHeight: false,
         context: context,
         onClose: (){
           controller.cleanLogin();

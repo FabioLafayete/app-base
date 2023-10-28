@@ -1,4 +1,10 @@
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:miniplayer/miniplayer.dart';
+import 'package:video_player/video_player.dart';
+
+import '../../../shared/model/video/video_model.dart';
 import '../../food/widgets/list_cards_food.dart';
+import '../../navigator/controller/nav_controller.dart';
 import '../../workout/widgets/list_cards_items.dart';
 
 class HomeMock {
@@ -7,7 +13,17 @@ class HomeMock {
     ListCardItems(title: 'Corpo todo', seeMore: (){}, listItems: [
       CardItemModel(
           title: 'SEI LA 2',
-          onPress: (){},
+          onPress: (){
+            final navController = Modular.get<NavController>();
+            navController.setVideoSelected(
+                const VideoModel(
+                    name: 'TESTE DE VIDEO 1',
+                    url: 'https://stream.mux.com/Fz9TDH4f13E2rtwMMW4TGEgF4vioyKmi32I8IVKgENg.m3u8',
+                    type: DataSourceType.network
+                )
+            );
+            navController.miniplayerController.animateToHeight(state: PanelState.MAX);
+          },
           thumbnail: 'https://images.pexels.com/photos/863977/pexels-photo-863977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
           description: 'Queime gordura no ritmo',
           typeTraining: 'RESISTENCIA',
@@ -16,7 +32,17 @@ class HomeMock {
       ),
       CardItemModel(
           title: 'SEI LA 2',
-          onPress: (){},
+          onPress: (){
+            final navController = Modular.get<NavController>();
+            navController.setVideoSelected(
+                const VideoModel(
+                    name: 'TESTE DE VIDEO 2',
+                    url: 'https://stream.mux.com/aW5YBw2S7rWwXZgNtrcNA5p3EjphlRTKOO3c502Fp02Sk.m3u8',
+                    type: DataSourceType.network
+                )
+            );
+            navController.miniplayerController.animateToHeight(state: PanelState.MAX);
+          },
           thumbnail: 'https://images.pexels.com/photos/2780762/pexels-photo-2780762.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
           description: 'Crie resistencia',
           typeTraining: 'RESISTENCIA',

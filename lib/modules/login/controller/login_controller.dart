@@ -20,7 +20,7 @@ abstract class LoginControllerBase extends BaseController with Store {
   LoginControllerBase({
     required this.repositoryImpl
   }) : super(){
-    bottomSheet.setHeightBottomSheet(0.35);
+    // bottomSheet.setHeightBottomSheet(0.35);
   }
 
   final LoginRepositoryImpl repositoryImpl;
@@ -132,14 +132,14 @@ abstract class LoginControllerBase extends BaseController with Store {
         return;
       } else {
         await repositoryImpl.postTokenEmail(email!);
-        bottomSheet.setHeightBottomSheet(0.53);
+        // bottomSheet.setHeightBottomSheet(0.53);
         await Future.delayed(const Duration(milliseconds: 350));
         setShowCode(true);
         Get.focusScope?.unfocus();
       }
     } catch(e) {
       if(showCode) {
-        bottomSheet.setHeightBottomSheet(0.56);
+        // bottomSheet.setHeightBottomSheet(0.56);
         setErrorCode('');
         cleanCode();
         Get.focusScope?.unfocus();
@@ -163,7 +163,7 @@ abstract class LoginControllerBase extends BaseController with Store {
       await repositoryImpl.postTokenEmail(email!);
       cleanCode();
       setErrorCode(null);
-      bottomSheet.setHeightBottomSheet(0.53);
+      // bottomSheet.setHeightBottomSheet(0.53);
     } finally{
       setIsLoadingSendCode(false);
     }
@@ -173,7 +173,7 @@ abstract class LoginControllerBase extends BaseController with Store {
     Get.focusScope?.unfocus();
     setShowCode(false);
     cleanCode();
-    bottomSheet.setHeightBottomSheet(0.35);
+    // bottomSheet.setHeightBottomSheet(0.35);
     setErrorEmail(null);
     setErrorCode(null);
   }
@@ -223,7 +223,7 @@ abstract class LoginControllerBase extends BaseController with Store {
     controllerEmail.clear();
     Get.focusScope?.unfocus();
     setShowCode(false);
-    bottomSheet.setHeightBottomSheet(0.35);
+    // bottomSheet.setHeightBottomSheet(0.35);
     setErrorEmail(null);
     setErrorCode(null);
   }

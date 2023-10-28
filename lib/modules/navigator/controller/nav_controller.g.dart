@@ -202,22 +202,6 @@ mixin _$NavController on NavControllerBase, Store {
     });
   }
 
-  late final _$heightBottomSheetAtom =
-      Atom(name: 'NavControllerBase.heightBottomSheet', context: context);
-
-  @override
-  double get heightBottomSheet {
-    _$heightBottomSheetAtom.reportRead();
-    return super.heightBottomSheet;
-  }
-
-  @override
-  set heightBottomSheet(double value) {
-    _$heightBottomSheetAtom.reportWrite(value, super.heightBottomSheet, () {
-      super.heightBottomSheet = value;
-    });
-  }
-
   late final _$setVideoSelectedAsyncAction =
       AsyncAction('NavControllerBase.setVideoSelected', context: context);
 
@@ -229,17 +213,6 @@ mixin _$NavController on NavControllerBase, Store {
 
   late final _$NavControllerBaseActionController =
       ActionController(name: 'NavControllerBase', context: context);
-
-  @override
-  dynamic setHeightBottomSheet(double value) {
-    final _$actionInfo = _$NavControllerBaseActionController.startAction(
-        name: 'NavControllerBase.setHeightBottomSheet');
-    try {
-      return super.setHeightBottomSheet(value);
-    } finally {
-      _$NavControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
 
   @override
   dynamic setSelectedIndex(int value) {
@@ -376,8 +349,7 @@ heightPlayer: ${heightPlayer},
 positionVideo: ${positionVideo},
 videoSelected: ${videoSelected},
 chewieController: ${chewieController},
-videoPlayerController: ${videoPlayerController},
-heightBottomSheet: ${heightBottomSheet}
+videoPlayerController: ${videoPlayerController}
     ''';
   }
 }

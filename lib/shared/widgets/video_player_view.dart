@@ -46,7 +46,9 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
         controller.setVideoPlayerController(VideoPlayerController.asset(widget.url));
         break;
       case DataSourceType.network:
-        controller.setVideoPlayerController(VideoPlayerController.network(widget.url));
+        controller.setVideoPlayerController(VideoPlayerController.networkUrl(
+          Uri.parse(widget.url)
+        ));
         break;
       case DataSourceType.file:
         controller.setVideoPlayerController(VideoPlayerController.file(File(widget.url)));

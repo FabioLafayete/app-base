@@ -40,9 +40,9 @@ class CustomBottomSheet extends BaseWidget<NavController> {
               ),
               Stack(
                 children: [
-                  Observer(builder: (_) => AnimatedContainer(
+                  AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
-                    height: !hasHeight ? null : (height * controller.heightBottomSheet),
+                    // height: !hasHeight ? null : (height * controller.heightBottomSheet),
                     width: Get.width,
                     padding: const EdgeInsets.all(16).copyWith(
                         top: 30
@@ -55,7 +55,7 @@ class CustomBottomSheet extends BaseWidget<NavController> {
                         )
                     ),
                     child: child,
-                  )),
+                  ),
                   Positioned(
                     top: Get.height * 0.02,
                     right: Get.width * 0.04,

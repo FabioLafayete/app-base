@@ -36,16 +36,16 @@ abstract class NavControllerBase with Store {
   ChewieController? chewieController;
   @observable
   VideoPlayerController? videoPlayerController;
-  @observable
-  double heightBottomSheet = 0.35;
+  // @observable
+  // double heightBottomSheet = 0.35;
 
   final MiniplayerController miniplayerController = MiniplayerController();
   BehaviorSubject<double> percent = BehaviorSubject.seeded(0.0);
 
   NavControllerBase();
 
-  @action
-  setHeightBottomSheet(double value) => heightBottomSheet = value;
+  // @action
+  // setHeightBottomSheet(double value) => heightBottomSheet = value;
   @action
   setSelectedIndex(int value) => selectedIndex = value;
   @action
