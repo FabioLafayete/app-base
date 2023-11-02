@@ -94,11 +94,18 @@ class CustomInterceptors extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     Duration duration = DateTime.now().difference(timeRequest);
-    String time = '${duration.inSeconds}.${duration.inMilliseconds.toString().substring(duration.inSeconds.toString().length)}s';
+    String time = '';
+    if(duration.inSeconds > 0){
+      time = '${duration.inSeconds}.${duration.inMilliseconds.toString().substring(duration.inSeconds.toString().length)} s';
+    } else if(duration.inMilliseconds > 0) {
+      time = '${duration.inMilliseconds} ms';
+    } else {
+      time = '${duration.inMicroseconds} microseconds';
+    }
     final logger = Logger(
       printer: PrettyPrinter(
           methodCount: 0,
-          lineLength: 110,
+          lineLength: 90,
           errorMethodCount: 0,
           colors: true,
           printEmojis: true

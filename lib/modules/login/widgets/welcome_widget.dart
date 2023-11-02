@@ -16,7 +16,7 @@ class WelcomeWidget extends StatefulWidget {
     required this.signInOnPress
   }) : super(key: key);
 
-  final Function() signInOnPress;
+  final Function(bool signUp) signInOnPress;
 
   @override
   State<WelcomeWidget> createState() => _WelcomeWidgetState();
@@ -134,7 +134,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     sizeTitle: 16,
                     colorTitle: colors.secondary,
                     colorButton: colors.background,
-                    onPress: widget.signInOnPress,
+                    onPress: () => widget.signInOnPress(false),
                   ),
                   const SizedBox(height: 20),
                   CustomButton(
@@ -142,7 +142,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     sizeTitle: 16,
                     colorTitle: Colors.white,
                     cleanButton: true,
-                    onPress: widget.signInOnPress,
+                    onPress: () => widget.signInOnPress(true),
                   )
                 ],
               ),
