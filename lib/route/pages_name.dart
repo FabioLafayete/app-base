@@ -14,6 +14,7 @@ class PagesNames {
   /// WORKOUT
   static const String workout = '/workout/';
   static const String workoutDetail = '/workout/detail';
+  static const String workoutVideo = '/workout/video';
 
   /// PROFILE
   static const String profile = '/profile/';

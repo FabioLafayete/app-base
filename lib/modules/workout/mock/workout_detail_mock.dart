@@ -18,8 +18,8 @@ abstract class WorkoutDetailMock{
           "title": 'Banded Lateral Walk',
           "description": 'Descricao 01',
           "duration": '30 segundos',
-          "videoUrl": 'https://stream.mux.com/QKc3kScQl02ntDMA02FEHGWoQ6kEJ9V7UtD2pSB01DYwZ00.m3u8',
-          "thumbnail": 'https://image.mux.com/QKc3kScQl02ntDMA02FEHGWoQ6kEJ9V7UtD2pSB01DYwZ00/thumbnail.png?width=720&height=480&time=0',
+          "videoUrl": 'https://stream.mux.com/FgF5P00wG7DYTo005OFrbluyor007Wgyf9tV00aw02WEK84Y.m3u8',
+          "thumbnail": 'https://image.mux.com/FgF5P00wG7DYTo005OFrbluyor007Wgyf9tV00aw02WEK84Y/thumbnail.png?width=720&height=480&time=0',
           "alreadySeen": false,
         },
         {
@@ -37,7 +37,7 @@ abstract class WorkoutDetailMock{
           "description": 'Descricao 03',
           "duration": '30 segundos',
           "videoUrl": 'https://stream.mux.com/QKc3kScQl02ntDMA02FEHGWoQ6kEJ9V7UtD2pSB01DYwZ00.m3u8',
-          "thumbnail": 'https://images.pexels.com/photos/863977/pexels-photo-863977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          "thumbnail": 'https://image.mux.com/QKc3kScQl02ntDMA02FEHGWoQ6kEJ9V7UtD2pSB01DYwZ00/thumbnail.png?width=720&height=480&time=0',
           "alreadySeen": false,
         },
         {

@@ -1,5 +1,5 @@
 import 'package:app/modules/workout/controller/workout_controller.dart';
-import 'package:app/shared/model/workout/program_model/program_model.dart';
+import 'package:app/route/pages_name.dart';
 import 'package:app/shared/widgets/back_button.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
@@ -10,10 +10,8 @@ import 'package:flutter/material.dart';
 class WorkoutDetailPage extends BaseWidget<WorkoutController> {
   WorkoutDetailPage({
     Key? key,
-    required this.model
   }) : super(key: key);
 
-  final ProgramModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +43,8 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                     const SizedBox(height: 20),
                     text('Treinos', fontSize: 20, fontWeight: FontWeight.w700),
                     const SizedBox(height: 20),
-                    ...List.generate(model.workouts.length, (index){
-                      final item = model.workouts[index];
+                    ...List.generate(controller.programModel!.workouts.length, (index){
+                      final item = controller.programModel!.workouts[index];
                       return Container(
                         margin: const EdgeInsets.only(bottom: 20),
                         child: Row(
@@ -110,7 +108,9 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                 border: 10,
                 colorButton: colors.primary,
                 colorTitle: colors.background,
-                onPress: (){},
+                onPress: (){
+                  router.pushNamed(PagesNames.workoutVideo);
+                },
               ),
             ),
           )
@@ -139,7 +139,7 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
   Widget _image() {
     return CachedNetworkImage(
       fadeInDuration: const Duration(milliseconds: 300),
-      imageUrl: model.thumbnail,
+      imageUrl: controller.programModel!.thumbnail,
       width: width,
       height: height * 0.45,
       fit: BoxFit.cover,
@@ -156,7 +156,7 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           text(
-            model.title,
+            controller.programModel!.title,
             fontWeight: FontWeight.w700,
             color: colors.text2,
             maxLines: 2,
@@ -170,13 +170,13 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
               children: [
-                if(model.duration != null)
+                if(controller.programModel!.duration != null)
                   Row(
                     children: [
                       Icon(Icons.access_time_sharp, color: colors.text2, size: 22),
                       const SizedBox(width: 5),
                       text(
-                        model.duration!,
+                        controller.programModel!.duration!,
                         fontWeight: FontWeight.w400,
                         color: colors.text2,
                         fontSize: 16,
@@ -191,7 +191,7 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                       Icon(Icons.local_fire_department_outlined, color: colors.text2),
                       const SizedBox(width: 5),
                       text(
-                        model.kcal.toString(),
+                        controller.programModel!.kcal.toString(),
                         fontWeight: FontWeight.w400,
                         color: colors.text2,
                         fontSize: 16,
@@ -199,14 +199,14 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                       text(' Kcal', fontSize: 12, color: colors.text2)
                     ],
                   ),
-                if(model.difficulty != null)
+                if(controller.programModel!.difficulty != null)
                   Row(
                     children: [
                       const SizedBox(width: 20),
                       Icon(Icons.bar_chart_rounded, color: colors.text2, size: 20),
                       const SizedBox(width: 5),
                       text(
-                        model.difficulty!,
+                        controller.programModel!.difficulty!,
                         fontWeight: FontWeight.w400,
                         color: colors.text2,
                         fontSize: 16,

@@ -19,10 +19,8 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
   final navController = Modular.get<NavController>();
 
   void openVideo (){
-    router.pushNamed(
-      PagesNames.workoutDetail,
-      arguments: ProgramModel.fromJson(WorkoutDetailMock.mockJson()),
-    );
+    controller.setProgramModel(ProgramModel.fromJson(WorkoutDetailMock.mockJson()));
+    router.pushNamed(PagesNames.workoutDetail);
   }
 
   void openVideo2 (){

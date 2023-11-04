@@ -2,13 +2,15 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
 
 class MyBackButton extends BaseWidget {
-  MyBackButton({super.key});
+  MyBackButton({super.key, this.onPress});
+
+  final Function()? onPress;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: GestureDetector(
-        onTap: router.pop,
+        onTap: onPress ?? router.pop,
         child: Container(
           margin: const EdgeInsets.only(left: 10, top: 10),
           decoration: BoxDecoration(
