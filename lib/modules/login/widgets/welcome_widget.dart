@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:app/shared/widgets/base_page.dart';
-import 'package:app/shared/widgets/custom_button.dart';
+import 'package:app/shared/widgets/my_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -129,7 +129,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                       fontSize: width * 0.05
                   ),
                   SizedBox(height: height * 0.07),
-                  CustomButton(
+                  MyButton(
                     title: 'ENTRAR',
                     sizeTitle: 16,
                     colorTitle: colors.secondary,
@@ -137,7 +137,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     onPress: () => widget.signInOnPress(false),
                   ),
                   const SizedBox(height: 20),
-                  CustomButton(
+                  MyButton(
                     title: 'Não tem cadastro? Adquira aqui',
                     sizeTitle: 16,
                     colorTitle: Colors.white,

@@ -1,8 +1,8 @@
-import 'package:app/modules/login/model/auth_model.dart';
 import 'package:app/service/storage/storage_service.dart';
 import 'package:app/shared/constants/storage_constants.dart';
 import 'package:app/shared/flavor/flavor_types.dart';
 import 'package:app/shared/flavor/impl/flavor_impl.dart';
+import 'package:app/shared/model/auth_model/auth_model.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../shared/constants/endpoints.dart';
 import '../shared/constants/string_contants.dart';

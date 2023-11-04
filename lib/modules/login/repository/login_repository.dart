@@ -1,4 +1,4 @@
-import '../model/auth_model.dart';
+import 'package:app/shared/model/auth_model/auth_model.dart';
 
 abstract class LoginRepository {
   Future<void> postTokenEmail(String email);

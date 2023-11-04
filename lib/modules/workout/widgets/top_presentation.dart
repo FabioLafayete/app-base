@@ -1,6 +1,6 @@
 import 'package:app/modules/workout/widgets/list_cards_items.dart';
 import 'package:app/shared/widgets/base_widget.dart';
-import 'package:app/shared/widgets/custom_button.dart';
+import 'package:app/shared/widgets/my_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -80,13 +80,13 @@ class TopPresentation extends BaseWidget {
                   users: [
                     MultipleUsersModel(name: 'Fabio Lafayete', photo: 'https://www.netliteracy.org/wp-content/uploads/2020/07/Capture-3-768x758.png'),
                     MultipleUsersModel(name: 'Mariana Cardoso'),
-                    MultipleUsersModel(name: 'Lucas Alves', photo: 'https://ddg.wiki/wp-content/uploads/sites/22/2019/02/thispersondoesnotexist.com_000.jpg'),
+                    // MultipleUsersModel(name: 'Lucas Alves', photo: 'https://ddg.wiki/wp-content/uploads/sites/22/2019/02/thispersondoesnotexist.com_000.jpg'),
                     MultipleUsersModel(name: 'Vitor Rafael'),
                   ],
                 ),
               SizedBox(
                 width: 100,
-                child: CustomButton(
+                child: MyButton(
                   title: titleButton ?? 'INICIAR',
                   heightButton: 30,
                   sizeTitle: 14,

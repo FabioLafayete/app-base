@@ -1,5 +1,5 @@
 import 'package:app/modules/food/mock/food_detail_mock.dart';
-import 'package:app/modules/food/models/food_detail_model/food_detail_model.dart';
+import 'package:app/shared/model/food/food_detail_model/food_detail_model.dart';
 import 'package:mobx/mobx.dart';
 
 part 'food_controller.g.dart';

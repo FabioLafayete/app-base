@@ -2,8 +2,8 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class CustomButton extends BaseWidget {
-  CustomButton({
+class MyButton extends BaseWidget {
+  MyButton({
     Key? key,
     required this.title,
     this.sizeTitle,
@@ -16,11 +16,13 @@ class CustomButton extends BaseWidget {
     this.boldText = true,
     this.iconRight = false,
     this.loading = false,
+    this.border = 12,
     this.loadingColor
   }) : super(key: key);
 
   final String title;
   final double? sizeTitle;
+  final double border;
   final double? heightButton;
   final Function()? onPress;
   final Color? colorTitle;
@@ -62,7 +64,7 @@ class CustomButton extends BaseWidget {
       height: heightButton ?? 50,
       child: ElevatedButton(
         onPressed: loading ? (){} : onPress,
-        style: onPress != null ? enableButtonStyle() : disableButtonStyle(),
+        style: onPress != null ? enableButtonStyle(border) : disableButtonStyle(border),
         child: !loading ? Stack(
           alignment: Alignment.center,
           children: [
@@ -96,20 +98,20 @@ class CustomButton extends BaseWidget {
     );
   }
 
-  ButtonStyle enableButtonStyle(){
+  ButtonStyle enableButtonStyle(double border){
     return ButtonStyle(
         overlayColor: MaterialStateProperty.all<Color>(colors.primary.withOpacity(0.1)),
         backgroundColor: MaterialStateProperty.all<Color>(colorButton ?? colors.primary),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(1000.0),
+                borderRadius: BorderRadius.circular(border),
                 side: colorBorder != null ? BorderSide(color: colorBorder!) : BorderSide.none
             )
         )
     );
   }
 
-  ButtonStyle disableButtonStyle(){
+  ButtonStyle disableButtonStyle(double border){
     return ButtonStyle(
         overlayColor: MaterialStateProperty.all<Color>(colors.primary.withOpacity(0.1)),
         backgroundColor: MaterialStateProperty.all<Color>(
@@ -117,7 +119,7 @@ class CustomButton extends BaseWidget {
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(1000.0),
+                borderRadius: BorderRadius.circular(border),
                 side: BorderSide(color: colorBorder ?? colors.primary.withOpacity(0.6), width: 1.5)
             )
         )

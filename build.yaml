@@ -5,6 +5,5 @@ targets:
         generate_for:
           include:
             - "lib/modules/**/controller/**_controller.dart"
-            - "lib/modules/**/models/**_model.dart"
             - "lib/shared/model/**_model.dart"
             - "lib/shared/modules/user/controller/**_controller.dart"

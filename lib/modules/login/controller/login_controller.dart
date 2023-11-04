@@ -1,6 +1,7 @@
 import 'package:app/config/app_config.dart';
 import 'package:app/modules/login/repository/impl/login_repository_impl.dart';
 import 'package:app/route/pages_name.dart';
+import 'package:app/shared/model/auth_model/auth_model.dart';
 import 'package:app/util/util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,6 @@ import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 import 'package:app/shared/widgets/base_controller.dart';
 import '../../navigator/controller/nav_controller.dart';
-import '../model/auth_model.dart';
 
 part 'login_controller.g.dart';
 

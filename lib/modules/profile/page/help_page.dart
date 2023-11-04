@@ -1,7 +1,7 @@
 import 'package:app/modules/profile/controller/profile_controller.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
-import 'package:app/shared/widgets/custom_button.dart';
+import 'package:app/shared/widgets/my_button.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -108,7 +108,7 @@ class HelpPage extends BaseWidget<ProfileController> {
           ),
           const Spacer(),
           Observer(builder: (_){
-            return CustomButton(
+            return MyButton(
               onPress: controller.enableButtonSendHelp() ? (){
 
               } : null,

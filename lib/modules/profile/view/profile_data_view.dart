@@ -1,7 +1,7 @@
 import 'package:app/modules/profile/controller/profile_controller.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
-import 'package:app/shared/widgets/custom_button.dart';
+import 'package:app/shared/widgets/my_button.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
@@ -106,7 +106,7 @@ class ProfileDataView extends BaseWidget<ProfileController> {
               },
             ),
             const SizedBox(height: 24),
-            Observer(builder: (_) => CustomButton(
+            Observer(builder: (_) => MyButton(
               title: 'SALVAR',
               colorTitle: colors.background,
               colorButton: colors.primary,
@@ -184,7 +184,7 @@ class ProfileDataView extends BaseWidget<ProfileController> {
               },
             ),
             const SizedBox(height: 24),
-            Observer(builder: (_) => CustomButton(
+            Observer(builder: (_) => MyButton(
               title: 'SALVAR',
               colorTitle: colors.background,
               colorButton: colors.primary,

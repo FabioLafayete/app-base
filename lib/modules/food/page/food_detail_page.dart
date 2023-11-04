@@ -1,7 +1,7 @@
-import 'package:app/modules/food/models/food_detail_model/food_detail_model.dart';
+import 'package:app/shared/model/food/food_detail_model/food_detail_model.dart';
+import 'package:app/shared/widgets/back_button.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
-import 'package:app/shared/widgets/border_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -185,28 +185,6 @@ class FoodDetailPage extends BaseWidget {
     );
   }
 
-  Widget _buttonBack(){
-    return SafeArea(
-      child: GestureDetector(
-        onTap: router.pop,
-        child: Container(
-          margin: const EdgeInsets.only(left: 10, top: 10),
-          decoration: BoxDecoration(
-            color: colors.primary,
-            borderRadius: BorderRadius.circular(10)
-          ),
-          padding: const EdgeInsets.only(
-            left: 20, right: 10, top: 15, bottom: 15
-          ),
-          child: Icon(
-              Icons.arrow_back_ios,
-              color: colors.background
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget _imageTop(){
     return Stack(
       children: [
@@ -243,7 +221,7 @@ class FoodDetailPage extends BaseWidget {
             child: Icon(Icons.no_photography_sharp, color: Colors.grey),
           )
         ),
-        _buttonBack()
+        MyBackButton(),
       ],
     );
   }

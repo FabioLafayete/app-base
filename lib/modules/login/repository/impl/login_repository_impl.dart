@@ -1,4 +1,5 @@
-import '../../model/auth_model.dart';
+import 'package:app/shared/model/auth_model/auth_model.dart';
+
 import '../../service/login_service.dart';
 import '../login_repository.dart';
 

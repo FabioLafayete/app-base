@@ -1,11 +1,10 @@
-import 'package:app/modules/food/models/food_detail_model/food_detail_model.dart';
 import 'package:app/modules/food/widgets/items_wrap.dart';
+import 'package:app/shared/model/food/food_detail_model/food_detail_model.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../route/pages_name.dart';
-import '../mock/food_detail_mock.dart';
 
 class FoodListByCategory extends BaseWidget {
   FoodListByCategory({

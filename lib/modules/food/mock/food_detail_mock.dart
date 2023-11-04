@@ -1,4 +1,3 @@
-import 'package:app/modules/food/models/food_detail_model/food_detail_model.dart';
 
 abstract class FoodDetailMock{
 

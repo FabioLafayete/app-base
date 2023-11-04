@@ -1,4 +1,7 @@
 import 'package:app/modules/workout/controller/workout_controller.dart';
+import 'package:app/modules/workout/mock/workout_detail_mock.dart';
+import 'package:app/route/pages_name.dart';
+import 'package:app/shared/model/workout/program_model/program_model.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
@@ -16,37 +19,21 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
   final navController = Modular.get<NavController>();
 
   void openVideo (){
-    // navController.setVideoSelected(
-    //     const VideoModel(
-    //         name: 'TESTE DE VIDEO 1',
-    //         url: 'https://stream.mux.com/Fz9TDH4f13E2rtwMMW4TGEgF4vioyKmi32I8IVKgENg.m3u8',
-    //         type: DataSourceType.network
-    //     )
-    // );
+    router.pushNamed(
+      PagesNames.workoutDetail,
+      arguments: ProgramModel.fromJson(WorkoutDetailMock.mockJson()),
+    );
+  }
 
-    // navController.setVideoSelected(
-    //     const VideoModel(
-    //         name: 'TESTE DE VIDEO 1',
-    //         url: 'https://player.vimeo.com/progressive_redirect/playback/675622290/rendition/360p?loc=external&oauth2_token_id=1406393538&signature=1545279f8150f119095ae76eb3326158500e1a9f3b2df1ed271917f4e3d0af2d',
-    //         type: DataSourceType.network
-    //     )
-    // );
-
+  void openVideo2 (){
     navController.setVideoSelected(
         const VideoModel(
             name: 'TESTE DE VIDEO 1',
-            url: 'https://player.vimeo.com/progressive_redirect/playback/792225316/container/7c12ba45-32b3-4711-b209-412fceb9236a/fbf16dfe-ba2a38ab?expires=1694798578&loc=external&oauth2_token_id=1621307933&session_id=49ed4a1818a451a53ee3e93f2b001336c0c420bb1694712058&signature=18d537a05798b5c229e3f6a6000811aeaa7fe5ad5c9dae78620a7c0f375deb69',
+            url: 'https://stream.mux.com/Fz9TDH4f13E2rtwMMW4TGEgF4vioyKmi32I8IVKgENg.m3u8',
             type: DataSourceType.network
         )
     );
 
-    // navController.setVideoSelected(
-    //     const VideoModel(
-    //         name: 'TESTE DE VIDEO 1',
-    //         url: 'https://player.vimeo.com/progressive_redirect/playback/video_id/rendition/1080p/file.mp4',
-    //         type: DataSourceType.network
-    //     )
-    // );
     navController.miniplayerController.animateToHeight(state: PanelState.MAX);
   }
 
@@ -54,7 +41,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
   Widget build(BuildContext context) {
 
     final List<ListCardItems> _list = [
-      ListCardItems(title: 'Corpo todo', seeMore: (){}, listItems: [
+      ListCardItems(title: 'Feitos para você', seeMore: (){}, listItems: [
         CardItemModel(
             title: 'SEI LA 2',
             onPress: openVideo,
@@ -74,7 +61,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
             trainer: 'Sabrina Luisa'
         ),
       ]),
-      ListCardItems(title: 'Luta', seeMore: (){}, listItems: [
+      ListCardItems(title: 'Desafios', seeMore: (){}, listItems: [
         CardItemModel(
             title: 'SEI LA 2',
             onPress: openVideo,
@@ -94,7 +81,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
             trainer: 'Joao Carlos'
         ),
       ]),
-      ListCardItems(title: 'Meditação', seeMore: (){}, listItems: [
+      ListCardItems(title: 'Treinos em casa', seeMore: (){}, listItems: [
         CardItemModel(
             title: 'SEI LA 2',
             onPress: openVideo,
@@ -145,35 +132,6 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
                   space(0.03),
               ]
           ),
-          // Container(
-          //   color: colors.primary.withOpacity(0.9),
-          //   width: width,
-          //   height: height,
-          //   child: Padding(
-          //     padding: const EdgeInsets.all(30),
-          //     child: Column(
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       children: [
-          //         const SizedBox(height: 100),
-          //         text(
-          //             'Quase la...',
-          //             fontSize: 40,
-          //             fontWeight: FontWeight.w700,
-          //             color: colors.background
-          //         ),
-          //         const SizedBox(height: 20),
-          //         text(
-          //             'Estamos terminando de gravar as aulas de treinamentos.\n\nAvisaremos assim que estiver pronto',
-          //             fontSize: 20,
-          //             fontWeight: FontWeight.w600,
-          //             textAlign: TextAlign.left,
-          //             height: 1.5,
-          //             color: colors.background,
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // )
         ],
       ),
     );

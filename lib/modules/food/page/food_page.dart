@@ -6,7 +6,7 @@ import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
-import 'package:app/shared/widgets/custom_button.dart';
+import 'package:app/shared/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -112,7 +112,7 @@ class FoodPage extends BaseWidget<FoodController> {
           ),
           Flexible(
             flex: 4,
-            child: CustomButton(
+            child: MyButton(
               cleanButton: true,
               title: 'Ver receita',
               colorTitle: colors.primary,

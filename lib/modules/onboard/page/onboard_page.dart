@@ -2,7 +2,7 @@ import 'package:app/modules/onboard/controller/onboard_controller.dart';
 import 'package:app/modules/onboard/widgets/step_name_widget.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
-import 'package:app/shared/widgets/custom_button.dart';
+import 'package:app/shared/widgets/my_button.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -89,7 +89,7 @@ class OnboardPage extends BaseWidget<OnboardController> {
                 const Spacer(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Observer(builder: (_) => CustomButton(
+                  child: Observer(builder: (_) => MyButton(
                     title: controller.index + 1 == _items.length ? 'FINALIZAR' : "AVANÇAR",
                     colorTitle: colors.background,
                     colorButton: colors.primary,

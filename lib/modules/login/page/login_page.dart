@@ -1,7 +1,7 @@
 import 'package:app/modules/login/controller/login_controller.dart';
 import 'package:app/modules/login/widgets/welcome_widget.dart';
 import 'package:app/shared/widgets/base_widget.dart';
-import 'package:app/shared/widgets/custom_button.dart';
+import 'package:app/shared/widgets/my_button.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -96,7 +96,7 @@ class LoginPage extends BaseWidget<LoginController> {
                             if (controller.showCode)
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
-                                child: CustomButton(
+                                child: MyButton(
                                     title: 'Enviar novo código',
                                     colorTitle: colors.primary,
                                     cleanButton: true,
@@ -108,7 +108,7 @@ class LoginPage extends BaseWidget<LoginController> {
                         ),
                       ),
                     Observer(
-                        builder: (_) => CustomButton(
+                        builder: (_) => MyButton(
                               title: controller.showCode
                                   ? 'VALIDAR CÓDIGO'
                                   : 'AVANÇAR',
