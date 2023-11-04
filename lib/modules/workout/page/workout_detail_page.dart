@@ -37,17 +37,17 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                 bottom: 0, right: 0, left: 0,
                 child: Container(
                   margin: const EdgeInsets.only(
-                    bottom: 20,
+                    bottom: 0,
                     right: 20,
                     left: 20
                   ),
                   child: MyButton(
-                    title: 'Assistir treinos',
-                    sizeTitle: 20,
+                    title: 'INICIAR TREINO',
+                    sizeTitle: 18,
                     heightButton: 55,
                     border: 10,
-                    colorButton: colors.background,
-                    colorTitle: colors.text,
+                    colorButton: colors.primary,
+                    colorTitle: colors.background,
                     onPress: (){},
                   ),
                 ),
@@ -61,16 +61,16 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
 
   Widget _effectImage(){
     return Container(
-      height: height * 0.55,
+      height: height * 0.5,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: FractionalOffset.topCenter,
               end: FractionalOffset.bottomCenter,
               colors: [
                 Colors.transparent,
-                colors.primary,
+                colors.background,
               ],
-              stops: const [0.0, 1]
+              stops: const [0, 0.85]
           )
       ),
     );
@@ -81,14 +81,14 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
       fadeInDuration: const Duration(milliseconds: 300),
       imageUrl: model.thumbnail,
       width: width,
-      height: height * 0.55,
+      height: height * 0.5,
       fit: BoxFit.cover,
     );
   }
 
   Widget _info(){
     return Positioned(
-      bottom: 90,
+      bottom: 70,
       left: 20,
       right: 20,
       child: Column(
@@ -97,8 +97,8 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
         children: [
           text(
             model.title,
-            fontWeight: FontWeight.w500,
-            color: colors.text2,
+            fontWeight: FontWeight.w700,
+            color: colors.text,
             maxLines: 2,
             textOverflow: TextOverflow.ellipsis,
             fontSize: 30,
@@ -113,41 +113,41 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                 if(model.duration != null)
                   Row(
                     children: [
-                      Icon(Icons.access_time_sharp, color: colors.background, size: 25),
+                      Icon(Icons.access_time_sharp, color: colors.text, size: 25),
                       const SizedBox(width: 5),
                       text(
                         model.duration!,
                         fontWeight: FontWeight.w400,
-                        color: colors.text2,
+                        color: colors.text,
                         fontSize: 18,
                       ),
-                      text(' min', fontSize: 12, color: colors.text2)
+                      text(' min', fontSize: 12, color: colors.text)
                     ],
                   ),
                   Row(
                     children: [
                       const SizedBox(width: 20),
-                      Icon(Icons.local_fire_department_outlined, color: colors.background),
+                      Icon(Icons.local_fire_department_outlined, color: colors.text),
                       const SizedBox(width: 5),
                       text(
                         model.kcal.toString(),
                         fontWeight: FontWeight.w400,
-                        color: colors.text2,
+                        color: colors.text,
                         fontSize: 18,
                       ),
-                      text(' Kcal', fontSize: 12, color: colors.text2)
+                      text(' Kcal', fontSize: 12, color: colors.text)
                     ],
                   ),
                 if(model.difficulty != null)
                   Row(
                     children: [
                       const SizedBox(width: 20),
-                      Icon(Icons.bar_chart_rounded, color: colors.background, size: 25),
+                      Icon(Icons.bar_chart_rounded, color: colors.text, size: 25),
                       const SizedBox(width: 5),
                       text(
                         model.difficulty!,
                         fontWeight: FontWeight.w400,
-                        color: colors.text2,
+                        color: colors.text,
                         fontSize: 18,
                       ),
                     ],

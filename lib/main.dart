@@ -12,6 +12,7 @@ void main() async {
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
           locale: const Locale('pt', 'BR'),
+          theme: ThemeData(fontFamily: 'Inter'),
           routeInformationParser: Modular.routeInformationParser,
           routerDelegate: Modular.routerDelegate,
         ),

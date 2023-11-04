@@ -25,6 +25,7 @@ class AppTheme {
         letterSpacing: letterSpacing,
         height: height,
         decoration: decoration,
+        fontFamily: 'Inter'
       ),
     );
   }

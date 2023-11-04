@@ -64,6 +64,17 @@ flutter:
     - assets/images/
     - assets/images/foods/
 
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter/static/Inter-ExtraBold.ttf
+        - asset: assets/fonts/Inter/static/Inter-Bold.ttf
+        - asset: assets/fonts/Inter/static/Inter-SemiBold.ttf
+        - asset: assets/fonts/Inter/static/Inter-Regular.ttf
+        - asset: assets/fonts/Inter/static/Inter-Medium.ttf
+        - asset: assets/fonts/Inter/static/Inter-Light.ttf
+
+
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true

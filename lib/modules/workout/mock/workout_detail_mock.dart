@@ -4,7 +4,7 @@ abstract class WorkoutDetailMock{
   static Map<String, dynamic> mockJson(){
     return {
       "id": '01',
-      "title": "TESTE TITULO",
+      "title": "15-Minute Abs",
       "description": "TESTE DESCRICAO",
       "duration": "20",
       "difficulty": "Fácil",

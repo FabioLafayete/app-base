@@ -16,7 +16,7 @@ class MyBackButton extends BaseWidget {
               borderRadius: BorderRadius.circular(10)
           ),
           padding: const EdgeInsets.only(
-              left: 20, right: 10, top: 15, bottom: 15
+              left: 18, right: 8, top: 13, bottom: 13
           ),
           child: Icon(
               Icons.arrow_back_ios,
