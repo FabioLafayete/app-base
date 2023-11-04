@@ -23,37 +23,97 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
       showAppBar: false,
       paddingPage: 0,
       extendBodyBehindAppBar: false,
-      body: ListView(
-        padding: EdgeInsets.zero,
-        physics: const ClampingScrollPhysics(),
+      body: Stack(
         children: [
-          Stack(
+          ListView(
+            padding: EdgeInsets.zero,
+            physics: const ClampingScrollPhysics(),
             children: [
-              _image(),
-              _effectImage(),
-              _info(),
-              MyBackButton(),
-              Positioned(
-                bottom: 0, right: 0, left: 0,
-                child: Container(
-                  margin: const EdgeInsets.only(
-                    bottom: 0,
-                    right: 20,
-                    left: 20
-                  ),
-                  child: MyButton(
-                    title: 'INICIAR TREINO',
-                    sizeTitle: 18,
-                    heightButton: 55,
-                    border: 10,
-                    colorButton: colors.primary,
-                    colorTitle: colors.background,
-                    onPress: (){},
-                  ),
-                ),
+              Stack(
+                children: [
+                  _image(),
+                  _effectImage(),
+                  _info(),
+                  MyBackButton(),
+                ],
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 20),
+                    text('Treinos', fontSize: 20, fontWeight: FontWeight.w700),
+                    const SizedBox(height: 20),
+                    ...List.generate(model.workouts.length, (index){
+                      final item = model.workouts[index];
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 20),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: CachedNetworkImage(
+                                fadeInDuration: const Duration(milliseconds: 300),
+                                imageUrl: item.thumbnail!,
+                                fit: BoxFit.cover,
+                                height: 110,
+                                width: 110,
+                              ),
+                            ),
+                            const SizedBox(width: 20),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  text(
+                                    item.title,
+                                    fontWeight: FontWeight.w600,
+                                    color: colors.text,
+                                    maxLines: 2,
+                                    textOverflow: TextOverflow.ellipsis,
+                                    fontSize: 20,
+                                  ),
+                                  const SizedBox(height: 10),
+                                  text(
+                                    item.duration ?? '',
+                                    fontWeight: FontWeight.w300,
+                                    color: colors.text,
+                                    maxLines: 1,
+                                    textOverflow: TextOverflow.ellipsis,
+                                    fontSize: 14,
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    }),
+                    const SizedBox(height: 100),
+                  ],
+                ),
+              )
             ],
           ),
+          Positioned(
+            bottom: 40,
+            left: 0,
+            right: 0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: MyButton(
+                title: 'Começar',
+                sizeTitle: 20,
+                heightButton: 55,
+                border: 10,
+                colorButton: colors.primary,
+                colorTitle: colors.background,
+                onPress: (){},
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -61,16 +121,16 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
 
   Widget _effectImage(){
     return Container(
-      height: height * 0.5,
+      height: height * 0.45,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: FractionalOffset.topCenter,
               end: FractionalOffset.bottomCenter,
               colors: [
                 Colors.transparent,
-                colors.background,
+                colors.text.withOpacity(0.6),
               ],
-              stops: const [0, 0.85]
+              stops: const [0, 0.9]
           )
       ),
     );
@@ -81,14 +141,14 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
       fadeInDuration: const Duration(milliseconds: 300),
       imageUrl: model.thumbnail,
       width: width,
-      height: height * 0.5,
+      height: height * 0.45,
       fit: BoxFit.cover,
     );
   }
 
   Widget _info(){
     return Positioned(
-      bottom: 70,
+      bottom: 10,
       left: 20,
       right: 20,
       child: Column(
@@ -98,7 +158,7 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
           text(
             model.title,
             fontWeight: FontWeight.w700,
-            color: colors.text,
+            color: colors.text2,
             maxLines: 2,
             textOverflow: TextOverflow.ellipsis,
             fontSize: 30,
@@ -113,42 +173,43 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                 if(model.duration != null)
                   Row(
                     children: [
-                      Icon(Icons.access_time_sharp, color: colors.text, size: 25),
+                      Icon(Icons.access_time_sharp, color: colors.text2, size: 22),
                       const SizedBox(width: 5),
                       text(
                         model.duration!,
                         fontWeight: FontWeight.w400,
-                        color: colors.text,
-                        fontSize: 18,
+                        color: colors.text2,
+                        fontSize: 16,
                       ),
-                      text(' min', fontSize: 12, color: colors.text)
+                      text(' min', fontSize: 12, color: colors.text2)
                     ],
                   ),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const SizedBox(width: 20),
-                      Icon(Icons.local_fire_department_outlined, color: colors.text),
+                      Icon(Icons.local_fire_department_outlined, color: colors.text2),
                       const SizedBox(width: 5),
                       text(
                         model.kcal.toString(),
                         fontWeight: FontWeight.w400,
-                        color: colors.text,
-                        fontSize: 18,
+                        color: colors.text2,
+                        fontSize: 16,
                       ),
-                      text(' Kcal', fontSize: 12, color: colors.text)
+                      text(' Kcal', fontSize: 12, color: colors.text2)
                     ],
                   ),
                 if(model.difficulty != null)
                   Row(
                     children: [
                       const SizedBox(width: 20),
-                      Icon(Icons.bar_chart_rounded, color: colors.text, size: 25),
+                      Icon(Icons.bar_chart_rounded, color: colors.text2, size: 20),
                       const SizedBox(width: 5),
                       text(
                         model.difficulty!,
                         fontWeight: FontWeight.w400,
-                        color: colors.text,
-                        fontSize: 18,
+                        color: colors.text2,
+                        fontSize: 16,
                       ),
                     ],
                   ),

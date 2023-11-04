@@ -17,11 +17,13 @@ class MyButton extends BaseWidget {
     this.iconRight = false,
     this.loading = false,
     this.border = 12,
+    this.elevation = 3,
     this.loadingColor
   }) : super(key: key);
 
   final String title;
   final double? sizeTitle;
+  final double elevation;
   final double border;
   final double? heightButton;
   final Function()? onPress;
@@ -64,7 +66,9 @@ class MyButton extends BaseWidget {
       height: heightButton ?? 50,
       child: ElevatedButton(
         onPressed: loading ? (){} : onPress,
-        style: onPress != null ? enableButtonStyle(border) : disableButtonStyle(border),
+        style: onPress != null ?
+        enableButtonStyle(border, elevation) :
+        disableButtonStyle(border, elevation),
         child: !loading ? Stack(
           alignment: Alignment.center,
           children: [
@@ -98,9 +102,10 @@ class MyButton extends BaseWidget {
     );
   }
 
-  ButtonStyle enableButtonStyle(double border){
+  ButtonStyle enableButtonStyle(double border, double elevation){
     return ButtonStyle(
         overlayColor: MaterialStateProperty.all<Color>(colors.primary.withOpacity(0.1)),
+        elevation: MaterialStateProperty.all<double>(elevation),
         backgroundColor: MaterialStateProperty.all<Color>(colorButton ?? colors.primary),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
@@ -111,9 +116,10 @@ class MyButton extends BaseWidget {
     );
   }
 
-  ButtonStyle disableButtonStyle(double border){
+  ButtonStyle disableButtonStyle(double border, double elevation){
     return ButtonStyle(
         overlayColor: MaterialStateProperty.all<Color>(colors.primary.withOpacity(0.1)),
+        elevation: MaterialStateProperty.all<double>(elevation),
         backgroundColor: MaterialStateProperty.all<Color>(
             colorButton?.withOpacity(0.6) ?? colors.primary.withOpacity(0.6)
         ),
