@@ -43,6 +43,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
     controller.chewieController?.dispose();
     controller.setVideoPlayerController(null);
     controller.setChewieController(null);
+    super.dispose();
   }
 
   @override
@@ -135,6 +136,10 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
 
   void initController({int index = 0}){
     controller.setCurrentIndexVideo(index);
+    controller.chewieController?.dispose();
+    controller.videoPlayerController?.dispose();
+    controller.setChewieController(null);
+    controller.setVideoPlayerController(null);
     controller.setVideoPlayerController(
         VideoPlayerController.networkUrl(Uri.parse(controller.workoutModel!.videoUrl))
     );
@@ -150,9 +155,11 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
         autoInitialize: true,
       ));
       controller.chewieController!.setVolume(0);
-      controller.videoPlayerController!.addListener(
-              () => controller.setPositionVideo(controller.videoPlayerController!.value.position)
-      );
+      controller.videoPlayerController!.addListener((){
+        if(controller.videoPlayerController != null){
+          controller.setPositionVideo(controller.videoPlayerController!.value.position);
+        }
+      });
     });
   }
 
