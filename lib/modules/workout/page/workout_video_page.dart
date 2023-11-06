@@ -19,7 +19,7 @@ class WorkoutVideoPage extends StatefulWidget {
   State<WorkoutVideoPage> createState() => _WorkoutVideoPageState();
 }
 
-class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
+class _WorkoutVideoPageState extends State<WorkoutVideoPage> with TickerProviderStateMixin {
 
   late WorkoutController controller;
 
@@ -74,7 +74,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
       child: Center(
         child: CircularProgressIndicator(
           strokeWidth: 2,
-          valueColor: AlwaysStoppedAnimation<Color>(colors.background),
+          color: colors.background,
         ),
       ),
     );
@@ -160,10 +160,25 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
                           setState(() {});
                         }
                       },
-                    icon: Icon(
-                        controller.videoPlayerController!.value.isPlaying ?
-                            Icons.pause_circle_filled_rounded :
-                            Icons.play_circle_fill_rounded
+                    icon: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Icon(
+                            controller.videoPlayerController!.value.isPlaying ?
+                                Icons.pause_circle_filled_rounded :
+                                Icons.play_circle_fill_rounded
+                        ),
+                        if(controller.positionVideo != null)
+                          SizedBox(
+                            height: 50,
+                            width: 50,
+                            child: CircularProgressIndicator(
+                              color: colors.background,
+                              strokeWidth: 2,
+                              value: controller.percentVideo,
+                            ),
+                          )
+                      ],
                     ),
                     iconSize: 70,
                     color: colors.primary,

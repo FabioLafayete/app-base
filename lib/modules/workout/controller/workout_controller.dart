@@ -31,6 +31,7 @@ abstract class WorkoutControllerBase with Store {
   @action
   setCurrentIndexVideo(int item) => currentIndexVideo = item;
 
+
   @action
   setPositionVideo(Duration value) => positionVideo = value;
 
@@ -40,5 +41,21 @@ abstract class WorkoutControllerBase with Store {
 
 
   WorkoutModel? get workoutModel => programModel?.workouts[currentIndexVideo];
+
+  double get percentVideo {
+
+    try{
+      if(videoPlayerController != null && positionVideo != null){
+        Duration total = videoPlayerController!.value.duration;
+        final percentage = (positionVideo!.inMicroseconds / total.inMicroseconds * 100).truncate();
+        print(percentage / 100);
+        return percentage.toDouble() / 100;
+      }
+      return 0;
+    } catch(e){
+      print(e);
+      return 0;
+    }
+  }
 
 }
