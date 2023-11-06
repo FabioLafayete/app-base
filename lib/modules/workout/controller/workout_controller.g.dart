@@ -41,22 +41,6 @@ mixin _$WorkoutController on WorkoutControllerBase, Store {
     });
   }
 
-  late final _$chewieControllerAtom =
-      Atom(name: 'WorkoutControllerBase.chewieController', context: context);
-
-  @override
-  ChewieController? get chewieController {
-    _$chewieControllerAtom.reportRead();
-    return super.chewieController;
-  }
-
-  @override
-  set chewieController(ChewieController? value) {
-    _$chewieControllerAtom.reportWrite(value, super.chewieController, () {
-      super.chewieController = value;
-    });
-  }
-
   late final _$videoPlayerControllerAtom = Atom(
       name: 'WorkoutControllerBase.videoPlayerController', context: context);
 
@@ -127,17 +111,6 @@ mixin _$WorkoutController on WorkoutControllerBase, Store {
   }
 
   @override
-  dynamic setChewieController(ChewieController? value) {
-    final _$actionInfo = _$WorkoutControllerBaseActionController.startAction(
-        name: 'WorkoutControllerBase.setChewieController');
-    try {
-      return super.setChewieController(value);
-    } finally {
-      _$WorkoutControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   dynamic setVideoPlayerController(VideoPlayerController? value) {
     final _$actionInfo = _$WorkoutControllerBaseActionController.startAction(
         name: 'WorkoutControllerBase.setVideoPlayerController');
@@ -153,7 +126,6 @@ mixin _$WorkoutController on WorkoutControllerBase, Store {
     return '''
 programModel: ${programModel},
 currentIndexVideo: ${currentIndexVideo},
-chewieController: ${chewieController},
 videoPlayerController: ${videoPlayerController},
 positionVideo: ${positionVideo}
     ''';

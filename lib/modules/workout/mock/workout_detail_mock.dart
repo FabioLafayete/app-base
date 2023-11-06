@@ -14,6 +14,15 @@ abstract class WorkoutDetailMock{
       "alreadySeen": false,
       "workouts": [
         {
+          "id": '0',
+          "title": 'Squats',
+          "description": 'Descricao 01',
+          "duration": '30 segundos',
+          "videoUrl": 'https://stream.mux.com/BB2dxKnYrMtcS02XZV8w6YAK02Toy01YiOJRCd00oagjyPY.m3u8',
+          "thumbnail": 'https://image.mux.com/BB2dxKnYrMtcS02XZV8w6YAK02Toy01YiOJRCd00oagjyPY/thumbnail.png?width=720&height=480&time=1',
+          "alreadySeen": false,
+        },
+        {
           "id": '01',
           "title": 'Banded Lateral Walk',
           "description": 'Descricao 01',

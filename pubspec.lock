@@ -181,10 +181,10 @@ packages:
     dependency: "direct main"
     description:
       name: chewie
-      sha256: ccfce3350ae9fd419cd336cdf3380f77a08e45171e1e3cb3d499d204de5e7ea8
+      sha256: "60701da1f22ed20cd2d40e856fd1f2249dacf5b629d9fa50676443a18a4857b8"
       url: "https://pub.dev"
     source: hosted
-    version: "1.7.1"
+    version: "1.7.0"
   cli_util:
     dependency: transitive
     description:
@@ -293,10 +293,10 @@ packages:
     dependency: "direct main"
     description:
       name: dio
-      sha256: ce75a1b40947fea0a0e16ce73337122a86762e38b982e1ccb909daa3b9bc4197
+      sha256: "417e2a6f9d83ab396ec38ff4ea5da6c254da71e4db765ad737a42af6930140b7"
       url: "https://pub.dev"
     source: hosted
-    version: "5.3.2"
+    version: "5.3.3"
   easy_mask:
     dependency: "direct main"
     description:
@@ -528,14 +528,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
-  gap:
-    dependency: "direct main"
-    description:
-      name: gap
-      sha256: f19387d4e32f849394758b91377f9153a1b41d79513ef7668c088c77dbc6955d
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.1"
   get:
     dependency: "direct main"
     description:

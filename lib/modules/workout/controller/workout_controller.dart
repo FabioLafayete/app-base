@@ -18,8 +18,6 @@ abstract class WorkoutControllerBase with Store {
   @observable
   int currentIndexVideo = 0;
 
-  @observable
-  ChewieController? chewieController;
 
   @observable
   VideoPlayerController? videoPlayerController;
@@ -36,8 +34,6 @@ abstract class WorkoutControllerBase with Store {
   @action
   setPositionVideo(Duration value) => positionVideo = value;
 
-  @action
-  setChewieController(ChewieController? value) => chewieController = value;
 
   @action
   setVideoPlayerController(VideoPlayerController? value) => videoPlayerController = value;

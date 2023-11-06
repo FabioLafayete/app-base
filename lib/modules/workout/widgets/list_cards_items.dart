@@ -28,26 +28,28 @@ class ListCardItems extends BaseWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  text(
-                      title,
-                      color: invertColors ? colors.text2 : colors.text,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 22
-                  ),
-                  if(description != null)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: text(
-                          description!,
-                          color: invertColors ? colors.text2 : colors.text,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16
-                      ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    text(
+                        title,
+                        color: invertColors ? colors.text2 : colors.text,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 22
                     ),
-                ],
+                    if(description != null)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: text(
+                            description!,
+                            color: invertColors ? colors.text2 : colors.text,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16
+                        ),
+                      ),
+                  ],
+                ),
               ),
               if(seeMore != null)
                 GestureDetector(

@@ -4,7 +4,6 @@ import 'package:app/shared/widgets/back_button.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/util/colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -12,7 +11,7 @@ import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 class WorkoutVideoPage extends StatefulWidget {
-  WorkoutVideoPage({
+  const WorkoutVideoPage({
     Key? key,
   }) : super(key: key);
 
@@ -32,17 +31,14 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
 
   @override
   void initState() {
-    super.initState();
     controller = Modular.get<WorkoutController>();
     initController();
+    super.initState();
   }
 
   @override
   void dispose() {
-    controller.videoPlayerController?.dispose();
-    controller.chewieController?.dispose();
-    controller.setVideoPlayerController(null);
-    controller.setChewieController(null);
+    disposeVideo();
     super.dispose();
   }
 
@@ -59,9 +55,10 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
           children: [
             SizedBox(height: height),
             _image(),
-            if(controller.chewieController != null)
+            if(controller.videoPlayerController?.value.isInitialized ?? false)
               _video(),
-            if(controller.chewieController == null)
+            if(controller.videoPlayerController == null ||
+                !controller.videoPlayerController!.value.isInitialized)
               const Center(child: CircularProgressIndicator()),
             MyBackButton(),
             _videoControl()
@@ -76,19 +73,21 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
       fadeInDuration: const Duration(milliseconds: 300),
       imageUrl: controller.programModel!.thumbnail,
       width: width,
-      height: height * 0.65,
+      height: height * 0.6,
       fit: BoxFit.cover,
     );
   }
 
   Widget _video() {
     return SizedBox(
-      height: height * 0.64,
+      height: height * 0.6,
       child: FittedBox(
-        fit: BoxFit.cover,
+        fit: BoxFit.fitHeight,
+        alignment: Alignment.center,
         child: SizedBox(
-          height: 1,
-          child: Chewie(controller: controller.chewieController!),
+          height: controller.videoPlayerController!.value.size.height,
+          width: controller.videoPlayerController!.value.size.width,
+          child: VideoPlayer(controller.videoPlayerController!)
         ),
       ),
     );
@@ -103,7 +102,10 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
       left: 0,
       right: 0,
       child: Container(
-        height: height * 0.37,
+        height: height * 0.42,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20
+        ),
         decoration: BoxDecoration(
           color: colors.background,
           borderRadius: const BorderRadius.only(
@@ -116,18 +118,74 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
             const SizedBox(height: 20),
             text(
               controller.workoutModel!.title,
+              maxLines: 2,
+              textOverflow: TextOverflow.ellipsis,
               fontSize: 25,
               fontWeight: FontWeight.w600,
             ),
-            const SizedBox(height: 20),
-            TextButton(
-                onPressed: (){
-                  initController(
-                    index: controller.currentIndexVideo + 1
-                  );
-                },
-                child: const Text('PLAY / PAUSE')
-            )
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if(controller.currentIndexVideo > 0)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: IconButton(
+                      onPressed: (){
+                        initController(
+                            index: controller.currentIndexVideo - 1
+                        );
+                      },
+                      icon: const Icon(Icons.skip_previous_rounded),
+                      iconSize: 40,
+                      color: colors.primary,
+                    ),
+                  )
+                else
+                  const SizedBox(width: 56),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: IconButton(
+                    onPressed: (){
+                        if(controller.videoPlayerController != null &&
+                            controller.videoPlayerController!.value.isInitialized){
+                          if(controller.videoPlayerController!.value.isPlaying){
+                            controller.videoPlayerController!.pause();
+                          } else {
+                            controller.videoPlayerController!.play();
+                          }
+                          setState(() {});
+                        }
+                      },
+                    icon: Icon(
+                        controller.videoPlayerController!.value.isPlaying ?
+                            Icons.pause_circle_filled_rounded :
+                            Icons.play_circle_fill_rounded
+                    ),
+                    iconSize: 70,
+                    color: colors.primary,
+                  ),
+                ),
+                if(controller.currentIndexVideo < controller.programModel!.workouts.length - 1)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: IconButton(
+                      onPressed: (){
+                        initController(
+                          index: controller.currentIndexVideo + 1
+                        );
+                      },
+                      icon: const Icon(Icons.skip_next_rounded),
+                      iconSize: 40,
+                      color: colors.primary,
+                    ),
+                  )
+                else
+                  const SizedBox(width: 56),
+              ],
+            ),
+            SizedBox(height: height * 0.12)
           ],
         ),
       ),
@@ -136,31 +194,34 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
 
   void initController({int index = 0}){
     controller.setCurrentIndexVideo(index);
-    controller.chewieController?.dispose();
+    controller.setPositionVideo(Duration.zero);
     controller.videoPlayerController?.dispose();
-    controller.setChewieController(null);
     controller.setVideoPlayerController(null);
+
     controller.setVideoPlayerController(
-        VideoPlayerController.networkUrl(Uri.parse(controller.workoutModel!.videoUrl))
+        VideoPlayerController.networkUrl(
+          Uri.parse(controller.workoutModel!.videoUrl),
+        )
     );
     controller.videoPlayerController!.initialize().then((_) {
-      controller.setChewieController(ChewieController(
-        videoPlayerController: controller.videoPlayerController!,
-        // aspectRatio: controller.videoPlayerController!.value.aspectRatio,
-        aspectRatio: 9 / 6,
-        showControls: false,
-        showOptions: false,
-        looping: true,
-        autoPlay: true,
-        autoInitialize: true,
-      ));
-      controller.chewieController!.setVolume(0);
+      controller.videoPlayerController!.setVolume(0);
+      controller.videoPlayerController!.setLooping(true);
+      controller.videoPlayerController!.play();
+      setState(() {});
       controller.videoPlayerController!.addListener((){
         if(controller.videoPlayerController != null){
           controller.setPositionVideo(controller.videoPlayerController!.value.position);
         }
       });
     });
+
+  }
+
+  void disposeVideo(){
+    controller.setCurrentIndexVideo(0);
+    controller.setPositionVideo(Duration.zero);
+    controller.videoPlayerController?.dispose();
+    controller.setVideoPlayerController(null);
   }
 
 }
