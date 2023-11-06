@@ -54,12 +54,11 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
         return Stack(
           children: [
             SizedBox(height: height),
-            _image(),
-            if(controller.videoPlayerController?.value.isInitialized ?? false)
-              _video(),
             if(controller.videoPlayerController == null ||
                 !controller.videoPlayerController!.value.isInitialized)
-              const Center(child: CircularProgressIndicator()),
+              _loading(),
+            if(controller.videoPlayerController?.value.isInitialized ?? false)
+              _video(),
             MyBackButton(),
             _videoControl()
           ],
@@ -68,13 +67,16 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
     );
   }
 
-  Widget _image() {
-    return CachedNetworkImage(
-      fadeInDuration: const Duration(milliseconds: 300),
-      imageUrl: controller.programModel!.thumbnail,
-      width: width,
-      height: height * 0.6,
-      fit: BoxFit.cover,
+  Widget _loading() {
+    return Container(
+      height: height * 0.65,
+      color: colors.primary,
+      child: Center(
+        child: CircularProgressIndicator(
+          strokeWidth: 2,
+          valueColor: AlwaysStoppedAnimation<Color>(colors.background),
+        ),
+      ),
     );
   }
 
