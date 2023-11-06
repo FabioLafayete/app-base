@@ -1,6 +1,7 @@
 import 'package:app/shared/model/workout/program_model/program_model.dart';
 import 'package:app/shared/model/workout/workout_model/workout_model.dart';
 import 'package:chewie/chewie.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:video_player/video_player.dart';
 
@@ -47,7 +48,7 @@ abstract class WorkoutControllerBase with Store {
     try{
       if(videoPlayerController != null && positionVideo != null){
         Duration total = videoPlayerController!.value.duration;
-        final percentage = (positionVideo!.inMicroseconds / total.inMicroseconds * 100).truncate();
+        final percentage = (positionVideo!.inMilliseconds / total.inMilliseconds * 100).truncate();
         print(percentage / 100);
         return percentage.toDouble() / 100;
       }
@@ -56,6 +57,25 @@ abstract class WorkoutControllerBase with Store {
       print(e);
       return 0;
     }
+  }
+
+
+  Future<bool> isPrime(int value) async {
+    final result = await compute(_calculate, value);
+    print(result);
+    return result;
+  }
+
+  bool _calculate(int value) {
+    if (value == 1) {
+      return false;
+    }
+    for (int i = 2; i < value; ++i) {
+      if (value % i == 0) {
+        return false;
+      }
+    }
+    return true;
   }
 
 }

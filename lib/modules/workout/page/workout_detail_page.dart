@@ -5,6 +5,7 @@ import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/my_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutDetailPage extends BaseWidget<WorkoutController> {
@@ -15,7 +16,6 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
 
   @override
   Widget build(BuildContext context) {
-
     return BasePage(
       backgroundColor: colors.background,
       showAppBar: false,

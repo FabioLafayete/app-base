@@ -3,7 +3,6 @@ import 'package:app/shared/widgets/app_theme_widget.dart';
 import 'package:app/shared/widgets/back_button.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/util/colors.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -19,7 +18,7 @@ class WorkoutVideoPage extends StatefulWidget {
   State<WorkoutVideoPage> createState() => _WorkoutVideoPageState();
 }
 
-class _WorkoutVideoPageState extends State<WorkoutVideoPage> with TickerProviderStateMixin {
+class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
 
   late WorkoutController controller;
 
@@ -44,7 +43,6 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> with TickerProvider
 
   @override
   Widget build(BuildContext context) {
-
     return BasePage(
       backgroundColor: colors.background,
       showAppBar: false,
@@ -60,7 +58,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> with TickerProvider
             if(controller.videoPlayerController?.value.isInitialized ?? false)
               _video(),
             MyBackButton(),
-            _videoControl()
+            _videoControl(),
           ],
         );
       }),
@@ -69,7 +67,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> with TickerProvider
 
   Widget _loading() {
     return Container(
-      height: height * 0.65,
+      height: height * 0.62,
       color: colors.primary,
       child: Center(
         child: CircularProgressIndicator(
@@ -82,13 +80,15 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> with TickerProvider
 
   Widget _video() {
     return SizedBox(
-      height: height * 0.6,
+      height: height * 0.61,
       child: FittedBox(
         fit: BoxFit.fitHeight,
         alignment: Alignment.center,
         child: SizedBox(
-          height: controller.videoPlayerController!.value.size.height,
-          width: controller.videoPlayerController!.value.size.width,
+          // height: controller.videoPlayerController!.value.size.height,
+          // width: controller.videoPlayerController!.value.size.width,
+          height: height * 0.29,
+          width: width,
           child: VideoPlayer(controller.videoPlayerController!)
         ),
       ),
@@ -96,15 +96,13 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> with TickerProvider
   }
 
   Widget _videoControl(){
-    if(controller.workoutModel == null) {
+    if(controller.videoPlayerController == null) {
       return const SizedBox.shrink();
     }
     return Positioned(
-      bottom: 0,
-      left: 0,
-      right: 0,
+      bottom: 0, left: 0, right: 0,
       child: Container(
-        height: height * 0.42,
+        height: height * 0.41,
         padding: const EdgeInsets.symmetric(
           horizontal: 20
         ),
@@ -117,12 +115,12 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> with TickerProvider
         ),
         child: Column(
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             text(
               controller.workoutModel!.title,
               maxLines: 2,
               textOverflow: TextOverflow.ellipsis,
-              fontSize: 25,
+              fontSize: 30,
               fontWeight: FontWeight.w600,
             ),
             const Spacer(),
@@ -140,14 +138,14 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> with TickerProvider
                         );
                       },
                       icon: const Icon(Icons.skip_previous_rounded),
-                      iconSize: 40,
+                      iconSize: 60,
                       color: colors.primary,
                     ),
                   )
                 else
-                  const SizedBox(width: 56),
+                  const SizedBox(width: 75),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 0),
                   child: IconButton(
                     onPressed: (){
                         if(controller.videoPlayerController != null &&
@@ -170,8 +168,8 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> with TickerProvider
                         ),
                         if(controller.positionVideo != null)
                           SizedBox(
-                            height: 50,
-                            width: 50,
+                            height: 70,
+                            width: 70,
                             child: CircularProgressIndicator(
                               color: colors.background,
                               strokeWidth: 2,
@@ -180,7 +178,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> with TickerProvider
                           )
                       ],
                     ),
-                    iconSize: 70,
+                    iconSize: 90,
                     color: colors.primary,
                   ),
                 ),
@@ -194,22 +192,22 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> with TickerProvider
                         );
                       },
                       icon: const Icon(Icons.skip_next_rounded),
-                      iconSize: 40,
+                      iconSize: 60,
                       color: colors.primary,
                     ),
                   )
                 else
-                  const SizedBox(width: 56),
+                  const SizedBox(width: 75),
               ],
             ),
-            SizedBox(height: height * 0.12)
+            SizedBox(height: height * 0.1)
           ],
         ),
       ),
     );
   }
 
-  void initController({int index = 0}){
+  Future<void> initController({int index = 0}) async {
     controller.setCurrentIndexVideo(index);
     controller.setPositionVideo(Duration.zero);
     controller.videoPlayerController?.dispose();
@@ -220,16 +218,17 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> with TickerProvider
           Uri.parse(controller.workoutModel!.videoUrl),
         )
     );
-    controller.videoPlayerController!.initialize().then((_) {
-      controller.videoPlayerController!.setVolume(0);
-      controller.videoPlayerController!.setLooping(true);
-      controller.videoPlayerController!.play();
-      setState(() {});
-      controller.videoPlayerController!.addListener((){
-        if(controller.videoPlayerController != null){
-          controller.setPositionVideo(controller.videoPlayerController!.value.position);
-        }
-      });
+
+    await controller.videoPlayerController!.initialize();
+
+    controller.videoPlayerController!.setVolume(0);
+    controller.videoPlayerController!.setLooping(true);
+    controller.videoPlayerController!.play();
+    setState(() {});
+    controller.videoPlayerController!.addListener((){
+      if(controller.videoPlayerController != null){
+        controller.setPositionVideo(controller.videoPlayerController!.value.position);
+      }
     });
 
   }
