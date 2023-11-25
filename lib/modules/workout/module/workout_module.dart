@@ -12,7 +12,7 @@ class WorkoutModule extends Module {
     ),
     ChildRoute(
         '/video',
-        child: (context, args) => WorkoutVideoPage()
+        child: (context, args) => const WorkoutVideoPage()
     ),
     ChildRoute(
         '/detail',

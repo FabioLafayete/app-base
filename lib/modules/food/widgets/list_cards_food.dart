@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';

@@ -39,7 +39,7 @@ class StepTargetWidget extends BaseWidget<OnboardController> {
                   icon: text('🏃‍♀️', fontSize: 24)
               ),
             ],
-            onChange: (value) => controller.setTarget(value?.title),
+            onChange: (value) => controller.setTarget(value.title),
           )),
         )
       ],

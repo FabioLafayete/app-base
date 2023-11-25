@@ -180,7 +180,7 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
               height: 20,
               color: Colors.black,
             ),
-            Spacer(),
+            const Spacer(),
             Icon(
               Icons.arrow_forward_ios_rounded,
               color: colors.primary,
@@ -417,7 +417,7 @@ class ImageCropperModel {
 
 
 class ImageCrop extends StatefulWidget {
-  const ImageCrop({
+  const ImageCrop({super.key, 
     required this.imageOriginal,
     required this.onCropped,
     this.interactive = false,

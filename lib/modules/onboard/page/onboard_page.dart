@@ -21,7 +21,7 @@ class OnboardPage extends BaseWidget<OnboardController> {
   @override
   Widget build(BuildContext context) {
 
-    List<Widget> _items = [
+    List<Widget> items = [
       StepName(),
       StepBirthdayWidget(),
       StepGender(),
@@ -66,7 +66,7 @@ class OnboardPage extends BaseWidget<OnboardController> {
                     SizedBox(
                       width: width * 0.55,
                       child: VisualDisplay.progressBar(
-                          totalItems: _items.length,
+                          totalItems: items.length,
                           index: controller.index
                       ),
                     ),
@@ -77,11 +77,11 @@ class OnboardPage extends BaseWidget<OnboardController> {
                   height: height * 0.7,
                   child: PageView.builder(
                     controller: controller.pageController,
-                    itemCount: _items.length,
+                    itemCount: items.length,
                     itemBuilder: (_, index) =>
                         Padding(
                           padding: const EdgeInsets.all(16).copyWith(top: 0),
-                          child: _items[index]
+                          child: items[index]
                         ),
                     onPageChanged: controller.setIndex,
                   ),
@@ -90,7 +90,7 @@ class OnboardPage extends BaseWidget<OnboardController> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Observer(builder: (_) => MyButton(
-                    title: controller.index + 1 == _items.length ? 'FINALIZAR' : "AVANÇAR",
+                    title: controller.index + 1 == items.length ? 'FINALIZAR' : "AVANÇAR",
                     colorTitle: colors.background,
                     colorButton: colors.primary,
                     iconRight: true,

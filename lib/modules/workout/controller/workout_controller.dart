@@ -1,6 +1,5 @@
 import 'package:app/shared/model/workout/program_model/program_model.dart';
 import 'package:app/shared/model/workout/workout_model/workout_model.dart';
-import 'package:chewie/chewie.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:video_player/video_player.dart';

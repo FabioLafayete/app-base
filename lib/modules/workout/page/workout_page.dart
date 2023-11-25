@@ -38,7 +38,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
   @override
   Widget build(BuildContext context) {
 
-    final List<ListCardItems> _list = [
+    final List<ListCardItems> list = [
       ListCardItems(title: 'Feitos para você', seeMore: (){}, listItems: [
         CardItemModel(
             title: 'SEI LA 2',
@@ -112,15 +112,15 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
               padding: MediaQuery.maybeOf(context)?.padding.copyWith(top: 0),
               children: [
                 TopPresentation(
-                  cardItemModel: _list[2].listItems[1],
+                  cardItemModel: list[2].listItems[1],
                   showUsers: false,
                 ),
                 Column(
                   children: List.generate(
-                      _list.length,
+                      list.length,
                           (index) => Container(
                         margin: const EdgeInsets.only(top: 30),
-                        child: _list[index],
+                        child: list[index],
                       )
                   ),
                 ),

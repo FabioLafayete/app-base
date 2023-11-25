@@ -10,11 +10,8 @@ import '../../../shared/widgets/app_theme_widget.dart';
 import '../../../util/colors.dart';
 
 class WelcomeWidget extends StatefulWidget {
-
-  const WelcomeWidget({
-    Key? key,
-    required this.signInOnPress
-  }) : super(key: key);
+  const WelcomeWidget({Key? key, required this.signInOnPress})
+      : super(key: key);
 
   final Function(bool signUp) signInOnPress;
 
@@ -23,7 +20,6 @@ class WelcomeWidget extends StatefulWidget {
 }
 
 class _WelcomeWidgetState extends State<WelcomeWidget> {
-
   final List<String> _images01 = [
     'https://images.pexels.com/photos/1128678/pexels-photo-1128678.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     // 'https://images.pexels.com/photos/4051252/pexels-photo-4051252.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
@@ -60,19 +56,17 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
   bool topGrid = false;
 
   @override
-  initState(){
+  initState() {
     super.initState();
-    Timer(const Duration(milliseconds: 100), (){
-      setState((){
+    Timer(const Duration(milliseconds: 100), () {
+      setState(() {
         topGrid = true;
       });
     });
-
   }
 
   @override
   Widget build(BuildContext context) {
-
     return BasePage(
       paddingPage: 0,
       showAppBar: false,
@@ -82,8 +76,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
           AnimatedPositioned(
             duration: const Duration(seconds: 3),
             curve: Curves.ease,
-            left: - width * 0.1,
-            top: !topGrid ? - height * 0.25 : - height * 0.2,
+            left: -width * 0.1,
+            top: !topGrid ? -height * 0.25 : -height * 0.2,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -115,19 +109,13 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                 children: [
                   SizedBox(
                       width: width * 0.8,
-                      child: text(
-                        'Bem-vinda ao iBetter',
-                        fontSize: width * 0.1,
-                        fontWeight: FontWeight.w600,
-                        color: colors.background
-                    )
-                  ),
+                      child: text('Bem-vinda ao iBetter',
+                          fontSize: width * 0.1,
+                          fontWeight: FontWeight.w600,
+                          color: colors.background)),
                   SizedBox(height: height * 0.05),
-                  text(
-                      'Explore nossa motivação e encontre sua força',
-                      color: colors.background,
-                      fontSize: width * 0.05
-                  ),
+                  text('Explore nossa motivação e encontre sua força',
+                      color: colors.background, fontSize: width * 0.05),
                   SizedBox(height: height * 0.07),
                   MyButton(
                     title: 'ENTRAR',
@@ -153,12 +141,12 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     );
   }
 
-  Widget _gridview(List<String> images, {bool showLogo = false}){
+  Widget _gridview(List<String> images, {bool showLogo = false}) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 3),
       child: Column(
-        children: List.generate(images.length, (index){
-          bool _showLogo = index == 1 && showLogo;
+        children: List.generate(images.length, (index) {
+          bool showLogo0 = index == 1 && showLogo;
           return Container(
             margin: const EdgeInsets.symmetric(vertical: 3),
             width: width * 0.3,
@@ -167,27 +155,29 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
                     width: 1,
-                    color: _showLogo ? Colors.transparent : colors.background.withOpacity(0.0)
-                )
-            ),
-            child: _showLogo ? Center(
-              child: Icon(LineIcons.heartAlt, size: 50, color: colors.background),
-            ) :
-            ClipRRect(
-              borderRadius: BorderRadius.circular(13),
-              child: CachedNetworkImage(
-                fadeInDuration: const Duration(milliseconds: 200),
-                imageUrl: images[index],
-                fit: BoxFit.cover,
-              ),
-            ),
+                    color: showLogo0
+                        ? Colors.transparent
+                        : colors.background.withOpacity(0.0))),
+            child: showLogo0
+                ? Center(
+                    child: Icon(LineIcons.heartAlt,
+                        size: 50, color: colors.background),
+                  )
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(13),
+                    child: CachedNetworkImage(
+                      fadeInDuration: const Duration(milliseconds: 200),
+                      imageUrl: images[index],
+                      fit: BoxFit.cover,
+                    ),
+                  ),
           );
         }),
       ),
     );
   }
 
-  Widget _background(){
+  Widget _background() {
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -195,13 +185,11 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
               begin: Alignment.topRight,
               end: Alignment.bottomRight,
               colors: [
-                // Colors.white,
-                colors.secondary,
-                colors.primary,
-                colors.primary,
-              ]
-          )
-      ),
+            // Colors.white,
+            colors.secondary,
+            colors.primary,
+            colors.primary,
+          ])),
     );
   }
 }

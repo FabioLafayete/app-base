@@ -11,6 +11,7 @@ abstract class HomeControllerBase extends BaseController with Store {
 
   HomeControllerBase();
 
+  @override
   Future logout() async {
     try{
       final storage = Modular.get<SecureStorageService>();

@@ -9,7 +9,7 @@ class StepBirthdayWidget extends BaseWidget<OnboardController> {
 
   @override
   Widget build(BuildContext context) {
-    final _now = DateTime.now();
+    final now = DateTime.now();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -28,8 +28,8 @@ class StepBirthdayWidget extends BaseWidget<OnboardController> {
             dateFormat: 'dd/MMMM/yyyy',
             firstDate: DateTime(1900),
             initialDate: controller.birthday ??
-                DateTime(_now.year - 35, _now.month, _now.day),
-            lastDate: _now,
+                DateTime(now.year - 35, now.month, now.day),
+            lastDate: now,
             locale: DateTimePickerLocale.pt_br,
             pickerTheme: DateTimePickerTheme(
                 backgroundColor: colors.background,
