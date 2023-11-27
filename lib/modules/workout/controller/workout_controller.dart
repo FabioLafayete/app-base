@@ -18,12 +18,17 @@ abstract class WorkoutControllerBase with Store {
   @observable
   int currentIndexVideo = 0;
 
-
   @observable
   VideoPlayerController? videoPlayerController;
 
   @observable
   Duration? positionVideo;
+
+  @observable
+  bool showOutWorkout = false;
+
+  @action
+  setOutWorkout(bool value) => showOutWorkout = value;
 
   @action
   setProgramModel(ProgramModel item) => programModel = item;

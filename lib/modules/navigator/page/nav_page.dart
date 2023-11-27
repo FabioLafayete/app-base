@@ -103,13 +103,14 @@ class _BottomNavState extends State<BottomNav> {
 
         return Container(
           color: colors.background,
-          height: (kBottomNavigationBarHeight + MediaQuery.of(context).padding.bottom) * (1 - percentage),
+          height: (kBottomNavigationBarHeight + MediaQuery.of(context).padding.bottom + 3) * (1 - percentage),
           child: Transform.translate(
-            offset: Offset(0.0, (kBottomNavigationBarHeight + MediaQuery.of(context).padding.bottom) * (percentage * 0.2)),
+            offset: Offset(0.0, (kBottomNavigationBarHeight + MediaQuery.of(context).padding.bottom + 3) * (percentage * 0.2)),
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 200),
               opacity: opacity,
-              child: percentage == 0.0 ? _bottom() : ListView(
+              child: ListView(
+                physics: const ClampingScrollPhysics(),
                 padding: EdgeInsets.zero,
                 children: [_bottom()],
               ),

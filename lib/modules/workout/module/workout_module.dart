@@ -7,16 +7,17 @@ class WorkoutModule extends Module {
   @override
   List<ModularRoute> get routes => [
     ChildRoute(
-        '/',
-        child: (context, args) => NavPage(index: 2)
+      '/',
+      child: (context, args) => NavPage(index: 2),
     ),
     ChildRoute(
-        '/video',
-        child: (context, args) => const WorkoutVideoPage()
+      '/video',
+      child: (context, args) => const WorkoutVideoPage(),
+      transition: TransitionType.noTransition,
     ),
     ChildRoute(
-        '/detail',
-        child: (context, args) =>  WorkoutDetailPage()
+      '/detail',
+      child: (context, args) =>  WorkoutDetailPage(),
     ),
   ];
 }

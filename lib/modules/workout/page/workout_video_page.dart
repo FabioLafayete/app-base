@@ -1,8 +1,11 @@
 import 'package:app/modules/workout/controller/workout_controller.dart';
+import 'package:app/route/my_router.dart';
 import 'package:app/shared/widgets/app_theme_widget.dart';
 import 'package:app/shared/widgets/back_button.dart';
 import 'package:app/shared/widgets/base_page.dart';
+import 'package:app/shared/widgets/my_button.dart';
 import 'package:app/util/colors.dart';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -57,12 +60,91 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
               _loading(),
             if(controller.videoPlayerController?.value.isInitialized ?? false)
               _video(),
-            MyBackButton(),
+            MyBackButton(
+              onPress: (){
+                controller.setOutWorkout(true);
+                if(controller.videoPlayerController != null &&
+                    controller.videoPlayerController!.value.isInitialized){
+                  if(controller.videoPlayerController!.value.isPlaying){
+                    controller.videoPlayerController!.pause();
+                    setState(() {});
+                  }
+                }
+              },
+            ),
             _videoControl(),
+            _outWorkout(),
           ],
         );
       }),
     );
+  }
+
+  Widget _outWorkout(){
+
+    if(controller.showOutWorkout) {
+      return Container(
+        height: height,
+        width: width,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: FractionalOffset.topCenter,
+                end: FractionalOffset.bottomCenter,
+                colors: [
+                  colors.background.withOpacity(0.4),
+                  colors.background,
+                ],
+                stops: const [0.01, 0.6]
+            )
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            const SizedBox(height: 200),
+            text('💪', fontSize: 60),
+            const SizedBox(height: 20),
+            text('Fique firme!', fontSize: 30, fontWeight: FontWeight.w600),
+            const SizedBox(height: 10),
+            text('Você consegue!', fontSize: 30, fontWeight: FontWeight.w600),
+            const SizedBox(height: 50),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: MyButton(
+                title: 'Continuar exercicio',
+                heightButton: 60,
+                sizeTitle: 20,
+                colorTitle: colors.background,
+                onPress: (){
+                  controller.setOutWorkout(false);
+                  if(controller.videoPlayerController != null &&
+                      controller.videoPlayerController!.value.isInitialized){
+                    if(!controller.videoPlayerController!.value.isPlaying){
+                      controller.videoPlayerController!.play();
+                      setState(() {});
+                    }
+                  }
+                },
+              ),
+            ),
+            const SizedBox(height: 10),
+            MyButton(
+              title: 'Terminar treino',
+              colorTitle: colors.text.withOpacity(0.6),
+              sizeTitle: 20,
+              cleanButton: true,
+              onPress: (){
+                MyRouter().pop();
+                controller.setOutWorkout(false);
+              },
+            ),
+            const SizedBox(height: 80),
+          ],
+        ),
+      );
+    }
+
+    return const SizedBox.shrink();
   }
 
   Widget _loading() {
@@ -85,8 +167,6 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
         fit: BoxFit.fitHeight,
         alignment: Alignment.center,
         child: SizedBox(
-          // height: controller.videoPlayerController!.value.size.height,
-          // width: controller.videoPlayerController!.value.size.width,
           height: height * 0.29,
           width: width,
           child: VideoPlayer(controller.videoPlayerController!)
@@ -115,7 +195,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
         ),
         child: Column(
           children: [
-            const SizedBox(height: 30),
+            const SizedBox(height: 60),
             text(
               controller.workoutModel!.title,
               maxLines: 2,

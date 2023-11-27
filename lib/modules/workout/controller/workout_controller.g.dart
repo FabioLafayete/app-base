@@ -74,8 +74,35 @@ mixin _$WorkoutController on WorkoutControllerBase, Store {
     });
   }
 
+  late final _$showOutWorkoutAtom =
+      Atom(name: 'WorkoutControllerBase.showOutWorkout', context: context);
+
+  @override
+  bool get showOutWorkout {
+    _$showOutWorkoutAtom.reportRead();
+    return super.showOutWorkout;
+  }
+
+  @override
+  set showOutWorkout(bool value) {
+    _$showOutWorkoutAtom.reportWrite(value, super.showOutWorkout, () {
+      super.showOutWorkout = value;
+    });
+  }
+
   late final _$WorkoutControllerBaseActionController =
       ActionController(name: 'WorkoutControllerBase', context: context);
+
+  @override
+  dynamic setOutWorkout(bool value) {
+    final _$actionInfo = _$WorkoutControllerBaseActionController.startAction(
+        name: 'WorkoutControllerBase.setOutWorkout');
+    try {
+      return super.setOutWorkout(value);
+    } finally {
+      _$WorkoutControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic setProgramModel(ProgramModel item) {
@@ -127,7 +154,8 @@ mixin _$WorkoutController on WorkoutControllerBase, Store {
 programModel: ${programModel},
 currentIndexVideo: ${currentIndexVideo},
 videoPlayerController: ${videoPlayerController},
-positionVideo: ${positionVideo}
+positionVideo: ${positionVideo},
+showOutWorkout: ${showOutWorkout}
     ''';
   }
 }

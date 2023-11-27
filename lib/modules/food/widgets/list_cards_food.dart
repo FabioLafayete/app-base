@@ -79,10 +79,11 @@ class ListCardFood extends BaseWidget {
         ),
         width: 180,
         child: Card(
+          color: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10)
           ),
-          elevation: 4,
+          elevation: 3,
           child: Column(
             children: [
               Expanded(
@@ -138,7 +139,6 @@ class ListCardFood extends BaseWidget {
                 ),
               ),
               Container(
-                height: 80,
                 width: width,
                 padding: const EdgeInsets.all(12).copyWith(top: 8, bottom: 8),
                 child: Column(
