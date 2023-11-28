@@ -4,6 +4,7 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/video_player_view.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -133,7 +134,10 @@ class _BottomNavState extends State<BottomNav> {
       showUnselectedLabels: true,
       selectedFontSize: 14,
       unselectedFontSize: 12,
-      onTap: controller.setSelectedIndex,
+      onTap: (int value){
+        HapticFeedback.lightImpact();
+        controller.setSelectedIndex(value);
+      },
       items: const [
         BottomNavigationBarItem(
             icon: FaIcon(LineIcons.home),

@@ -12,13 +12,13 @@ class MyBackButton extends BaseWidget {
       child: GestureDetector(
         onTap: onPress ?? router.pop,
         child: Container(
-          margin: const EdgeInsets.only(left: 10, top: 10),
+          margin: const EdgeInsets.only(left: 15, top: 10),
           decoration: BoxDecoration(
-              color: colors.text.withOpacity(0.6),
+              color: colors.text.withOpacity(0.65),
               borderRadius: BorderRadius.circular(10)
           ),
           padding: const EdgeInsets.only(
-              left: 15, right: 5, top: 10, bottom: 10
+              left: 18, right: 8, top: 13, bottom: 13
           ),
           child: Icon(
               Icons.arrow_back_ios,

@@ -5,7 +5,6 @@ import 'package:app/shared/widgets/back_button.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/my_button.dart';
 import 'package:app/util/colors.dart';
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -60,23 +59,47 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
               _loading(),
             if(controller.videoPlayerController?.value.isInitialized ?? false)
               _video(),
-            MyBackButton(
-              onPress: (){
-                controller.setOutWorkout(true);
-                if(controller.videoPlayerController != null &&
-                    controller.videoPlayerController!.value.isInitialized){
-                  if(controller.videoPlayerController!.value.isPlaying){
-                    controller.videoPlayerController!.pause();
-                    setState(() {});
-                  }
-                }
-              },
-            ),
+            _appBar(),
             _videoControl(),
             _outWorkout(),
           ],
         );
       }),
+    );
+  }
+
+  Widget _appBar(){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        MyBackButton(
+          onPress: (){
+            controller.setOutWorkout(true);
+            if(controller.videoPlayerController != null &&
+                controller.videoPlayerController!.value.isInitialized){
+              if(controller.videoPlayerController!.value.isPlaying){
+                controller.videoPlayerController!.pause();
+                setState(() {});
+              }
+            }
+          },
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 30, right: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: colors.text.withOpacity(0.6)
+          ),
+          child: text(
+            '${controller.currentIndexVideo + 1} / ${controller.programModel?.workouts.length}',
+            color: colors.text2,
+            fontSize: 20,
+            fontWeight: FontWeight.w600
+          ),
+        ),
+      ],
     );
   }
 
@@ -162,12 +185,12 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
 
   Widget _video() {
     return SizedBox(
-      height: height * 0.61,
+      height: height * 0.6,
       child: FittedBox(
         fit: BoxFit.fitHeight,
         alignment: Alignment.center,
         child: SizedBox(
-          height: height * 0.29,
+          height: height * 0.28,
           width: width,
           child: VideoPlayer(controller.videoPlayerController!)
         ),
@@ -195,7 +218,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
         ),
         child: Column(
           children: [
-            const SizedBox(height: 60),
+            SizedBox(height: height * 0.05),
             text(
               controller.workoutModel!.title,
               maxLines: 2,
@@ -280,7 +303,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
                   const SizedBox(width: 75),
               ],
             ),
-            SizedBox(height: height * 0.1)
+            SizedBox(height: height * 0.12)
           ],
         ),
       ),

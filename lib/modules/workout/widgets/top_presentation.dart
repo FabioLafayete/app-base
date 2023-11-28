@@ -85,11 +85,11 @@ class TopPresentation extends BaseWidget {
                   ],
                 ),
               SizedBox(
-                width: 100,
+                width: 120,
                 child: MyButton(
                   title: titleButton ?? 'INICIAR',
-                  heightButton: 30,
-                  sizeTitle: 14,
+                  heightButton: 35,
+                  sizeTitle: 15,
                   colorTitle: colors.primary,
                   colorButton: colors.background,
                   onPress: cardItemModel.onPress,
