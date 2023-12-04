@@ -14,7 +14,7 @@ class MyBackButton extends BaseWidget {
         child: Container(
           margin: const EdgeInsets.only(left: 15, top: 10),
           decoration: BoxDecoration(
-              color: colors.text.withOpacity(0.65),
+              color: colors.text.withOpacity(0.6),
               borderRadius: BorderRadius.circular(10)
           ),
           padding: const EdgeInsets.only(

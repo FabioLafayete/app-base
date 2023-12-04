@@ -90,8 +90,35 @@ mixin _$WorkoutController on WorkoutControllerBase, Store {
     });
   }
 
+  late final _$showCountdownAtom =
+      Atom(name: 'WorkoutControllerBase.showCountdown', context: context);
+
+  @override
+  bool get showCountdown {
+    _$showCountdownAtom.reportRead();
+    return super.showCountdown;
+  }
+
+  @override
+  set showCountdown(bool value) {
+    _$showCountdownAtom.reportWrite(value, super.showCountdown, () {
+      super.showCountdown = value;
+    });
+  }
+
   late final _$WorkoutControllerBaseActionController =
       ActionController(name: 'WorkoutControllerBase', context: context);
+
+  @override
+  dynamic setShowCountdown(bool value) {
+    final _$actionInfo = _$WorkoutControllerBaseActionController.startAction(
+        name: 'WorkoutControllerBase.setShowCountdown');
+    try {
+      return super.setShowCountdown(value);
+    } finally {
+      _$WorkoutControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic setOutWorkout(bool value) {
@@ -155,7 +182,8 @@ programModel: ${programModel},
 currentIndexVideo: ${currentIndexVideo},
 videoPlayerController: ${videoPlayerController},
 positionVideo: ${positionVideo},
-showOutWorkout: ${showOutWorkout}
+showOutWorkout: ${showOutWorkout},
+showCountdown: ${showCountdown}
     ''';
   }
 }

@@ -46,17 +46,27 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                       final item = controller.programModel!.workouts[index];
                       return Container(
                         margin: const EdgeInsets.only(bottom: 20),
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(238, 238, 238, 1.0),
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(
+                            width: 0.5, color: const Color.fromRGBO(220, 222, 224, 1.0),
+                          )
+                        ),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(12),
+                                bottomLeft: Radius.circular(12),
+                              ),
                               child: CachedNetworkImage(
                                 fadeInDuration: const Duration(milliseconds: 300),
                                 imageUrl: item.thumbnail!,
                                 fit: BoxFit.cover,
-                                height: 110,
-                                width: 110,
+                                height: 100,
+                                width: 120,
                               ),
                             ),
                             const SizedBox(width: 20),

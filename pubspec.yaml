@@ -44,6 +44,7 @@ dependencies:
   sliding_up_panel: ^2.0.0+1
   flutter_launcher_icons: 0.13.1
   back_button_interceptor: 7.0.0
+  stop_watch_timer: 3.0.2
 
 dev_dependencies:
   flutter_test:

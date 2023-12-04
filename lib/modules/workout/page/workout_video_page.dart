@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app/modules/workout/controller/workout_controller.dart';
 import 'package:app/route/my_router.dart';
 import 'package:app/shared/widgets/app_theme_widget.dart';
@@ -6,9 +8,11 @@ import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/my_button.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:video_player/video_player.dart';
 
 class WorkoutVideoPage extends StatefulWidget {
@@ -26,14 +30,17 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
 
   AppColors colors = AppColors();
   final text = AppTheme().text;
-
   final double width = Get.width;
   final double height = Get.height;
+
+  Timer? _timer;
+  int _start = 3;
 
   @override
   void initState() {
     controller = Modular.get<WorkoutController>();
     initController();
+    controller.setShowCountdown(true);
     super.initState();
   }
 
@@ -62,6 +69,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
             _appBar(),
             _videoControl(),
             _outWorkout(),
+            _countDown()
           ],
         );
       }),
@@ -80,7 +88,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
                 controller.videoPlayerController!.value.isInitialized){
               if(controller.videoPlayerController!.value.isPlaying){
                 controller.videoPlayerController!.pause();
-                setState(() {});
+                // setState(() {});
               }
             }
           },
@@ -95,11 +103,46 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
           child: text(
             '${controller.currentIndexVideo + 1} / ${controller.programModel?.workouts.length}',
             color: colors.text2,
-            fontSize: 20,
+            fontSize: 16,
             fontWeight: FontWeight.w600
           ),
         ),
       ],
+    );
+  }
+
+  void startTimer() {
+    const period = Duration(seconds: 1);
+    _timer = Timer.periodic(period, (Timer timer) {
+        if (_start == 1) {
+          controller.setShowCountdown(false);
+          controller.videoPlayerController!.play();
+          timer.cancel();
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
+
+  Widget _countDown(){
+    if(!controller.showCountdown) return const SizedBox.shrink();
+    if(!(_timer?.isActive ?? false)){
+      _start = 3;
+      startTimer();
+    }
+    return Container(
+      color: colors.primary.withOpacity(0.85),
+      child: Center(
+        child: text(
+            '$_start',
+            color: colors.text2,
+            fontSize: 100,
+            fontWeight: FontWeight.w700
+        ),
+      ),
     );
   }
 
@@ -293,6 +336,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
                         initController(
                           index: controller.currentIndexVideo + 1
                         );
+                        controller.setShowCountdown(true);
                       },
                       icon: const Icon(Icons.skip_next_rounded),
                       iconSize: 60,
@@ -326,8 +370,9 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
 
     controller.videoPlayerController!.setVolume(0);
     controller.videoPlayerController!.setLooping(true);
-    controller.videoPlayerController!.play();
-    setState(() {});
+    if(!(_timer?.isActive ?? false)){
+      controller.videoPlayerController!.play();
+    }
     controller.videoPlayerController!.addListener((){
       if(controller.videoPlayerController != null){
         controller.setPositionVideo(controller.videoPlayerController!.value.position);

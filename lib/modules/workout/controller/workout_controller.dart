@@ -26,6 +26,13 @@ abstract class WorkoutControllerBase with Store {
   @observable
   bool showOutWorkout = false;
 
+  @observable
+  bool showCountdown = false;
+
+
+  @action
+  setShowCountdown(bool value) => showCountdown = value;
+
   @action
   setOutWorkout(bool value) => showOutWorkout = value;
 
