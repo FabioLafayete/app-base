@@ -32,6 +32,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
   final text = AppTheme().text;
   final double width = Get.width;
   final double height = Get.height;
+  bool hasInitialize = false;
 
   Timer? _timer;
   int _start = 3;
@@ -116,7 +117,9 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
     _timer = Timer.periodic(period, (Timer timer) {
         if (_start == 1) {
           controller.setShowCountdown(false);
-          controller.videoPlayerController!.play();
+          if(hasInitialize){
+            controller.videoPlayerController!.play();
+          }
           timer.cancel();
         } else {
           setState(() {
@@ -355,6 +358,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
   }
 
   Future<void> initController({int index = 0}) async {
+    hasInitialize = false;
     controller.setCurrentIndexVideo(index);
     controller.setPositionVideo(Duration.zero);
     controller.videoPlayerController?.dispose();
@@ -367,7 +371,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
     );
 
     await controller.videoPlayerController!.initialize();
-
+    hasInitialize = true;
     controller.videoPlayerController!.setVolume(0);
     controller.videoPlayerController!.setLooping(true);
     if(!(_timer?.isActive ?? false)){

@@ -130,12 +130,15 @@ class _BottomNavState extends State<BottomNav> {
       backgroundColor: Colors.white,
       selectedItemColor: colors.primary,
       unselectedItemColor: colors.textSecondary,
+      selectedLabelStyle: const TextStyle(
+        fontWeight: FontWeight.w600
+      ),
       showSelectedLabels: true,
       showUnselectedLabels: true,
       selectedFontSize: 14,
       unselectedFontSize: 12,
       onTap: (int value){
-        HapticFeedback.lightImpact();
+        HapticFeedback.mediumImpact();
         controller.setSelectedIndex(value);
       },
       items: const [
