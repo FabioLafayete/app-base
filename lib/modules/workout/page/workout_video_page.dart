@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:app/modules/workout/controller/workout_controller.dart';
 import 'package:app/route/my_router.dart';
+import 'package:app/route/pages_name.dart';
 import 'package:app/shared/widgets/app_theme_widget.dart';
 import 'package:app/shared/widgets/back_button.dart';
 import 'package:app/shared/widgets/base_page.dart';
@@ -12,7 +13,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
-import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:video_player/video_player.dart';
 
 class WorkoutVideoPage extends StatefulWidget {
@@ -27,6 +27,7 @@ class WorkoutVideoPage extends StatefulWidget {
 class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
 
   late WorkoutController controller;
+  late MyRouter router;
 
   AppColors colors = AppColors();
   final text = AppTheme().text;
@@ -40,6 +41,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
   @override
   void initState() {
     controller = Modular.get<WorkoutController>();
+    router = MyRouter();
     initController();
     controller.setShowCountdown(true);
     super.initState();
@@ -331,23 +333,24 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
                     color: colors.primary,
                   ),
                 ),
-                if(controller.currentIndexVideo < controller.programModel!.workouts.length - 1)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 15),
-                    child: IconButton(
-                      onPressed: (){
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: IconButton(
+                    onPressed: (){
+                      if(controller.currentIndexVideo < controller.programModel!.workouts.length - 1){
                         initController(
-                          index: controller.currentIndexVideo + 1
+                            index: controller.currentIndexVideo + 1
                         );
                         controller.setShowCountdown(true);
-                      },
-                      icon: const Icon(Icons.skip_next_rounded),
-                      iconSize: 60,
-                      color: colors.primary,
-                    ),
-                  )
-                else
-                  const SizedBox(width: 75),
+                      } else {
+                        router.pushNamedAndRemoveUntil(PagesNames.workoutCongrats);
+                      }
+                    },
+                    icon: const Icon(Icons.skip_next_rounded),
+                    iconSize: 60,
+                    color: colors.primary,
+                  ),
+                )
               ],
             ),
             SizedBox(height: height * 0.12)

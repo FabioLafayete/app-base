@@ -118,8 +118,7 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                 colorButton: colors.primary,
                 colorTitle: colors.background,
                 onPress: (){
-                  // router.pushNamed(PagesNames.workoutVideo);
-                  router.pushNamed(PagesNames.workoutCongrats);
+                  router.pushNamed(PagesNames.workoutVideo);
                 },
               ),
             ),
