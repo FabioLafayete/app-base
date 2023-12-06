@@ -8,19 +8,19 @@ import '../service/impl/login_service_impl.dart';
 
 class LoginModule extends Module {
   @override
-  List<Bind> get binds => [
-    Bind.factory((i) => LoginController(
+  void binds(i) {
+    i.add(() => LoginController(
       repositoryImpl: LoginRepositoryImpl(
           LoginServiceImpl(HttpService()),
         ),
-    )),
-  ];
+    ));
+  }
 
   @override
-  List<ModularRoute> get routes => [
-    ChildRoute(
+  void routes(r) {
+    r.child(
         '/',
-        child: (context, args) => LoginPage()
-    ),
-  ];
+        child: (context) => LoginPage()
+    );
+  }
 }

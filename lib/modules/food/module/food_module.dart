@@ -6,23 +6,22 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class FoodModule extends Module {
   @override
-  List<ModularRoute> get routes => [
-    ChildRoute(
+  void routes(r) {
+    r.child(
         '/',
-        child: (context, args) {
+        child: (context) {
           Modular.get<NavController>().setSelectedIndex(1);
           return NavPage();
         }
-    ),
-    ChildRoute(
+    );
+    r.child(
         '/detail',
-        child: (context, args){
-          FoodDetailModel item = args.data;
+        child: (context){
+          FoodDetailModel item = r.args.data;
           return FoodDetailPage(
               model: item
           );
         }
-    ),
-
-  ];
+    );
+  }
 }

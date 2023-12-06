@@ -7,26 +7,26 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class WorkoutModule extends Module {
   @override
-  List<ModularRoute> get routes => [
-    ChildRoute(
+  void routes(r) {
+    r.child(
       '/',
-      child: (context, args) {
+      child: (context) {
         Modular.get<NavController>().setSelectedIndex(2);
         return NavPage();
       },
-    ),
-    ChildRoute(
+    );
+    r.child(
       '/video',
-      child: (context, args) => const WorkoutVideoPage(),
+      child: (context) => const WorkoutVideoPage(),
       transition: TransitionType.noTransition,
-    ),
-    ChildRoute(
+    );
+    r.child(
       '/detail',
-      child: (context, args) =>  WorkoutDetailPage(),
-    ),
-    ChildRoute(
+      child: (context) =>  WorkoutDetailPage(),
+    );
+    r.child(
       '/congrats',
-      child: (context, args) =>  CongratsPage(),
-    ),
-  ];
+      child: (context) =>  CongratsPage(),
+    );
+  }
 }

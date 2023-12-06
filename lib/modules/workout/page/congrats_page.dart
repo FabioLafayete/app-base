@@ -4,7 +4,6 @@ import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/my_button.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CongratsPage extends BaseWidget {
   CongratsPage({super.key});

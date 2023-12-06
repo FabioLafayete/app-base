@@ -6,21 +6,21 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class ProfileModule extends Module {
   @override
-  List<ModularRoute> get routes => [
-    ChildRoute(
+  void routes(r) {
+    r.child(
         '/',
-        child: (context, args) {
+        child: (context) {
           Modular.get<NavController>().setSelectedIndex(4);
           return NavPage();
         }
-    ),
-    ChildRoute(
+    );
+    r.child(
         '/data',
-        child: (context, args) => ProfileDataView()
-    ),
-    ChildRoute(
+        child: (context) => ProfileDataView()
+    );
+    r.child(
         '/help',
-        child: (context, args) => HelpPage()
-    ),
-  ];
+        child: (context) => HelpPage()
+    );
+  }
 }

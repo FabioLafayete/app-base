@@ -144,7 +144,7 @@ SPEC CHECKSUMS:
   SDWebImageWebPCoder: 633b813fca24f1de5e076bcd7f720c038b23892b
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
   SwiftyGif: 93a1cc87bf3a51916001cf8f3d63835fb64c819f
-  video_player_avfoundation: 8563f13d8fc8b2c29dc2d09e60b660e4e8128837
+  video_player_avfoundation: e9e6f9cae7d7a6d9b43519b0aab382bca60fcfd1
   wakelock_plus: 8b09852c8876491e4b6d179e17dfe2a0b5f60d47
 
 PODFILE CHECKSUM: 93f9f24167dcb306394ddf8c816459f3a8e62f54

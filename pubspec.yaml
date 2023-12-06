@@ -34,7 +34,7 @@ dependencies:
   image_picker: 0.8.6+4
   flutter_image_compress: 1.1.3
   flutter_secure_storage: 8.0.0
-  flutter_modular: 5.0.3
+  flutter_modular: 6.3.2
   mobx: 2.2.0
   flutter_mobx: 2.0.6+5
   rx_notifier: 2.2.2

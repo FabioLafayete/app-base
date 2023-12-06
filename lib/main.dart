@@ -13,8 +13,7 @@ void main() async {
           debugShowCheckedModeBanner: false,
           locale: const Locale('pt', 'BR'),
           theme: ThemeData(fontFamily: 'Inter'),
-          routeInformationParser: Modular.routeInformationParser,
-          routerDelegate: Modular.routerDelegate,
+          routerConfig: Modular.routerConfig
         ),
       )
   );

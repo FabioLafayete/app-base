@@ -4,16 +4,13 @@ import '../../navigator/page/nav_page.dart';
 
 class HomeModule extends Module {
   @override
-  List<ModularRoute> get routes => [
-    ChildRoute(
+  void routes (r) {
+    r.child(
         '/',
-        child: (context, args) {
-          print('CHAMOU');
-          print(Modular.get<NavController>().selectedIndex);
+        child: (context) {
           Modular.get<NavController>().setSelectedIndex(0);
-          print(Modular.get<NavController>().selectedIndex);
           return NavPage();
         }
-    ),
-  ];
+    );
+  }
 }

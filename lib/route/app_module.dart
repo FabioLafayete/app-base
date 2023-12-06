@@ -22,52 +22,52 @@ import '../shared/modules/user/service/impl/user_service_impl.dart';
 import 'my_router.dart';
 
 class AppModule extends Module {
-  @override
-  List<Bind> get binds => [
-    Bind.singleton((i) => MyRouter.instance()),
-    Bind.singleton((i) => SecureStorageService.instance),
-    Bind.singleton((i) => AppConfig.instance),
-    Bind.singleton((i) => NavController()),
-    Bind.singleton((i) => UserController(UserRepositoryImpl(
-        UserServiceImpl(HttpService())
-    ))),
-    Bind.singleton((i) => HomeController()),
-    Bind.singleton((i) => FoodController()),
-    Bind.singleton((i) => WorkoutController()),
-    Bind.singleton((i) => ProfileController()),
-    Bind.singleton((i) => BaseController()),
-  ];
 
   @override
-  List<ModuleRoute> get routes => [
-    ModuleRoute(
-        PagesNames.onboard,
-        module: OnboardModule(),
-    ),
-    ModuleRoute(
-      PagesNames.login,
-      module: LoginModule(),
-    ),
-    ModuleRoute(
-      PagesNames.home,
-      module: HomeModule(),
-    ),
-    ModuleRoute(
-      PagesNames.food,
-      module: FoodModule(),
-    ),
-    ModuleRoute(
-      PagesNames.workout,
-      module: WorkoutModule(),
-    ),
-    ModuleRoute(
-      PagesNames.profile,
-      module: ProfileModule(),
-    ),
-    ModuleRoute(
-      PagesNames.splash,
-      module: SplashModule(),
-      transition: TransitionType.noTransition
-    ),
-  ];
+  void binds(i) {
+    i.addSingleton(() => MyRouter.instance());
+    i.addSingleton(() => SecureStorageService.instance);
+    i.addSingleton(() => AppConfig.instance);
+    i.addSingleton(() => NavController());
+    i.addSingleton(() =>
+        UserController(UserRepositoryImpl(UserServiceImpl(HttpService()))));
+    i.addSingleton(() => HomeController());
+    i.addSingleton(() => FoodController());
+    i.addSingleton(() => WorkoutController());
+    i.addSingleton(() => ProfileController());
+    i.addSingleton(() => BaseController());
+  }
+
+  @override
+  void routes (r) {
+        r.module(
+          PagesNames.onboard,
+          module: OnboardModule(),
+        );
+        r.module(
+          PagesNames.login,
+          module: LoginModule(),
+        );
+        r.module(
+          PagesNames.home,
+          module: HomeModule(),
+        );
+        r.module(
+          PagesNames.food,
+          module: FoodModule(),
+        );
+        r.module(
+          PagesNames.workout,
+          module: WorkoutModule(),
+        );
+        r.module(
+          PagesNames.profile,
+          module: ProfileModule(),
+        );
+        r.module(
+            PagesNames.splash,
+            module: SplashModule(),
+            transition: TransitionType.noTransition
+        );
+      }
 }
