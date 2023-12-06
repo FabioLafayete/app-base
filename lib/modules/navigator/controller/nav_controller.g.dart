@@ -13,13 +13,13 @@ mixin _$NavController on NavControllerBase, Store {
       Atom(name: 'NavControllerBase.selectedIndex', context: context);
 
   @override
-  int? get selectedIndex {
+  int get selectedIndex {
     _$selectedIndexAtom.reportRead();
     return super.selectedIndex;
   }
 
   @override
-  set selectedIndex(int? value) {
+  set selectedIndex(int value) {
     _$selectedIndexAtom.reportWrite(value, super.selectedIndex, () {
       super.selectedIndex = value;
     });

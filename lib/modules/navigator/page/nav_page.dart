@@ -16,15 +16,11 @@ import '../../profile/page/profile_page.dart';
 import '../../workout/page/workout_page.dart';
 
 class NavPage extends BaseWidget<NavController> {
-  NavPage({Key? key, this.index = 0}) : super(key: key);
+  NavPage({Key? key}) : super(key: key);
 
-  final int index;
 
   @override
   Widget build(BuildContext context) {
-    if(controller.selectedIndex == null) {
-      controller.setSelectedIndex(index);
-    }
     final screens = [
       HomePage(),
       FoodPage(),
@@ -123,46 +119,52 @@ class _BottomNavState extends State<BottomNav> {
   }
 
   Widget _bottom(){
-    return BottomNavigationBar(
-      currentIndex: controller.selectedIndex!,
-      type: BottomNavigationBarType.fixed,
-      elevation: 5,
-      backgroundColor: Colors.white,
-      selectedItemColor: colors.primary,
-      unselectedItemColor: colors.textSecondary,
-      selectedLabelStyle: const TextStyle(
-        fontWeight: FontWeight.w600
+    return Theme(
+      data: Theme.of(context).copyWith(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
       ),
-      showSelectedLabels: true,
-      showUnselectedLabels: true,
-      selectedFontSize: 14,
-      unselectedFontSize: 12,
-      onTap: (int value){
-        HapticFeedback.mediumImpact();
-        controller.setSelectedIndex(value);
-      },
-      items: const [
-        BottomNavigationBarItem(
-            icon: FaIcon(LineIcons.home),
-            label: 'Home'
+      child: BottomNavigationBar(
+        currentIndex: controller.selectedIndex!,
+        type: BottomNavigationBarType.fixed,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        selectedItemColor: colors.primary,
+        unselectedItemColor: colors.textSecondary,
+        selectedLabelStyle: const TextStyle(
+          fontWeight: FontWeight.w600
         ),
-        BottomNavigationBarItem(
-            icon: FaIcon(LineIcons.fruitApple),
-            label: 'Receitas'
-        ),
-        BottomNavigationBarItem(
-            icon: FaIcon(LineIcons.dumbbell),
-            label: 'Treinos'
-        ),
-        // BottomNavigationBarItem(
-        //     icon: FaIcon(LineIcons.users),
-        //     label: 'Feed'
-        // ),
-        BottomNavigationBarItem(
-            icon: FaIcon(LineIcons.user),
-            label: 'Perfil'
-        )
-      ],
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        selectedFontSize: 14,
+        unselectedFontSize: 12,
+        onTap: (int value){
+          HapticFeedback.mediumImpact();
+          controller.setSelectedIndex(value);
+        },
+        items: const [
+          BottomNavigationBarItem(
+              icon: FaIcon(LineIcons.home),
+              label: 'Home'
+          ),
+          BottomNavigationBarItem(
+              icon: FaIcon(LineIcons.fruitApple),
+              label: 'Receitas'
+          ),
+          BottomNavigationBarItem(
+              icon: FaIcon(LineIcons.dumbbell),
+              label: 'Treinos'
+          ),
+          // BottomNavigationBarItem(
+          //     icon: FaIcon(LineIcons.users),
+          //     label: 'Feed'
+          // ),
+          BottomNavigationBarItem(
+              icon: FaIcon(LineIcons.user),
+              label: 'Perfil'
+          )
+        ],
+      ),
     );
   }
 }

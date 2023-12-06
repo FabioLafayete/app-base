@@ -13,7 +13,7 @@ class NavController = NavControllerBase with _$NavController;
 abstract class NavControllerBase with Store {
 
   @observable
-  int? selectedIndex;
+  int selectedIndex = 0;
   @observable
   bool showControl = true;
   @observable

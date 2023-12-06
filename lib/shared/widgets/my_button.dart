@@ -18,7 +18,8 @@ class MyButton extends BaseWidget {
     this.loading = false,
     this.border = 12,
     this.elevation = 3,
-    this.loadingColor
+    this.loadingColor,
+    this.shadowColor,
   }) : super(key: key);
 
   final String title;
@@ -34,6 +35,7 @@ class MyButton extends BaseWidget {
   final bool boldText;
   final bool loading;
   final Color? loadingColor;
+  final Color? shadowColor;
   final bool iconRight;
 
 
@@ -120,6 +122,7 @@ class MyButton extends BaseWidget {
     return ButtonStyle(
         overlayColor: MaterialStateProperty.all<Color>(colors.primary.withOpacity(0.1)),
         elevation: MaterialStateProperty.all<double>(elevation),
+        shadowColor: shadowColor != null ? MaterialStateProperty.all<Color>(shadowColor!) : null,
         backgroundColor: MaterialStateProperty.all<Color>(
             colorButton?.withOpacity(0.6) ?? colors.primary.withOpacity(0.6)
         ),
