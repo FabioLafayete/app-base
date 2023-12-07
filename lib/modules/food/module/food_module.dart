@@ -10,7 +10,7 @@ class FoodModule extends Module {
     r.child(
         '/',
         child: (context) {
-          Modular.get<NavController>().setSelectedIndex(1);
+          Modular.get<NavController>().setPageSelected(1);
           return NavPage();
         }
     );

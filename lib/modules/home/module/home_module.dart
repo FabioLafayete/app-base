@@ -8,7 +8,7 @@ class HomeModule extends Module {
     r.child(
         '/',
         child: (context) {
-          Modular.get<NavController>().setSelectedIndex(0);
+          Modular.get<NavController>().setPageSelected(0);
           return NavPage();
         }
     );

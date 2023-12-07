@@ -9,19 +9,19 @@ part of 'nav_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$NavController on NavControllerBase, Store {
-  late final _$selectedIndexAtom =
-      Atom(name: 'NavControllerBase.selectedIndex', context: context);
+  late final _$pageSelectedAtom =
+      Atom(name: 'NavControllerBase.pageSelected', context: context);
 
   @override
-  int get selectedIndex {
-    _$selectedIndexAtom.reportRead();
-    return super.selectedIndex;
+  int get pageSelected {
+    _$pageSelectedAtom.reportRead();
+    return super.pageSelected;
   }
 
   @override
-  set selectedIndex(int value) {
-    _$selectedIndexAtom.reportWrite(value, super.selectedIndex, () {
-      super.selectedIndex = value;
+  set pageSelected(int value) {
+    _$pageSelectedAtom.reportWrite(value, super.pageSelected, () {
+      super.pageSelected = value;
     });
   }
 
@@ -215,11 +215,11 @@ mixin _$NavController on NavControllerBase, Store {
       ActionController(name: 'NavControllerBase', context: context);
 
   @override
-  dynamic setSelectedIndex(int value) {
+  dynamic setPageSelected(int value) {
     final _$actionInfo = _$NavControllerBaseActionController.startAction(
-        name: 'NavControllerBase.setSelectedIndex');
+        name: 'NavControllerBase.setPageSelected');
     try {
-      return super.setSelectedIndex(value);
+      return super.setPageSelected(value);
     } finally {
       _$NavControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -338,7 +338,7 @@ mixin _$NavController on NavControllerBase, Store {
   @override
   String toString() {
     return '''
-selectedIndex: ${selectedIndex},
+pageSelected: ${pageSelected},
 showControl: ${showControl},
 isFullScreen: ${isFullScreen},
 showProgress: ${showProgress},

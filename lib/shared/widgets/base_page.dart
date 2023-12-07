@@ -1,3 +1,4 @@
+import 'package:app/route/my_router.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -57,6 +58,11 @@ class BasePage extends BaseWidget {
     return AppBar(
       title: title == null ? Container() :
       text(title!, color: colors.text2, fontWeight: FontWeight.w600),
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios_new_rounded),
+        color: colors.text2,
+        onPressed: () => MyRouter().pop(),
+      ),
       backgroundColor: colors.primary,
       automaticallyImplyLeading: automaticallyImplyLeading,
       elevation: elevation,

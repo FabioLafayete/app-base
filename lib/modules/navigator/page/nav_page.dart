@@ -1,4 +1,3 @@
-import 'package:app/modules/home/page/home_page.dart';
 import 'package:app/modules/navigator/controller/nav_controller.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/video_player_view.dart';
@@ -22,17 +21,16 @@ class NavPage extends BaseWidget<NavController> {
   @override
   Widget build(BuildContext context) {
     final screens = [
-      HomePage(),
-      FoodPage(),
+      // HomePage(),
       WorkoutPage(),
-      // const Scaffold(backgroundColor: Colors.green),
+      FoodPage(),
       ProfilePage(),
     ];
 
     return Observer(builder: (_) => WillPopScope(
       onWillPop: () async {
-        if(controller.selectedIndex != 0) {
-          controller.setSelectedIndex(0);
+        if(controller.pageSelected != 0) {
+          controller.setPageSelected(0);
           return false;
         }
         return true;
@@ -44,7 +42,7 @@ class NavPage extends BaseWidget<NavController> {
                 .map((i, screen) => MapEntry(
                 i,
                 Offstage(
-                    offstage: controller.selectedIndex != i,
+                    offstage: controller.pageSelected != i,
                     child: screen
                 )
             )).values.toList()..add(
@@ -118,6 +116,7 @@ class _BottomNavState extends State<BottomNav> {
     );
   }
 
+
   Widget _bottom(){
     return Theme(
       data: Theme.of(context).copyWith(
@@ -125,7 +124,7 @@ class _BottomNavState extends State<BottomNav> {
         highlightColor: Colors.transparent,
       ),
       child: BottomNavigationBar(
-        currentIndex: controller.selectedIndex!,
+        currentIndex: controller.pageSelected,
         type: BottomNavigationBarType.fixed,
         elevation: 0,
         backgroundColor: Colors.white,
@@ -140,20 +139,20 @@ class _BottomNavState extends State<BottomNav> {
         unselectedFontSize: 12,
         onTap: (int value){
           HapticFeedback.mediumImpact();
-          controller.setSelectedIndex(value);
+          controller.setPageSelected(value);
         },
         items: const [
+          // BottomNavigationBarItem(
+          //     icon: FaIcon(LineIcons.home),
+          //     label: 'Home'
+          // ),
           BottomNavigationBarItem(
-              icon: FaIcon(LineIcons.home),
-              label: 'Home'
+              icon: FaIcon(LineIcons.dumbbell),
+              label: 'Treinos'
           ),
           BottomNavigationBarItem(
               icon: FaIcon(LineIcons.fruitApple),
               label: 'Receitas'
-          ),
-          BottomNavigationBarItem(
-              icon: FaIcon(LineIcons.dumbbell),
-              label: 'Treinos'
           ),
           // BottomNavigationBarItem(
           //     icon: FaIcon(LineIcons.users),

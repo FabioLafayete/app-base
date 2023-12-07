@@ -10,7 +10,7 @@ class ProfileModule extends Module {
     r.child(
         '/',
         child: (context) {
-          Modular.get<NavController>().setSelectedIndex(4);
+          Modular.get<NavController>().setPageSelected(2);
           return NavPage();
         }
     );

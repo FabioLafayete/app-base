@@ -37,7 +37,12 @@ class CongratsPage extends BaseWidget {
                   child: Image.asset(ImagesConstants.aplaudir),
                 ),
                 const SizedBox(height: 30),
-                text('Bom trabalho', color: colors.text2, fontSize: 30),
+                text(
+                  'Bom trabalho',
+                  color: colors.text2,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w500
+                ),
               ],
             ),
             Padding(

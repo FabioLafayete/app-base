@@ -109,6 +109,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
       body: Stack(
         children: [
           ListView(
+            physics: const ClampingScrollPhysics(),
               padding: MediaQuery.maybeOf(context)?.padding.copyWith(top: 0),
               children: [
                 TopPresentation(

@@ -44,7 +44,7 @@ class BaseController {
     try{
       final storage = Modular.get<SecureStorageService>();
       await storage.clearAll();
-      Modular.get<NavController>().setSelectedIndex(0);
+      Modular.get<NavController>().setPageSelected(0);
       router.pushReplacementNamed(PagesNames.login);
     }catch(_){
       print(_);

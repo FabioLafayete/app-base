@@ -13,7 +13,7 @@ class NavController = NavControllerBase with _$NavController;
 abstract class NavControllerBase with Store {
 
   @observable
-  int selectedIndex = 0;
+  int pageSelected = 0;
   @observable
   bool showControl = true;
   @observable
@@ -47,7 +47,7 @@ abstract class NavControllerBase with Store {
   // @action
   // setHeightBottomSheet(double value) => heightBottomSheet = value;
   @action
-  setSelectedIndex(int value) => selectedIndex = value;
+  setPageSelected(int value) => pageSelected = value;
   @action
   setShowControl(bool value) => showControl = value;
   @action
@@ -78,5 +78,4 @@ abstract class NavControllerBase with Store {
   setChewieController(ChewieController? value) => chewieController = value;
   @action
   setVideoPlayerController(VideoPlayerController? value) => videoPlayerController = value;
-
 }

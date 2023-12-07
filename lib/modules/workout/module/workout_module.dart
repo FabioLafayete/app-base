@@ -11,7 +11,7 @@ class WorkoutModule extends Module {
     r.child(
       '/',
       child: (context) {
-        Modular.get<NavController>().setSelectedIndex(2);
+        Modular.get<NavController>().setPageSelected(0);
         return NavPage();
       },
     );
