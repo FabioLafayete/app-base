@@ -49,6 +49,6 @@ pubspec.lock
 lib/generated_plugin_registrant.dart
 .vscode/launch.json
 
-assets/video
+#assets/video
 
 android/key.properties
