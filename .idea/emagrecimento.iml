@@ -366,6 +366,12 @@
       <excludeFolder url="file://$MODULE_DIR$/.fvm/flutter_sdk/packages/flutter_goldens/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/.fvm/flutter_sdk/packages/flutter_goldens/build" />
       <excludeFolder url="file://$MODULE_DIR$/.fvm/flutter_sdk/packages/flutter_goldens/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/video_thumbnail/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/video_thumbnail/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/video_thumbnail/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/video_thumbnail/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/video_thumbnail/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/video_thumbnail/example/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

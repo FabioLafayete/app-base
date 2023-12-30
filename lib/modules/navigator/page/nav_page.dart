@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
@@ -131,27 +132,41 @@ class _BottomNavState extends State<BottomNav> {
         selectedItemColor: colors.primary,
         unselectedItemColor: colors.textSecondary,
         selectedLabelStyle: const TextStyle(
-          fontWeight: FontWeight.w600
+          fontWeight: FontWeight.w500
         ),
         showSelectedLabels: true,
         showUnselectedLabels: true,
-        selectedFontSize: 14,
-        unselectedFontSize: 12,
+        selectedFontSize: 12,
+        unselectedFontSize: 11,
         onTap: (int value){
-          HapticFeedback.mediumImpact();
+          HapticFeedback.lightImpact();
           controller.setPageSelected(value);
         },
-        items: const [
+        items: [
           // BottomNavigationBarItem(
           //     icon: FaIcon(LineIcons.home),
           //     label: 'Home'
           // ),
           BottomNavigationBarItem(
-              icon: FaIcon(LineIcons.dumbbell),
-              label: 'Treinos'
+              icon: SvgPicture.asset(
+                'assets/images/icons/svg/home-4.svg',
+                colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
+              ),
+              activeIcon: SvgPicture.asset(
+                'assets/images/icons/svg/home-4.svg',
+                colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
+              ),
+              label: 'Inicio'
           ),
           BottomNavigationBarItem(
-              icon: FaIcon(LineIcons.fruitApple),
+              icon: SvgPicture.asset(
+                'assets/images/icons/svg/cloche.svg',
+                colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
+              ),
+              activeIcon: SvgPicture.asset(
+                'assets/images/icons/svg/cloche.svg',
+                colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
+              ),
               label: 'Receitas'
           ),
           // BottomNavigationBarItem(
@@ -159,9 +174,16 @@ class _BottomNavState extends State<BottomNav> {
           //     label: 'Feed'
           // ),
           BottomNavigationBarItem(
-              icon: FaIcon(LineIcons.user),
+              icon: SvgPicture.asset(
+                'assets/images/icons/svg/user.svg',
+                colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
+              ),
+              activeIcon: SvgPicture.asset(
+                'assets/images/icons/svg/user.svg',
+                colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
+              ),
               label: 'Perfil'
-          )
+          ),
         ],
       ),
     );

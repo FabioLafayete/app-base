@@ -55,12 +55,12 @@ class ListButton extends BaseWidget {
                                 Row(
                                   children: [
                                     if(item.icon != null)
-                                    Row(
-                                      children: [
-                                        Icon(item.icon, size: 28),
-                                        const SizedBox(width: 14),
-                                      ],
-                                    ),
+                                      Row(
+                                        children: [
+                                          item.icon!,
+                                          const SizedBox(width: 14),
+                                        ],
+                                      ),
                                     Expanded(
                                       child: text(
                                         item.title,
@@ -111,7 +111,7 @@ class ListButtonItem {
   final String? subTitle;
   final String? textIcon;
   final Function()? onPress;
-  final IconData? icon;
+  final Widget? icon;
   final Color? background;
   final Color? iconColor;
   final Color? titleColor;

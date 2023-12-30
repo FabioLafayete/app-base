@@ -1,14 +1,13 @@
 import 'package:app/modules/workout/controller/workout_controller.dart';
 import 'package:app/modules/workout/mock/workout_detail_mock.dart';
+import 'package:app/modules/workout/mock/workout_json.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/model/workout/program_model/program_model.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/shared/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:miniplayer/miniplayer.dart';
-import 'package:video_player/video_player.dart';
-import '../../../shared/model/video/video_model.dart';
 import '../../navigator/controller/nav_controller.dart';
 import '../widgets/list_cards_items.dart';
 import '../widgets/top_presentation.dart';
@@ -18,85 +17,100 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
 
   final navController = Modular.get<NavController>();
 
-  void openVideo (){
-    controller.setProgramModel(ProgramModel.fromJson(WorkoutDetailMock.mockJson()));
+  void openVideo (ProgramModel model){
+    controller.setProgramModel(model);
     router.pushNamed(PagesNames.workoutDetail);
-  }
-
-  void openVideo2 (){
-    navController.setVideoSelected(
-        const VideoModel(
-            name: 'TESTE DE VIDEO 1',
-            url: 'https://stream.mux.com/Fz9TDH4f13E2rtwMMW4TGEgF4vioyKmi32I8IVKgENg.m3u8',
-            type: DataSourceType.network
-        )
-    );
-
-    navController.miniplayerController.animateToHeight(state: PanelState.MAX);
   }
 
   @override
   Widget build(BuildContext context) {
 
     final List<ListCardItems> list = [
-      ListCardItems(title: 'Feitos para você', seeMore: (){}, listItems: [
+      ListCardItems(title: 'Feitos para você', listItems: [
         CardItemModel(
             title: 'SEI LA 2',
-            onPress: openVideo,
-            thumbnail: 'https://images.pexels.com/photos/863977/pexels-photo-863977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            description: 'Queime gordura no ritmo',
+            onPress: () => openVideo(programs[0]),
+            thumbnail: programs[0].thumbnail,
+            description: programs[0].description ?? '',
             typeTraining: 'RESISTENCIA',
-            timeTraining: '15 min',
+            timeTraining: programs[0].duration ?? '',
             trainer: 'Roberta Souza'
         ),
         CardItemModel(
             title: 'SEI LA 2',
-            onPress: openVideo,
-            thumbnail: 'https://images.pexels.com/photos/2780762/pexels-photo-2780762.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            description: 'Crie resistencia',
+            onPress: () => openVideo(programs[1]),
+            thumbnail: programs[1].thumbnail,
+            description: programs[1].description ?? '',
             typeTraining: 'RESISTENCIA',
-            timeTraining: '10 min',
-            trainer: 'Sabrina Luisa'
+            timeTraining: programs[1].duration ?? '',
+            trainer: 'Roberta Souza'
+        ),
+        CardItemModel(
+            title: 'SEI LA 2',
+            onPress: () => openVideo(programs[1]),
+            thumbnail: programs[2].thumbnail,
+            description: programs[2].description ?? '',
+            typeTraining: 'RESISTENCIA',
+            timeTraining: programs[2].duration ?? '',
+            trainer: 'Roberta Souza'
         ),
       ]),
-      ListCardItems(title: 'Desafios', seeMore: (){}, listItems: [
+      ListCardItems(title: 'Desafios', listItems: [
         CardItemModel(
             title: 'SEI LA 2',
-            onPress: openVideo,
-            thumbnail: 'https://images.pexels.com/photos/4754133/pexels-photo-4754133.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            description: 'Suando com Muay Thai',
-            typeTraining: 'Muay Thai',
-            timeTraining: '15 min',
-            trainer: 'Mariana Cardoso'
+            onPress: () => openVideo(programs[3]),
+            thumbnail: programs[3].thumbnail,
+            description: programs[3].description ?? '',
+            typeTraining: 'RESISTENCIA',
+            timeTraining: programs[3].duration ?? '',
+            trainer: 'Roberta Souza'
         ),
         CardItemModel(
             title: 'SEI LA 2',
-            onPress: openVideo,
-            thumbnail: 'https://images.pexels.com/photos/8810062/pexels-photo-8810062.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            description: 'Respire e bata',
-            typeTraining: 'Boxe',
-            timeTraining: '10 min',
-            trainer: 'Joao Carlos'
+            onPress: () => openVideo(programs[3]),
+            thumbnail: programs[4].thumbnail,
+            description: programs[4].description ?? '',
+            typeTraining: 'RESISTENCIA',
+            timeTraining: programs[4].duration ?? '',
+            trainer: 'Roberta Souza'
+        ),
+        CardItemModel(
+            title: 'SEI LA 2',
+            onPress: () => openVideo(programs[3]),
+            thumbnail: programs[5].thumbnail,
+            description: programs[5].description ?? '',
+            typeTraining: 'RESISTENCIA',
+            timeTraining: programs[5].duration ?? '',
+            trainer: 'Roberta Souza'
         ),
       ]),
-      ListCardItems(title: 'Treinos em casa', seeMore: (){}, listItems: [
+      ListCardItems(title: 'Treinos em casa', listItems: [
         CardItemModel(
             title: 'SEI LA 2',
-            onPress: openVideo,
-            thumbnail: 'https://images.pexels.com/photos/5384538/pexels-photo-5384538.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            description: 'Alongue-se com yoga',
-            typeTraining: 'Yoga',
-            timeTraining: '15 min',
-            trainer: 'Caio Santos'
+            onPress: () => openVideo(programs[1]),
+            thumbnail: programs[6].thumbnail,
+            description: programs[6].description ?? '',
+            typeTraining: 'RESISTENCIA',
+            timeTraining: programs[6].duration ?? '',
+            trainer: 'Roberta Souza'
         ),
         CardItemModel(
             title: 'SEI LA 2',
-            onPress: openVideo,
-            thumbnail: 'https://images.pexels.com/photos/2908175/pexels-photo-2908175.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-            description: 'Treinando a repiração',
-            typeTraining: 'Corpo',
-            timeTraining: '20 min',
-            trainer: 'Monge Li'
+            onPress: () => openVideo(programs[1]),
+            thumbnail: programs[7].thumbnail,
+            description: programs[7].description ?? '',
+            typeTraining: 'RESISTENCIA',
+            timeTraining: programs[7].duration ?? '',
+            trainer: 'Roberta Souza'
+        ),
+        CardItemModel(
+            title: 'SEI LA 2',
+            onPress: () => openVideo(programs[1]),
+            thumbnail: programs[8].thumbnail,
+            description: programs[8].description ?? '',
+            typeTraining: 'RESISTENCIA',
+            timeTraining: programs[8].duration ?? '',
+            trainer: 'Roberta Souza'
         ),
       ]),
     ];
@@ -106,6 +120,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
       showAppBar: false,
       paddingPage: 0,
       extendBodyBehindAppBar: true,
+      elevation: 0,
       body: Stack(
         children: [
           ListView(
@@ -125,11 +140,50 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
                       )
                   ),
                 ),
-                if(navController.videoSelected != null)
-                  space(0.12),
-                if(navController.videoSelected == null)
-                  space(0.03),
+                space(0.07),
+                _bottomCard(
+                  'Precisa de ajuda?',
+                  'Envie uma mensagem para nossa equipe de suporte',
+                  'Fale com a gente', (){
+                    router.pushNamed(PagesNames.profileHelp);
+                    },
+                ),
               ]
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _bottomCard(
+      String title,
+      String description,
+      String buttonName,
+      Function() onPress){
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
+      color: colors.primary,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          text(
+              title,
+              color: colors.text2,
+              fontWeight: FontWeight.w700,
+              fontSize: 24
+          ),
+          const SizedBox(height: 30),
+          text(
+            description,
+            color: colors.text2,
+            fontWeight: FontWeight.w400,
+          ),
+          const SizedBox(height: 30),
+          MyButton(
+            title: buttonName,
+            onPress: onPress,
+            colorButton: colors.text2,
+            colorTitle: colors.primary,
           ),
         ],
       ),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app/modules/workout/controller/workout_controller.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/widgets/back_button.dart';
@@ -6,6 +8,9 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/my_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 class WorkoutDetailPage extends BaseWidget<WorkoutController> {
   WorkoutDetailPage({
@@ -61,13 +66,27 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                                 topLeft: Radius.circular(12),
                                 bottomLeft: Radius.circular(12),
                               ),
-                              child: CachedNetworkImage(
-                                fadeInDuration: const Duration(milliseconds: 300),
-                                imageUrl: item.thumbnail!,
-                                fit: BoxFit.cover,
-                                height: 100,
-                                width: 120,
+                              child: FutureBuilder<Uint8List>(
+                                future: _getImage(item.thumbnail!),
+                                builder: (_, snap){
+                                  if(!snap.hasData){
+                                    return const Icon(Icons.camera_alt_outlined);
+                                  }
+                                  return Image.memory(
+                                    snap.data!,
+                                    fit: BoxFit.cover,
+                                    height: 100,
+                                    width: 120,
+                                  );
+                                },
                               ),
+                              // child: CachedNetworkImage(
+                              //   fadeInDuration: const Duration(milliseconds: 300),
+                              //   imageUrl: item.thumbnail!,
+                              //   fit: BoxFit.cover,
+                              //   height: 100,
+                              //   width: 120,
+                              // ),
                             ),
                             const SizedBox(width: 20),
                             Expanded(
@@ -128,6 +147,23 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
     );
   }
 
+  Future<Uint8List> _getImage(String image) async {
+    final byteData = await rootBundle.load(image);
+    Directory tempDir = await getTemporaryDirectory();
+
+    File tempVideo = File("${tempDir.path}$image")
+      ..createSync(recursive: true)
+      ..writeAsBytesSync(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+
+    final fileName = await VideoThumbnail.thumbnailData(
+      video: tempVideo.path,
+      imageFormat: ImageFormat.JPEG,
+      quality: 100,
+    );
+
+    return fileName!;
+  }
+
   Widget _effectImage(){
     return Container(
       height: height * 0.45,
@@ -146,13 +182,19 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
   }
 
   Widget _image() {
-    return CachedNetworkImage(
-      fadeInDuration: const Duration(milliseconds: 300),
-      imageUrl: controller.programModel!.thumbnail,
+    return Image.asset(
+      controller.programModel!.thumbnail,
       width: width,
       height: height * 0.45,
       fit: BoxFit.cover,
     );
+    // return CachedNetworkImage(
+    //   fadeInDuration: const Duration(milliseconds: 300),
+    //   imageUrl: controller.programModel!.thumbnail,
+    //   width: width,
+    //   height: height * 0.45,
+    //   fit: BoxFit.cover,
+    // );
   }
 
   Widget _info(){

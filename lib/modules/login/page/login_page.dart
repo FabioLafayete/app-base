@@ -120,7 +120,7 @@ class LoginPage extends BaseWidget<LoginController> {
                                   ? () => controller.onPress()
                                   : null,
                             )),
-                    space(0.02)
+                    space(0.04)
                   ],
                 )),
         dismissible: false,

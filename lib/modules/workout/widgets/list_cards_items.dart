@@ -71,7 +71,7 @@ class ListCardItems extends BaseWidget {
         ),
         space(0.01),
         SizedBox(
-          height: height * 0.27,
+          height: width * 0.57,
           child: ListView(
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
@@ -102,13 +102,21 @@ class ListCardItems extends BaseWidget {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      CachedNetworkImage(
-                        fadeInDuration: const Duration(milliseconds: 300),
-                        imageUrl: listItems[index].thumbnail,
-                        width: width,
-                        alignment: Alignment.bottomCenter,
-                        fit: BoxFit.cover,
-                      ),
+                      if(listItems[index].thumbnail.contains('http'))
+                        CachedNetworkImage(
+                          fadeInDuration: const Duration(milliseconds: 300),
+                          imageUrl: listItems[index].thumbnail,
+                          width: width,
+                          alignment: Alignment.bottomCenter,
+                          fit: BoxFit.cover,
+                        ),
+                      if(!listItems[index].thumbnail.contains('http'))
+                        Image.asset(
+                          listItems[index].thumbnail,
+                          width: width,
+                          alignment: Alignment.bottomCenter,
+                          fit: BoxFit.cover,
+                        ),
                       if(item.showFavorite)
                         Positioned(
                           top: 5,

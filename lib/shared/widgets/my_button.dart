@@ -65,7 +65,7 @@ class MyButton extends BaseWidget {
     }
     return SizedBox(
       width: width,
-      height: heightButton ?? 60,
+      height: heightButton ?? height * 0.06,
       child: ElevatedButton(
         onPressed: loading ? (){} : onPress,
         style: onPress != null ?

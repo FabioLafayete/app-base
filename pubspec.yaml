@@ -21,7 +21,7 @@ dependencies:
   easy_mask: 2.0.1
   flutter_holo_date_picker: 1.0.6
   font_awesome_flutter: 10.3.0
-  video_player: 2.7.1
+  video_player: 2.8.1
   chewie: 1.7.0
   miniplayer: 1.0.1
   freezed_annotation: 2.2.0
@@ -45,6 +45,9 @@ dependencies:
   flutter_launcher_icons: 0.13.1
   back_button_interceptor: 7.0.0
   stop_watch_timer: 3.0.2
+  flutter_svg: 2.0.9
+  video_thumbnail: 0.5.3
+  path_provider: 2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +67,9 @@ flutter:
     - assets/video/
     - assets/images/
     - assets/images/foods/
+    - assets/images/welcome/
+    - assets/images/workouts/
+    - assets/images/icons/svg/
 
   fonts:
     - family: Inter

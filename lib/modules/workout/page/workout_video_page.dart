@@ -172,7 +172,6 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            const SizedBox(height: 200),
             text('💪', fontSize: 60),
             const SizedBox(height: 20),
             text('Fique firme!', fontSize: 30, fontWeight: FontWeight.w600),
@@ -183,7 +182,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: MyButton(
                 title: 'Continuar exercicio',
-                heightButton: 60,
+                heightButton: 55,
                 sizeTitle: 20,
                 colorTitle: colors.background,
                 onPress: (){
@@ -198,11 +197,11 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
                 },
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             MyButton(
               title: 'Terminar treino',
               colorTitle: colors.text.withOpacity(0.6),
-              sizeTitle: 20,
+              sizeTitle: 18,
               cleanButton: true,
               onPress: (){
                 MyRouter().pop();
@@ -368,15 +367,14 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
     controller.setVideoPlayerController(null);
 
     controller.setVideoPlayerController(
-        VideoPlayerController.networkUrl(
-          Uri.parse(controller.workoutModel!.videoUrl),
-        )
+        VideoPlayerController.asset(controller.workoutModel!.videoUrl)
     );
+
+    controller.videoPlayerController!.setVolume(0);
+    controller.videoPlayerController!.setLooping(true);
 
     await controller.videoPlayerController!.initialize();
     hasInitialize = true;
-    controller.videoPlayerController!.setVolume(0);
-    controller.videoPlayerController!.setLooping(true);
     if(!(_timer?.isActive ?? false)){
       controller.videoPlayerController!.play();
     }

@@ -14,8 +14,8 @@ class HelpPage extends BaseWidget<ProfileController> {
     controller.clearHelpPage();
     return BasePage(
       title: 'Precisa de ajuda?',
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: ListView(
+        physics: const ClampingScrollPhysics(),
         children: [
           const SizedBox(height: 40),
           text(
@@ -29,10 +29,7 @@ class HelpPage extends BaseWidget<ProfileController> {
             fontSize: 18,
           ),
           const SizedBox(height: 30),
-          text(
-              'Assunto *',
-              fontWeight: FontWeight.w600
-          ),
+          text('Assunto *', fontWeight: FontWeight.w600),
           const SizedBox(height: 10),
           VisualDisplay.textField(
             hintText: 'Digite o assunto da mensagem',
@@ -47,13 +44,10 @@ class HelpPage extends BaseWidget<ProfileController> {
             onChanged: controller.setTitleHelp,
           ),
           const SizedBox(height: 40),
-          text(
-              'Motivo do contato *',
-              fontWeight: FontWeight.w600
-          ),
+          text('Motivo do contato *', fontWeight: FontWeight.w600),
           const SizedBox(height: 10),
           GestureDetector(
-            onTap: (){
+            onTap: () {
               _showOptions(context);
             },
             child: Container(
@@ -73,23 +67,22 @@ class HelpPage extends BaseWidget<ProfileController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Observer(builder: (_){
+                  Observer(builder: (_) {
                     return text(
                         controller.optionHelp ?? 'Escolha o motivo do contato',
                         fontSize: 18,
-                        fontWeight: FontWeight.w500
-                    );
+                        fontWeight: FontWeight.w500);
                   }),
-                  Icon(Icons.arrow_forward_ios_rounded, color: colors.primary,)
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: colors.primary,
+                  )
                 ],
               ),
             ),
           ),
           const SizedBox(height: 30),
-          text(
-              'Mensagem *',
-              fontWeight: FontWeight.w600
-          ),
+          text('Mensagem *', fontWeight: FontWeight.w600),
           const SizedBox(height: 10),
           VisualDisplay.textField(
             hintText: 'Digite sua mensagem',
@@ -106,12 +99,10 @@ class HelpPage extends BaseWidget<ProfileController> {
             maxLines: 4,
             onChanged: controller.setMessageHelp,
           ),
-          const Spacer(),
-          Observer(builder: (_){
+          const SizedBox(height: 50),
+          Observer(builder: (_) {
             return MyButton(
-              onPress: controller.enableButtonSendHelp() ? (){
-
-              } : null,
+              onPress: controller.enableButtonSendHelp() ? () {} : null,
               colorTitle: colors.text2,
               title: 'Enviar mensagem',
             );
@@ -128,17 +119,15 @@ class HelpPage extends BaseWidget<ProfileController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            text(
-                'Qual é o motivo?',
+            text('Qual é o motivo?',
                 color: colors.text,
                 fontSize: 26,
                 fontWeight: FontWeight.w600,
-                textAlign: TextAlign.start
-            ),
+                textAlign: TextAlign.start),
             const SizedBox(height: 50),
-            ...List.generate(controller.listOptionsHelp.length, (index){
+            ...List.generate(controller.listOptionsHelp.length, (index) {
               return GestureDetector(
-                onTap: (){
+                onTap: () {
                   controller.setOptionHelp(controller.listOptionsHelp[index]);
                   router.pop();
                 },
@@ -148,11 +137,8 @@ class HelpPage extends BaseWidget<ProfileController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      text(
-                          controller.listOptionsHelp[index],
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18
-                      ),
+                      text(controller.listOptionsHelp[index],
+                          fontWeight: FontWeight.w600, fontSize: 18),
                       const SizedBox(height: 10),
                       const Divider(),
                     ],
@@ -166,8 +152,6 @@ class HelpPage extends BaseWidget<ProfileController> {
         hasHeight: false,
         dismissible: true,
         context: context,
-        onClose: (){}
-    );
+        onClose: () {});
   }
-
 }

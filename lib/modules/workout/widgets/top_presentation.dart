@@ -21,7 +21,7 @@ class TopPresentation extends BaseWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height * 0.4,
+      height: height * 0.45,
       child: ClipRRect(
         borderRadius: const BorderRadius.only(
           bottomRight: Radius.circular(0),
@@ -64,10 +64,10 @@ class TopPresentation extends BaseWidget {
           Row(
             children: [
               if(cardItemModel.trainer != null)
-                text(cardItemModel.trainer!, fontWeight: FontWeight.w300, fontSize: 12, color: colors.background),
+                text(cardItemModel.trainer!, fontWeight: FontWeight.w400, fontSize: 14, color: colors.background),
               if(cardItemModel.timeTraining != null)
                 text('${cardItemModel.trainer != null ? ' | ' : ''}${cardItemModel.timeTraining!}',
-                    fontWeight: FontWeight.w300, fontSize: 12, color: colors.background),
+                    fontWeight: FontWeight.w400, fontSize: 14, color: colors.background),
             ],
           ),
           space(0.02),
@@ -103,19 +103,26 @@ class TopPresentation extends BaseWidget {
   }
 
   Widget _image() {
-    return CachedNetworkImage(
-      fadeInDuration: const Duration(milliseconds: 300),
-      imageUrl: cardItemModel.thumbnail,
+    return Image.asset(
+      cardItemModel.thumbnail,
       width: width,
-      height: height * 0.4,
+      height: height * 0.45,
       alignment: Alignment.bottomCenter,
       fit: BoxFit.cover,
     );
+    // return CachedNetworkImage(
+    //   fadeInDuration: const Duration(milliseconds: 300),
+    //   imageUrl: cardItemModel.thumbnail,
+    //   width: width,
+    //   height: height * 0.45,
+    //   alignment: Alignment.bottomCenter,
+    //   fit: BoxFit.cover,
+    // );
   }
 
   Widget _effectImage(){
     return Container(
-      height: height * 0.4,
+      height: height * 0.45,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: FractionalOffset.topCenter,
