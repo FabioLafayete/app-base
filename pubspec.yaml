@@ -67,6 +67,7 @@ flutter:
     - assets/video/
     - assets/images/
     - assets/images/foods/
+    - assets/images/foods/category/
     - assets/images/welcome/
     - assets/images/workouts/
     - assets/images/icons/svg/

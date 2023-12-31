@@ -1,3 +1,4 @@
+import 'package:app/modules/workout/widgets/list_cards_items.dart';
 import 'package:app/shared/model/workout/program_model/program_model.dart';
 import 'package:app/shared/model/workout/workout_model/workout_model.dart';
 import 'package:mobx/mobx.dart';
@@ -28,6 +29,8 @@ abstract class WorkoutControllerBase with Store {
 
   @observable
   bool showCountdown = false;
+
+  CardItemModel? topProgram;
 
 
   @action

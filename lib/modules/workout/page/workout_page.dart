@@ -1,5 +1,6 @@
+import 'dart:math';
+
 import 'package:app/modules/workout/controller/workout_controller.dart';
-import 'package:app/modules/workout/mock/workout_detail_mock.dart';
 import 'package:app/modules/workout/mock/workout_json.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/model/workout/program_model/program_model.dart';
@@ -22,98 +23,131 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
     router.pushNamed(PagesNames.workoutDetail);
   }
 
+
+
   @override
   Widget build(BuildContext context) {
 
     final List<ListCardItems> list = [
       ListCardItems(title: 'Feitos para você', listItems: [
         CardItemModel(
-            title: 'SEI LA 2',
             onPress: () => openVideo(programs[0]),
             thumbnail: programs[0].thumbnail,
             description: programs[0].description ?? '',
-            typeTraining: 'RESISTENCIA',
             timeTraining: programs[0].duration ?? '',
-            trainer: 'Roberta Souza'
+            trainer: programs[0].difficulty
         ),
         CardItemModel(
-            title: 'SEI LA 2',
             onPress: () => openVideo(programs[1]),
             thumbnail: programs[1].thumbnail,
             description: programs[1].description ?? '',
-            typeTraining: 'RESISTENCIA',
             timeTraining: programs[1].duration ?? '',
-            trainer: 'Roberta Souza'
+            trainer: programs[1].difficulty
         ),
         CardItemModel(
-            title: 'SEI LA 2',
-            onPress: () => openVideo(programs[1]),
+            onPress: () => openVideo(programs[2]),
             thumbnail: programs[2].thumbnail,
             description: programs[2].description ?? '',
-            typeTraining: 'RESISTENCIA',
             timeTraining: programs[2].duration ?? '',
-            trainer: 'Roberta Souza'
+            trainer: programs[2].difficulty
         ),
       ]),
       ListCardItems(title: 'Desafios', listItems: [
         CardItemModel(
-            title: 'SEI LA 2',
             onPress: () => openVideo(programs[3]),
             thumbnail: programs[3].thumbnail,
             description: programs[3].description ?? '',
-            typeTraining: 'RESISTENCIA',
             timeTraining: programs[3].duration ?? '',
-            trainer: 'Roberta Souza'
+            trainer: programs[3].difficulty
         ),
         CardItemModel(
-            title: 'SEI LA 2',
-            onPress: () => openVideo(programs[3]),
+            onPress: () => openVideo(programs[4]),
             thumbnail: programs[4].thumbnail,
             description: programs[4].description ?? '',
-            typeTraining: 'RESISTENCIA',
             timeTraining: programs[4].duration ?? '',
-            trainer: 'Roberta Souza'
+            trainer: programs[4].difficulty
         ),
         CardItemModel(
-            title: 'SEI LA 2',
-            onPress: () => openVideo(programs[3]),
+            onPress: () => openVideo(programs[5]),
             thumbnail: programs[5].thumbnail,
             description: programs[5].description ?? '',
-            typeTraining: 'RESISTENCIA',
             timeTraining: programs[5].duration ?? '',
-            trainer: 'Roberta Souza'
+            trainer: programs[5].difficulty
         ),
       ]),
       ListCardItems(title: 'Treinos em casa', listItems: [
         CardItemModel(
-            title: 'SEI LA 2',
-            onPress: () => openVideo(programs[1]),
+            onPress: () => openVideo(programs[6]),
             thumbnail: programs[6].thumbnail,
             description: programs[6].description ?? '',
-            typeTraining: 'RESISTENCIA',
             timeTraining: programs[6].duration ?? '',
-            trainer: 'Roberta Souza'
+            trainer: programs[6].difficulty
         ),
         CardItemModel(
-            title: 'SEI LA 2',
-            onPress: () => openVideo(programs[1]),
+            onPress: () => openVideo(programs[7]),
             thumbnail: programs[7].thumbnail,
             description: programs[7].description ?? '',
-            typeTraining: 'RESISTENCIA',
             timeTraining: programs[7].duration ?? '',
-            trainer: 'Roberta Souza'
+            trainer: programs[7].difficulty
         ),
         CardItemModel(
-            title: 'SEI LA 2',
-            onPress: () => openVideo(programs[1]),
+            onPress: () => openVideo(programs[8]),
             thumbnail: programs[8].thumbnail,
             description: programs[8].description ?? '',
-            typeTraining: 'RESISTENCIA',
             timeTraining: programs[8].duration ?? '',
-            trainer: 'Roberta Souza'
+            trainer: programs[8].difficulty
+        ),
+      ]),
+      ListCardItems(title: 'Em breve...', listItems: [
+        CardItemModel(
+          onPress: (){},
+          thumbnail: programs[9].thumbnail,
+          description: programs[9].description ?? '',
+          timeTraining: programs[9].duration ?? '',
+          trainer: programs[9].difficulty,
+          soon: true
+        ),
+        CardItemModel(
+            onPress: (){},
+            thumbnail: programs[10].thumbnail,
+            description: programs[10].description ?? '',
+            timeTraining: programs[10].duration ?? '',
+            trainer: programs[10].difficulty,
+            soon: true
+        ),
+        CardItemModel(
+            onPress: (){},
+            thumbnail: programs[11].thumbnail,
+            description: programs[11].description ?? '',
+            timeTraining: programs[11].duration ?? '',
+            trainer: programs[11].difficulty,
+            soon: true
+        ),
+        CardItemModel(
+            onPress: (){},
+            thumbnail: programs[12].thumbnail,
+            description: programs[12].description ?? '',
+            timeTraining: programs[12].duration ?? '',
+            trainer: programs[12].difficulty,
+            soon: true
         ),
       ]),
     ];
+
+    CardItemModel randomProgram(){
+
+      if(controller.topProgram != null){
+        return controller.topProgram!;
+      }
+
+      final item = Random().nextInt(list.length - 1);
+      final listItem = list[item].listItems;
+      final item2 = Random().nextInt(listItem.length);
+
+      controller.topProgram = list[item].listItems[item2];
+
+      return list[item].listItems[item2];
+    }
 
     return BasePage(
       backgroundColor: colors.background,
@@ -125,30 +159,30 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
         children: [
           ListView(
             physics: const ClampingScrollPhysics(),
-              padding: MediaQuery.maybeOf(context)?.padding.copyWith(top: 0),
-              children: [
-                TopPresentation(
-                  cardItemModel: list[2].listItems[1],
-                  showUsers: false,
+            padding: MediaQuery.maybeOf(context)?.padding.copyWith(top: 0),
+            children: [
+              TopPresentation(
+                cardItemModel: randomProgram(),
+                showUsers: false,
+              ),
+              Column(
+                children: List.generate(
+                    list.length,
+                        (index) => Container(
+                          margin: const EdgeInsets.only(top: 30),
+                          child: list[index],
+                        )
                 ),
-                Column(
-                  children: List.generate(
-                      list.length,
-                          (index) => Container(
-                        margin: const EdgeInsets.only(top: 30),
-                        child: list[index],
-                      )
-                  ),
-                ),
-                space(0.07),
-                _bottomCard(
-                  'Precisa de ajuda?',
-                  'Envie uma mensagem para nossa equipe de suporte',
-                  'Fale com a gente', (){
-                    router.pushNamed(PagesNames.profileHelp);
-                    },
-                ),
-              ]
+              ),
+              space(0.07),
+              _bottomCard(
+                'Precisa de ajuda?',
+                'Envie uma mensagem para nossa equipe de suporte',
+                'Fale com a gente', (){
+                  router.pushNamed(PagesNames.profileHelp);
+                  },
+              ),
+            ],
           ),
         ],
       ),

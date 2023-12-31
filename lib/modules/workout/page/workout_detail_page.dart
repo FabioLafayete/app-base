@@ -20,6 +20,9 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
 
   @override
   Widget build(BuildContext context) {
+
+    final viewTransformationController = TransformationController();
+
     return BasePage(
       backgroundColor: colors.background,
       showAppBar: false,
@@ -49,71 +52,90 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                     const SizedBox(height: 20),
                     ...List.generate(controller.programModel!.workouts.length, (index){
                       final item = controller.programModel!.workouts[index];
-                      return Container(
-                        margin: const EdgeInsets.only(bottom: 20),
-                        decoration: BoxDecoration(
-                          color: const Color.fromRGBO(238, 238, 238, 1.0),
-                          borderRadius: BorderRadius.circular(14),
-                          border: Border.all(
-                            width: 0.5, color: const Color.fromRGBO(220, 222, 224, 1.0),
-                          )
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(12),
-                                bottomLeft: Radius.circular(12),
-                              ),
-                              child: FutureBuilder<Uint8List>(
-                                future: _getImage(item.thumbnail!),
-                                builder: (_, snap){
-                                  if(!snap.hasData){
-                                    return const Icon(Icons.camera_alt_outlined);
-                                  }
-                                  return Image.memory(
-                                    snap.data!,
-                                    fit: BoxFit.cover,
-                                    height: 100,
-                                    width: 120,
-                                  );
-                                },
-                              ),
-                              // child: CachedNetworkImage(
-                              //   fadeInDuration: const Duration(milliseconds: 300),
-                              //   imageUrl: item.thumbnail!,
-                              //   fit: BoxFit.cover,
-                              //   height: 100,
-                              //   width: 120,
-                              // ),
-                            ),
-                            const SizedBox(width: 20),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  text(
-                                    item.title,
-                                    fontWeight: FontWeight.w600,
-                                    color: colors.text,
-                                    maxLines: 2,
-                                    textOverflow: TextOverflow.ellipsis,
-                                    fontSize: 20,
-                                  ),
-                                  const SizedBox(height: 10),
-                                  text(
-                                    item.duration ?? '',
-                                    fontWeight: FontWeight.w300,
-                                    color: colors.text,
-                                    maxLines: 1,
-                                    textOverflow: TextOverflow.ellipsis,
-                                    fontSize: 14,
-                                  ),
-                                ],
-                              ),
+                      return GestureDetector(
+                        onTap: (){
+                          router.pushNamed(PagesNames.workoutVideo);
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 20),
+                          decoration: BoxDecoration(
+                            color: const Color.fromRGBO(238, 238, 238, 1.0),
+                            borderRadius: BorderRadius.circular(14),
+                            border: Border.all(
+                              width: 0.5, color: const Color.fromRGBO(220, 222, 224, 1.0),
                             )
-                          ],
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(12),
+                                  bottomLeft: Radius.circular(12),
+                                ),
+                                child: FutureBuilder<Uint8List>(
+                                  future: _getImage(item.thumbnail!),
+                                  builder: (_, snap){
+                                    if(!snap.hasData){
+                                      return Container(
+                                        width: 120,
+                                        height: 100,
+                                        decoration: BoxDecoration(
+                                          color: colors.background,
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(14),
+                                            bottomLeft: Radius.circular(14),
+                                          )
+                                        ),
+                                        child: const Icon(
+                                          Icons.camera_alt_outlined,
+                                        ),
+                                      );
+                                    }
+
+                                    return Image.memory(
+                                      snap.data!,
+                                      fit: BoxFit.cover,
+                                      height: 100,
+                                      width: 120,
+                                    );
+                                  },
+                                ),
+                                // child: CachedNetworkImage(
+                                //   fadeInDuration: const Duration(milliseconds: 300),
+                                //   imageUrl: item.thumbnail!,
+                                //   fit: BoxFit.cover,
+                                //   height: 100,
+                                //   width: 120,
+                                // ),
+                              ),
+                              const SizedBox(width: 20),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    text(
+                                      item.title,
+                                      fontWeight: FontWeight.w600,
+                                      color: colors.text,
+                                      maxLines: 2,
+                                      textOverflow: TextOverflow.ellipsis,
+                                      fontSize: 20,
+                                    ),
+                                    const SizedBox(height: 10),
+                                    text(
+                                      item.duration ?? '',
+                                      fontWeight: FontWeight.w300,
+                                      color: colors.text,
+                                      maxLines: 1,
+                                      textOverflow: TextOverflow.ellipsis,
+                                      fontSize: 14,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       );
                     }),

@@ -45,15 +45,18 @@ class TopPresentation extends BaseWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            decoration: BoxDecoration(
-              color: colors.primary,
-              borderRadius: BorderRadius.circular(1000)
-            ),
-            child: text(cardItemModel.typeTraining, fontSize: 12, fontWeight: FontWeight.w600, color: colors.background),
-          ),
-          space(0.01),
+          if(cardItemModel.typeTraining != null)
+            ...[
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                    color: colors.primary,
+                    borderRadius: BorderRadius.circular(8)
+                ),
+                child: text(cardItemModel.typeTraining!, fontSize: 12, fontWeight: FontWeight.w600, color: colors.background),
+              ),
+              space(0.01),
+            ],
           text(cardItemModel.description,
               fontWeight: FontWeight.w600,
               maxLines: 2,

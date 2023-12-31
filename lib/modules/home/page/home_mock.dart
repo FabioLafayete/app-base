@@ -12,7 +12,6 @@ class HomeMock {
   static final List<ListCardItems> listWorkout = [
     ListCardItems(title: 'Corpo todo', seeMore: (){}, listItems: [
       CardItemModel(
-          title: 'SEI LA 2',
           onPress: (){
             final navController = Modular.get<NavController>();
             navController.setVideoSelected(
@@ -31,7 +30,6 @@ class HomeMock {
           trainer: 'Roberta Souza'
       ),
       CardItemModel(
-          title: 'SEI LA 2',
           onPress: (){
             final navController = Modular.get<NavController>();
             navController.setVideoSelected(
@@ -52,7 +50,6 @@ class HomeMock {
     ]),
     ListCardItems(title: 'Luta', seeMore: (){}, listItems: [
       CardItemModel(
-          title: 'SEI LA 2',
           onPress: (){},
           thumbnail: 'https://images.pexels.com/photos/4754133/pexels-photo-4754133.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
           description: 'Suando com Muay Thai',
@@ -61,7 +58,6 @@ class HomeMock {
           trainer: 'Mariana Cardoso'
       ),
       CardItemModel(
-          title: 'SEI LA 2',
           onPress: (){},
           thumbnail: 'https://images.pexels.com/photos/8810062/pexels-photo-8810062.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
           description: 'Respire e bata',
@@ -72,7 +68,6 @@ class HomeMock {
     ]),
     ListCardItems(title: 'Meditação', seeMore: (){}, listItems: [
       CardItemModel(
-          title: 'SEI LA 2',
           onPress: (){},
           thumbnail: 'https://images.pexels.com/photos/5384538/pexels-photo-5384538.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
           description: 'Alongue-se com yoga',
@@ -81,7 +76,6 @@ class HomeMock {
           trainer: 'Caio Santos'
       ),
       CardItemModel(
-          title: 'SEI LA 2',
           onPress: (){},
           thumbnail: 'https://images.pexels.com/photos/2908175/pexels-photo-2908175.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
           description: 'Treinando a repiração',
@@ -94,7 +88,6 @@ class HomeMock {
 
   static final List<CardItemModel> listFoodSoon = [
     CardItemModel(
-        title: 'SEI LA 2',
         onPress: (){},
         thumbnail: 'https://images.pexels.com/photos/8629098/pexels-photo-8629098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
         description: 'Aquela janta rápida e gostosa',
@@ -105,7 +98,6 @@ class HomeMock {
         trainer: 'Rodrigo Luis'
     ),
     CardItemModel(
-      title: 'SEI LA 2',
       onPress: (){},
       thumbnail: 'https://images.pexels.com/photos/4259140/pexels-photo-4259140.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       description: 'Para a família',

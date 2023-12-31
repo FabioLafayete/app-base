@@ -270,8 +270,8 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
               controller.workoutModel!.title,
               maxLines: 2,
               textOverflow: TextOverflow.ellipsis,
-              fontSize: 30,
-              fontWeight: FontWeight.w600,
+              fontSize: 24,
+              fontWeight: FontWeight.w500,
             ),
             const Spacer(),
             Row(
@@ -316,16 +316,16 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
                                 Icons.pause_circle_filled_rounded :
                                 Icons.play_circle_fill_rounded
                         ),
-                        if(controller.positionVideo != null)
-                          SizedBox(
-                            height: 70,
-                            width: 70,
-                            child: CircularProgressIndicator(
-                              color: colors.background,
-                              strokeWidth: 2,
-                              value: controller.percentVideo,
-                            ),
-                          )
+                        // if(controller.positionVideo != null)
+                        //   SizedBox(
+                        //     height: 70,
+                        //     width: 70,
+                        //     child: CircularProgressIndicator(
+                        //       color: colors.background,
+                        //       strokeWidth: 2,
+                        //       value: controller.percentVideo,
+                        //     ),
+                        //   )
                       ],
                     ),
                     iconSize: 90,
@@ -360,6 +360,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
   }
 
   Future<void> initController({int index = 0}) async {
+    bool isPrevious = index < controller.currentIndexVideo;
     hasInitialize = false;
     controller.setCurrentIndexVideo(index);
     controller.setPositionVideo(Duration.zero);
@@ -372,14 +373,22 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
 
     controller.videoPlayerController!.setVolume(0);
     controller.videoPlayerController!.setLooping(true);
+    await controller.videoPlayerController!.setPlaybackSpeed(0.95);
 
     await controller.videoPlayerController!.initialize();
-    hasInitialize = true;
+    if(!isPrevious){
+      hasInitialize = true;
+    }
+
     if(!(_timer?.isActive ?? false)){
       controller.videoPlayerController!.play();
     }
     controller.videoPlayerController!.addListener((){
       if(controller.videoPlayerController != null){
+        if(hasInitialize == false && isPrevious){
+          hasInitialize = true;
+          setState(() {});
+        }
         controller.setPositionVideo(controller.videoPlayerController!.value.position);
       }
     });

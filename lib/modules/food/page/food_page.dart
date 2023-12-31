@@ -132,9 +132,8 @@ class FoodPage extends BaseWidget<FoodController> {
 
   final List<CardItemModel> _soonVideos = [
     CardItemModel(
-        title: 'SEI LA 2',
         onPress: (){},
-        thumbnail: 'https://images.pexels.com/photos/8629098/pexels-photo-8629098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        thumbnail: 'assets/images/foods/soon_01.jpg',
         description: 'Aquela janta rápida e gostosa',
         typeTraining: 'JANTA',
         timeTraining: '20 min',
@@ -143,9 +142,8 @@ class FoodPage extends BaseWidget<FoodController> {
         trainer: 'Rodrigo Luis'
     ),
     CardItemModel(
-      title: 'SEI LA 2',
       onPress: (){},
-      thumbnail: 'https://images.pexels.com/photos/4259140/pexels-photo-4259140.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      thumbnail: 'assets/images/foods/soon_02.jpg',
       description: 'Para a família',
       typeTraining: 'ALMOÇO',
       timeTraining: '1 hora',
@@ -157,7 +155,7 @@ class FoodPage extends BaseWidget<FoodController> {
 
   final List<ItemWrapModel> _categories = [
     ItemWrapModel(
-        image: 'https://images.pexels.com/photos/103124/pexels-photo-103124.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        image: 'assets/images/foods/category/pexels-photo-103124.jpg',
         title: 'Café da manhã',
         onPress: (){
           final item = Modular.get<FoodController>().listFoodDetail;
@@ -168,7 +166,7 @@ class FoodPage extends BaseWidget<FoodController> {
         }
     ),
     ItemWrapModel(
-        image: 'https://images.pexels.com/photos/5710178/pexels-photo-5710178.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        image: 'assets/images/foods/category/pexels-photo-5710178.jpeg',
         title: 'Almoço',
         onPress: (){
           final item = Modular.get<FoodController>().listFoodDetail;
@@ -179,7 +177,7 @@ class FoodPage extends BaseWidget<FoodController> {
         }
     ),
     ItemWrapModel(
-        image: 'https://images.pexels.com/photos/2092906/pexels-photo-2092906.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        image: 'assets/images/foods/category/pexels-photo-2092906.jpeg',
         title: 'Jantar',
         onPress: (){
           final item = Modular.get<FoodController>().listFoodDetail;
@@ -190,7 +188,7 @@ class FoodPage extends BaseWidget<FoodController> {
         }
     ),
     ItemWrapModel(
-        image: 'https://images.pexels.com/photos/3889844/pexels-photo-3889844.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        image: 'assets/images/foods/category/pexels-photo-3889844.jpeg',
         title: 'Bebidas',
         onPress: (){
           final item = Modular.get<FoodController>().listFoodDetail;
@@ -201,7 +199,7 @@ class FoodPage extends BaseWidget<FoodController> {
         }
     ),
     ItemWrapModel(
-        image: 'https://images.pexels.com/photos/257816/pexels-photo-257816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        image: 'assets/images/foods/category/pexels-photo-257816.jpg',
         title: 'Saladas',
         onPress: (){
           final item = Modular.get<FoodController>().listFoodDetail;
@@ -212,7 +210,7 @@ class FoodPage extends BaseWidget<FoodController> {
         }
     ),
     ItemWrapModel(
-        image: 'https://images.pexels.com/photos/1351238/pexels-photo-1351238.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        image: 'assets/images/foods/category/pexels-photo-1351238.jpeg',
         title: 'Vegano',
         onPress: (){
           final item = Modular.get<FoodController>().listFoodDetail;
@@ -223,7 +221,7 @@ class FoodPage extends BaseWidget<FoodController> {
         }
     ),
     ItemWrapModel(
-        image: 'https://images.pexels.com/photos/5836776/pexels-photo-5836776.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        image: 'assets/images/foods/category/pexels-photo-5836776.jpeg',
         title: 'Lanches',
         onPress: (){
           final item = Modular.get<FoodController>().listFoodDetail;
@@ -234,7 +232,7 @@ class FoodPage extends BaseWidget<FoodController> {
         }
     ),
     ItemWrapModel(
-        image: 'https://images.pexels.com/photos/3026804/pexels-photo-3026804.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        image: 'assets/images/foods/category/pexels-photo-3026804.jpeg',
         title: 'Doces',
         onPress: (){
           final item = Modular.get<FoodController>().listFoodDetail;
