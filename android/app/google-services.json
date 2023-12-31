@@ -1,43 +1,26 @@
 {
   "project_info": {
-    "project_number": "737112738490",
-    "project_id": "ibetther-325d1",
-    "storage_bucket": "ibetther-325d1.appspot.com"
+    "project_number": "220683252898",
+    "project_id": "ibetter",
+    "storage_bucket": "ibetter.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:737112738490:android:7497097f3c8fa515fd1083",
+        "mobilesdk_app_id": "1:220683252898:android:1d6ccb0bec66a74bdb93fb",
         "android_client_info": {
           "package_name": "com.ibetter.app"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "737112738490-bpnd9mh1crdct40663eafqab4nbk8utk.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAKoajxwRkE337OnzOCKxLxWFAJx9KOmi0"
+          "current_key": "AIzaSyAPBal7CBgssEs6aYRvB3zEvQRdPv1HDqQ"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "737112738490-bpnd9mh1crdct40663eafqab4nbk8utk.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "737112738490-f2nsf7274rp0kgdq00sonp7nsjd1jf5o.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.ibetter.app"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

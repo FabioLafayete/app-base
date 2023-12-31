@@ -124,6 +124,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
           }
           timer.cancel();
         } else {
+          HapticFeedback.lightImpact();
           setState(() {
             _start--;
           });
