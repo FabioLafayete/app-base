@@ -43,6 +43,9 @@ abstract class ProfileControllerBase extends BaseController with Store {
   bool loading = false;
 
   @observable
+  bool successPage = false;
+
+  @observable
   String? optionHelp;
 
   @observable
@@ -58,6 +61,9 @@ abstract class ProfileControllerBase extends BaseController with Store {
     'Parceria',
     'Reembolso',
   ];
+
+  @action
+  setSuccessPage(bool value) => successPage = value;
 
   @action
   setOptionHelp(String? value) => optionHelp = value;
@@ -170,6 +176,7 @@ abstract class ProfileControllerBase extends BaseController with Store {
     setOptionHelp(null);
     setMessageHelp(null);
     setTitleHelp(null);
+    setSuccessPage(false);
   }
 
   bool enableButtonSendHelp(){

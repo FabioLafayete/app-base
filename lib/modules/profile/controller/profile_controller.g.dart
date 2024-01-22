@@ -175,6 +175,22 @@ mixin _$ProfileController on ProfileControllerBase, Store {
     });
   }
 
+  late final _$successPageAtom =
+      Atom(name: 'ProfileControllerBase.successPage', context: context);
+
+  @override
+  bool get successPage {
+    _$successPageAtom.reportRead();
+    return super.successPage;
+  }
+
+  @override
+  set successPage(bool value) {
+    _$successPageAtom.reportWrite(value, super.successPage, () {
+      super.successPage = value;
+    });
+  }
+
   late final _$optionHelpAtom =
       Atom(name: 'ProfileControllerBase.optionHelp', context: context);
 
@@ -225,6 +241,17 @@ mixin _$ProfileController on ProfileControllerBase, Store {
 
   late final _$ProfileControllerBaseActionController =
       ActionController(name: 'ProfileControllerBase', context: context);
+
+  @override
+  dynamic setSuccessPage(bool value) {
+    final _$actionInfo = _$ProfileControllerBaseActionController.startAction(
+        name: 'ProfileControllerBase.setSuccessPage');
+    try {
+      return super.setSuccessPage(value);
+    } finally {
+      _$ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic setOptionHelp(String? value) {
@@ -359,6 +386,7 @@ errorName: ${errorName},
 errorEmail: ${errorEmail},
 errorPhone: ${errorPhone},
 loading: ${loading},
+successPage: ${successPage},
 optionHelp: ${optionHelp},
 titleHelp: ${titleHelp},
 messageHelp: ${messageHelp},

@@ -149,7 +149,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
           return Container(
             margin: const EdgeInsets.symmetric(vertical: 3),
             width: width * 0.28,
-            height: width * 0.42,
+            height: height * 0.19,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
