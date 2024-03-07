@@ -52,3 +52,4 @@ lib/generated_plugin_registrant.dart
 #assets/video
 
 android/key.properties
+android/app/key.jks

@@ -96,7 +96,7 @@ class FoodDetailPage extends BaseWidget {
               top: BorderSide(color: colors.primary, width: 1),
               bottom: BorderSide(color: colors.primary, width: 1),
               right: BorderSide(color: colors.primary, width: 1.1),
-              left: BorderSide(color: colors.primary, width: 0),
+              left: BorderSide(color: colors.primary, width: 0.1),
             )
           ),
           child: text('Ingredientes', fontWeight: FontWeight.w600, fontSize: 18),
@@ -132,7 +132,7 @@ class FoodDetailPage extends BaseWidget {
                 top: BorderSide(color: colors.primary, width: 1),
                 bottom: BorderSide(color: colors.primary, width: 1),
                 right: BorderSide(color: colors.primary, width: 1.1),
-                left: BorderSide(color: colors.primary, width: 0),
+                left: BorderSide(color: colors.primary, width: 0.1),
               )
           ),
           child: text('Modo de preparo', fontWeight: FontWeight.w600, fontSize: 18),

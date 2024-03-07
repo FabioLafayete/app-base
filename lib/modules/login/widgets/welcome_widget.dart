@@ -24,21 +24,21 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
 
   final List<String> _image01 = [
     'assets/images/welcome/0.jpeg',
-    'assets/images/welcome/7.jpg',
+    'assets/images/welcome/7.png',
     'assets/images/welcome/17.jpeg',
   ];
   final List<String> _image02 = [
     'assets/images/welcome/8.jpg',
-    'assets/images/welcome/13.jpg',
+    'assets/images/welcome/13.png',
     'assets/images/welcome/5.jpeg',
   ];
   final List<String> _image03 = [
-    'assets/images/welcome/6.jpg',
-    'assets/images/welcome/6.jpg',
-    'assets/images/welcome/18.jpg',
+    'assets/images/welcome/6.png',
+    'assets/images/welcome/6.png',
+    'assets/images/welcome/18.png',
   ];
   final List<String> _image04 = [
-    'assets/images/welcome/20.jpg',
+    'assets/images/welcome/20.png',
     'assets/images/welcome/9.jpeg',
     'assets/images/welcome/1.jpeg',
   ];

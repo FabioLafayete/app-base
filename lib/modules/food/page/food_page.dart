@@ -133,7 +133,7 @@ class FoodPage extends BaseWidget<FoodController> {
   final List<CardItemModel> _soonVideos = [
     CardItemModel(
         onPress: (){},
-        thumbnail: 'assets/images/foods/soon_01.jpg',
+        thumbnail: 'assets/images/foods/soon_01.png',
         description: 'Aquela janta rápida e gostosa',
         typeTraining: 'JANTA',
         timeTraining: '20 min',
@@ -143,7 +143,7 @@ class FoodPage extends BaseWidget<FoodController> {
     ),
     CardItemModel(
       onPress: (){},
-      thumbnail: 'assets/images/foods/soon_02.jpg',
+      thumbnail: 'assets/images/foods/soon_02.png',
       description: 'Para a família',
       typeTraining: 'ALMOÇO',
       timeTraining: '1 hora',

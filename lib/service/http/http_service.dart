@@ -113,9 +113,10 @@ class CustomInterceptors extends Interceptor {
     );
     logger.d('====== R E S P O N S E ======\n\n'
         '[DATE] -----> ${DateTime.now()}\n'
+        '[TIME] -----> $time\n'
         '[METHOD] ---> ${response.requestOptions.method}\n'
         '[STATUS] ---> ${response.statusCode}\n'
-        '[TIME] -----> $time\n'
+        '[HOST] -----> ${response.realUri.host}\n'
         '[PATH] -----> ${response.requestOptions.path}\n'
         '[BODY] -----> ${response.requestOptions.data}\n'
         '[RESPONSE] -> ${response.data}'

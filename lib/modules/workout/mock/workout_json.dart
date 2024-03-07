@@ -8,7 +8,7 @@ List<Map<String, dynamic>> workouts = [
     "duration": "7 - 13 min",
     "difficulty": "Fácil",
     "kcal": 101,
-    "thumbnail": "assets/images/workouts/1.jpg",
+    "thumbnail": "assets/images/workouts/1.png",
     "tags": [],
     "alreadySeen": false,
     "workouts": [
@@ -84,7 +84,7 @@ List<Map<String, dynamic>> workouts = [
     "duration": "15 - 20 min",
     "difficulty": "Intermediário",
     "kcal": 150,
-    "thumbnail": "assets/images/workouts/3.jpg",
+    "thumbnail": "assets/images/workouts/3.png",
     "tags": [],
     "alreadySeen": false,
     "workouts": [
@@ -151,7 +151,7 @@ List<Map<String, dynamic>> workouts = [
     "duration": "10 - 15 min",
     "difficulty": "Intermediário",
     "kcal": 120,
-    "thumbnail": "assets/images/workouts/6.jpg",
+    "thumbnail": "assets/images/workouts/6.png",
     "tags": [],
     "alreadySeen": false,
     "workouts": [
@@ -249,7 +249,7 @@ List<Map<String, dynamic>> workouts = [
     "duration": "30 - 40 min",
     "difficulty": "Fácil",
     "kcal": 90,
-    "thumbnail": "assets/images/workouts/11.jpg",
+    "thumbnail": "assets/images/workouts/11.png",
     "tags": [],
     "alreadySeen": false,
     "workouts": [
@@ -316,7 +316,7 @@ List<Map<String, dynamic>> workouts = [
     "duration": "10 - 15 min",
     "difficulty": "Fácil",
     "kcal": 120,
-    "thumbnail": "assets/images/workouts/2.jpg",
+    "thumbnail": "assets/images/workouts/2.png",
     "tags": [],
     "alreadySeen": false,
     "workouts": [
@@ -463,7 +463,7 @@ List<Map<String, dynamic>> workouts = [
     "duration": "15 - 20 min",
     "difficulty": "Intermediário",
     "kcal": 135,
-    "thumbnail": "assets/images/workouts/4.jpg",
+    "thumbnail": "assets/images/workouts/4.png",
     "tags": [],
     "alreadySeen": false,
     "workouts": [
@@ -512,7 +512,7 @@ List<Map<String, dynamic>> workouts = [
     "duration": "25 - 30 min",
     "difficulty": "Iniciante",
     "kcal": 10,
-    "thumbnail": "assets/images/workouts/7.jpg",
+    "thumbnail": "assets/images/workouts/7.png",
     "tags": [],
     "alreadySeen": false,
     "workouts": []
@@ -536,7 +536,7 @@ List<Map<String, dynamic>> workouts = [
     "duration": "15 - 20 min",
     "difficulty": "Iniciante",
     "kcal": 135,
-    "thumbnail": "assets/images/workouts/13.jpg",
+    "thumbnail": "assets/images/workouts/13.png",
     "tags": [],
     "alreadySeen": false,
     "workouts": []
@@ -548,7 +548,7 @@ List<Map<String, dynamic>> workouts = [
     "duration": "30 - 40 min",
     "difficulty": "Iniciante",
     "kcal": 135,
-    "thumbnail": "assets/images/workouts/14.jpg",
+    "thumbnail": "assets/images/workouts/14.webp",
     "tags": [],
     "alreadySeen": false,
     "workouts": []

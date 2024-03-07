@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'service/deep_link_manager.dart';
+
 void main() async {
   runZonedGuarded(() async {
     await _preload();
@@ -30,6 +32,7 @@ Future _preload() async {
   await Firebase.initializeApp();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  initUniLinks();
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
 
