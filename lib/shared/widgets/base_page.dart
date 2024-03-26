@@ -18,10 +18,12 @@ class BasePage extends BaseWidget {
     this.backgroundColor,
     this.paddingPage,
     this.actions,
-    this.elevation
+    this.elevation,
+    this.bottomSheet,
   }) : super(key: key);
 
   final Widget body;
+  final Widget? bottomSheet;
   final String? title;
   final bool showAppBar;
   final bool extendBody;
@@ -50,6 +52,7 @@ class BasePage extends BaseWidget {
           padding: EdgeInsets.symmetric(horizontal: paddingPage ?? 16.0),
           child: body,
         ),
+        bottomSheet: bottomSheet,
       ),
     );
   }

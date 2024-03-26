@@ -37,70 +37,70 @@ class OnboardPage extends BaseWidget<OnboardController> {
       paddingPage: 0,
       showAppBar: false,
       body: SafeArea(
-        child: Observer(builder: (_) => SingleChildScrollView(
-          child: SizedBox(
-            height: height - (padding.bottom + padding.top),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                space(0.02),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      alignment: Alignment.bottomLeft,
-                      margin: const EdgeInsets.only(left: 16),
-                      child: Opacity(
-                        opacity: controller.index > 0 ? 1 : 0,
-                        child: GestureDetector(
-                          onTap: (){
-                            if(controller.index > 0){
-                              controller.setIndex(controller.index - 1);
-                            }
-                          },
-                          child: const Icon(Icons.arrow_back_ios_new_outlined),
-                        ),
+        child: Observer(builder: (_) => SizedBox(
+          height: height - (padding.bottom + padding.top),
+          child: ListView(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              space(0.02),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    alignment: Alignment.bottomLeft,
+                    margin: const EdgeInsets.only(left: 16),
+                    child: Opacity(
+                      opacity: controller.index > 0 ? 1 : 0,
+                      child: GestureDetector(
+                        onTap: (){
+                          if(controller.index > 0){
+                            controller.setIndex(controller.index - 1);
+                          }
+                        },
+                        child: const Icon(Icons.arrow_back_ios_new_outlined),
                       ),
                     ),
-                    SizedBox(
-                      width: width * 0.55,
-                      child: VisualDisplay.progressBar(
-                          totalItems: items.length,
-                          index: controller.index
-                      ),
-                    ),
-                    const SizedBox(width: 50)
-                  ],
-                ),
-                SizedBox(
-                  height: height * 0.7,
-                  child: PageView.builder(
-                    controller: controller.pageController,
-                    itemCount: items.length,
-                    itemBuilder: (_, index) =>
-                        Padding(
-                          padding: const EdgeInsets.all(16).copyWith(top: 0),
-                          child: items[index]
-                        ),
-                    onPageChanged: controller.setIndex,
                   ),
+                  SizedBox(
+                    width: width * 0.55,
+                    child: VisualDisplay.progressBar(
+                        totalItems: items.length,
+                        index: controller.index
+                    ),
+                  ),
+                  const SizedBox(width: 50)
+                ],
+              ),
+              SizedBox(
+                height: height * 0.7,
+                child: PageView.builder(
+                  controller: controller.pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: items.length,
+                  itemBuilder: (_, index) =>
+                      Padding(
+                        padding: const EdgeInsets.all(16).copyWith(top: 0),
+                        child: items[index]
+                      ),
+                  onPageChanged: controller.setIndex,
                 ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Observer(builder: (_) => MyButton(
-                    title: controller.index + 1 == items.length ? 'FINALIZAR' : "AVANÇAR",
-                    colorTitle: colors.background,
-                    colorButton: colors.primary,
-                    iconRight: true,
-                    onPress: controller.enableButton ? controller.onPressButton : null,
-                  )),
-                ),
-                space(0.01),
-              ],
-            ),
+              ),
+            ],
           ),
+        )),
+      ),
+      bottomSheet: Container(
+        color: colors.background,
+        padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
+          bottom: 40, top: 20,
+        ),
+        child: Observer(builder: (_) => MyButton(
+          title: controller.index + 1 == items.length ? 'FINALIZAR' : "AVANÇAR",
+          colorTitle: colors.background,
+          colorButton: colors.primary,
+          iconRight: true,
+          onPress: controller.enableButton ? controller.onPressButton : null,
         )),
       ),
     );

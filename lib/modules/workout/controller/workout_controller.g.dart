@@ -9,100 +9,19 @@ part of 'workout_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$WorkoutController on WorkoutControllerBase, Store {
-  late final _$programModelAtom =
-      Atom(name: 'WorkoutControllerBase.programModel', context: context);
+  late final _$stateAtom =
+      Atom(name: 'WorkoutControllerBase.state', context: context);
 
   @override
-  ProgramModel? get programModel {
-    _$programModelAtom.reportRead();
-    return super.programModel;
+  WorkoutState get state {
+    _$stateAtom.reportRead();
+    return super.state;
   }
 
   @override
-  set programModel(ProgramModel? value) {
-    _$programModelAtom.reportWrite(value, super.programModel, () {
-      super.programModel = value;
-    });
-  }
-
-  late final _$currentIndexVideoAtom =
-      Atom(name: 'WorkoutControllerBase.currentIndexVideo', context: context);
-
-  @override
-  int get currentIndexVideo {
-    _$currentIndexVideoAtom.reportRead();
-    return super.currentIndexVideo;
-  }
-
-  @override
-  set currentIndexVideo(int value) {
-    _$currentIndexVideoAtom.reportWrite(value, super.currentIndexVideo, () {
-      super.currentIndexVideo = value;
-    });
-  }
-
-  late final _$videoPlayerControllerAtom = Atom(
-      name: 'WorkoutControllerBase.videoPlayerController', context: context);
-
-  @override
-  VideoPlayerController? get videoPlayerController {
-    _$videoPlayerControllerAtom.reportRead();
-    return super.videoPlayerController;
-  }
-
-  @override
-  set videoPlayerController(VideoPlayerController? value) {
-    _$videoPlayerControllerAtom.reportWrite(value, super.videoPlayerController,
-        () {
-      super.videoPlayerController = value;
-    });
-  }
-
-  late final _$positionVideoAtom =
-      Atom(name: 'WorkoutControllerBase.positionVideo', context: context);
-
-  @override
-  Duration? get positionVideo {
-    _$positionVideoAtom.reportRead();
-    return super.positionVideo;
-  }
-
-  @override
-  set positionVideo(Duration? value) {
-    _$positionVideoAtom.reportWrite(value, super.positionVideo, () {
-      super.positionVideo = value;
-    });
-  }
-
-  late final _$showOutWorkoutAtom =
-      Atom(name: 'WorkoutControllerBase.showOutWorkout', context: context);
-
-  @override
-  bool get showOutWorkout {
-    _$showOutWorkoutAtom.reportRead();
-    return super.showOutWorkout;
-  }
-
-  @override
-  set showOutWorkout(bool value) {
-    _$showOutWorkoutAtom.reportWrite(value, super.showOutWorkout, () {
-      super.showOutWorkout = value;
-    });
-  }
-
-  late final _$showCountdownAtom =
-      Atom(name: 'WorkoutControllerBase.showCountdown', context: context);
-
-  @override
-  bool get showCountdown {
-    _$showCountdownAtom.reportRead();
-    return super.showCountdown;
-  }
-
-  @override
-  set showCountdown(bool value) {
-    _$showCountdownAtom.reportWrite(value, super.showCountdown, () {
-      super.showCountdown = value;
+  set state(WorkoutState value) {
+    _$stateAtom.reportWrite(value, super.state, () {
+      super.state = value;
     });
   }
 
@@ -110,66 +29,11 @@ mixin _$WorkoutController on WorkoutControllerBase, Store {
       ActionController(name: 'WorkoutControllerBase', context: context);
 
   @override
-  dynamic setShowCountdown(bool value) {
+  dynamic setState(WorkoutState value) {
     final _$actionInfo = _$WorkoutControllerBaseActionController.startAction(
-        name: 'WorkoutControllerBase.setShowCountdown');
+        name: 'WorkoutControllerBase.setState');
     try {
-      return super.setShowCountdown(value);
-    } finally {
-      _$WorkoutControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setOutWorkout(bool value) {
-    final _$actionInfo = _$WorkoutControllerBaseActionController.startAction(
-        name: 'WorkoutControllerBase.setOutWorkout');
-    try {
-      return super.setOutWorkout(value);
-    } finally {
-      _$WorkoutControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setProgramModel(ProgramModel item) {
-    final _$actionInfo = _$WorkoutControllerBaseActionController.startAction(
-        name: 'WorkoutControllerBase.setProgramModel');
-    try {
-      return super.setProgramModel(item);
-    } finally {
-      _$WorkoutControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setCurrentIndexVideo(int item) {
-    final _$actionInfo = _$WorkoutControllerBaseActionController.startAction(
-        name: 'WorkoutControllerBase.setCurrentIndexVideo');
-    try {
-      return super.setCurrentIndexVideo(item);
-    } finally {
-      _$WorkoutControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setPositionVideo(Duration value) {
-    final _$actionInfo = _$WorkoutControllerBaseActionController.startAction(
-        name: 'WorkoutControllerBase.setPositionVideo');
-    try {
-      return super.setPositionVideo(value);
-    } finally {
-      _$WorkoutControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setVideoPlayerController(VideoPlayerController? value) {
-    final _$actionInfo = _$WorkoutControllerBaseActionController.startAction(
-        name: 'WorkoutControllerBase.setVideoPlayerController');
-    try {
-      return super.setVideoPlayerController(value);
+      return super.setState(value);
     } finally {
       _$WorkoutControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -178,12 +42,7 @@ mixin _$WorkoutController on WorkoutControllerBase, Store {
   @override
   String toString() {
     return '''
-programModel: ${programModel},
-currentIndexVideo: ${currentIndexVideo},
-videoPlayerController: ${videoPlayerController},
-positionVideo: ${positionVideo},
-showOutWorkout: ${showOutWorkout},
-showCountdown: ${showCountdown}
+state: ${state}
     ''';
   }
 }

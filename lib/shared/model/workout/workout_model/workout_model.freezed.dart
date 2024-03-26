@@ -24,6 +24,7 @@ mixin _$WorkoutModel {
   String get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get duration => throw _privateConstructorUsedError;
+  @JsonKey(name: 'streamUrl')
   String get videoUrl => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
@@ -46,7 +47,7 @@ abstract class $WorkoutModelCopyWith<$Res> {
       String title,
       String? description,
       String? duration,
-      String videoUrl,
+      @JsonKey(name: 'streamUrl') String videoUrl,
       String? thumbnail,
       List<String> tags,
       bool alreadySeen});
@@ -124,7 +125,7 @@ abstract class _$$_WorkoutModelCopyWith<$Res>
       String title,
       String? description,
       String? duration,
-      String videoUrl,
+      @JsonKey(name: 'streamUrl') String videoUrl,
       String? thumbnail,
       List<String> tags,
       bool alreadySeen});
@@ -190,12 +191,12 @@ class __$$_WorkoutModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_WorkoutModel extends _WorkoutModel {
-  const _$_WorkoutModel(
+  _$_WorkoutModel(
       {required this.id,
       required this.title,
       this.description,
       this.duration,
-      required this.videoUrl,
+      @JsonKey(name: 'streamUrl') required this.videoUrl,
       this.thumbnail,
       final List<String> tags = const [],
       this.alreadySeen = false})
@@ -214,6 +215,7 @@ class _$_WorkoutModel extends _WorkoutModel {
   @override
   final String? duration;
   @override
+  @JsonKey(name: 'streamUrl')
   final String videoUrl;
   @override
   final String? thumbnail;
@@ -283,16 +285,16 @@ class _$_WorkoutModel extends _WorkoutModel {
 }
 
 abstract class _WorkoutModel extends WorkoutModel {
-  const factory _WorkoutModel(
+  factory _WorkoutModel(
       {required final String id,
       required final String title,
       final String? description,
       final String? duration,
-      required final String videoUrl,
+      @JsonKey(name: 'streamUrl') required final String videoUrl,
       final String? thumbnail,
       final List<String> tags,
       final bool alreadySeen}) = _$_WorkoutModel;
-  const _WorkoutModel._() : super._();
+  _WorkoutModel._() : super._();
 
   factory _WorkoutModel.fromJson(Map<String, dynamic> json) =
       _$_WorkoutModel.fromJson;
@@ -306,6 +308,7 @@ abstract class _WorkoutModel extends WorkoutModel {
   @override
   String? get duration;
   @override
+  @JsonKey(name: 'streamUrl')
   String get videoUrl;
   @override
   String? get thumbnail;

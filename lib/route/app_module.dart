@@ -1,6 +1,8 @@
 import 'package:app/modules/splash/module/splash_module.dart';
 import 'package:app/modules/workout/controller/workout_controller.dart';
 import 'package:app/modules/workout/module/workout_module.dart';
+import 'package:app/modules/workout/repository/impl/workout_repository_impl.dart';
+import 'package:app/modules/workout/service/impl/workout_service_impl.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/modules/user/repository/impl/user_repository_impl.dart';
 import 'package:app/shared/widgets/base_controller.dart';
@@ -33,7 +35,13 @@ class AppModule extends Module {
         UserController(UserRepositoryImpl(UserServiceImpl(HttpService()))));
     i.addSingleton(() => HomeController());
     i.addSingleton(() => FoodController());
-    i.addSingleton(() => WorkoutController());
+    i.addSingleton(() => WorkoutController(
+      repositoryImpl: WorkoutRepositoryImpl(
+        WorkoutServiceImpl(
+          HttpService()
+        )
+      )
+    ));
     i.addSingleton(() => ProfileController());
     i.addSingleton(() => BaseController());
   }

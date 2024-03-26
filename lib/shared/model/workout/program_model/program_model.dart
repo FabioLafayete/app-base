@@ -18,10 +18,21 @@ class ProgramModel with _$ProgramModel {
     int? rate,
     required String thumbnail,
     @Default([]) List<String> tags,
-    @Default([]) List<WorkoutModel> workouts,
+    @JsonKey(name: 'workoutsProgram')
+    required List<WorkoutsProgram> workouts,
     @Default(false) bool alreadySeen,
+    @Default(false) bool isSoon,
   }) = _ProgramModel;
 
   factory ProgramModel.fromJson(Map<String, dynamic> json) =>
       _$ProgramModelFromJson(json);
+}
+
+@freezed
+class WorkoutsProgram with _$WorkoutsProgram {
+  const factory WorkoutsProgram({
+    WorkoutModel? video,
+  }) = _WorkoutsProgram;
+
+  factory WorkoutsProgram.fromJson(Map<String, dynamic> json) => _$WorkoutsProgramFromJson(json);
 }

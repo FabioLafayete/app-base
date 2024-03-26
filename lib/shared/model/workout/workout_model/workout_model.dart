@@ -7,11 +7,12 @@ part 'workout_model.g.dart';
 class WorkoutModel with _$WorkoutModel {
   const WorkoutModel._();
 
-  const factory WorkoutModel({
+  factory WorkoutModel({
     required String id,
     required String title,
     String? description,
     String? duration,
+    @JsonKey(name: 'streamUrl')
     required String videoUrl,
     String? thumbnail,
     @Default([]) List<String> tags,

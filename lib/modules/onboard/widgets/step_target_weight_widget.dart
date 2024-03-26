@@ -36,11 +36,16 @@ class StepTargetWeightWidget extends BaseWidget<OnboardController> {
                   textInputType: TextInputType.number,
                   inputMask: [TextInputMask(mask: '999')],
                   onChanged: (value){
-                    controller.setTargetWeight(int.parse(value));
+                    if(value.isNotEmpty){
+                      controller.setTargetWeight(int.parse(value));
+                    } else {
+                      controller.setTargetWeight(null);
+                    }
+
                   },
                   onEditingComplete: (){
                     if(controller.enableButton){
-                      router.pushReplacementNamed(PagesNames.home);
+                      controller.onPressButton();
                     }
                   }
                 ),

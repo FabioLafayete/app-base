@@ -3,6 +3,7 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class StepWeightWidget extends BaseWidget<OnboardController> {
   StepWeightWidget({Key? key}) : super(key: key);
@@ -34,11 +35,15 @@ class StepWeightWidget extends BaseWidget<OnboardController> {
                   initialValue: user.weight?.toString(),
                   inputMask: [TextInputMask(mask: '999')],
                   onChanged: (value){
-                    controller.setPersonalWeight(int.parse(value));
+                    if(value.isNotEmpty){
+                      controller.setPersonalWeight(int.parse(value));
+                    } else {
+                      controller.setPersonalWeight(null);
+                    }
                   },
                   onEditingComplete: (){
                     if(controller.enableButton){
-                      controller.setIndex(controller.index + 1);
+                      controller.onPressButton();
                     }
                   }
                 ),

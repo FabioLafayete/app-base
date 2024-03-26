@@ -29,8 +29,10 @@ mixin _$ProgramModel {
   int? get rate => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
-  List<WorkoutModel> get workouts => throw _privateConstructorUsedError;
+  @JsonKey(name: 'workoutsProgram')
+  List<WorkoutsProgram> get workouts => throw _privateConstructorUsedError;
   bool get alreadySeen => throw _privateConstructorUsedError;
+  bool get isSoon => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,8 +56,9 @@ abstract class $ProgramModelCopyWith<$Res> {
       int? rate,
       String thumbnail,
       List<String> tags,
-      List<WorkoutModel> workouts,
-      bool alreadySeen});
+      @JsonKey(name: 'workoutsProgram') List<WorkoutsProgram> workouts,
+      bool alreadySeen,
+      bool isSoon});
 }
 
 /// @nodoc
@@ -82,6 +85,7 @@ class _$ProgramModelCopyWithImpl<$Res, $Val extends ProgramModel>
     Object? tags = null,
     Object? workouts = null,
     Object? alreadySeen = null,
+    Object? isSoon = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -123,10 +127,14 @@ class _$ProgramModelCopyWithImpl<$Res, $Val extends ProgramModel>
       workouts: null == workouts
           ? _value.workouts
           : workouts // ignore: cast_nullable_to_non_nullable
-              as List<WorkoutModel>,
+              as List<WorkoutsProgram>,
       alreadySeen: null == alreadySeen
           ? _value.alreadySeen
           : alreadySeen // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSoon: null == isSoon
+          ? _value.isSoon
+          : isSoon // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -150,8 +158,9 @@ abstract class _$$_ProgramModelCopyWith<$Res>
       int? rate,
       String thumbnail,
       List<String> tags,
-      List<WorkoutModel> workouts,
-      bool alreadySeen});
+      @JsonKey(name: 'workoutsProgram') List<WorkoutsProgram> workouts,
+      bool alreadySeen,
+      bool isSoon});
 }
 
 /// @nodoc
@@ -176,6 +185,7 @@ class __$$_ProgramModelCopyWithImpl<$Res>
     Object? tags = null,
     Object? workouts = null,
     Object? alreadySeen = null,
+    Object? isSoon = null,
   }) {
     return _then(_$_ProgramModel(
       id: null == id
@@ -217,10 +227,14 @@ class __$$_ProgramModelCopyWithImpl<$Res>
       workouts: null == workouts
           ? _value._workouts
           : workouts // ignore: cast_nullable_to_non_nullable
-              as List<WorkoutModel>,
+              as List<WorkoutsProgram>,
       alreadySeen: null == alreadySeen
           ? _value.alreadySeen
           : alreadySeen // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSoon: null == isSoon
+          ? _value.isSoon
+          : isSoon // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -239,8 +253,10 @@ class _$_ProgramModel extends _ProgramModel {
       this.rate,
       required this.thumbnail,
       final List<String> tags = const [],
-      final List<WorkoutModel> workouts = const [],
-      this.alreadySeen = false})
+      @JsonKey(name: 'workoutsProgram')
+      required final List<WorkoutsProgram> workouts,
+      this.alreadySeen = false,
+      this.isSoon = false})
       : _tags = tags,
         _workouts = workouts,
         super._();
@@ -274,10 +290,10 @@ class _$_ProgramModel extends _ProgramModel {
     return EqualUnmodifiableListView(_tags);
   }
 
-  final List<WorkoutModel> _workouts;
+  final List<WorkoutsProgram> _workouts;
   @override
-  @JsonKey()
-  List<WorkoutModel> get workouts {
+  @JsonKey(name: 'workoutsProgram')
+  List<WorkoutsProgram> get workouts {
     if (_workouts is EqualUnmodifiableListView) return _workouts;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_workouts);
@@ -286,10 +302,13 @@ class _$_ProgramModel extends _ProgramModel {
   @override
   @JsonKey()
   final bool alreadySeen;
+  @override
+  @JsonKey()
+  final bool isSoon;
 
   @override
   String toString() {
-    return 'ProgramModel(id: $id, title: $title, description: $description, difficulty: $difficulty, duration: $duration, kcal: $kcal, rate: $rate, thumbnail: $thumbnail, tags: $tags, workouts: $workouts, alreadySeen: $alreadySeen)';
+    return 'ProgramModel(id: $id, title: $title, description: $description, difficulty: $difficulty, duration: $duration, kcal: $kcal, rate: $rate, thumbnail: $thumbnail, tags: $tags, workouts: $workouts, alreadySeen: $alreadySeen, isSoon: $isSoon)';
   }
 
   @override
@@ -312,7 +331,8 @@ class _$_ProgramModel extends _ProgramModel {
             const DeepCollectionEquality().equals(other._tags, _tags) &&
             const DeepCollectionEquality().equals(other._workouts, _workouts) &&
             (identical(other.alreadySeen, alreadySeen) ||
-                other.alreadySeen == alreadySeen));
+                other.alreadySeen == alreadySeen) &&
+            (identical(other.isSoon, isSoon) || other.isSoon == isSoon));
   }
 
   @JsonKey(ignore: true)
@@ -329,7 +349,8 @@ class _$_ProgramModel extends _ProgramModel {
       thumbnail,
       const DeepCollectionEquality().hash(_tags),
       const DeepCollectionEquality().hash(_workouts),
-      alreadySeen);
+      alreadySeen,
+      isSoon);
 
   @JsonKey(ignore: true)
   @override
@@ -356,8 +377,10 @@ abstract class _ProgramModel extends ProgramModel {
       final int? rate,
       required final String thumbnail,
       final List<String> tags,
-      final List<WorkoutModel> workouts,
-      final bool alreadySeen}) = _$_ProgramModel;
+      @JsonKey(name: 'workoutsProgram')
+      required final List<WorkoutsProgram> workouts,
+      final bool alreadySeen,
+      final bool isSoon}) = _$_ProgramModel;
   const _ProgramModel._() : super._();
 
   factory _ProgramModel.fromJson(Map<String, dynamic> json) =
@@ -382,11 +405,168 @@ abstract class _ProgramModel extends ProgramModel {
   @override
   List<String> get tags;
   @override
-  List<WorkoutModel> get workouts;
+  @JsonKey(name: 'workoutsProgram')
+  List<WorkoutsProgram> get workouts;
   @override
   bool get alreadySeen;
   @override
+  bool get isSoon;
+  @override
   @JsonKey(ignore: true)
   _$$_ProgramModelCopyWith<_$_ProgramModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+WorkoutsProgram _$WorkoutsProgramFromJson(Map<String, dynamic> json) {
+  return _WorkoutsProgram.fromJson(json);
+}
+
+/// @nodoc
+mixin _$WorkoutsProgram {
+  WorkoutModel? get video => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $WorkoutsProgramCopyWith<WorkoutsProgram> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $WorkoutsProgramCopyWith<$Res> {
+  factory $WorkoutsProgramCopyWith(
+          WorkoutsProgram value, $Res Function(WorkoutsProgram) then) =
+      _$WorkoutsProgramCopyWithImpl<$Res, WorkoutsProgram>;
+  @useResult
+  $Res call({WorkoutModel? video});
+
+  $WorkoutModelCopyWith<$Res>? get video;
+}
+
+/// @nodoc
+class _$WorkoutsProgramCopyWithImpl<$Res, $Val extends WorkoutsProgram>
+    implements $WorkoutsProgramCopyWith<$Res> {
+  _$WorkoutsProgramCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? video = freezed,
+  }) {
+    return _then(_value.copyWith(
+      video: freezed == video
+          ? _value.video
+          : video // ignore: cast_nullable_to_non_nullable
+              as WorkoutModel?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WorkoutModelCopyWith<$Res>? get video {
+    if (_value.video == null) {
+      return null;
+    }
+
+    return $WorkoutModelCopyWith<$Res>(_value.video!, (value) {
+      return _then(_value.copyWith(video: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_WorkoutsProgramCopyWith<$Res>
+    implements $WorkoutsProgramCopyWith<$Res> {
+  factory _$$_WorkoutsProgramCopyWith(
+          _$_WorkoutsProgram value, $Res Function(_$_WorkoutsProgram) then) =
+      __$$_WorkoutsProgramCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({WorkoutModel? video});
+
+  @override
+  $WorkoutModelCopyWith<$Res>? get video;
+}
+
+/// @nodoc
+class __$$_WorkoutsProgramCopyWithImpl<$Res>
+    extends _$WorkoutsProgramCopyWithImpl<$Res, _$_WorkoutsProgram>
+    implements _$$_WorkoutsProgramCopyWith<$Res> {
+  __$$_WorkoutsProgramCopyWithImpl(
+      _$_WorkoutsProgram _value, $Res Function(_$_WorkoutsProgram) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? video = freezed,
+  }) {
+    return _then(_$_WorkoutsProgram(
+      video: freezed == video
+          ? _value.video
+          : video // ignore: cast_nullable_to_non_nullable
+              as WorkoutModel?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_WorkoutsProgram implements _WorkoutsProgram {
+  const _$_WorkoutsProgram({this.video});
+
+  factory _$_WorkoutsProgram.fromJson(Map<String, dynamic> json) =>
+      _$$_WorkoutsProgramFromJson(json);
+
+  @override
+  final WorkoutModel? video;
+
+  @override
+  String toString() {
+    return 'WorkoutsProgram(video: $video)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_WorkoutsProgram &&
+            (identical(other.video, video) || other.video == video));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, video);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_WorkoutsProgramCopyWith<_$_WorkoutsProgram> get copyWith =>
+      __$$_WorkoutsProgramCopyWithImpl<_$_WorkoutsProgram>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_WorkoutsProgramToJson(
+      this,
+    );
+  }
+}
+
+abstract class _WorkoutsProgram implements WorkoutsProgram {
+  const factory _WorkoutsProgram({final WorkoutModel? video}) =
+      _$_WorkoutsProgram;
+
+  factory _WorkoutsProgram.fromJson(Map<String, dynamic> json) =
+      _$_WorkoutsProgram.fromJson;
+
+  @override
+  WorkoutModel? get video;
+  @override
+  @JsonKey(ignore: true)
+  _$$_WorkoutsProgramCopyWith<_$_WorkoutsProgram> get copyWith =>
       throw _privateConstructorUsedError;
 }

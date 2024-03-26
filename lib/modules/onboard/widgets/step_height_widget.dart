@@ -3,6 +3,7 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class StepHeightWidget extends BaseWidget<OnboardController> {
   StepHeightWidget({Key? key}) : super(key: key);
@@ -34,11 +35,15 @@ class StepHeightWidget extends BaseWidget<OnboardController> {
                   inputMask: [TextInputMask(mask: '999')],
                   initialValue: user.height?.toString(),
                   onChanged: (value) {
-                    controller.setPersonalHeight(int.parse(value));
+                    if(value.isNotEmpty) {
+                      controller.setPersonalHeight(int.parse(value));
+                    } else {
+                      controller.setPersonalHeight(null);
+                    }
                   },
                   onEditingComplete: (){
                     if(controller.enableButton){
-                      controller.setIndex(controller.index + 1);
+                      controller.onPressButton();
                     }
                   }
                 ),

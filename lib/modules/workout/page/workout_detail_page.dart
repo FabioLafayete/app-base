@@ -50,8 +50,8 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                     const SizedBox(height: 20),
                     text('Treinos', fontSize: 20, fontWeight: FontWeight.w700),
                     const SizedBox(height: 20),
-                    ...List.generate(controller.programModel!.workouts.length, (index){
-                      final item = controller.programModel!.workouts[index];
+                    ...List.generate(controller.state.programModel!.workouts.length, (index){
+                      final item = controller.state.programModel!.workouts[index].video!;
                       return GestureDetector(
                         onTap: (){
                           router.pushNamed(PagesNames.workoutVideo);
@@ -73,41 +73,41 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                                   topLeft: Radius.circular(12),
                                   bottomLeft: Radius.circular(12),
                                 ),
-                                child: FutureBuilder<Uint8List>(
-                                  future: _getImage(item.thumbnail!),
-                                  builder: (_, snap){
-                                    if(!snap.hasData){
-                                      return Container(
-                                        width: 120,
-                                        height: 100,
-                                        decoration: BoxDecoration(
-                                          color: colors.background,
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(14),
-                                            bottomLeft: Radius.circular(14),
-                                          )
-                                        ),
-                                        child: const Icon(
-                                          Icons.camera_alt_outlined,
-                                        ),
-                                      );
-                                    }
-
-                                    return Image.memory(
-                                      snap.data!,
-                                      fit: BoxFit.cover,
-                                      height: 100,
-                                      width: 120,
-                                    );
-                                  },
-                                ),
-                                // child: CachedNetworkImage(
-                                //   fadeInDuration: const Duration(milliseconds: 300),
-                                //   imageUrl: item.thumbnail!,
-                                //   fit: BoxFit.cover,
-                                //   height: 100,
-                                //   width: 120,
+                                // child: FutureBuilder<Uint8List>(
+                                //   future: _getImage(item.thumbnail!),
+                                //   builder: (_, snap){
+                                //     if(!snap.hasData){
+                                //       return Container(
+                                //         width: 120,
+                                //         height: 100,
+                                //         decoration: BoxDecoration(
+                                //           color: colors.background,
+                                //           borderRadius: const BorderRadius.only(
+                                //             topLeft: Radius.circular(14),
+                                //             bottomLeft: Radius.circular(14),
+                                //           )
+                                //         ),
+                                //         child: const Icon(
+                                //           Icons.camera_alt_outlined,
+                                //         ),
+                                //       );
+                                //     }
+                                //
+                                //     return Image.memory(
+                                //       snap.data!,
+                                //       fit: BoxFit.cover,
+                                //       height: 100,
+                                //       width: 120,
+                                //     );
+                                //   },
                                 // ),
+                                child: CachedNetworkImage(
+                                  fadeInDuration: const Duration(milliseconds: 300),
+                                  imageUrl: item.thumbnail!,
+                                  fit: BoxFit.cover,
+                                  height: 100,
+                                  width: 120,
+                                ),
                               ),
                               const SizedBox(width: 20),
                               Expanded(
@@ -205,7 +205,7 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
 
   Widget _image() {
     return Image.asset(
-      controller.programModel!.thumbnail,
+      controller.state.programModel!.thumbnail,
       width: width,
       height: height * 0.45,
       fit: BoxFit.cover,
@@ -229,7 +229,7 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           text(
-            controller.programModel!.title,
+            controller.state.programModel!.title,
             fontWeight: FontWeight.w700,
             color: colors.text2,
             maxLines: 2,
@@ -243,13 +243,13 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
               children: [
-                if(controller.programModel!.duration != null)
+                if(controller.state.programModel!.duration != null)
                   Row(
                     children: [
                       Icon(Icons.access_time_sharp, color: colors.text2, size: 22),
                       const SizedBox(width: 5),
                       text(
-                        controller.programModel!.duration!,
+                        controller.state.programModel!.duration!,
                         fontWeight: FontWeight.w400,
                         color: colors.text2,
                         fontSize: 16,
@@ -264,7 +264,7 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                       Icon(Icons.local_fire_department_outlined, color: colors.text2),
                       const SizedBox(width: 5),
                       text(
-                        controller.programModel!.kcal.toString(),
+                        controller.state.programModel!.kcal.toString(),
                         fontWeight: FontWeight.w400,
                         color: colors.text2,
                         fontSize: 16,
@@ -272,14 +272,14 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                       text(' Kcal', fontSize: 12, color: colors.text2)
                     ],
                   ),
-                if(controller.programModel!.difficulty != null)
+                if(controller.state.programModel!.difficulty != null)
                   Row(
                     children: [
                       const SizedBox(width: 20),
                       Icon(Icons.bar_chart_rounded, color: colors.text2, size: 20),
                       const SizedBox(width: 5),
                       text(
-                        controller.programModel!.difficulty!,
+                        controller.state.programModel!.difficulty!,
                         fontWeight: FontWeight.w400,
                         color: colors.text2,
                         fontSize: 16,

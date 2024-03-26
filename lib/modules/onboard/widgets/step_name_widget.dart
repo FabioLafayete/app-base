@@ -2,6 +2,7 @@ import 'package:app/modules/onboard/controller/onboard_controller.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class StepName extends BaseWidget<OnboardController> {
@@ -23,7 +24,7 @@ class StepName extends BaseWidget<OnboardController> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: VisualDisplay.textField(
-            labelText: 'Nome',
+            labelText: 'Nome e sobrenome',
             initialValue: controller.name,
             fillColor: Colors.white,
             colorBorder: Colors.white,
@@ -31,14 +32,14 @@ class StepName extends BaseWidget<OnboardController> {
             colorBorderFocus: colors.secondary.withOpacity(0.7),
             colorLabel: colors.textSecondary,
             colorLabelFocus: colors.textSecondary,
+            textInputType: TextInputType.text,
+            maxLines: 1,
             onEditingComplete: (){
               if(controller.enableButton){
-                controller.setIndex(controller.index + 1);
+                controller.onPressButton();
               }
             },
-            onChanged: (value){
-              controller.setName(value);
-            }
+            onChanged: controller.setName
           ),
         )
       ],

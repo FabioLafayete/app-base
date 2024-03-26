@@ -19,11 +19,11 @@ _$_ProgramModel _$$_ProgramModelFromJson(Map<String, dynamic> json) =>
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
               const [],
-      workouts: (json['workouts'] as List<dynamic>?)
-              ?.map((e) => WorkoutModel.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
+      workouts: (json['workoutsProgram'] as List<dynamic>)
+          .map((e) => WorkoutsProgram.fromJson(e as Map<String, dynamic>))
+          .toList(),
       alreadySeen: json['alreadySeen'] as bool? ?? false,
+      isSoon: json['isSoon'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_ProgramModelToJson(_$_ProgramModel instance) =>
@@ -37,6 +37,19 @@ Map<String, dynamic> _$$_ProgramModelToJson(_$_ProgramModel instance) =>
       'rate': instance.rate,
       'thumbnail': instance.thumbnail,
       'tags': instance.tags,
-      'workouts': instance.workouts,
+      'workoutsProgram': instance.workouts,
       'alreadySeen': instance.alreadySeen,
+      'isSoon': instance.isSoon,
+    };
+
+_$_WorkoutsProgram _$$_WorkoutsProgramFromJson(Map<String, dynamic> json) =>
+    _$_WorkoutsProgram(
+      video: json['video'] == null
+          ? null
+          : WorkoutModel.fromJson(json['video'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$_WorkoutsProgramToJson(_$_WorkoutsProgram instance) =>
+    <String, dynamic>{
+      'video': instance.video,
     };

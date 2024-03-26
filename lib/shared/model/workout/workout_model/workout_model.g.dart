@@ -12,7 +12,7 @@ _$_WorkoutModel _$$_WorkoutModelFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       description: json['description'] as String?,
       duration: json['duration'] as String?,
-      videoUrl: json['videoUrl'] as String,
+      videoUrl: json['streamUrl'] as String,
       thumbnail: json['thumbnail'] as String?,
       tags:
           (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
@@ -26,7 +26,7 @@ Map<String, dynamic> _$$_WorkoutModelToJson(_$_WorkoutModel instance) =>
       'title': instance.title,
       'description': instance.description,
       'duration': instance.duration,
-      'videoUrl': instance.videoUrl,
+      'streamUrl': instance.videoUrl,
       'thumbnail': instance.thumbnail,
       'tags': instance.tags,
       'alreadySeen': instance.alreadySeen,

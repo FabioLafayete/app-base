@@ -1,6 +1,7 @@
 import 'package:app/shared/widgets/base_controller.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 
 part 'onboard_controller.g.dart';
@@ -70,13 +71,16 @@ abstract class OnboardControllerBase extends BaseController with Store {
     } else if(index == 3) {
       if(limitation == null) return false;
     } else if(index == 4) {
-      if(personalHeight == null) return false;
+      if(personalHeight == null ||
+          (personalHeight! < 100 || personalHeight! > 300) ) return false;
     } else if(index == 5) {
       if(target == null) return false;
     } else if(index == 6) {
-      if(personalWeight == null) return false;
+      if(personalWeight == null ||
+          (personalWeight! < 30 || personalWeight! > 300)) return false;
     } else if(index == 7) {
-      if(targetWeight == null) return false;
+      if(targetWeight == null ||
+          (targetWeight! < 40 || targetWeight! > 180)) return false;
     }
     return true;
   }
@@ -123,6 +127,7 @@ abstract class OnboardControllerBase extends BaseController with Store {
 
   void onPressButton(){
     try{
+      Get.focusScope?.unfocus();
       if(index == 0){
         addName();
       } else if (index == 1){
