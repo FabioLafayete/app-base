@@ -109,8 +109,8 @@ class ListCardItems extends BaseWidget {
                           width: width,
                           alignment: Alignment.topCenter,
                           fit: BoxFit.cover,
-                        ),
-                      if(!listItems[index].thumbnail.contains('http'))
+                        )
+                      else
                         Image.asset(
                           listItems[index].thumbnail,
                           width: width,

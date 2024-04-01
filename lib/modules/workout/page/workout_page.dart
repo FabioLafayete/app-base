@@ -1,6 +1,5 @@
-import 'dart:math';
-
 import 'package:app/modules/workout/controller/workout_controller.dart';
+import 'package:app/modules/workout/widgets/workout_loading.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/model/workout/program_model/program_model.dart';
 import 'package:app/shared/widgets/base_page.dart';
@@ -35,7 +34,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
       elevation: 0,
       body: Observer(builder: (_){
         if(controller.state.comboProgramModel == null) {
-          return const Center(child: CircularProgressIndicator());
+          return const WorkoutLoading();
         }
 
         return Stack(

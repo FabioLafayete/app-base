@@ -106,21 +106,23 @@ class TopPresentation extends BaseWidget {
   }
 
   Widget _image() {
-    return Image.asset(
-      cardItemModel.thumbnail,
+    if(!cardItemModel.thumbnail.contains('http')){
+      return Image.asset(
+        cardItemModel.thumbnail,
+        width: width,
+        height: height * 0.45,
+        alignment: Alignment.bottomCenter,
+        fit: BoxFit.cover,
+      );
+    }
+    return CachedNetworkImage(
+      fadeInDuration: const Duration(milliseconds: 300),
+      imageUrl: cardItemModel.thumbnail,
       width: width,
       height: height * 0.45,
       alignment: Alignment.bottomCenter,
       fit: BoxFit.cover,
     );
-    // return CachedNetworkImage(
-    //   fadeInDuration: const Duration(milliseconds: 300),
-    //   imageUrl: cardItemModel.thumbnail,
-    //   width: width,
-    //   height: height * 0.45,
-    //   alignment: Alignment.bottomCenter,
-    //   fit: BoxFit.cover,
-    // );
   }
 
   Widget _effectImage(){

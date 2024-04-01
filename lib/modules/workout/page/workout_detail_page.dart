@@ -204,19 +204,21 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
   }
 
   Widget _image() {
-    return Image.asset(
+    if(!controller.state.programModel!.thumbnail.contains('http')) {
+      return Image.asset(
       controller.state.programModel!.thumbnail,
       width: width,
       height: height * 0.45,
       fit: BoxFit.cover,
     );
-    // return CachedNetworkImage(
-    //   fadeInDuration: const Duration(milliseconds: 300),
-    //   imageUrl: controller.programModel!.thumbnail,
-    //   width: width,
-    //   height: height * 0.45,
-    //   fit: BoxFit.cover,
-    // );
+    }
+    return CachedNetworkImage(
+      fadeInDuration: const Duration(milliseconds: 300),
+      imageUrl: controller.state.programModel!.thumbnail,
+      width: width,
+      height: height * 0.45,
+      fit: BoxFit.cover,
+    );
   }
 
   Widget _info(){
