@@ -10,6 +10,7 @@ import 'package:app/shared/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:super_sliver_list/super_sliver_list.dart';
 import '../../navigator/controller/nav_controller.dart';
 import '../../workout/widgets/list_cards_items.dart';
 import '../widgets/items_wrap.dart';
@@ -26,7 +27,7 @@ class FoodPage extends BaseWidget<FoodController> {
         builder: (_) => BasePage(
         paddingPage: 0,
         showAppBar: false,
-        body: ListView(
+        body: SuperListView(
           children: [
             const SizedBox(height: 40),
             Padding(

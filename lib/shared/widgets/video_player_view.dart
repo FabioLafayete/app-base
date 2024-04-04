@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:super_sliver_list/super_sliver_list.dart';
 import 'package:video_player/video_player.dart';
 import '../../modules/navigator/widget/custom_control_view.dart';
 import '../../util/colors.dart';
@@ -133,7 +134,7 @@ class _VideoPlayerViewState extends State<VideoPlayerView> {
                   opacity: controller.percentVideo == 1 ? controller.percentVideo : (
                       controller.percentVideo - 0.3 <= 0 ? 0 : controller.percentVideo - 0.3
                   ),
-                  child: ListView(
+                  child: SuperListView(
                     padding: EdgeInsets.zero,
                     children: List.generate(10, (index) =>
                         Container(margin: const EdgeInsets.all(10),

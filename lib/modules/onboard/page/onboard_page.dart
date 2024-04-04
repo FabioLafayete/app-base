@@ -6,6 +6,7 @@ import 'package:app/shared/widgets/my_button.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:super_sliver_list/super_sliver_list.dart';
 import '../widgets/step_gender_widget.dart';
 import '../widgets/step_target_widget.dart';
 import '../widgets/step_birthday_widget.dart';
@@ -39,7 +40,7 @@ class OnboardPage extends BaseWidget<OnboardController> {
       body: SafeArea(
         child: Observer(builder: (_) => SizedBox(
           height: height - (padding.bottom + padding.top),
-          child: ListView(
+          child: SuperListView(
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               space(0.02),

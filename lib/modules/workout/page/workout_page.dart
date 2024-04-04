@@ -8,6 +8,7 @@ import 'package:app/shared/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:super_sliver_list/super_sliver_list.dart';
 import '../../navigator/controller/nav_controller.dart';
 import '../widgets/list_cards_items.dart';
 import '../widgets/top_presentation.dart';
@@ -39,7 +40,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
 
         return Stack(
           children: [
-            ListView(
+            SuperListView(
               physics: const ClampingScrollPhysics(),
               padding: MediaQuery.maybeOf(context)?.padding.copyWith(top: 0),
               children: [
@@ -48,7 +49,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
                     cardItemModel: controller.state.topProgram!,
                     showUsers: true,
                   ),
-                ListView.builder(
+                SuperListView.builder(
                   itemCount: controller.state.comboProgramModel!.length,
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,

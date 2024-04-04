@@ -1,6 +1,7 @@
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:super_sliver_list/super_sliver_list.dart';
 
 class ListCardItems extends BaseWidget {
   ListCardItems({
@@ -72,7 +73,7 @@ class ListCardItems extends BaseWidget {
         space(0.01),
         SizedBox(
           height: width * 0.57,
-          child: ListView(
+          child: SuperListView(
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
             children: List.generate(listItems.length, (index){

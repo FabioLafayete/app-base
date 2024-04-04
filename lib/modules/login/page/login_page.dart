@@ -108,19 +108,23 @@ class LoginPage extends BaseWidget<LoginController> {
                         ),
                       ),
                     Observer(
-                        builder: (_) => MyButton(
-                              title: controller.showCode
-                                  ? 'VALIDAR CÓDIGO'
-                                  : 'AVANÇAR',
-                              colorTitle: colors.background,
-                              colorButton: colors.primary,
-                              iconRight: controller.showCode ? false : true,
-                              loading: controller.isLoading,
-                              onPress: controller.enableButton
-                                  ? () => controller.onPress()
-                                  : null,
-                            )),
-                    space(0.04)
+                        builder: (_) => Padding(
+                          padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).padding.bottom,
+                          ),
+                          child: MyButton(
+                                title: controller.showCode
+                                    ? 'VALIDAR CÓDIGO'
+                                    : 'AVANÇAR',
+                                colorTitle: colors.background,
+                                colorButton: colors.primary,
+                                iconRight: controller.showCode ? false : true,
+                                loading: controller.isLoading,
+                                onPress: controller.enableButton
+                                    ? () => controller.onPress()
+                                    : null,
+                              ),
+                        )),
                   ],
                 )),
         dismissible: false,

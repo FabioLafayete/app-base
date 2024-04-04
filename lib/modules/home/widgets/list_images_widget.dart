@@ -1,6 +1,7 @@
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:super_sliver_list/super_sliver_list.dart';
 
 
 class ListImagesWidget extends BaseWidget {
@@ -46,7 +47,7 @@ class ListImagesWidget extends BaseWidget {
         const SizedBox(height: 20),
         SizedBox(
           height: 500,
-          child: ListView.builder(
+          child: SuperListView.builder(
               itemCount: listImages.length,
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,

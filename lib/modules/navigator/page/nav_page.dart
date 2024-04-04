@@ -11,6 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:miniplayer/miniplayer.dart';
+import 'package:super_sliver_list/super_sliver_list.dart';
 import '../../food/page/food_page.dart';
 import '../../profile/page/profile_page.dart';
 import '../../workout/page/workout_page.dart';
@@ -105,7 +106,7 @@ class _BottomNavState extends State<BottomNav> {
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 200),
               opacity: opacity,
-              child: ListView(
+              child: SuperListView(
                 physics: const ClampingScrollPhysics(),
                 padding: EdgeInsets.zero,
                 children: [_bottom()],

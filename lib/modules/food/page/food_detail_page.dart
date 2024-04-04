@@ -6,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:super_sliver_list/super_sliver_list.dart';
 
 class FoodDetailPage extends BaseWidget {
   FoodDetailPage({
@@ -43,7 +44,7 @@ class FoodDetailPage extends BaseWidget {
             child: Container(
               alignment: Alignment.topCenter,
               color: Colors.white,
-              child: ListView(
+              child: SuperListView(
                 controller: _,
                 padding: const EdgeInsets.only(top: 20),
                 children: [
@@ -149,7 +150,7 @@ class FoodDetailPage extends BaseWidget {
   Widget _info(){
     return SizedBox(
       height: 40,
-      child: ListView(
+      child: SuperListView(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
         children: [

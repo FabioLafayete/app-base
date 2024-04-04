@@ -32,6 +32,7 @@ class ItemsWrapWidget extends BaseWidget {
       onTap: item.onPress,
       child: Card(
         elevation: 2,
+        color: colors.text2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),

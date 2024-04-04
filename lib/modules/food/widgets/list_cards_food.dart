@@ -3,6 +3,7 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:super_sliver_list/super_sliver_list.dart';
 
 class ListCardFood extends BaseWidget {
   ListCardFood({
@@ -54,7 +55,7 @@ class ListCardFood extends BaseWidget {
         space(0.01),
         SizedBox(
           height:  250,
-          child: ListView(
+          child: SuperListView(
             padding: EdgeInsets.zero,
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
@@ -79,7 +80,7 @@ class ListCardFood extends BaseWidget {
         ),
         width: 180,
         child: Card(
-          color: Colors.white,
+          color: colors.text2,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10)
           ),

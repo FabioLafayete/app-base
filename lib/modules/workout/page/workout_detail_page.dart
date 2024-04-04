@@ -10,6 +10,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:super_sliver_list/super_sliver_list.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 class WorkoutDetailPage extends BaseWidget<WorkoutController> {
@@ -30,7 +31,7 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
       extendBodyBehindAppBar: false,
       body: Stack(
         children: [
-          ListView(
+          SuperListView(
             padding: EdgeInsets.zero,
             physics: const ClampingScrollPhysics(),
             children: [
@@ -146,7 +147,7 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
             ],
           ),
           Positioned(
-            bottom: 40,
+            bottom: MediaQuery.of(context).padding.bottom + 10,
             left: 0,
             right: 0,
             child: Padding(
@@ -241,7 +242,7 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
           const SizedBox(height: 10),
           SizedBox(
             height: 40,
-            child: ListView(
+            child: SuperListView(
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
               children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:super_sliver_list/super_sliver_list.dart';
 
 class WorkoutLoading extends StatelessWidget {
   const WorkoutLoading({super.key});
@@ -12,7 +13,7 @@ class WorkoutLoading extends StatelessWidget {
         enabled: true,
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
-          child: ListView(
+          child: SuperListView(
             padding: EdgeInsets.zero,
             physics: const NeverScrollableScrollPhysics(),
             children: [
@@ -45,7 +46,7 @@ class WorkoutLoading extends StatelessWidget {
                     const SizedBox(height: 20),
                     SizedBox(
                       height: 120,
-                      child: ListView(
+                      child: SuperListView(
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         children: List.generate(4, (index){
