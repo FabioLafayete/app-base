@@ -44,7 +44,7 @@ class HelpPage extends BaseWidget<ProfileController> {
                   child: Padding(
                     padding: const EdgeInsets.all(30.0),
                     child: SvgPicture.asset(
-                      'assets/images/icons/svg/message-send.svg',
+                      'assets/images/icon/svg/message-send.svg',
                       colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
                     ),
                   ),
