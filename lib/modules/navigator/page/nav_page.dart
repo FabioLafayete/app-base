@@ -150,22 +150,22 @@ class _BottomNavState extends State<BottomNav> {
           // ),
           BottomNavigationBarItem(
               icon: SvgPicture.asset(
-                'assets/images/icons/svg/home-4.svg',
+                'assets/images/icon/svg/home-4.svg',
                 colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
               ),
               activeIcon: SvgPicture.asset(
-                'assets/images/icons/svg/home-4.svg',
+                'assets/images/icon/svg/home-4.svg',
                 colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
               ),
               label: 'Inicio'
           ),
           BottomNavigationBarItem(
               icon: SvgPicture.asset(
-                'assets/images/icons/svg/cloche.svg',
+                'assets/images/icon/svg/cloche.svg',
                 colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
               ),
               activeIcon: SvgPicture.asset(
-                'assets/images/icons/svg/cloche.svg',
+                'assets/images/icon/svg/cloche.svg',
                 colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
               ),
               label: 'Receitas'
@@ -176,11 +176,11 @@ class _BottomNavState extends State<BottomNav> {
           // ),
           BottomNavigationBarItem(
               icon: SvgPicture.asset(
-                'assets/images/icons/svg/user.svg',
+                'assets/images/icon/svg/user.svg',
                 colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
               ),
               activeIcon: SvgPicture.asset(
-                'assets/images/icons/svg/user.svg',
+                'assets/images/icon/svg/user.svg',
                 colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
               ),
               label: 'Perfil'
