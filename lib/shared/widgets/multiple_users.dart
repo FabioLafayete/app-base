@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:app/components/base_widget.dart';
+import 'package:app/shared/widgets/base_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -35,9 +35,16 @@ class MultipleUsers extends BaseWidget {
           borderRadius: BorderRadius.circular(1000),
           border: Border.all(color: colors.text2, width: 1.5)
         ),
-        child: CachedNetworkImage(
+        child: !(!lastItem && users[index].photo != null) ?
+        Center(
+          child: text(
+              lastItem ? compact(context) : users[index].name[0].toUpperCase(),
+              fontWeight: FontWeight.w700, color: colors.text2,
+              fontSize: lastItem ? 10 : null
+          ),
+        ) : CachedNetworkImage(
           fadeInDuration: const Duration(milliseconds: 300),
-          imageUrl: (!lastItem && users[index].photo != null) ? users[index].photo! : '',
+          imageUrl: users[index].photo!,
           alignment: Alignment.center,
           fit: BoxFit.cover,
           imageBuilder: (_, img) {

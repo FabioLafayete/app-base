@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "220683252898",
+    "project_id": "ibetter",
+    "storage_bucket": "ibetter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220683252898:android:1d6ccb0bec66a74bdb93fb",
+        "android_client_info": {
+          "package_name": "com.ibetter.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPBal7CBgssEs6aYRvB3zEvQRdPv1HDqQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,15 +5,15 @@ import '../controller/onboard_controller.dart';
 
 class OnboardModule extends Module {
   @override
-  List<Bind> get binds => [
-    Bind.factory((i) => OnboardController())
-  ];
+  void binds(i) {
+    i.addSingleton(() => OnboardController());
+  }
 
   @override
-  List<ModularRoute> get routes => [
-    ChildRoute(
+  void routes(r) {
+    r.child(
         '/',
-        child: (context, args) => OnboardPage()
-    ),
-  ];
+        child: (context) => OnboardPage()
+    );
+  }
 }

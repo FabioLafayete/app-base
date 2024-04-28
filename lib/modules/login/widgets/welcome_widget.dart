@@ -1,22 +1,22 @@
 import 'dart:async';
-
-import 'package:app/components/base_page.dart';
+import 'package:app/shared/widgets/base_page.dart';
+import 'package:app/shared/widgets/my_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:line_icons/line_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '../../../components/app_theme_widget.dart';
-import '../../../components/custom_button.dart';
+import '../../../shared/widgets/app_theme_widget.dart';
 import '../../../util/colors.dart';
 
 class WelcomeWidget extends StatefulWidget {
+  const WelcomeWidget({Key? key, required this.signInOnPress})
+      : super(key: key);
 
-  const WelcomeWidget({
-    Key? key,
-    required this.signInOnPress
-  }) : super(key: key);
-
-  final Function() signInOnPress;
+  final Function(bool signUp) signInOnPress;
 
   @override
   State<WelcomeWidget> createState() => _WelcomeWidgetState();
@@ -24,29 +24,25 @@ class WelcomeWidget extends StatefulWidget {
 
 class _WelcomeWidgetState extends State<WelcomeWidget> {
 
-  final List<String> _images01 = [
-    'https://images.pexels.com/photos/1128678/pexels-photo-1128678.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    // 'https://images.pexels.com/photos/4051252/pexels-photo-4051252.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/66346/pexels-photo-66346.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/1153369/pexels-photo-1153369.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+  final List<String> _image01 = [
+    'assets/images/welcome/0.jpeg',
+    'assets/images/welcome/7.png',
+    'assets/images/welcome/17.jpeg',
   ];
-  final List<String> _images02 = [
-    'https://images.pexels.com/photos/992819/pexels-photo-992819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    // 'https://images.pexels.com/photos/1310777/pexels-photo-1310777.jpeg?auto=compress&cs=tinysrgb&w=800',
-    // 'https://images.pexels.com/photos/8852027/pexels-photo-8852027.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/3297882/pexels-photo-3297882.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/416809/pexels-photo-416809.jpeg?auto=compress&cs=tinysrgb&w=1600'
+  final List<String> _image02 = [
+    'assets/images/welcome/8.jpg',
+    'assets/images/welcome/13.png',
+    'assets/images/welcome/5.jpeg',
   ];
-  final List<String> _images03 = [
-    'https://images.pexels.com/photos/66346/pexels-photo-66346.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/4057738/pexels-photo-4057738.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/3059981/pexels-photo-3059981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+  final List<String> _image03 = [
+    'assets/images/welcome/6.png',
+    'assets/images/welcome/6.png',
+    'assets/images/welcome/18.png',
   ];
-  final List<String> _images04 = [
-    'https://images.pexels.com/photos/4057738/pexels-photo-4057738.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    // 'https://images.pexels.com/photos/5946045/pexels-photo-5946045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-    'https://images.pexels.com/photos/4051252/pexels-photo-4051252.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    'https://images.pexels.com/photos/4944978/pexels-photo-4944978.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+  final List<String> _image04 = [
+    'assets/images/welcome/20.png',
+    'assets/images/welcome/9.jpeg',
+    'assets/images/welcome/1.jpeg',
   ];
 
   final double width = Get.width;
@@ -56,91 +52,87 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
 
   bool topGrid = false;
 
+  bool showImages = false;
+
   @override
-  initState(){
+  initState() {
     super.initState();
-    Timer(const Duration(milliseconds: 100), (){
-      setState((){
+    Timer(Duration.zero, () {
+      setState(() {
         topGrid = true;
+        showImages = true;
       });
     });
-
   }
 
   @override
   Widget build(BuildContext context) {
-
     return BasePage(
-      padding: 0,
+      paddingPage: 0,
       showAppBar: false,
       body: Stack(
         children: [
           _background(),
           AnimatedPositioned(
-            duration: const Duration(seconds: 3),
-            curve: Curves.ease,
-            left: - width * 0.1,
-            top: !topGrid ? - height * 0.25 : - height * 0.2,
+            duration: const Duration(seconds: 5),
+            curve: Curves.easeOutBack,
+            left: !topGrid ? -width * 0.13 : -width * 0.10,
+            top: !topGrid ? -height * 0.3 : -height * 0.23,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                _gridview(_images01),
+                _gridview(_image01),
                 Padding(
                   padding: EdgeInsets.only(top: height * 0.08),
-                  child: _gridview(_images02),
+                  child: _gridview(_image02),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: height * 0.03),
-                  child: _gridview(_images03, showLogo: true),
+                  child: _gridview(_image03, showLogo: true),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: height * 0.18),
-                  child: _gridview(_images04),
+                  child: _gridview(_image04),
                 ),
               ],
             ),
           ),
           Positioned(
-            top: height * 0.48,
+            top: height * 0.43,
             child: Container(
               width: width,
-              height: height * 0.52,
+              height: height * 0.56,
               padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                      width: width * 0.8,
-                      child: text(
-                        'Bem-vinda ao FitLab',
-                        fontSize: width * 0.1,
-                        fontWeight: FontWeight.w600,
-                        color: colors.background
-                    )
-                  ),
-                  SizedBox(height: height * 0.05),
-                  text(
-                      'Explore nossa motivação e encontre sua força',
-                      color: colors.background,
-                      fontSize: width * 0.05
-                  ),
-                  SizedBox(height: height * 0.07),
-                  CustomButton(
+                      width: width * 0.75,
+                      child: text('Bem-vinda ao iBetter',
+                          fontSize: height * 0.047,
+                          fontWeight: FontWeight.w600,
+                          color: colors.background)),
+                  SizedBox(height: height * 0.04),
+                  text('Explore nossa motivação e encontre sua força',
+                      color: colors.background, fontSize: height * 0.028),
+                  const Spacer(),
+                  MyButton(
                     title: 'ENTRAR',
-                    sizeTitle: 16,
-                    colorTitle: colors.secondary,
-                    colorButton: colors.background,
-                    onPress: widget.signInOnPress,
+                    sizeTitle: height * 0.022,
+                    colorTitle: colors.primary,
+                    colorButton: colors.text2,
+                    onPress: () => widget.signInOnPress(false),
                   ),
-                  SizedBox(height: height * 0.01),
-                  CustomButton(
+                  const SizedBox(height: 15),
+                  MyButton(
                     title: 'Não tem cadastro? Adquira aqui',
-                    sizeTitle: 16,
+                    sizeTitle: height * 0.018,
                     colorTitle: Colors.white,
                     cleanButton: true,
-                    onPress: (){},
-                  )
+                    onPress: () => widget.signInOnPress(true),
+                  ),
+                  SizedBox(height: height * 0.05),
                 ],
               ),
             ),
@@ -150,32 +142,44 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     );
   }
 
-  Widget _gridview(List<String> images, {bool showLogo = false}){
+  Widget _gridview(List<String> images, {bool showLogo = false}) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 3),
       child: Column(
-        children: List.generate(images.length, (index){
-          bool _showLogo = index == 1 && showLogo;
+        children: List.generate(images.length, (index) {
+          bool showLogo0 = index == 1 && showLogo;
           return Container(
             margin: const EdgeInsets.symmetric(vertical: 3),
-            width: width * 0.3,
+            width: width * 0.28,
             height: height * 0.19,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
-                    width: 0,
-                    color: _showLogo ? Colors.transparent : colors.background.withOpacity(0.8)
-                )
-            ),
-            child: _showLogo ? Center(
-              child: Icon(Icons.flash_on, size: 50, color: colors.background),
-            ) :
-            ClipRRect(
-              borderRadius: BorderRadius.circular(13),
-              child: CachedNetworkImage(
-                fadeInDuration: const Duration(milliseconds: 300),
-                imageUrl: images[index],
-                fit: BoxFit.cover,
+                    width: 1,
+                    color: showLogo0
+                        ? Colors.transparent
+                        : colors.background.withOpacity(0.0))),
+            child: showLogo0
+                ? Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: height * 0.02),
+                      child: Icon(
+                        LineIcons.heartAlt,
+                        size: height * 0.07,
+                        color: colors.background,
+                      ),
+                    ),
+                  )
+                : AnimatedOpacity(
+              duration: const Duration(milliseconds: 900),
+              opacity: showImages ? 1.0 : 0.0,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(13),
+                child: Image.asset(
+                  images[index],
+                  filterQuality: FilterQuality.high,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           );
@@ -184,20 +188,19 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     );
   }
 
-  Widget _background(){
+  Widget _background() {
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
               tileMode: TileMode.repeated,
-              begin: Alignment.topLeft,
+              begin: Alignment.topRight,
               end: Alignment.bottomRight,
               colors: [
-                Colors.white,
-                colors.primary,
-                colors.secondary,
-              ]
-          )
-      ),
+            // Colors.white,
+            colors.secondary,
+            colors.primary,
+            colors.primary,
+          ])),
     );
   }
 }

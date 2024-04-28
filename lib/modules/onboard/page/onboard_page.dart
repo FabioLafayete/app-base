@@ -1,89 +1,107 @@
-import 'package:app/components/base_page.dart';
-import 'package:app/components/base_widget.dart';
-import 'package:app/components/visual_display.dart';
-import 'package:app/modules/home/page/home_page.dart';
 import 'package:app/modules/onboard/controller/onboard_controller.dart';
-import 'package:app/modules/onboard/widgets/step_01_widget.dart';
+import 'package:app/modules/onboard/widgets/step_name_widget.dart';
+import 'package:app/shared/widgets/base_page.dart';
+import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/shared/widgets/my_button.dart';
+import 'package:app/shared/widgets/visual_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import '../../../components/custom_button.dart';
-import '../../../route/pages_name.dart';
-import '../widgets/step_02_widget.dart';
-import '../widgets/step_03_widget.dart';
-import '../widgets/step_04_widget.dart';
-import '../widgets/step_05_widget.dart';
-import '../widgets/step_06_widget.dart';
-import '../widgets/step_07_widget.dart';
-import '../widgets/step_08_widget.dart';
+import 'package:super_sliver_list/super_sliver_list.dart';
+import '../widgets/step_gender_widget.dart';
+import '../widgets/step_target_widget.dart';
+import '../widgets/step_birthday_widget.dart';
+import '../widgets/step_limitation_widget.dart';
+import '../widgets/step_weight_widget.dart';
+import '../widgets/step_height_widget.dart';
+import '../widgets/step_target_weight_widget.dart';
 
 class OnboardPage extends BaseWidget<OnboardController> {
 
   OnboardPage({Key? key}) : super(key: key);
-  static const router = '${PagesNames.onboard}/';
 
   @override
   Widget build(BuildContext context) {
 
-    List<Widget> _items = [
-      Step01Widget(),
-      Step02Widget(),
-      Step03Widget(),
-      Step04Widget(),
-      Step05Widget(),
-      Step06Widget(),
-      Step07Widget(),
-      Step08Widget(),
+    List<Widget> items = [
+      StepName(),
+      StepBirthdayWidget(),
+      StepGender(),
+      StepLimitationWidget(),
+      StepHeightWidget(),
+      StepTargetWidget(),
+      StepWeightWidget(),
+      StepTargetWeightWidget(),
     ];
 
-
+    final EdgeInsets padding = MediaQuery.of(context).padding;
     return BasePage(
-      padding: 0,
+      paddingPage: 0,
       showAppBar: false,
       body: SafeArea(
-        child: Observer(builder: (_) => SingleChildScrollView(
-          child: SizedBox(
-            height: height * 0.9,
-            child: Column(
-              children: [
-                space(0.01),
-                VisualDisplay.progressBar(
-                    totalItems: _items.length,
-                    index: controller.index
-                ),
-                SizedBox(
-                  height: height * 0.8,
-                  child: PageView.builder(
-                    controller: controller.pageController,
-                    itemCount: _items.length,
-                    itemBuilder: (_, index) =>
-                        Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: _items[index]
-                        ),
-                    onPageChanged: controller.setIndex,
+        child: Observer(builder: (_) => SizedBox(
+          height: height - (padding.bottom + padding.top),
+          child: SuperListView(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              space(0.02),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    alignment: Alignment.bottomLeft,
+                    margin: const EdgeInsets.only(left: 16),
+                    child: Opacity(
+                      opacity: controller.index > 0 ? 1 : 0,
+                      child: GestureDetector(
+                        onTap: (){
+                          if(controller.index > 0){
+                            controller.setIndex(controller.index - 1);
+                          }
+                        },
+                        child: const Icon(Icons.arrow_back_ios_new_outlined),
+                      ),
+                    ),
                   ),
-                ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: CustomButton(
-                    title: 'AVANCAR',
-                    colorTitle: colors.background,
-                    colorButton: colors.primary,
-                    iconRight: true,
-                    onPress: (){
-                      controller.setIndex(controller.index + 1);
-                      if(controller.index == 8){
-                        Modular.to.pushReplacementNamed(HomePage.router);
-                      }
-                    },
+                  SizedBox(
+                    width: width * 0.55,
+                    child: VisualDisplay.progressBar(
+                        totalItems: items.length,
+                        index: controller.index
+                    ),
                   ),
+                  const SizedBox(width: 50)
+                ],
+              ),
+              SizedBox(
+                height: height * 0.7,
+                child: PageView.builder(
+                  controller: controller.pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: items.length,
+                  itemBuilder: (_, index) =>
+                      Padding(
+                        padding: const EdgeInsets.all(16).copyWith(top: 0),
+                        child: items[index]
+                      ),
+                  onPageChanged: controller.setIndex,
                 ),
-                space(0.01),
-              ],
-            ),
+              ),
+            ],
           ),
+        )),
+      ),
+      bottomSheet: Container(
+        color: colors.background,
+        padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
+          bottom: 40, top: 20,
+        ),
+        child: Observer(builder: (_) => MyButton(
+          title: controller.index + 1 == items.length ? 'FINALIZAR' : "AVANÇAR",
+          colorTitle: colors.background,
+          colorButton: colors.primary,
+          iconRight: true,
+          onPress: controller.enableButton ? controller.onPressButton : null,
         )),
       ),
     );

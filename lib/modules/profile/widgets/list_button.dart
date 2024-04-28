@@ -1,4 +1,4 @@
-import 'package:app/components/base_widget.dart';
+import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
 
 class ListButton extends BaseWidget {
@@ -18,58 +18,85 @@ class ListButton extends BaseWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (_, index){
           ListButtonItem item = list[index];
-          bool hasMoreOne = list.length > 1;
-          bool isFirst = index == 0;
-          bool isLast = index + 1 == list.length;
-          return Card(
-            margin: const EdgeInsets.only(bottom: 1),
-            elevation: 0.5,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: isFirst ? const Radius.circular(8) : Radius.zero,
-                topRight: isFirst ? const Radius.circular(8) : Radius.zero,
-                bottomLeft: (!hasMoreOne || isLast) ? const Radius.circular(8) : Radius.zero,
-                bottomRight: (!hasMoreOne || isLast) ? const Radius.circular(8) : Radius.zero,
-              )
-            ),
-            child: Material(
-              type: MaterialType.transparency,
-              child: InkWell(
-                onTap: item.onPress,
-                splashColor: Colors.black54.withOpacity(0.2),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 18),
-                  child: Column(
-                    children: [
-                      Row(
+          return Container(
+            margin: EdgeInsets.only(top: item.isLogout ? 100 : 12),
+            child: Card(
+              margin: const EdgeInsets.only(bottom: 1),
+              elevation: 0.8,
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Material(
+                  type: MaterialType.transparency,
+                  child: InkWell(
+                    onTap: item.onPress,
+                    splashColor: item.onPress != null ? Colors.black54.withOpacity(0.05) : Colors.transparent,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 18),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                            child: Row(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Icon(item.icon),
-                                space(0.03, width: true),
-                                Expanded(
-                                  child: text(
-                                    item.title,
-                                    maxLines: 1,
-                                    textOverflow: TextOverflow.ellipsis,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
+                                if(item.subTitle != null)
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 5),
+                                    child: text(
+                                        item.subTitle!,
+                                        fontSize: 12,
+                                        color: colors.textSecondary
+                                    ),
                                   ),
+                                Row(
+                                  children: [
+                                    if(item.icon != null)
+                                      Row(
+                                        children: [
+                                          item.icon!,
+                                          const SizedBox(width: 14),
+                                        ],
+                                      ),
+                                    Expanded(
+                                      child: text(
+                                        item.title,
+                                        maxLines: 1,
+                                        textOverflow: TextOverflow.ellipsis,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                space(0.03, width: true),
                               ],
                             ),
                           ),
-                          Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 18,
-                              color: item.iconColor ?? colors.primary
-                          )
+                          if(item.showIcon)
+                            Row(
+                              children: [
+                                if(item.textIcon != null)
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8),
+                                    child: text(
+                                      item.textIcon!,
+                                      color: item.iconColor ?? colors.primary,
+                                      fontSize: 12
+                                    ),
+                                  ),
+                                Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    size: 16,
+                                    color: item.iconColor ?? colors.primary
+                                )
+                              ],
+                            )
                         ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
@@ -81,15 +108,23 @@ class ListButton extends BaseWidget {
 
 class ListButtonItem {
   final String title;
-  final Function() onPress;
-  final IconData? icon;
+  final String? subTitle;
+  final String? textIcon;
+  final Function()? onPress;
+  final Widget? icon;
   final Color? background;
   final Color? iconColor;
   final Color? titleColor;
+  final bool isLogout;
+  final bool showIcon;
 
   ListButtonItem({
     required this.title,
-    required this.onPress,
+    this.subTitle,
+    this.textIcon,
+    this.onPress,
+    this.isLogout = false,
+    this.showIcon = true,
     this.icon,
     this.background,
     this.iconColor,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-
+//primary: const Color(0xFF04f6ea),
   final ColorsSchema _light = ColorsSchema(
     text: Colors.black,
     textSecondary: Colors.black54,
@@ -11,9 +11,24 @@ class AppColors {
     // secondary: Colors.pink.shade700,
     // primary: Colors.purple.shade400,
     // secondary: Colors.purple.shade700,
-    primary: const Color(0xFF6357DD),
+
+    // primary: const Color(0xFF6357DD),
+    // primary: const Color(0xFF43127a),
+    // primary: const Color(0xFF441f89),
+    // primary: const Color(0xFF4c9ffe),
+    // primary: const Color(0xFF26285a),
+    primary: const Color(0xFF39117a),
+
     secondary: Colors.purple.shade700,
-    background: const Color.fromRGBO(249, 249, 251, 1.0),
+    // secondary: Color(0xFFe34cfa),
+    // secondary: Color(0xFFddacfe),
+    // secondary: Color(0xFF4b0280),
+
+    // secondary: Color(0xFFfe39dd),
+    // secondary: Color(0xFFf752c0),
+
+    background: const Color.fromRGBO(246, 246, 246, 1.0),
+    // background: const Color.fromRGBO(150, 150, 150, 1.0),
     // background: Colors.white,
     error: const Color(0xFFC21D4F),
   );

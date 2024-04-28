@@ -10,7 +10,6 @@
 .svn/
 
 *.swp
-profile
 
 DerivedData/
 
@@ -50,4 +49,5 @@ pubspec.lock
 lib/generated_plugin_registrant.dart
 .vscode/launch.json
 
-assets/
+android/key.properties
+android/app/key.jks

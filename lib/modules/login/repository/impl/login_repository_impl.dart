@@ -1,3 +1,5 @@
+import 'package:app/shared/model/auth_model/auth_model.dart';
+
 import '../../service/login_service.dart';
 import '../login_repository.dart';
 
@@ -11,9 +13,9 @@ class LoginRepositoryImpl extends LoginRepository{
   Future<void> postTokenEmail(String email) => loginService.postTokenEmail(email);
 
   @override
-  Future<Map<String, dynamic>> postLogin(String email, String token) async {
+  Future<AuthModel> postLogin(String email, String token) async {
     final data = await loginService.postLogin(email, token);
-    return data.data;
+    return AuthModel.fromJson(data.data);
   }
 
 }

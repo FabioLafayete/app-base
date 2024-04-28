@@ -1,25 +1,26 @@
 import 'package:app/config/app_config.dart';
-import 'package:app/modules/home/page/home_page.dart';
 import 'package:app/modules/login/repository/impl/login_repository_impl.dart';
+import 'package:app/route/pages_name.dart';
+import 'package:app/shared/model/auth_model/auth_model.dart';
 import 'package:app/util/util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
-
-import '../../../components/bottom_sheet/bottom_sheet_controller.dart';
+import 'package:app/shared/widgets/base_controller.dart';
+import '../../navigator/controller/nav_controller.dart';
 
 part 'login_controller.g.dart';
 
 class LoginController = LoginControllerBase with _$LoginController;
 
-abstract class LoginControllerBase with Store {
+abstract class LoginControllerBase extends BaseController with Store {
 
   LoginControllerBase({
     required this.repositoryImpl
   }) : super(){
-    bottomSheet.setHeightBottomSheet(0.35);
+    // bottomSheet.setHeightBottomSheet(0.35);
   }
 
   final LoginRepositoryImpl repositoryImpl;
@@ -47,14 +48,14 @@ abstract class LoginControllerBase with Store {
   @observable
   String code5 = '';
 
-  final bottomSheet = Modular.get<BottomSheetController>();
+  final bottomSheet = Modular.get<NavController>();
 
   @action
   setIsLoading(bool value) => isLoading = value;
   @action
   setIsLoadingSendCode(bool value) => isLoadingSendCode = value;
   @action
-  setEmail(String value) => email = value;
+  setEmail(String value) => email = value.toLowerCase().trim();
   @action
   setErrorEmail(String? value) => errorEmail = value;
   @action
@@ -121,26 +122,30 @@ abstract class LoginControllerBase with Store {
     try{
       setIsLoading(true);
       if(showCode) {
-        final data = await repositoryImpl.postLogin(
-            email!, '$code1$code2$code3$code4$code5'
-        );
-        if(data.isNotEmpty && data.containsKey('token')){
-          AppConfig().setBearerToken(data['token']);
-          Modular.to.pushReplacementNamed(HomePage.router);
-          return;
+        AuthModel data = await repositoryImpl.postLogin(email!, fullCode);
+        await AppConfig().setBearerToken(data);
+        if(data.user.newUser) {
+          router.pushReplacementNamed(PagesNames.onboard);
+        } else {
+          router.pushReplacementNamed(PagesNames.home);
         }
+        return;
       } else {
         await repositoryImpl.postTokenEmail(email!);
-        bottomSheet.setHeightBottomSheet(0.53);
+        // bottomSheet.setHeightBottomSheet(0.53);
         await Future.delayed(const Duration(milliseconds: 350));
         setShowCode(true);
         Get.focusScope?.unfocus();
       }
-    } catch(e){
-      bottomSheet.setHeightBottomSheet(0.56);
-      setErrorCode('');
-      cleanCode();
-      Get.focusScope?.unfocus();
+    } catch(e) {
+      if(showCode) {
+        // bottomSheet.setHeightBottomSheet(0.56);
+        setErrorCode('');
+        cleanCode();
+        Get.focusScope?.unfocus();
+      } else {
+        setErrorEmail('Erro ao enviar token, tente novamente');
+      }
       if (kDebugMode) {
         print(e);
       }
@@ -149,6 +154,8 @@ abstract class LoginControllerBase with Store {
     }
   }
 
+  String get fullCode => '$code1$code2$code3$code4$code5';
+
   Future<void> resendCode() async {
     try{
       setIsLoadingSendCode(true);
@@ -156,7 +163,7 @@ abstract class LoginControllerBase with Store {
       await repositoryImpl.postTokenEmail(email!);
       cleanCode();
       setErrorCode(null);
-      bottomSheet.setHeightBottomSheet(0.53);
+      // bottomSheet.setHeightBottomSheet(0.53);
     } finally{
       setIsLoadingSendCode(false);
     }
@@ -166,7 +173,7 @@ abstract class LoginControllerBase with Store {
     Get.focusScope?.unfocus();
     setShowCode(false);
     cleanCode();
-    bottomSheet.setHeightBottomSheet(0.35);
+    // bottomSheet.setHeightBottomSheet(0.35);
     setErrorEmail(null);
     setErrorCode(null);
   }
@@ -216,7 +223,7 @@ abstract class LoginControllerBase with Store {
     controllerEmail.clear();
     Get.focusScope?.unfocus();
     setShowCode(false);
-    bottomSheet.setHeightBottomSheet(0.35);
+    // bottomSheet.setHeightBottomSheet(0.35);
     setErrorEmail(null);
     setErrorCode(null);
   }

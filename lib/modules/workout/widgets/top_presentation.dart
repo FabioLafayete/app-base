@@ -1,25 +1,27 @@
-import 'package:app/components/base_widget.dart';
 import 'package:app/modules/workout/widgets/list_cards_items.dart';
+import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/shared/widgets/my_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../components/custom_button.dart';
 import '../../../shared/widgets/multiple_users.dart';
 
 class TopPresentation extends BaseWidget {
   TopPresentation({
     Key? key,
     required this.cardItemModel,
-    this.titleButton
+    this.titleButton,
+    this.showUsers = true
   }) : super(key: key);
 
   final CardItemModel cardItemModel;
   final String? titleButton;
+  final bool? showUsers;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height * 0.4,
+      height: height * 0.45,
       child: ClipRRect(
         borderRadius: const BorderRadius.only(
           bottomRight: Radius.circular(0),
@@ -43,15 +45,18 @@ class TopPresentation extends BaseWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            decoration: BoxDecoration(
-              color: colors.primary,
-              borderRadius: BorderRadius.circular(1000)
-            ),
-            child: text(cardItemModel.typeTraining, fontSize: 12, fontWeight: FontWeight.w600, color: colors.background),
-          ),
-          space(0.01),
+          if(cardItemModel.typeTraining != null)
+            ...[
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                    color: colors.primary,
+                    borderRadius: BorderRadius.circular(8)
+                ),
+                child: text(cardItemModel.typeTraining!, fontSize: 12, fontWeight: FontWeight.w600, color: colors.background),
+              ),
+              space(0.01),
+            ],
           text(cardItemModel.description,
               fontWeight: FontWeight.w600,
               maxLines: 2,
@@ -62,10 +67,10 @@ class TopPresentation extends BaseWidget {
           Row(
             children: [
               if(cardItemModel.trainer != null)
-                text(cardItemModel.trainer!, fontWeight: FontWeight.w300, fontSize: 12, color: colors.background),
+                text(cardItemModel.trainer!, fontWeight: FontWeight.w400, fontSize: 14, color: colors.background),
               if(cardItemModel.timeTraining != null)
                 text('${cardItemModel.trainer != null ? ' | ' : ''}${cardItemModel.timeTraining!}',
-                    fontWeight: FontWeight.w300, fontSize: 12, color: colors.background),
+                    fontWeight: FontWeight.w400, fontSize: 14, color: colors.background),
             ],
           ),
           space(0.02),
@@ -73,20 +78,21 @@ class TopPresentation extends BaseWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              MultipleUsers(
-                users: [
-                  MultipleUsersModel(name: 'Fabio Lafayete', photo: 'https://www.netliteracy.org/wp-content/uploads/2020/07/Capture-3-768x758.png'),
-                  MultipleUsersModel(name: 'Mariana Cardoso'),
-                  MultipleUsersModel(name: 'Lucas Alves', photo: 'http://ddg.wiki/wp-content/uploads/sites/22/2019/02/thispersondoesnotexist.com_000.jpg'),
-                  MultipleUsersModel(name: 'Vitor Rafael'),
-                ],
-              ),
+              if(showUsers!)
+                MultipleUsers(
+                  users: [
+                    MultipleUsersModel(name: 'Fabio Lafayete', photo: 'https://www.netliteracy.org/wp-content/uploads/2020/07/Capture-3-768x758.png'),
+                    MultipleUsersModel(name: 'Mariana Cardoso'),
+                    // MultipleUsersModel(name: 'Lucas Alves', photo: 'https://ddg.wiki/wp-content/uploads/sites/22/2019/02/thispersondoesnotexist.com_000.jpg'),
+                    MultipleUsersModel(name: 'Vitor Rafael'),
+                  ],
+                ),
               SizedBox(
-                width: 100,
-                child: CustomButton(
+                width: 120,
+                child: MyButton(
                   title: titleButton ?? 'INICIAR',
-                  heightButton: 30,
-                  sizeTitle: 14,
+                  heightButton: 35,
+                  sizeTitle: 15,
                   colorTitle: colors.primary,
                   colorButton: colors.background,
                   onPress: cardItemModel.onPress,
@@ -100,11 +106,20 @@ class TopPresentation extends BaseWidget {
   }
 
   Widget _image() {
+    if(!cardItemModel.thumbnail.contains('http')){
+      return Image.asset(
+        cardItemModel.thumbnail,
+        width: width,
+        height: height * 0.45,
+        alignment: Alignment.bottomCenter,
+        fit: BoxFit.cover,
+      );
+    }
     return CachedNetworkImage(
       fadeInDuration: const Duration(milliseconds: 300),
       imageUrl: cardItemModel.thumbnail,
       width: width,
-      height: height * 0.4,
+      height: height * 0.45,
       alignment: Alignment.bottomCenter,
       fit: BoxFit.cover,
     );
@@ -112,7 +127,7 @@ class TopPresentation extends BaseWidget {
 
   Widget _effectImage(){
     return Container(
-      height: height * 0.4,
+      height: height * 0.45,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: FractionalOffset.topCenter,

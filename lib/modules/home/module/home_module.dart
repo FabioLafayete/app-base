@@ -1,19 +1,16 @@
-import 'package:app/modules/home/controller/home_controller.dart';
+import 'package:app/modules/navigator/controller/nav_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
 import '../../navigator/page/nav_page.dart';
 
 class HomeModule extends Module {
   @override
-  List<Bind> get binds => [
-    Bind.factory((i) => HomeController())
-  ];
-
-  @override
-  List<ModularRoute> get routes => [
-    ChildRoute(
+  void routes (r) {
+    r.child(
         '/',
-        child: (context, args) => NavPage(index: 0)
-    ),
-  ];
+        child: (context) {
+          Modular.get<NavController>().setPageSelected(0);
+          return NavPage();
+        }
+    );
+  }
 }

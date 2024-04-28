@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:app/components/app_theme_widget.dart';
+import 'package:app/shared/widgets/app_theme_widget.dart';
+import 'package:app/route/my_router.dart';
+import 'package:app/shared/widgets/visual_display.dart';
 import 'package:app/util/colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crop/crop.dart';
@@ -10,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rxdart/rxdart.dart';
-import '../../components/visual_display.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../util/util.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -24,6 +26,8 @@ class ImageCropperWidget extends StatefulWidget {
     this.subTitle,
     this.onPress,
     this.interactive = false,
+    this.simpleView = false,
+    this.loading = false,
     required this.onChange,
   });
 
@@ -32,6 +36,8 @@ class ImageCropperWidget extends StatefulWidget {
   final String? subTitle;
   final File? image;
   final String? imageUrl;
+  final bool simpleView;
+  final bool loading;
   final Function(File?) onChange;
   final Function()? onPress;
   final bool interactive;
@@ -46,6 +52,7 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
   late bool hasImage;
   final colors = AppColors();
   final text = AppTheme().text;
+  final MyRouter router = MyRouter();
 
   @override
   Widget build(BuildContext context) {
@@ -60,79 +67,169 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
         textLength = 2;
       }
     }
-    return GestureDetector(
-      onTap: widget.onPress ?? () => _openOptions(context),
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16, vertical: 16
-        ),
-        decoration: BoxDecoration(
-          color: const Color(0xFFF2F4F8),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Row(
-          children: [
-            if (image != null && (imageUrl == null || imageUrl!.isEmpty)) _image(),
-            if (imageUrl != null && imageUrl!.isNotEmpty) _imageUrl(),
-            if (!hasImage) Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1000),
-                  color: const Color(0xFFE4E7EC),
-                ),
-                child: Center(
-                  child: (widget.textImage != null && widget.textImage!.isNotEmpty) ? SizedBox(
-                    height: 30,
-                    width: 30,
+    return widget.simpleView ? _simpleview(textLength) : _body(textLength);
+  }
+
+  Widget _body(int textLength){
+    return Card(
+      elevation: 1.5,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10)
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Material(
+          type: MaterialType.transparency,
+          child: InkWell(
+            onTap: widget.loading ? null : widget.onPress ?? () => _openOptions(context),
+            splashColor: Colors.black54.withOpacity(0.05),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: widget.loading ? _loading() : Row(
+                children: [
+                  if (image != null && (imageUrl == null || imageUrl!.isEmpty))
+                    _image(),
+                  if (imageUrl != null && imageUrl!.isNotEmpty)
+                    _imageUrl(),
+                  if (!hasImage) Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(1000),
+                      color: const Color(0xFFE4E7EC),
+                    ),
                     child: Center(
-                      child: Text(
-                        widget.textImage!.substring(0, textLength).toUpperCase(),
-                        style: const TextStyle(
+                      child: (widget.textImage != null && widget.textImage!.isNotEmpty) ? SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: Center(
+                          child: Text(
+                              widget.textImage!.substring(0, textLength).toUpperCase(),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              )
+                          ),
+                        ),
+                      )
+                          : const Icon(Icons.person,
+                        color: Colors.white, size: 18,),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        text(
+                          widget.title ?? (hasImage ? 'Editar foto' : 'Carregar foto'),
+                          maxLines: 1,
+                          textOverflow: TextOverflow.ellipsis,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
-                        )
-                      ),
+                        ),
+                        if (widget.subTitle != null)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4),
+                            child: text(
+                                widget.subTitle!,
+                                maxLines: 1,
+                                textOverflow: TextOverflow.ellipsis,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black54,
+                                fontSize: 12
+                            ),
+                          ),
+                      ],
                     ),
-                  )
-                      : const Icon(Icons.person,
-                    color: Colors.white, size: 18,),
-                ),
-              ),
-            const SizedBox(width: 20),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  text(
-                    widget.title ?? (hasImage ? 'Editar foto' : 'Carregar foto'),
-                    maxLines: 1,
-                    textOverflow: TextOverflow.ellipsis,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
                   ),
-                  if (widget.subTitle != null)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4),
-                      child: text(
-                        widget.subTitle!,
-                        maxLines: 1,
-                        textOverflow: TextOverflow.ellipsis,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black54,
-                        fontSize: 12
-                      ),
-                    ),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: colors.primary,
+                    size: 18,
+                  )
                 ],
               ),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _loading(){
+    return SizedBox(
+      width: double.infinity,
+      height: 40,
+      child: Shimmer.fromColors(
+          baseColor: Colors.grey.withOpacity(0.2),
+          highlightColor: Colors.grey.withOpacity(0.1),
+        child: Row(
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(1000)
+              ),
+            ),
+            const SizedBox(width: 30),
+            Container(
+              width: 120,
+              height: 20,
+              color: Colors.black,
+            ),
+            const Spacer(),
             Icon(
               Icons.arrow_forward_ios_rounded,
               color: colors.primary,
               size: 18,
             )
           ],
-        ),
+        )
       ),
+    );
+  }
+
+  Widget _simpleview(int textLength){
+    return Column(
+      children: [
+        if (image != null && (imageUrl == null || imageUrl!.isEmpty)) _image(),
+        if (imageUrl != null && imageUrl!.isNotEmpty) _imageUrl(),
+        if (!hasImage) Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(1000),
+            color: const Color(0xFFE4E7EC),
+          ),
+          height: 80, width: 80,
+          child: Center(
+            child: (widget.textImage != null && widget.textImage!.isNotEmpty) ? SizedBox(
+              height: 30,
+              width: 30,
+              child: Center(
+                child: text(
+                  widget.textImage!.substring(0, textLength).toUpperCase(),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
+              ),
+            )
+                : const Icon(Icons.person,
+              color: Colors.white, size: 18,),
+          ),
+        ),
+        const SizedBox(height: 20),
+        if(widget.title != null)
+          text(
+            widget.title!,
+            maxLines: 1,
+            textOverflow: TextOverflow.ellipsis,
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+          ),
+      ],
     );
   }
 
@@ -152,22 +249,23 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
             const SizedBox(height: 32),
             _itemCard(Icons.photo, 'Escolher nova foto', (){
               getPhoto(onGallery: true);
-              Get.back();
+              router.pop();
             }),
             const SizedBox(height: 32),
             _itemCard(Icons.photo_camera, 'Tirar nova foto', (){
               getPhoto(onGallery: false);
-              Get.back();
+              router.pop();
             }),
             const SizedBox(height: 32),
-            _itemCard(Icons.delete, 'Remover foto', () {
-              setState(() {
-                image = null;
-              });
-              widget.onChange(null);
-              Get.back();
-            }),
-            const SizedBox(height: 64),
+            if(hasImage)
+              _itemCard(Icons.delete, 'Remover foto', () {
+                setState(() {
+                  image = null;
+                });
+                widget.onChange(null);
+                router.pop();
+              }),
+            const SizedBox(height: 30),
           ],
         ),
         hasHeight: false,
@@ -197,8 +295,8 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
   Widget _imageUrl() {
     return CachedNetworkImage(
       imageUrl: imageUrl!,
-      height: 45,
-      width: 45,
+      height: widget.simpleView ? 80 : 45,
+      width: widget.simpleView ? 80 : 45,
       fit: BoxFit.cover,
       imageBuilder: (_, img) {
         return ClipRRect(
@@ -214,7 +312,7 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
       placeholder: (context, url) => const SizedBox(
         height: 24,
         width: 24,
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(strokeWidth: 2),
       ),
       errorWidget: (context, url, error) {
         int textLength = 0;
@@ -293,7 +391,7 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
   Future<void> getPhoto({required bool onGallery}) async {
     final File? file = await pickImage(onGallery: onGallery);
     if (file != null) {
-      Get.to(() => ImageCrop(
+      router.push(ImageCrop(
         imageOriginal: file,
         interactive: widget.interactive,
         onCropped: (value) {
@@ -319,7 +417,7 @@ class ImageCropperModel {
 
 
 class ImageCrop extends StatefulWidget {
-  const ImageCrop({
+  const ImageCrop({super.key, 
     required this.imageOriginal,
     required this.onCropped,
     this.interactive = false,
@@ -349,6 +447,7 @@ class _ImageCropState extends State<ImageCrop> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final MyRouter router = MyRouter();
     return StreamBuilder<bool>(
       stream: isLoadingStream,
       initialData: false,
@@ -409,12 +508,12 @@ class _ImageCropState extends State<ImageCrop> {
                         file.writeAsBytesSync(compressImage);
                         widget.onCropped(file);
                         isLoadingStream.add(false);
-                        Get.back();
+                        router.pop();
                       }
                     }catch(e){
                       widget.onCropped(null);
                       isLoadingStream.add(false);
-                      Get.back();
+                      router.pop();
                     }
                   },
                 )
