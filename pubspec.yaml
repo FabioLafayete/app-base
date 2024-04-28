@@ -70,8 +70,8 @@ flutter:
   assets:
     - assets/
     - assets/images/
-    - assets/images/icons2/
-    - assets/images/icons2/svg/
+    - assets/images/icons/
+    - assets/images/icons/svg/
     - assets/images/foods/
     - assets/images/foods/category/
     - assets/images/welcome/

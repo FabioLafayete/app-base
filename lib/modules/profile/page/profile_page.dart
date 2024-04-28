@@ -189,31 +189,31 @@ class ProfilePage extends BaseWidget<ProfileController> {
                   ListButton(
                     list: [
                       ListButtonItem(title: 'Meus dados', icon: SvgPicture.asset(
-                        'assets/images/icons2/svg/user.svg',
+                        'assets/images/icons/svg/user.svg',
                         height: 24,
                         colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
                       ), onPress: (){
                         router.pushNamed(PagesNames.profileData);
                       }),
                       ListButtonItem(title: 'Política de privacidade', icon: SvgPicture.asset(
-                        'assets/images/icons2/svg/shield-tick.svg',
+                        'assets/images/icons/svg/shield-tick.svg',
                         height: 24,
                         colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
                       ), onPress: (){}),
                       ListButtonItem(title: 'Termos de uso', icon: SvgPicture.asset(
-                        'assets/images/icons2/svg/document.svg',
+                        'assets/images/icons/svg/document.svg',
                         height: 24,
                         colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
                       ), onPress: (){}),
                       ListButtonItem(title: 'Fale com a gente', icon: SvgPicture.asset(
-                        'assets/images/icons2/svg/messages.svg',
+                        'assets/images/icons/svg/messages.svg',
                         height: 24,
                         colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
                       ), onPress: (){
                         router.pushNamed(PagesNames.profileHelp);
                       }),
                       ListButtonItem(title: 'Sair da conta', icon: SvgPicture.asset(
-                        'assets/images/icons2/svg/signout.svg',
+                        'assets/images/icons/svg/signout.svg',
                         height: 24,
                         colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
                       ), onPress: controller.logout, isLogout: true),
