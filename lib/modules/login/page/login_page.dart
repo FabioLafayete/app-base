@@ -110,7 +110,7 @@ class LoginPage extends BaseWidget<LoginController> {
                     Observer(
                         builder: (_) => Padding(
                           padding: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).padding.bottom,
+                            bottom: MediaQuery.of(context).padding.bottom + 20,
                           ),
                           child: MyButton(
                                 title: controller.showCode
