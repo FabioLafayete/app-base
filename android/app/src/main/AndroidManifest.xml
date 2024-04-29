@@ -11,24 +11,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.VIEW"/>
-            <data android:scheme="https"/>
-        </intent>
-        <intent>
-            <action android:name="android.intent.action.VIEW"/>
-            <data android:scheme="tel"/>
-        </intent>
-        <intent>
-            <action android:name="android.intent.action.VIEW"/>
-            <data android:scheme="mailto"/>
-        </intent>
-        <intent>
-            <action android:name="android.support.customtabs.action.CustomTabsService" />
-        </intent>
-    </queries>
-
    <application
         android:label="iBetter"
         android:name="${applicationName}"
@@ -60,15 +42,25 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
                 <data android:scheme="https" />
                 <data android:host="ibetter.io" />
             </intent-filter>
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="ibetter.page.link" />
+            </intent-filter>
+
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="ibetter"/>
+                <data android:scheme="ibetter" />
             </intent-filter>
 
 

@@ -4,11 +4,14 @@ import 'package:app/shared/widgets/my_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../service/storage/storage_service.dart';
+import '../../../shared/constants/storage_constants.dart';
 import '../../../shared/widgets/app_theme_widget.dart';
 import '../../../util/colors.dart';
 
@@ -23,7 +26,6 @@ class WelcomeWidget extends StatefulWidget {
 }
 
 class _WelcomeWidgetState extends State<WelcomeWidget> {
-
   final List<String> _image01 = [
     'assets/images/welcome/0.jpeg',
     'assets/images/welcome/7.png',
@@ -53,6 +55,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
   bool topGrid = false;
 
   bool showImages = false;
+
+  final secure = Modular.get<SecureStorageService>();
 
   @override
   initState() {
@@ -132,6 +136,20 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     cleanButton: true,
                     onPress: () => widget.signInOnPress(true),
                   ),
+                  FutureBuilder<String?>(
+                    future: secure.get(StorageConstants.deepLink),
+                    initialData: null,
+                    builder: (_, snap) {
+                      if(snap.hasData) {
+                        return GestureDetector(
+                          onTap: (){
+                            secure.delete(StorageConstants.deepLink);
+                          },
+                            child: text(snap.data!, color: Colors.white));
+                      }
+                      return const SizedBox.shrink();
+                    },
+                  ),
                   SizedBox(height: height * 0.05),
                 ],
               ),
@@ -171,17 +189,17 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     ),
                   )
                 : AnimatedOpacity(
-              duration: const Duration(milliseconds: 900),
-              opacity: showImages ? 1.0 : 0.0,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(13),
-                child: Image.asset(
-                  images[index],
-                  filterQuality: FilterQuality.high,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+                    duration: const Duration(milliseconds: 900),
+                    opacity: showImages ? 1.0 : 0.0,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(13),
+                      child: Image.asset(
+                        images[index],
+                        filterQuality: FilterQuality.high,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
           );
         }),
       ),
