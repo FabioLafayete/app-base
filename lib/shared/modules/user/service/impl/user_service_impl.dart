@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:app/shared/model/support/support_model.dart';
 import 'package:app/shared/model/user/user_model.dart';
 import 'package:app/shared/modules/user/constants/user_constants.dart';
 import 'package:dio/dio.dart';
@@ -48,6 +49,15 @@ class UserServiceImpl implements UserService {
       type: RequestType.PUT,
       path: UserConstants.addPhoto,
       dataRequest: formData
+    );
+  }
+
+  @override
+  Future<Response> postSupport(SupportModel model) async {
+    return _service.request(
+        type: RequestType.POST,
+        path: UserConstants.postSupport,
+        dataRequest: model.toJson()
     );
   }
 }

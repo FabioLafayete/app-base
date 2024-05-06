@@ -14,6 +14,7 @@ import '../../../service/storage/storage_service.dart';
 import '../../../shared/constants/storage_constants.dart';
 import '../../../shared/widgets/app_theme_widget.dart';
 import '../../../util/colors.dart';
+import 'package:sentry/sentry.dart';
 
 class WelcomeWidget extends StatefulWidget {
   const WelcomeWidget({Key? key, required this.signInOnPress})

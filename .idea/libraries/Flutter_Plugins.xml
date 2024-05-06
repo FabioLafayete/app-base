@@ -35,6 +35,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_secure_storage-8.0.0" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/sqflite-2.3.2" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/firebase_dynamic_links-5.4.8" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/sentry_flutter-8.1.0" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

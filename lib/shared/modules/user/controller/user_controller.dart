@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/shared/model/support/support_model.dart';
 import 'package:app/shared/model/user/user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
@@ -106,6 +107,22 @@ abstract class UserControllerBase with Store{
         print(_);
       }
     }
+  }
+
+  Future<bool> postSupport(SupportModel model) async {
+    try{
+      await userRepositoryImpl.postSupport(model);
+      return true;
+    }catch(_){
+      if(_ is DioException){
+        print(_.message);
+        print(_.error);
+        print(_.response?.data);
+      } else {
+        print(_);
+      }
+    }
+    return false;
   }
 
 }

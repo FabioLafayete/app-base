@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:app/route/pages_name.dart';
+import 'package:app/shared/model/support/support_model.dart';
 import 'package:app/shared/widgets/base_controller.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
@@ -60,6 +62,7 @@ abstract class ProfileControllerBase extends BaseController with Store {
     'Elogio',
     'Parceria',
     'Reembolso',
+    'Cancelar assinatura'
   ];
 
   @action
@@ -183,7 +186,52 @@ abstract class ProfileControllerBase extends BaseController with Store {
     if(messageHelp == null || messageHelp!.isEmpty) return false;
     if(titleHelp == null || titleHelp!.isEmpty) return false;
     if(optionHelp == null || optionHelp!.isEmpty) return false;
+    if(loading) return false;
     return true;
+  }
+
+  Future postSupport() async {
+    try{
+      setLoading(true);
+
+      late SupportReasonEnum supportReasonEnum;
+
+      if(optionHelp! == 'Problema'){
+        supportReasonEnum = SupportReasonEnum.PROBLEM;
+      }
+      if(optionHelp! == 'Dúvida'){
+        supportReasonEnum = SupportReasonEnum.DOUBT;
+      }
+      if(optionHelp! == 'Elogio'){
+        supportReasonEnum = SupportReasonEnum.PRIASE;
+      }
+      if(optionHelp! == 'Parceria'){
+        supportReasonEnum = SupportReasonEnum.PARTNERSHIP;
+      }
+      if(optionHelp! == 'Reembolso'){
+        supportReasonEnum = SupportReasonEnum.REIMBURSEMENT;
+      }
+      if(optionHelp! == 'Cancelar assinatura'){
+        supportReasonEnum = SupportReasonEnum.SUBSCRIPTION_CANCELED;
+      }
+
+      final model = SupportModel(
+        message: messageHelp!,
+        subject: titleHelp!,
+        reason: supportReasonEnum
+      );
+
+      final response = await userController.postSupport(model);
+
+      if(response){
+        router.pushReplacementNamed(PagesNames.profileHelpCongrats);
+      }
+
+    }catch(_){
+      print(_);
+    } finally {
+      setLoading(false);
+    }
   }
 
 }

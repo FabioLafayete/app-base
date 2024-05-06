@@ -186,8 +186,11 @@ class HelpPage extends BaseWidget<ProfileController> {
             const SizedBox(height: 50),
             Observer(builder: (_) {
               return MyButton(
-                onPress: controller.enableButtonSendHelp() ? () {} : null,
+                onPress: controller.enableButtonSendHelp() ? () {
+                  controller.postSupport();
+                } : null,
                 colorTitle: colors.text2,
+                loading: controller.loading,
                 title: 'Enviar mensagem',
               );
             }),

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/shared/model/support/support_model.dart';
 import 'package:app/shared/model/user/user_model.dart';
 
 import '../../service/user_service.dart';
@@ -31,4 +32,7 @@ class UserRepositoryImpl extends UserRepository{
     final data = await userService.addPhoto(file);
     return data.data['photoUrl'];
   }
+
+  @override
+  Future<void> postSupport(SupportModel model) async => userService.postSupport(model);
 }

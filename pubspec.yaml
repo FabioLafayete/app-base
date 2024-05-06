@@ -54,6 +54,7 @@ dependencies:
   super_sliver_list: 0.4.1
   url_launcher: 6.2.6
   firebase_dynamic_links: ^5.4.8
+  sentry_flutter: 8.1.0
 
 dev_dependencies:
   flutter_test:
