@@ -8,4 +8,5 @@ class StringConstants {
   static const String prdKey = 'prd';
   static const String iosKey = 'ios';
   static const String androidKey = 'android';
+  static const String sentryUrl = 'https://66964d6975c3f568fed2902f90af86e1@o4507186383421440.ingest.us.sentry.io/4507186458460160';
 }

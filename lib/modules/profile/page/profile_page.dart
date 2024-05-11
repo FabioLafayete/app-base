@@ -6,6 +6,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
+import 'package:toastification/toastification.dart';
 import '../../../shared/widgets/image_cropper.dart';
 import '../controller/profile_controller.dart';
 import '../widgets/list_button.dart';

@@ -4,7 +4,9 @@ import 'package:app/route/pages_name.dart';
 import 'package:app/service/storage/storage_service.dart';
 import 'package:app/shared/model/user/user_model.dart';
 import 'package:app/shared/modules/user/controller/user_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:toastification/toastification.dart';
 
 class BaseController {
   BaseController();
@@ -49,6 +51,28 @@ class BaseController {
     }catch(_){
       print(_);
     }
+  }
+
+  showToast({
+    required BuildContext context,
+    required String title,
+    required String description,
+    required ToastificationType type,
+
+}){
+    toastification.show(
+        context: context,
+        type: type,
+        style: ToastificationStyle.flatColored,
+        title: Text(title),
+        description: Text(description),
+        alignment: Alignment.topCenter,
+        autoCloseDuration: const Duration(seconds: 5),
+        borderRadius: BorderRadius.circular(12.0),
+        showProgressBar: false,
+        closeButtonShowType: CloseButtonShowType.none,
+        boxShadow: lowModeShadow
+    );
   }
 
 }

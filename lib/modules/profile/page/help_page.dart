@@ -187,7 +187,7 @@ class HelpPage extends BaseWidget<ProfileController> {
             Observer(builder: (_) {
               return MyButton(
                 onPress: controller.enableButtonSendHelp() ? () {
-                  controller.postSupport();
+                  controller.postSupport(context);
                 } : null,
                 colorTitle: colors.text2,
                 loading: controller.loading,

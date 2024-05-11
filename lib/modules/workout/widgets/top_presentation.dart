@@ -1,8 +1,10 @@
 import 'package:app/modules/workout/widgets/list_cards_items.dart';
+import 'package:app/shared/modules/user/controller/user_controller.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/my_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../shared/widgets/multiple_users.dart';
 
@@ -17,6 +19,7 @@ class TopPresentation extends BaseWidget {
   final CardItemModel cardItemModel;
   final String? titleButton;
   final bool? showUsers;
+  final userController = Modular.get<UserController>();
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +98,7 @@ class TopPresentation extends BaseWidget {
                   sizeTitle: 15,
                   colorTitle: colors.primary,
                   colorButton: colors.background,
-                  onPress: cardItemModel.onPress,
+                  onPress: userController.user.activated ? cardItemModel.onPress : null
                 ),
               ),
             ],

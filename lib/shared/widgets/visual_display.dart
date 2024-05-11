@@ -6,27 +6,25 @@ import 'package:get/get.dart';
 import 'bottom_sheet/bottom_sheet.dart';
 
 class VisualDisplay {
-
-  static bottomSheet(Widget child, {
-    bool dismissible = true,
-    bool hasHeight = true,
-    Duration? exitBottomSheetDuration,
-    Duration? enterBottomSheetDuration,
-    Function()? onClose,
-    required BuildContext context
-  }){
+  static bottomSheet(Widget child,
+      {bool dismissible = true,
+      bool hasHeight = true,
+      Duration? exitBottomSheetDuration,
+      Duration? enterBottomSheetDuration,
+      Function()? onClose,
+      required BuildContext context}) {
     showModalBottomSheet(
       context: context,
-      builder: (_){
-       return CustomBottomSheet(hasHeight: hasHeight, child: child);
+      builder: (_) {
+        return CustomBottomSheet(hasHeight: hasHeight, child: child);
       },
       elevation: 16,
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
       isDismissible: dismissible,
       enableDrag: dismissible,
-    ).whenComplete((){
-      if(onClose != null) onClose();
+    ).whenComplete(() {
+      if (onClose != null) onClose();
     });
   }
 
@@ -61,23 +59,21 @@ class VisualDisplay {
     int? maxLength,
     int? maxLines,
     int? minLines,
-  }){
+  }) {
     return Stack(
       children: [
         Container(
           height: 50,
-          margin: const EdgeInsets.symmetric(horizontal: 4).copyWith(
-              top: 9
-          ),
+          margin: const EdgeInsets.symmetric(horizontal: 4).copyWith(top: 9),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(
               Radius.circular(10),
             ),
             boxShadow: [
               BoxShadow(
-                  color: shadowColor ?? Colors.black12,
-                  blurRadius: 5,
-                  spreadRadius: 3
+                color: shadowColor ?? Colors.black12,
+                blurRadius: 5,
+                spreadRadius: 3,
               ),
             ],
           ),
@@ -87,9 +83,9 @@ class VisualDisplay {
           initialValue: initialValue,
           onChanged: onChanged,
           style: TextStyle(
-              color: colorText ?? AppColors().text,
-              fontSize: 18,
-              fontWeight: FontWeight.w400
+            color: colorText ?? AppColors().text,
+            fontSize: 18,
+            fontWeight: FontWeight.w400,
           ),
           obscureText: obscure ?? false,
           maxLength: maxLength,
@@ -110,8 +106,7 @@ class VisualDisplay {
             prefixIcon: prefix,
             suffixIcon: Padding(
                 padding: const EdgeInsets.only(top: 15, right: 20),
-                child: suffix
-            ),
+                child: suffix),
             alignLabelWithHint: true,
             filled: fillColor != null ? true : false,
             fillColor: fillColor,
@@ -119,21 +114,27 @@ class VisualDisplay {
             icon: icon,
             hintText: hintText,
             hintStyle: TextStyle(
-                color: colorHint,
-                fontSize: 16,
-                fontWeight: FontWeight.w400
+              color: colorHint,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
             ),
             labelText: labelText,
             labelStyle: TextStyle(
-                color: colorLabel,
-                fontSize: 16,
-                fontWeight: FontWeight.w400
+              color: colorLabel,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
             ),
             helperMaxLines: helperMaxLines,
             hoverColor: Colors.transparent,
-            floatingLabelStyle: colorLabelFocus != null ?
-            TextStyle(color: colorLabelFocus, fontSize: 16, fontWeight: FontWeight.w600) : null,
-            errorStyle: TextStyle(fontWeight: FontWeight.w600, color: AppColors().error),
+            floatingLabelStyle: colorLabelFocus != null
+                ? TextStyle(
+                    color: colorLabelFocus,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600)
+                : null,
+            errorStyle: TextStyle(
+                fontWeight: FontWeight.w600, color: AppColors().error,
+            ),
             errorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors().error, width: 2),
               borderRadius: BorderRadius.circular(10),
@@ -142,24 +143,36 @@ class VisualDisplay {
               borderSide: BorderSide(color: AppColors().error, width: 2),
               borderRadius: BorderRadius.circular(10),
             ),
-            focusedBorder: !readOnly ? OutlineInputBorder(
-              borderSide: BorderSide(color: (colorBorderFocus ?? colorBorder) ?? AppColors().secondary, width: 2),
+            focusedBorder: !readOnly
+                ? OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: (colorBorderFocus ?? colorBorder) ??
+                            AppColors().secondary,
+                        width: 2),
+                    borderRadius: BorderRadius.circular(10),
+                  )
+                : OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: colorBorder ?? AppColors().secondary),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+            enabledBorder: OutlineInputBorder(
+              borderSide:
+                  BorderSide(color: colorBorder ?? AppColors().secondary),
               borderRadius: BorderRadius.circular(10),
-            ) : OutlineInputBorder(borderSide:  BorderSide(color: colorBorder ?? AppColors().secondary), borderRadius: BorderRadius.circular(10)),
-            enabledBorder: OutlineInputBorder(borderSide:  BorderSide(color: colorBorder ?? AppColors().secondary), borderRadius: BorderRadius.circular(10)),
+            ),
           ),
         ),
       ],
     );
   }
 
-  static Widget textFieldPin({
-    Function(String)? onChanged,
-    FocusNode? focusNode,
-    TextEditingController? controller,
-    String? listenText = '',
-    String? errorText
-  }) {
+  static Widget textFieldPin(
+      {Function(String)? onChanged,
+      FocusNode? focusNode,
+      TextEditingController? controller,
+      String? listenText = '',
+      String? errorText}) {
     double width = Get.width;
     double height = Get.height;
     return Container(
@@ -183,80 +196,76 @@ class VisualDisplay {
         textAlign: TextAlign.center,
         cursorColor: AppColors().text,
         style: TextStyle(
-            color: AppColors().text,
-            fontSize: 24,
-            fontWeight: FontWeight.w700
-        ),
+            color: AppColors().text, fontSize: 24, fontWeight: FontWeight.w700),
         expands: true,
         maxLines: null,
         minLines: null,
         decoration: InputDecoration(
-          filled: false,
-          errorText: errorText != null ? '' : null,
-          fillColor: AppColors().primary.withOpacity(0.05),
-          isCollapsed: false,
-          isDense: true,
-          contentPadding: const EdgeInsets.all(6),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(width * 0.03),
-            borderSide: BorderSide(
-              width: 2,
-              color: AppColors().primary.withOpacity(0.9),
+            filled: false,
+            errorText: errorText != null ? '' : null,
+            fillColor: AppColors().primary.withOpacity(0.05),
+            isCollapsed: false,
+            isDense: true,
+            contentPadding: const EdgeInsets.all(6),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(width * 0.03),
+              borderSide: BorderSide(
+                width: 2,
+                color: AppColors().primary.withOpacity(0.9),
+              ),
             ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(width * 0.03),
-            borderSide: BorderSide(
-              width: 2,
-              color: listenText!.isNotEmpty ?
-              AppColors().primary.withOpacity(0.9) :
-              Colors.grey.shade500,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(width * 0.03),
+              borderSide: BorderSide(
+                width: 2,
+                color: listenText!.isNotEmpty
+                    ? AppColors().primary.withOpacity(0.9)
+                    : Colors.grey.shade500,
+              ),
             ),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(width * 0.03),
-            borderSide: BorderSide(
-              width: 2,
-              color: AppColors().error,
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(width * 0.03),
+              borderSide: BorderSide(
+                width: 2,
+                color: AppColors().error,
+              ),
             ),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(width * 0.03),
-            borderSide: BorderSide(
-              width: 2,
-              color: AppColors().error,
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(width * 0.03),
+              borderSide: BorderSide(
+                width: 2,
+                color: AppColors().error,
+              ),
             ),
-          ),
-          errorStyle: const TextStyle(fontSize: 0.01)
-        ),
+            errorStyle: const TextStyle(fontSize: 0.01)),
         onChanged: onChanged,
         focusNode: focusNode,
-        inputFormatters: [TextInputMask(mask: ['9'])],
+        inputFormatters: [
+          TextInputMask(mask: ['9'])
+        ],
       ),
     );
   }
 
-
-  static Widget textFieldClean({
-    String? hintText,
-    String? errorText,
-    String? initialValue,
-    bool? obscure,
-    Function(String)? onChanged,
-    Function()? onEditingComplete,
-    TextInputType? textInputType,
-    TextInputAction? textInputAction,
-    List<TextInputFormatter>? inputMask,
-    Color? colorHint,
-    Color? fillColor,
-    Color? colorText,
-    Color? colorCursor,
-    bool readOnly = false,
-    AutovalidateMode? autoValidateMode,
-    String? Function(String?)? validator,
-    Widget? prefix,
-    TextEditingController? controller
-  }){
+  static Widget textFieldClean(
+      {String? hintText,
+      String? errorText,
+      String? initialValue,
+      bool? obscure,
+      Function(String)? onChanged,
+      Function()? onEditingComplete,
+      TextInputType? textInputType,
+      TextInputAction? textInputAction,
+      List<TextInputFormatter>? inputMask,
+      Color? colorHint,
+      Color? fillColor,
+      Color? colorText,
+      Color? colorCursor,
+      bool readOnly = false,
+      AutovalidateMode? autoValidateMode,
+      String? Function(String?)? validator,
+      Widget? prefix,
+      TextEditingController? controller}) {
     return TextFormField(
       controller: controller,
       initialValue: initialValue,
@@ -264,8 +273,7 @@ class VisualDisplay {
       style: TextStyle(
           color: colorText ?? AppColors().text,
           fontSize: 64,
-          fontWeight: FontWeight.w700
-      ),
+          fontWeight: FontWeight.w700),
       obscureText: obscure ?? false,
       readOnly: readOnly,
       keyboardType: textInputType,
@@ -278,30 +286,32 @@ class VisualDisplay {
       autocorrect: false,
       textAlign: TextAlign.start,
       decoration: InputDecoration(
-        isDense: true,
-        contentPadding: const EdgeInsets.only(bottom: 0),
-        errorText: errorText,
-        prefixIcon: prefix,
-        alignLabelWithHint: true,
-        filled: fillColor != null ? true : false,
-        fillColor: fillColor,
-        hintText: hintText,
-        hintStyle: TextStyle(
-            color: colorHint,
-            fontSize: 64,
-            fontWeight: FontWeight.w500
-        ),
-        hoverColor: Colors.transparent,
-        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(style: BorderStyle.solid, color: Colors.black.withOpacity(0.5))),
-        enabledBorder: UnderlineInputBorder(borderSide: BorderSide(style: BorderStyle.solid, color: Colors.black.withOpacity(0.5)))
-      ),
+          isDense: true,
+          contentPadding: const EdgeInsets.only(bottom: 0),
+          errorText: errorText,
+          prefixIcon: prefix,
+          alignLabelWithHint: true,
+          filled: fillColor != null ? true : false,
+          fillColor: fillColor,
+          hintText: hintText,
+          hintStyle: TextStyle(
+              color: colorHint, fontSize: 64, fontWeight: FontWeight.w500),
+          hoverColor: Colors.transparent,
+          focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  style: BorderStyle.solid,
+                  color: Colors.black.withOpacity(0.5))),
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                  style: BorderStyle.solid,
+                  color: Colors.black.withOpacity(0.5)))),
     );
   }
 
   static Widget progressBar({
     required int totalItems,
     required int index,
-  }){
+  }) {
     return Container(
       height: 3,
       alignment: Alignment.centerLeft,
@@ -310,11 +320,10 @@ class VisualDisplay {
         color: AppColors().primary.withOpacity(0.1),
       ),
       child: AnimatedContainer(
-          duration: const Duration(milliseconds: 500),
-          color: AppColors().primary,
-          width: (Get.width * 0.55) * ((index == 0 ? 1 : index + 1) / totalItems),
+        duration: const Duration(milliseconds: 500),
+        color: AppColors().primary,
+        width: (Get.width * 0.55) * ((index == 0 ? 1 : index + 1) / totalItems),
       ),
     );
   }
-
 }

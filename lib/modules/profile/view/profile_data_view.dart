@@ -2,6 +2,7 @@ import 'package:app/modules/profile/controller/profile_controller.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/my_button.dart';
+import 'package:app/shared/widgets/subscription_bottom_sheet.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,8 @@ class ProfileDataView extends BaseWidget<ProfileController> {
                   UtilBrasilFields.obterTelefone(controller.user.cellphone!) : '',
                   subTitle: 'Celular',
                   textIcon: 'Editar',
-                  onPress: () => _editPhone(context)
+                  // onPress: () => _editPhone(context)
+                onPress: () => const SubscriptionBottomSheet().show(context: context),
               ),
             ],
           ))

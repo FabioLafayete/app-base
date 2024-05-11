@@ -3,9 +3,11 @@ import 'package:app/route/pages_name.dart';
 import 'package:app/shared/model/support/support_model.dart';
 import 'package:app/shared/widgets/base_controller.dart';
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:mobx/mobx.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:toastification/toastification.dart';
 
 part 'profile_controller.g.dart';
 
@@ -61,7 +63,7 @@ abstract class ProfileControllerBase extends BaseController with Store {
     'Dúvida',
     'Elogio',
     'Parceria',
-    'Reembolso',
+    // 'Reembolso',
     'Cancelar assinatura'
   ];
 
@@ -190,7 +192,7 @@ abstract class ProfileControllerBase extends BaseController with Store {
     return true;
   }
 
-  Future postSupport() async {
+  Future postSupport(BuildContext context) async {
     try{
       setLoading(true);
 
@@ -228,6 +230,12 @@ abstract class ProfileControllerBase extends BaseController with Store {
       }
 
     }catch(_){
+      showToast(
+        context: context,
+        title: 'Mensagem não enviada',
+        description: 'Falha ao tentar enviar mensagem, por favor, tente novamente.',
+        type: ToastificationType.error
+      );
       print(_);
     } finally {
       setLoading(false);

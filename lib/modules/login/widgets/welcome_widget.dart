@@ -219,7 +219,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
             colors.secondary,
             colors.primary,
             colors.primary,
-          ])),
+          ]),
+      ),
     );
   }
 }
