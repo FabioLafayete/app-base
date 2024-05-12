@@ -3,7 +3,9 @@ import 'package:app/shared/widgets/my_button.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:pay/pay.dart';
 
 class SubscriptionBottomSheet extends StatefulWidget {
   const SubscriptionBottomSheet({super.key});
@@ -30,7 +32,23 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
   void initState() {
     super.initState();
     itemSelected = prices[1];
+
+    _payClient = Pay({
+      PayProvider.google_pay: PaymentConfiguration.fromJsonString(
+          defaultGooglePay
+      ),
+    });
   }
+
+  final _paymentItems = [
+    const PaymentItem(
+      label: 'Total',
+      amount: '99.99',
+      status: PaymentItemStatus.final_price,
+    )
+  ];
+
+  late final Pay _payClient;
 
   final colors = AppColors();
 
@@ -99,47 +117,106 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
             ),
           ),
           _effectImage(),
-          ListView(
-            physics: const NeverScrollableScrollPhysics(),
+          Column(
             children: [
               SizedBox(
                 height: size.height * 0.35,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                    child: Text(
-                      'Diga adeus ao excesso de gordura e destrave todo o seu potencial',
-                      style: TextStyle(
-                        color: colors.text2,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        'Diga adeus ao excesso de gordura e destrave todo o seu potencial',
+                        style: TextStyle(
+                          color: colors.text2,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               SizedBox(height: size.height * 0.03),
               _priceChoice(),
-              SizedBox(height: size.height * 0.07),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                ),
-                child: MyButton(
-                  title: 'CONTINUE',
-                  colorButton: colors.text2,
-                  colorTitle: colors.primary,
-                  border: 8,
-                  onPress: (){},
-                ),
+              const Spacer(),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(
+              //     horizontal: 16,
+              //   ),
+              //   child: MyButton(
+              //     title: 'CONTINUE',
+              //     colorButton: colors.text2,
+              //     colorTitle: colors.primary,
+              //     border: 8,
+              //     onPress: (){},
+              //   ),
+              // ),
+              FutureBuilder<bool>(
+                future: _payClient.userCanPay(PayProvider.google_pay),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.data == true) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ),
+                        child: MyButton(
+                          title: 'CONTINUE',
+                          colorButton: colors.text2,
+                          colorTitle: colors.primary,
+                          border: 8,
+                          onPress: () async {
+                            final result = await _payClient.showPaymentSelector(
+                              PayProvider.google_pay,
+                              _paymentItems,
+                            );
+                            print(result.toString());
+                          },
+                        ),
+                      );
+                    } else {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ),
+                        child: MyButton(
+                          title: 'CONTINUE P',
+                          colorButton: colors.text2,
+                          colorTitle: colors.primary,
+                          border: 8,
+                          loading: true,
+                        ),
+                      );
+                    }
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ),
+                      child: MyButton(
+                        title: 'CONTINUE L',
+                        colorButton: colors.text2,
+                        colorTitle: colors.primary,
+                        border: 8,
+                        loading: true,
+                      ),
+                    );
+                  }
+                },
               ),
-              SizedBox(height: size.height * 0.05),
+              SizedBox(height: size.height * 0.03),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
+                ).copyWith(
+                  bottom: MediaQuery.of(context).padding.bottom + 20,
                 ),
                 child: Text(
                   'Continuando, você concorda com os nossos Termos de Uso e Política de Privacidade',
@@ -186,7 +263,7 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
                 ),
                 width: size.width * 0.3,
                 padding: const EdgeInsets.symmetric(
-                  vertical: 20,
+                  vertical: 12,
                   horizontal: 8,
                 ),
                 decoration: BoxDecoration(
@@ -205,9 +282,6 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
                   children: [
                     Container(
                       width: double.maxFinite,
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                      ),
                       padding: const EdgeInsets.symmetric(
                         vertical: 2,
                       ),
@@ -228,7 +302,7 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
                             fontWeight: FontWeight.w600),
                       ),
                     ),
-                    SizedBox(height: size.height * 0.012),
+                    SizedBox(height: size.height * 0.01),
                     Text(
                       '${item.totalMonth} ${item.totalMonth == 1 ? 'mês' : 'meses'}',
                       style: TextStyle(
@@ -237,9 +311,9 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
                         fontSize: 18,
                       ),
                     ),
-                    SizedBox(height: size.height * 0.012),
+                    SizedBox(height: size.height * 0.01),
                     Text(
-                      '${returnPrice(item.price / (item.totalMonth * 4))}',
+                      returnPrice(item.price / (item.totalMonth * 4)),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
@@ -247,13 +321,13 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
                         fontSize: 12,
                       ),
                     ),
-                    Text(
-                      'por',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: colors.text2,
-                        fontSize: 8,
+                    const Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
+                      child: Divider(
+                        thickness: 0.2,
+                        height: 0,
                       ),
                     ),
                     Text(
@@ -262,10 +336,10 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: colors.text2,
-                        fontSize: 12,
+                        fontSize: 8,
                       ),
                     ),
-                    SizedBox(height: size.height * 0.012),
+                    SizedBox(height: size.height * 0.01),
                     Container(
                       margin: const EdgeInsets.only(top: 12, left: 4, right: 4),
                       width: double.maxFinite,
@@ -323,6 +397,7 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
     final formatter = NumberFormat("#,##0.00", "pt_BR");
     return "R\$ ${formatter.format(value)}";
   }
+
 }
 
 class PricingModel {
@@ -338,3 +413,50 @@ class PricingModel {
     this.savePercent,
   });
 }
+
+const String defaultGooglePay = '''{
+  "provider": "google_pay",
+  "data": {
+    "environment": "TEST",
+    "apiVersion": 2,
+    "apiVersionMinor": 0,
+    "allowedPaymentMethods": [
+      {
+        "type": "CARD",
+        "tokenizationSpecification": {
+          "type": "PAYMENT_GATEWAY",
+          "parameters": {
+            "gateway": "example",
+            "gatewayMerchantId": "gatewayMerchantId"
+          }
+        },
+        "tokenizationSpecification": {
+          "type": "PAYMENT_GATEWAY",
+          "parameters": {
+            "gateway": "example",
+            "gatewayMerchantId": "7029-5796-2592-9734"
+          }
+        },
+        "parameters": {
+          "allowedCardNetworks": ["VISA", "MASTERCARD"],
+          "allowedAuthMethods": ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+          "billingAddressRequired": true,
+          "billingAddressParameters": {
+            "format": "FULL",
+            "phoneNumberRequired": true
+          }
+        }
+      }
+    ],
+    "merchantInfo": {
+      "merchantId": "BCR2DN4T67R2XUTF",
+      "merchantName": "iBetter example"
+    },
+    "transactionInfo": {
+      "totalPriceStatus": "FINAL",
+      "totalPrice": "12.34",
+      "countryCode": "US",
+      "currencyCode": "USD"
+    }
+  }
+}''';
