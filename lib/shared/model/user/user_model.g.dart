@@ -10,6 +10,8 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       id: json['id'] as String?,
       name: json['name'] as String?,
       email: json['email'] as String?,
+      cpf: json['cpf'] as String?,
+      password: json['password'] as String?,
       age: json['age'] == null ? null : DateTime.parse(json['age'] as String),
       cellphone: json['cellphone'] as String?,
       photoUrl: json['photoUrl'] as String?,
@@ -21,6 +23,9 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       target: json['target'] as String?,
       activated: json['activated'] as bool? ?? true,
       newUser: json['newUser'] as bool? ?? true,
+      verifiedEmail: json['verifiedEmail'] as bool? ?? false,
+      verifiedCellphone: json['verifiedCellphone'] as bool? ?? false,
+      isSubscripted: json['isSubscripted'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
@@ -28,6 +33,8 @@ Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
       'id': instance.id,
       'name': instance.name,
       'email': instance.email,
+      'cpf': instance.cpf,
+      'password': instance.password,
       'age': instance.age?.toIso8601String(),
       'cellphone': instance.cellphone,
       'photoUrl': instance.photoUrl,
@@ -39,4 +46,7 @@ Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
       'target': instance.target,
       'activated': instance.activated,
       'newUser': instance.newUser,
+      'verifiedEmail': instance.verifiedEmail,
+      'verifiedCellphone': instance.verifiedCellphone,
+      'isSubscripted': instance.isSubscripted,
     };

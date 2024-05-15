@@ -11,6 +11,8 @@ class UserModel with _$UserModel {
     String? id,
     String? name,
     String? email,
+    String? cpf,
+    String? password,
     DateTime? age,
     String? cellphone,
     String? photoUrl,
@@ -21,7 +23,10 @@ class UserModel with _$UserModel {
     int? targetWeight,
     String? target,
     @Default(true) bool activated,
-    @Default(true) bool newUser
+    @Default(true) bool newUser,
+    @Default(false) bool verifiedEmail,
+    @Default(false) bool verifiedCellphone,
+    @Default(false) bool isSubscripted,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

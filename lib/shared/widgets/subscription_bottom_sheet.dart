@@ -1,11 +1,11 @@
+import 'package:app/route/my_router.dart';
 import 'package:app/shared/widgets/back_button.dart';
 import 'package:app/shared/widgets/my_button.dart';
+import 'package:app/shared/widgets/subscription_success.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:pay/pay.dart';
 
 class SubscriptionBottomSheet extends StatefulWidget {
   const SubscriptionBottomSheet({super.key});
@@ -32,24 +32,7 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
   void initState() {
     super.initState();
     itemSelected = prices[1];
-
-    _payClient = Pay({
-      PayProvider.google_pay: PaymentConfiguration.fromJsonString(
-          defaultGooglePay
-      ),
-    });
   }
-
-  final _paymentItems = [
-    const PaymentItem(
-      label: 'Total',
-      amount: '99.99',
-      status: PaymentItemStatus.final_price,
-    )
-  ];
-
-  late final Pay _payClient;
-
   final colors = AppColors();
 
   final List<PricingModel> prices = [
@@ -111,7 +94,9 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
                 width: double.maxFinite,
                 fit: BoxFit.cover,
                 alignment: Alignment.lerp(
-                    Alignment.topCenter, Alignment.bottomCenter, 0.9,
+                  Alignment.topCenter,
+                  Alignment.bottomCenter,
+                  0.9,
                 )!,
               ),
             ),
@@ -123,9 +108,7 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
                 height: size.height * 0.35,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -146,70 +129,20 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
               SizedBox(height: size.height * 0.03),
               _priceChoice(),
               const Spacer(),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(
-              //     horizontal: 16,
-              //   ),
-              //   child: MyButton(
-              //     title: 'CONTINUE',
-              //     colorButton: colors.text2,
-              //     colorTitle: colors.primary,
-              //     border: 8,
-              //     onPress: (){},
-              //   ),
-              // ),
-              FutureBuilder<bool>(
-                future: _payClient.userCanPay(PayProvider.google_pay),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.data == true) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                        ),
-                        child: MyButton(
-                          title: 'CONTINUE',
-                          colorButton: colors.text2,
-                          colorTitle: colors.primary,
-                          border: 8,
-                          onPress: () async {
-                            final result = await _payClient.showPaymentSelector(
-                              PayProvider.google_pay,
-                              _paymentItems,
-                            );
-                            print(result.toString());
-                          },
-                        ),
-                      );
-                    } else {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                        ),
-                        child: MyButton(
-                          title: 'CONTINUE P',
-                          colorButton: colors.text2,
-                          colorTitle: colors.primary,
-                          border: 8,
-                          loading: true,
-                        ),
-                      );
-                    }
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                      ),
-                      child: MyButton(
-                        title: 'CONTINUE L',
-                        colorButton: colors.text2,
-                        colorTitle: colors.primary,
-                        border: 8,
-                        loading: true,
-                      ),
-                    );
-                  }
-                },
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                ),
+                child: MyButton(
+                  title: 'CONTINUE',
+                  colorButton: colors.text2,
+                  colorTitle: colors.primary,
+                  border: 8,
+                  onPress: () async {
+                    MyRouter().pop();
+                    MyRouter().push(SubscriptionSuccessPage());
+                  },
+                ),
               ),
               SizedBox(height: size.height * 0.03),
               Padding(
@@ -397,7 +330,6 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
     final formatter = NumberFormat("#,##0.00", "pt_BR");
     return "R\$ ${formatter.format(value)}";
   }
-
 }
 
 class PricingModel {
@@ -413,50 +345,3 @@ class PricingModel {
     this.savePercent,
   });
 }
-
-const String defaultGooglePay = '''{
-  "provider": "google_pay",
-  "data": {
-    "environment": "TEST",
-    "apiVersion": 2,
-    "apiVersionMinor": 0,
-    "allowedPaymentMethods": [
-      {
-        "type": "CARD",
-        "tokenizationSpecification": {
-          "type": "PAYMENT_GATEWAY",
-          "parameters": {
-            "gateway": "example",
-            "gatewayMerchantId": "gatewayMerchantId"
-          }
-        },
-        "tokenizationSpecification": {
-          "type": "PAYMENT_GATEWAY",
-          "parameters": {
-            "gateway": "example",
-            "gatewayMerchantId": "7029-5796-2592-9734"
-          }
-        },
-        "parameters": {
-          "allowedCardNetworks": ["VISA", "MASTERCARD"],
-          "allowedAuthMethods": ["PAN_ONLY", "CRYPTOGRAM_3DS"],
-          "billingAddressRequired": true,
-          "billingAddressParameters": {
-            "format": "FULL",
-            "phoneNumberRequired": true
-          }
-        }
-      }
-    ],
-    "merchantInfo": {
-      "merchantId": "BCR2DN4T67R2XUTF",
-      "merchantName": "iBetter example"
-    },
-    "transactionInfo": {
-      "totalPriceStatus": "FINAL",
-      "totalPrice": "12.34",
-      "countryCode": "US",
-      "currencyCode": "USD"
-    }
-  }
-}''';

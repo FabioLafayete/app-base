@@ -106,7 +106,8 @@ class VisualDisplay {
             prefixIcon: prefix,
             suffixIcon: Padding(
                 padding: const EdgeInsets.only(top: 15, right: 20),
-                child: suffix),
+                child: suffix,
+            ),
             alignLabelWithHint: true,
             filled: fillColor != null ? true : false,
             fillColor: fillColor,

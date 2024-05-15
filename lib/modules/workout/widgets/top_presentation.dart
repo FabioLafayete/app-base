@@ -2,6 +2,7 @@ import 'package:app/modules/workout/widgets/list_cards_items.dart';
 import 'package:app/shared/modules/user/controller/user_controller.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/my_button.dart';
+import 'package:app/shared/widgets/subscription_bottom_sheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -34,14 +35,14 @@ class TopPresentation extends BaseWidget {
           children: [
             _image(),
             _effectImage(),
-            _information()
+            _information(context)
           ],
         ),
       )
     );
   }
 
-  Widget _information(){
+  Widget _information(BuildContext context){
     return Container(
       margin: EdgeInsets.only(bottom: height * 0.02).copyWith(left: 16, right: 16),
       child: Column(
@@ -98,7 +99,9 @@ class TopPresentation extends BaseWidget {
                   sizeTitle: 15,
                   colorTitle: colors.primary,
                   colorButton: colors.background,
-                  onPress: userController.user.activated ? cardItemModel.onPress : null
+                  onPress: userController.user.activated ? cardItemModel.onPress : (){
+                    const SubscriptionBottomSheet().show(context: context);
+                  }
                 ),
               ),
             ],

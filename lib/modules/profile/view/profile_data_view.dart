@@ -45,8 +45,7 @@ class ProfileDataView extends BaseWidget<ProfileController> {
                   UtilBrasilFields.obterTelefone(controller.user.cellphone!) : '',
                   subTitle: 'Celular',
                   textIcon: 'Editar',
-                  // onPress: () => _editPhone(context)
-                onPress: () => const SubscriptionBottomSheet().show(context: context),
+                  onPress: () => _editPhone(context)
               ),
             ],
           ))
