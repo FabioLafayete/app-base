@@ -1,5 +1,6 @@
 import 'package:app/modules/workout/controller/workout_controller.dart';
 import 'package:app/modules/workout/widgets/workout_loading.dart';
+import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/model/workout/program_model/program_model.dart';
 import 'package:app/shared/widgets/base_page.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../navigator/controller/nav_controller.dart';
 import '../widgets/list_cards_items.dart';
 import '../widgets/top_presentation.dart';

@@ -134,7 +134,7 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
                   colorTitle: colors.primary,
                   border: 8,
                   onPress: itemSelected == null ? null : () async {
-                    launchUrl(Uri.parse(itemSelected!.url));
+                    launchUrl(Uri.parse(generateUrl(itemSelected!.url)));
                   },
                 ),
               ),
@@ -297,6 +297,11 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
         );
       }),
     );
+  }
+
+  String generateUrl(String link){
+    final user = userController.user;
+    return '$link?name=${user.name}&email=${user.email}&cpf=${user.cpf}&phone=${user.cellphone}';
   }
 
   Widget _effectImage() {
