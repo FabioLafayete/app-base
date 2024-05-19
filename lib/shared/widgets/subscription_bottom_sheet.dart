@@ -1,11 +1,12 @@
-import 'package:app/route/my_router.dart';
+import 'package:app/shared/modules/user/controller/user_controller.dart';
 import 'package:app/shared/widgets/back_button.dart';
 import 'package:app/shared/widgets/my_button.dart';
-import 'package:app/shared/widgets/subscription_success.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SubscriptionBottomSheet extends StatefulWidget {
   const SubscriptionBottomSheet({super.key});
@@ -28,35 +29,29 @@ class SubscriptionBottomSheet extends StatefulWidget {
 }
 
 class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
-  @override
-  void initState() {
-    super.initState();
-    itemSelected = prices[1];
-  }
+
   final colors = AppColors();
 
-  final List<PricingModel> prices = [
-    PricingModel(
-      price: 147.0,
-      totalMonth: 6,
-      detail: 'MELHOR VALOR',
-      savePercent: '30% OFF',
-    ),
-    PricingModel(
-      price: 97.0,
-      totalMonth: 3,
-      detail: 'POPULAR',
-      savePercent: '25% OFF',
-    ),
-    PricingModel(
-      price: 47.00,
-      totalMonth: 1,
-    ),
-  ];
+  late final userController = Modular.get<UserController>();
+  late List<PricingModel> prices;
+  late Size size = MediaQuery.of(context).size;
 
   PricingModel? itemSelected;
 
-  late Size size = MediaQuery.of(context).size;
+  @override
+  void initState() {
+    super.initState();
+
+    prices = userController.productModel.map((e) => PricingModel(
+      price: double.parse(e.valueProduct),
+      totalMonth: e.month,
+      detail: e.detailProduct,
+      savePercent: e.subDetailProduct,
+      url: e.checkoutUrl,
+    )).toList();
+
+    itemSelected = prices[1];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,9 +133,8 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
                   colorButton: colors.text2,
                   colorTitle: colors.primary,
                   border: 8,
-                  onPress: () async {
-                    MyRouter().pop();
-                    MyRouter().push(SubscriptionSuccessPage());
+                  onPress: itemSelected == null ? null : () async {
+                    launchUrl(Uri.parse(itemSelected!.url));
                   },
                 ),
               ),
@@ -337,10 +331,12 @@ class PricingModel {
   final double price;
   final String? detail;
   final String? savePercent;
+  final String url;
 
   PricingModel({
     required this.totalMonth,
     required this.price,
+    required this.url,
     this.detail,
     this.savePercent,
   });

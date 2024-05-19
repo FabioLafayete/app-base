@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/shared/model/products/product_model.dart';
 import 'package:app/shared/model/support/support_model.dart';
 import 'package:app/shared/model/user/user_model.dart';
 
@@ -35,4 +36,10 @@ class UserRepositoryImpl extends UserRepository{
 
   @override
   Future<void> postSupport(SupportModel model) async => userService.postSupport(model);
+
+  @override
+  Future<List<ProductModel>> getProducts() async {
+    final data = await userService.getProducts();
+    return (data.data as List).map((e) => ProductModel.fromJson(e)).toList();
+  }
 }

@@ -4,6 +4,7 @@ import 'package:app/shared/model/support/support_model.dart';
 import 'package:app/shared/model/user/user_model.dart';
 import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
+import '../../../model/products/product_model.dart';
 import '../repository/impl/user_repository_impl.dart';
 
 part 'user_controller.g.dart';
@@ -18,6 +19,14 @@ abstract class UserControllerBase with Store{
 
   @observable
   UserModel user = const UserModel();
+
+  @observable
+  List<ProductModel> productModel = [];
+
+  @action
+  setProducts(List<ProductModel> value){
+    productModel = List.from(value);
+  }
 
   @action
   setNameProfile(String? value) => user = user.copyWith(name: value);
@@ -64,6 +73,7 @@ abstract class UserControllerBase with Store{
       final data = await userRepositoryImpl.getUser();
       setUser(data);
     }
+    getProducts();
   }
 
   Future deletePhotoUser() async {
@@ -113,6 +123,23 @@ abstract class UserControllerBase with Store{
     try{
       await userRepositoryImpl.postSupport(model);
       return true;
+    }catch(_){
+      if(_ is DioException){
+        print(_.message);
+        print(_.error);
+        print(_.response?.data);
+      } else {
+        print(_);
+      }
+    }
+    return false;
+  }
+
+  Future getProducts() async {
+    try{
+      if(productModel.isNotEmpty) return;
+      final response = await userRepositoryImpl.getProducts();
+      setProducts(response);
     }catch(_){
       if(_ is DioException){
         print(_.message);

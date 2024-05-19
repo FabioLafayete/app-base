@@ -56,8 +56,8 @@ dependencies:
   firebase_dynamic_links: ^5.4.8
   sentry_flutter: 8.1.0
   toastification: 2.0.0
-  pay: 2.0.0
-  upgrader: 10.3.0
+  in_app_purchase: ^3.2.0
+#  upgrader: 10.3.0
 
 dev_dependencies:
   flutter_test:

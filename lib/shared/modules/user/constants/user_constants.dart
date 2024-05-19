@@ -4,4 +4,5 @@ class UserConstants {
   static const String deletePhoto = '/user/upload-photo';
   static const String addPhoto = '/user/upload-photo';
   static const String postSupport = '/user/support';
+  static const String getProducts = '/user/products';
 }

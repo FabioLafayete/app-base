@@ -10,4 +10,5 @@ abstract class UserService {
   Future<Response> deletePhoto();
   Future<Response> addPhoto(File file);
   Future<Response> postSupport(SupportModel model);
+  Future<Response> getProducts();
 }

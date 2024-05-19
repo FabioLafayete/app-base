@@ -25,8 +25,35 @@ mixin _$UserController on UserControllerBase, Store {
     });
   }
 
+  late final _$productModelAtom =
+      Atom(name: 'UserControllerBase.productModel', context: context);
+
+  @override
+  List<ProductModel> get productModel {
+    _$productModelAtom.reportRead();
+    return super.productModel;
+  }
+
+  @override
+  set productModel(List<ProductModel> value) {
+    _$productModelAtom.reportWrite(value, super.productModel, () {
+      super.productModel = value;
+    });
+  }
+
   late final _$UserControllerBaseActionController =
       ActionController(name: 'UserControllerBase', context: context);
+
+  @override
+  dynamic setProducts(List<ProductModel> value) {
+    final _$actionInfo = _$UserControllerBaseActionController.startAction(
+        name: 'UserControllerBase.setProducts');
+    try {
+      return super.setProducts(value);
+    } finally {
+      _$UserControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic setNameProfile(String? value) {
@@ -163,7 +190,8 @@ mixin _$UserController on UserControllerBase, Store {
   @override
   String toString() {
     return '''
-user: ${user}
+user: ${user},
+productModel: ${productModel}
     ''';
   }
 }

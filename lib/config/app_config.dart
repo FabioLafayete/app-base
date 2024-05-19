@@ -41,6 +41,7 @@ class AppConfig {
       UserController controller = Modular.get<UserController>();
       await controller.setInitUser().catchError((e){
         _bearerToken = null;
+        secure.clearAll();
       });
     }
 

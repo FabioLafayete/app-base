@@ -60,4 +60,12 @@ class UserServiceImpl implements UserService {
         dataRequest: model.toJson()
     );
   }
+
+  @override
+  Future<Response> getProducts() async {
+    return _service.request(
+        type: RequestType.GET,
+        path: UserConstants.getProducts,
+    );
+  }
 }
