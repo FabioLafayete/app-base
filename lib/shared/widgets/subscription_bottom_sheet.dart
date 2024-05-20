@@ -38,6 +38,7 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
 
   PricingModel? itemSelected;
 
+
   @override
   void initState() {
     super.initState();
@@ -69,7 +70,7 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
             colors: [
               colors.secondary,
               colors.primary,
-              colors.secondary.withOpacity(0.9),
+              colors.secondary,
             ]),
       ),
       padding: EdgeInsets.only(
@@ -134,7 +135,14 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
                   colorTitle: colors.primary,
                   border: 8,
                   onPress: itemSelected == null ? null : () async {
-                    launchUrl(Uri.parse(generateUrl(itemSelected!.url)));
+                    // launchUrl(
+                    //   Uri.parse(generateUrl(itemSelected!.url)),
+                    //   mode: LaunchMode.inAppWebView,
+                    // );
+                    launchUrl(
+                      Uri.parse('https://ibetter.io'),
+                      mode: LaunchMode.inAppWebView,
+                    );
                   },
                 ),
               ),
