@@ -135,13 +135,8 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
                   colorTitle: colors.primary,
                   border: 8,
                   onPress: itemSelected == null ? null : () async {
-                    // launchUrl(
-                    //   Uri.parse(generateUrl(itemSelected!.url)),
-                    //   mode: LaunchMode.inAppWebView,
-                    // );
                     launchUrl(
-                      Uri.parse('https://ibetter.io'),
-                      mode: LaunchMode.inAppWebView,
+                      Uri.parse(generateUrl(itemSelected!.url)),
                     );
                   },
                 ),
