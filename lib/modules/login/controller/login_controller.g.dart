@@ -85,13 +85,13 @@ mixin _$LoginController on LoginControllerBase, Store {
       Atom(name: 'LoginControllerBase.errorCode', context: context);
 
   @override
-  String? get errorCode {
+  bool get errorCode {
     _$errorCodeAtom.reportRead();
     return super.errorCode;
   }
 
   @override
-  set errorCode(String? value) {
+  set errorCode(bool value) {
     _$errorCodeAtom.reportWrite(value, super.errorCode, () {
       super.errorCode = value;
     });
@@ -110,6 +110,70 @@ mixin _$LoginController on LoginControllerBase, Store {
   set showCode(bool value) {
     _$showCodeAtom.reportWrite(value, super.showCode, () {
       super.showCode = value;
+    });
+  }
+
+  late final _$showPasswordAtom =
+      Atom(name: 'LoginControllerBase.showPassword', context: context);
+
+  @override
+  bool get showPassword {
+    _$showPasswordAtom.reportRead();
+    return super.showPassword;
+  }
+
+  @override
+  set showPassword(bool value) {
+    _$showPasswordAtom.reportWrite(value, super.showPassword, () {
+      super.showPassword = value;
+    });
+  }
+
+  late final _$obscureTextAtom =
+      Atom(name: 'LoginControllerBase.obscureText', context: context);
+
+  @override
+  bool get obscureText {
+    _$obscureTextAtom.reportRead();
+    return super.obscureText;
+  }
+
+  @override
+  set obscureText(bool value) {
+    _$obscureTextAtom.reportWrite(value, super.obscureText, () {
+      super.obscureText = value;
+    });
+  }
+
+  late final _$forceSendCodeAtom =
+      Atom(name: 'LoginControllerBase.forceSendCode', context: context);
+
+  @override
+  bool get forceSendCode {
+    _$forceSendCodeAtom.reportRead();
+    return super.forceSendCode;
+  }
+
+  @override
+  set forceSendCode(bool value) {
+    _$forceSendCodeAtom.reportWrite(value, super.forceSendCode, () {
+      super.forceSendCode = value;
+    });
+  }
+
+  late final _$passwordAtom =
+      Atom(name: 'LoginControllerBase.password', context: context);
+
+  @override
+  String? get password {
+    _$passwordAtom.reportRead();
+    return super.password;
+  }
+
+  @override
+  set password(String? value) {
+    _$passwordAtom.reportWrite(value, super.password, () {
+      super.password = value;
     });
   }
 
@@ -197,6 +261,50 @@ mixin _$LoginController on LoginControllerBase, Store {
       ActionController(name: 'LoginControllerBase', context: context);
 
   @override
+  dynamic setForceSendCode(bool value) {
+    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
+        name: 'LoginControllerBase.setForceSendCode');
+    try {
+      return super.setForceSendCode(value);
+    } finally {
+      _$LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setPassword(String? value) {
+    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
+        name: 'LoginControllerBase.setPassword');
+    try {
+      return super.setPassword(value);
+    } finally {
+      _$LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setObscureText(bool value) {
+    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
+        name: 'LoginControllerBase.setObscureText');
+    try {
+      return super.setObscureText(value);
+    } finally {
+      _$LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setShowPassword(bool value) {
+    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
+        name: 'LoginControllerBase.setShowPassword');
+    try {
+      return super.setShowPassword(value);
+    } finally {
+      _$LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setIsLoading(bool value) {
     final _$actionInfo = _$LoginControllerBaseActionController.startAction(
         name: 'LoginControllerBase.setIsLoading');
@@ -241,7 +349,7 @@ mixin _$LoginController on LoginControllerBase, Store {
   }
 
   @override
-  dynamic setErrorCode(String? value) {
+  dynamic setErrorCode(bool value) {
     final _$actionInfo = _$LoginControllerBaseActionController.startAction(
         name: 'LoginControllerBase.setErrorCode');
     try {
@@ -326,6 +434,10 @@ email: ${email},
 errorEmail: ${errorEmail},
 errorCode: ${errorCode},
 showCode: ${showCode},
+showPassword: ${showPassword},
+obscureText: ${obscureText},
+forceSendCode: ${forceSendCode},
+password: ${password},
 code1: ${code1},
 code2: ${code2},
 code3: ${code3},

@@ -142,7 +142,8 @@ class CustomInterceptors extends Interceptor {
         '[PATH]     -> ${err.requestOptions.path}\n'
         '[BODY]     -> ${err.requestOptions.data}\n'
         '[MESSAGE]  -> ${err.message}\n'
-        '[ERROR]    -> ${err.error}'
+        '[ERROR]    -> ${err.error}\n'
+        '[RESPONSE] -> ${err.response?.data}'
     );
     super.onError(err, handler);
   }

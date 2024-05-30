@@ -5,6 +5,7 @@ import 'package:app/shared/model/auth_model/auth_model.dart';
 import 'package:app/util/util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
@@ -19,9 +20,7 @@ abstract class LoginControllerBase extends BaseController with Store {
 
   LoginControllerBase({
     required this.repositoryImpl
-  }) : super(){
-    // bottomSheet.setHeightBottomSheet(0.35);
-  }
+  });
 
   final LoginRepositoryImpl repositoryImpl;
 
@@ -34,9 +33,17 @@ abstract class LoginControllerBase extends BaseController with Store {
   @observable
   String? errorEmail;
   @observable
-  String? errorCode;
+  bool errorCode = false;
   @observable
   bool showCode = false;
+  @observable
+  bool showPassword = false;
+  @observable
+  bool obscureText = true;
+  @observable
+  bool forceSendCode = false;
+  @observable
+  String? password;
   @observable
   String code1 = '';
   @observable
@@ -51,6 +58,14 @@ abstract class LoginControllerBase extends BaseController with Store {
   final bottomSheet = Modular.get<NavController>();
 
   @action
+  setForceSendCode(bool value) => forceSendCode = value;
+  @action
+  setPassword(String? value) => password = value;
+  @action
+  setObscureText(bool value) => obscureText = value;
+  @action
+  setShowPassword(bool value) => showPassword = value;
+  @action
   setIsLoading(bool value) => isLoading = value;
   @action
   setIsLoadingSendCode(bool value) => isLoadingSendCode = value;
@@ -59,7 +74,7 @@ abstract class LoginControllerBase extends BaseController with Store {
   @action
   setErrorEmail(String? value) => errorEmail = value;
   @action
-  setErrorCode(String? value) => errorCode = value;
+  setErrorCode(bool value) => errorCode = value;
   @action
   setShowCode(bool value) => showCode = value;
   @action
@@ -72,8 +87,6 @@ abstract class LoginControllerBase extends BaseController with Store {
     code2 = value;
     if (value.isNotEmpty) {
       codePart3FocusNode.requestFocus();
-    } else {
-      codePart1FocusNode.requestFocus();
     }
   }
   @action
@@ -81,8 +94,6 @@ abstract class LoginControllerBase extends BaseController with Store {
     code3 = value;
     if (value.isNotEmpty) {
       codePart4FocusNode.nextFocus();
-    } else {
-      codePart2FocusNode.requestFocus();
     }
   }
   @action
@@ -90,8 +101,6 @@ abstract class LoginControllerBase extends BaseController with Store {
     code4 = value;
     if (value.isNotEmpty) {
       codePart5FocusNode.nextFocus();
-    } else {
-      codePart3FocusNode.requestFocus();
     }
   }
   @action
@@ -101,17 +110,99 @@ abstract class LoginControllerBase extends BaseController with Store {
       Get.focusScope?.unfocus();
       callLogin();
     } else {
-      codePart4FocusNode.requestFocus();
+      // codePart4FocusNode.requestFocus();
     }
   }
 
-  final FocusNode codePart1FocusNode = FocusNode();
-  final FocusNode codePart2FocusNode = FocusNode();
-  final FocusNode codePart3FocusNode = FocusNode();
-  final FocusNode codePart4FocusNode = FocusNode();
-  final FocusNode codePart5FocusNode = FocusNode();
+  late final FocusNode codePart1FocusNode = FocusNode(
+    onKeyEvent: (node, event){
+      if(node.hasFocus){
+        if(event is KeyDownEvent) {
+          if(int.tryParse(event.character ?? '') != null && code1.isNotEmpty){
+            code1 = event.character!;
+            controllerCode1.text = event.character!;
+            node.nextFocus();
+          }
+        }
+      }
+      return KeyEventResult.ignored;
+    }
+  );
+  late final FocusNode codePart2FocusNode = FocusNode(
+    onKeyEvent: (node, event){
+      if(node.hasFocus){
+        if(event is KeyDownEvent) {
+          if (event.logicalKey == LogicalKeyboardKey.backspace) {
+            if(code2.isEmpty){
+              node.previousFocus();
+            }
+          } else if(int.tryParse(event.character ?? '') != null && code2.isNotEmpty){
+            code2 = event.character!;
+            controllerCode2.text = event.character!;
+            node.nextFocus();
+          }
+        }
+      }
+      return KeyEventResult.ignored;
+    },
+  );
+  late final FocusNode codePart3FocusNode = FocusNode(
+    onKeyEvent: (node, event){
+      if(node.hasFocus){
+        if(event is KeyDownEvent) {
+          if (event.logicalKey == LogicalKeyboardKey.backspace) {
+            if(code3.isEmpty){
+              node.previousFocus();
+            }
+          } else if(int.tryParse(event.character ?? '') != null && code3.isNotEmpty){
+            code3 = event.character!;
+            controllerCode3.text = event.character!;
+            node.nextFocus();
+          }
+        }
+      }
+      return KeyEventResult.ignored;
+    },
+  );
+  late final FocusNode codePart4FocusNode = FocusNode(
+    onKeyEvent: (node, event){
+      if(node.hasFocus){
+        if(event is KeyDownEvent) {
+          if (event.logicalKey == LogicalKeyboardKey.backspace) {
+            if(code4.isEmpty){
+              node.previousFocus();
+            }
+          } else if(int.tryParse(event.character ?? '') != null && code4.isNotEmpty){
+            code4 = event.character!;
+            controllerCode4.text = event.character!;
+            node.nextFocus();
+          }
+        }
+      }
+      return KeyEventResult.ignored;
+    },
+  );
+  late final FocusNode codePart5FocusNode = FocusNode(
+    onKeyEvent: (node, event){
+      if(node.hasFocus){
+        if(event is KeyDownEvent) {
+          if (event.logicalKey == LogicalKeyboardKey.backspace) {
+            if(code5.isEmpty){
+              node.previousFocus();
+            }
+          } else if(int.tryParse(event.character ?? '') != null && code5.isNotEmpty){
+            code5 = event.character!;
+            controllerCode3.text = event.character!;
+            callLogin();
+          }
+        }
+      }
+      return KeyEventResult.ignored;
+    },
+  );
 
   TextEditingController controllerEmail = TextEditingController();
+  TextEditingController controllerPassword = TextEditingController();
   TextEditingController controllerCode1 = TextEditingController();
   TextEditingController controllerCode2 = TextEditingController();
   TextEditingController controllerCode3 = TextEditingController();
@@ -122,7 +213,7 @@ abstract class LoginControllerBase extends BaseController with Store {
     try{
       setIsLoading(true);
       if(showCode) {
-        AuthModel data = await repositoryImpl.postLogin(email!, fullCode);
+        AuthModel data = await repositoryImpl.postLogin(email!, token: fullCode);
         await AppConfig().setBearerToken(data);
         if(data.user.newUser) {
           router.pushReplacementNamed(PagesNames.onboard);
@@ -130,21 +221,32 @@ abstract class LoginControllerBase extends BaseController with Store {
           router.pushReplacementNamed(PagesNames.home);
         }
         return;
-      } else {
-        await repositoryImpl.postTokenEmail(email!);
-        // bottomSheet.setHeightBottomSheet(0.53);
+      } else if (showPassword){
+        AuthModel data = await repositoryImpl.postLogin(email!, password: password);
+        await AppConfig().setBearerToken(data);
+        if(data.user.newUser) {
+          router.pushReplacementNamed(PagesNames.onboard);
+        } else {
+          router.pushReplacementNamed(PagesNames.home);
+        }
+        return;
+      }else {
+        final response = await repositoryImpl.postTokenEmail(email!);
         await Future.delayed(const Duration(milliseconds: 350));
-        setShowCode(true);
+        if(response.hasPassword){
+          setShowPassword(true);
+        } else {
+          setShowCode(true);
+        }
         Get.focusScope?.unfocus();
       }
     } catch(e) {
       if(showCode) {
-        // bottomSheet.setHeightBottomSheet(0.56);
-        setErrorCode('');
+        setErrorCode(true);
         cleanCode();
         Get.focusScope?.unfocus();
       } else {
-        setErrorEmail('Erro ao enviar token, tente novamente');
+        setErrorEmail('Erro interno, favor tentar novamente');
       }
       if (kDebugMode) {
         print(e);
@@ -160,22 +262,31 @@ abstract class LoginControllerBase extends BaseController with Store {
     try{
       setIsLoadingSendCode(true);
       Get.focusScope?.unfocus();
-      await repositoryImpl.postTokenEmail(email!);
+      await repositoryImpl.postTokenEmail(
+          email!,
+          forceSendCode: forceSendCode,
+      );
       cleanCode();
-      setErrorCode(null);
-      // bottomSheet.setHeightBottomSheet(0.53);
+      setErrorCode(false);
+      setErrorEmail(null);
+      setShowPassword(false);
+      setShowCode(true);
     } finally{
       setIsLoadingSendCode(false);
     }
+  }
+
+  bool isDigit(){
+
+    return true;
   }
 
   Future<void> changeEmail() async {
     Get.focusScope?.unfocus();
     setShowCode(false);
     cleanCode();
-    // bottomSheet.setHeightBottomSheet(0.35);
     setErrorEmail(null);
-    setErrorCode(null);
+    setErrorCode(false);
   }
 
   @computed
@@ -188,7 +299,13 @@ abstract class LoginControllerBase extends BaseController with Store {
           code5.isNotEmpty) {
         return true;
       }
-    } else {
+    } else if (showPassword) {
+      if(email != null && email!.isNotEmpty && Util.isEmail(email!)) {
+        if(password != null && password!.length > 2 ){
+          return true;
+        }
+      }
+    }else {
       if(email != null && email!.isNotEmpty && Util.isEmail(email!)) return true;
     }
     return false;
@@ -223,8 +340,7 @@ abstract class LoginControllerBase extends BaseController with Store {
     controllerEmail.clear();
     Get.focusScope?.unfocus();
     setShowCode(false);
-    // bottomSheet.setHeightBottomSheet(0.35);
     setErrorEmail(null);
-    setErrorCode(null);
+    setErrorCode(false);
   }
 }

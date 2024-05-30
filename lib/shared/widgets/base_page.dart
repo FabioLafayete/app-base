@@ -40,7 +40,8 @@ class BasePage extends BaseWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.focusScope?.unfocus(),
+      onTap: () =>  FocusScope.of(context).unfocus(),
+      behavior: HitTestBehavior.translucent,
       child: Scaffold(
         appBar: showAppBar ? (appBar ?? _appBar(context)) : null,
         bottomNavigationBar: bottomNavigationBar,

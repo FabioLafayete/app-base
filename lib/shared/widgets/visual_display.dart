@@ -105,8 +105,8 @@ class VisualDisplay {
             errorText: errorText,
             prefixIcon: prefix,
             suffixIcon: Padding(
-                padding: const EdgeInsets.only(top: 15, right: 20),
-                child: suffix,
+              padding: const EdgeInsets.only(top: 15, right: 20),
+              child: suffix,
             ),
             alignLabelWithHint: true,
             filled: fillColor != null ? true : false,
@@ -134,7 +134,8 @@ class VisualDisplay {
                     fontWeight: FontWeight.w600)
                 : null,
             errorStyle: TextStyle(
-                fontWeight: FontWeight.w600, color: AppColors().error,
+              fontWeight: FontWeight.w600,
+              color: AppColors().error,
             ),
             errorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors().error, width: 2),
@@ -168,12 +169,13 @@ class VisualDisplay {
     );
   }
 
-  static Widget textFieldPin(
-      {Function(String)? onChanged,
-      FocusNode? focusNode,
-      TextEditingController? controller,
-      String? listenText = '',
-      String? errorText}) {
+  static Widget textFieldPin({
+    Function(String)? onChanged,
+    FocusNode? focusNode,
+    TextEditingController? controller,
+    String? listenText = '',
+    bool errorText = false,
+  }) {
     double width = Get.width;
     double height = Get.height;
     return Container(
@@ -190,21 +192,22 @@ class VisualDisplay {
           ),
         ],
       ),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         keyboardType: TextInputType.number,
         textAlignVertical: TextAlignVertical.center,
         textAlign: TextAlign.center,
         cursorColor: AppColors().text,
         style: TextStyle(
-            color: AppColors().text, fontSize: 24, fontWeight: FontWeight.w700),
+            color: AppColors().text, fontSize: 24, fontWeight: FontWeight.w700,
+        ),
         expands: true,
         maxLines: null,
         minLines: null,
+        autocorrect: false,
         decoration: InputDecoration(
             filled: false,
-            errorText: errorText != null ? '' : null,
-            fillColor: AppColors().primary.withOpacity(0.05),
+            errorText: errorText ? ' ' : null,
             isCollapsed: false,
             isDense: true,
             contentPadding: const EdgeInsets.all(6),
@@ -238,7 +241,8 @@ class VisualDisplay {
                 color: AppColors().error,
               ),
             ),
-            errorStyle: const TextStyle(fontSize: 0.01)),
+            errorStyle: const TextStyle(fontSize: 0.01),
+        ),
         onChanged: onChanged,
         focusNode: focusNode,
         inputFormatters: [
@@ -266,7 +270,7 @@ class VisualDisplay {
       AutovalidateMode? autoValidateMode,
       String? Function(String?)? validator,
       Widget? prefix,
-      TextEditingController? controller}) {
+      TextEditingController? controller,}) {
     return TextFormField(
       controller: controller,
       initialValue: initialValue,

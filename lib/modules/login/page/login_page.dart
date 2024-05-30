@@ -4,6 +4,7 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/my_button.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get/get.dart';
 
@@ -71,6 +72,63 @@ class LoginPage extends BaseWidget<LoginController> {
                         }
                       },
                     ),
+                    if(controller.showPassword)
+                      ...[
+                        space(0.02),
+                        VisualDisplay.textField(
+                          controller: controller.controllerPassword,
+                          labelText: 'Senha',
+                          obscure: controller.obscureText,
+                          fillColor: Colors.white,
+                          colorBorder: Colors.white,
+                          colorCursor: colors.secondary,
+                          colorBorderFocus: colors.secondary.withOpacity(0.7),
+                          colorLabel: colors.textSecondary,
+                          colorLabelFocus: colors.textSecondary,
+                          textInputType: TextInputType.emailAddress,
+                          readOnly: controller.showCode,
+                          maxLines: 1,
+                          onChanged: controller.setPassword,
+                          suffix: IconButton(
+                            padding: const EdgeInsets.only(
+                                bottom: 12
+                            ),
+                            onPressed: (){
+                              controller.setObscureText(!controller.obscureText);
+                            },
+                            icon: !controller.obscureText ?
+                            const Icon(Icons.visibility_outlined) :
+                            const Icon(Icons.visibility_off_outlined),
+                          ),
+                          onEditingComplete: () {
+                            if (controller.enableButton) {
+                              controller.onPress();
+                            }
+                          },
+                          validator: (txt) {
+                            if (txt != null) {
+                              if (txt.isEmpty) {
+                                return 'Digite uma senha válida';
+                              }
+                            }
+                            return null;
+                          },
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: MyButton(
+                              title: 'Esqueci a senha',
+                              colorTitle: colors.primary,
+                              cleanButton: true,
+                              loading: controller.isLoadingSendCode,
+                              loadingColor: colors.primary,
+                              onPress: (){
+                                controller.setForceSendCode(true);
+                                controller.resendCode();
+                              },
+                          ),
+                        )
+                      ],
                     space(0.03),
                     if (controller.showCode)
                       Container(
@@ -85,7 +143,7 @@ class LoginPage extends BaseWidget<LoginController> {
                                 color: colors.textSecondary),
                             space(0.02),
                             pinCodeInput(),
-                            if (controller.errorCode != null)
+                            if (controller.errorCode)
                               Container(
                                 margin: const EdgeInsets.only(top: 10),
                                 child: text(
