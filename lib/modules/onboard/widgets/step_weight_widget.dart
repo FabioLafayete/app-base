@@ -3,7 +3,6 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class StepWeightWidget extends BaseWidget<OnboardController> {
   StepWeightWidget({Key? key}) : super(key: key);
@@ -13,7 +12,7 @@ class StepWeightWidget extends BaseWidget<OnboardController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        space(0.05),
+        space(0.05, context),
         text(
           'Qual o seu peso atual?',
           fontSize: 25,
@@ -21,7 +20,7 @@ class StepWeightWidget extends BaseWidget<OnboardController> {
           fontWeight: FontWeight.w700,
           textAlign: TextAlign.center
         ),
-        space(0.1),
+        space(0.1, context),
         IntrinsicWidth(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -43,12 +42,12 @@ class StepWeightWidget extends BaseWidget<OnboardController> {
                   },
                   onEditingComplete: (){
                     if(controller.enableButton){
-                      controller.onPressButton();
+                      controller.onPressButton(context);
                     }
                   }
                 ),
               ),
-              space(0.03, width: true),
+              space(0.03, context, width: true),
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: text(

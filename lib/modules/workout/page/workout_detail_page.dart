@@ -21,9 +21,6 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
 
   @override
   Widget build(BuildContext context) {
-
-    final viewTransformationController = TransformationController();
-
     return BasePage(
       backgroundColor: colors.background,
       showAppBar: false,
@@ -37,8 +34,8 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
             children: [
               Stack(
                 children: [
-                  _image(),
-                  _effectImage(),
+                  _image(context),
+                  _effectImage(context),
                   _info(),
                   MyBackButton(),
                 ],
@@ -187,9 +184,9 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
     return fileName!;
   }
 
-  Widget _effectImage(){
+  Widget _effectImage(BuildContext context){
     return Container(
-      height: height * 0.45,
+      height: height(context) * 0.45,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: FractionalOffset.topCenter,
@@ -204,20 +201,20 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
     );
   }
 
-  Widget _image() {
+  Widget _image(BuildContext context) {
     if(!controller.state.programModel!.thumbnail.contains('http')) {
       return Image.asset(
       controller.state.programModel!.thumbnail,
-      width: width,
-      height: height * 0.45,
+      width: width(context),
+      height: height(context) * 0.45,
       fit: BoxFit.cover,
     );
     }
     return CachedNetworkImage(
       fadeInDuration: const Duration(milliseconds: 300),
       imageUrl: controller.state.programModel!.thumbnail,
-      width: width,
-      height: height * 0.45,
+      width: width(context),
+      height: height(context) * 0.45,
       fit: BoxFit.cover,
     );
   }

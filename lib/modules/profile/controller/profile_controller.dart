@@ -3,8 +3,8 @@ import 'package:app/route/pages_name.dart';
 import 'package:app/shared/model/support/support_model.dart';
 import 'package:app/shared/widgets/base_controller.dart';
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:mobx/mobx.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:toastification/toastification.dart';
@@ -115,7 +115,7 @@ abstract class ProfileControllerBase extends BaseController with Store {
 
   @computed
   bool get enableButtonEmail {
-    if(email != null && email!.isNotEmpty && GetUtils.isEmail(email!)) return true;
+    if(email != null && email!.isNotEmpty && EmailValidator.validate(email!)) return true;
     return false;
   }
 

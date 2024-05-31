@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 class WorkoutVideoPage extends StatefulWidget {
@@ -31,8 +30,8 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
 
   AppColors colors = AppColors();
   final text = AppTheme().text;
-  final double width = Get.width;
-  final double height = Get.height;
+  late final double width = MediaQuery.of(context).size.width;
+  late final double height = MediaQuery.of(context).size.height;
   bool hasInitialize = false;
 
   Timer? _timer;

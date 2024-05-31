@@ -2,7 +2,6 @@ import 'package:app/modules/onboard/controller/onboard_controller.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 
 class StepName extends BaseWidget<OnboardController> {
@@ -13,14 +12,14 @@ class StepName extends BaseWidget<OnboardController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        space(0.05),
+        space(0.05, context),
         text(
           'Qual o seu nome?',
           fontSize: 25,
           color: colors.text,
           fontWeight: FontWeight.w700
         ),
-        space(0.1),
+        space(0.1, context),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: VisualDisplay.textField(
@@ -36,7 +35,7 @@ class StepName extends BaseWidget<OnboardController> {
             maxLines: 1,
             onEditingComplete: (){
               if(controller.enableButton){
-                controller.onPressButton();
+                controller.onPressButton(context);
               }
             },
             onChanged: controller.setName

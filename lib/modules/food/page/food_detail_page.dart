@@ -23,17 +23,17 @@ class FoodDetailPage extends BaseWidget {
       paddingPage: 0,
       body: SlidingUpPanel(
         renderPanelSheet: true,
-        minHeight: height * 0.62,
-        maxHeight: ((height * 0.9) - MediaQuery.of(context).padding.top),
+        minHeight: height(context) * 0.62,
+        maxHeight: ((height(context) * 0.9) - MediaQuery.of(context).padding.top),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(15),
           topRight: Radius.circular(15),
         ),
         body: Container(
-            height: height,
-            width: width,
+            height: height(context),
+            width: width(context),
             alignment: Alignment.topCenter,
-            child: _imageTop()
+            child: _imageTop(context)
         ),
         margin: EdgeInsets.zero,
         panelBuilder: (_) => ClipRRect(
@@ -186,14 +186,14 @@ class FoodDetailPage extends BaseWidget {
     );
   }
 
-  Widget _imageTop(){
+  Widget _imageTop(BuildContext context){
     return Stack(
       children: [
         if(model.image!.contains('assets/image'))
           Image.asset(
             model.image!,
-            width: width,
-            height: height * 0.4,
+            width: width(context),
+            height: height(context) * 0.4,
             alignment: Alignment.bottomCenter,
             fit: BoxFit.cover,
           )
@@ -201,8 +201,8 @@ class FoodDetailPage extends BaseWidget {
         CachedNetworkImage(
           fadeInDuration: const Duration(milliseconds: 400),
           imageUrl: model.image ?? '',
-          width: width,
-          height: height * 0.4,
+          width: width(context),
+          height: height(context) * 0.4,
           alignment: Alignment.bottomCenter,
           fit: BoxFit.cover,
           imageBuilder: (_, img) {

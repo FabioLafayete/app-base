@@ -7,9 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 import '../../food/page/food_page.dart';
@@ -54,7 +51,7 @@ class NavPage extends BaseWidget<NavController> {
                         minHeight: 80,
                         backgroundColor: Colors.transparent,
                         controller: controller.miniplayerController,
-                        maxHeight: Get.height,
+                        maxHeight: height(context),
                         builder: (heightPlayer, percentage){
                           controller.setPercentVideo(percentage);
                           controller.percent.add(percentage);

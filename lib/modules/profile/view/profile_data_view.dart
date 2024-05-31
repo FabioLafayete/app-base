@@ -2,13 +2,12 @@ import 'package:app/modules/profile/controller/profile_controller.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/my_button.dart';
-import 'package:app/shared/widgets/subscription_bottom_sheet.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import '../../../shared/widgets/image_cropper.dart';
 import '../widgets/list_button.dart';
 
@@ -93,7 +92,7 @@ class ProfileDataView extends BaseWidget<ProfileController> {
                   return controller.errorName;
                 }
                 if(txt != null){
-                  if(!GetUtils.isEmail(txt)){
+                  if(!EmailValidator.validate(txt)){
                     return 'Digite um e-mail válido';
                   }
                 }

@@ -3,10 +3,9 @@ import 'package:app/modules/login/widgets/welcome_widget.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/my_button.dart';
 import 'package:app/shared/widgets/visual_display.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:get/get.dart';
 
 class LoginPage extends BaseWidget<LoginController> {
   LoginPage({Key? key}) : super(key: key);
@@ -27,7 +26,7 @@ class LoginPage extends BaseWidget<LoginController> {
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                         textAlign: TextAlign.start),
-                    space(0.03),
+                    space(0.03, context),
                     VisualDisplay.textField(
                       controller: controller.controllerEmail,
                       labelText: 'E-mail',
@@ -42,7 +41,7 @@ class LoginPage extends BaseWidget<LoginController> {
                       errorText: controller.errorEmail,
                       onEditingComplete: () {
                         if (controller.enableButton) {
-                          controller.onPress();
+                          controller.onPress(context);
                         } else {
                           controller.setErrorEmail('Digite um e-mail válido');
                         }
@@ -52,7 +51,7 @@ class LoginPage extends BaseWidget<LoginController> {
                           return controller.errorEmail;
                         }
                         if (txt != null) {
-                          if (!GetUtils.isEmail(txt)) {
+                          if (!EmailValidator.validate(txt)) {
                             return 'Digite um e-mail válido';
                           }
                         }
@@ -60,89 +59,87 @@ class LoginPage extends BaseWidget<LoginController> {
                       },
                       suffix: controller.showCode
                           ? GestureDetector(
-                              onTap: controller.changeEmail,
+                              onTap: () => controller.changeEmail(context),
                               child: text('trocar e-mail',
                                   color: colors.primary,
                                   fontWeight: FontWeight.w600))
                           : null,
                       onChanged: (email) {
                         controller.setEmail(email);
-                        if (GetUtils.isEmail(email)) {
+                        if (EmailValidator.validate(email)) {
                           controller.setErrorEmail(null);
                         }
                       },
                     ),
-                    if(controller.showPassword)
-                      ...[
-                        space(0.02),
-                        VisualDisplay.textField(
-                          controller: controller.controllerPassword,
-                          labelText: 'Senha',
-                          obscure: controller.obscureText,
-                          fillColor: Colors.white,
-                          colorBorder: Colors.white,
-                          colorCursor: colors.secondary,
-                          colorBorderFocus: colors.secondary.withOpacity(0.7),
-                          colorLabel: colors.textSecondary,
-                          colorLabelFocus: colors.textSecondary,
-                          textInputType: TextInputType.emailAddress,
-                          readOnly: controller.showCode,
-                          maxLines: 1,
-                          onChanged: controller.setPassword,
-                          suffix: IconButton(
-                            padding: const EdgeInsets.only(
-                                bottom: 12
-                            ),
-                            onPressed: (){
-                              controller.setObscureText(!controller.obscureText);
-                            },
-                            icon: !controller.obscureText ?
-                            const Icon(Icons.visibility_outlined) :
-                            const Icon(Icons.visibility_off_outlined),
-                          ),
-                          onEditingComplete: () {
-                            if (controller.enableButton) {
-                              controller.onPress();
-                            }
+                    if (controller.showPassword) ...[
+                      space(0.02, context),
+                      VisualDisplay.textField(
+                        controller: controller.controllerPassword,
+                        labelText: 'Senha',
+                        obscure: controller.obscureText,
+                        fillColor: Colors.white,
+                        colorBorder: Colors.white,
+                        colorCursor: colors.secondary,
+                        colorBorderFocus: colors.secondary.withOpacity(0.7),
+                        colorLabel: colors.textSecondary,
+                        colorLabelFocus: colors.textSecondary,
+                        textInputType: TextInputType.emailAddress,
+                        readOnly: controller.showCode,
+                        maxLines: 1,
+                        onChanged: controller.setPassword,
+                        suffix: IconButton(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          onPressed: () {
+                            controller.setObscureText(!controller.obscureText);
                           },
-                          validator: (txt) {
-                            if (txt != null) {
-                              if (txt.isEmpty) {
-                                return 'Digite uma senha válida';
-                              }
+                          icon: !controller.obscureText
+                              ? const Icon(Icons.visibility_outlined)
+                              : const Icon(Icons.visibility_off_outlined),
+                        ),
+                        onEditingComplete: () {
+                          if (controller.enableButton) {
+                            controller.onPress(context);
+                          }
+                        },
+                        validator: (txt) {
+                          if (txt != null) {
+                            if (txt.isEmpty) {
+                              return 'Digite uma senha válida';
                             }
-                            return null;
+                          }
+                          return null;
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: MyButton(
+                          title: 'Esqueci a senha',
+                          colorTitle: colors.primary,
+                          cleanButton: true,
+                          loading: controller.isLoadingSendCode,
+                          loadingColor: colors.primary,
+                          onPress: () {
+                            controller.setForceSendCode(true);
+                            controller.resendCode(context);
                           },
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: MyButton(
-                              title: 'Esqueci a senha',
-                              colorTitle: colors.primary,
-                              cleanButton: true,
-                              loading: controller.isLoadingSendCode,
-                              loadingColor: colors.primary,
-                              onPress: (){
-                                controller.setForceSendCode(true);
-                                controller.resendCode();
-                              },
-                          ),
-                        )
-                      ],
-                    space(0.03),
+                      )
+                    ],
+                    space(0.03, context),
                     if (controller.showCode)
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: width * 0.01)
+                        margin: EdgeInsets.symmetric(
+                                horizontal: width(context) * 0.01)
                             .copyWith(
-                          bottom: height * 0.03,
+                          bottom: height(context) * 0.03,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             text('Informe o código enviado no seu e-mail...',
                                 color: colors.textSecondary),
-                            space(0.02),
-                            pinCodeInput(),
+                            space(0.02, context),
+                            pinCodeInput(context),
                             if (controller.errorCode)
                               Container(
                                 margin: const EdgeInsets.only(top: 10),
@@ -160,17 +157,19 @@ class LoginPage extends BaseWidget<LoginController> {
                                     cleanButton: true,
                                     loading: controller.isLoadingSendCode,
                                     loadingColor: colors.primary,
-                                    onPress: controller.resendCode),
+                                    onPress: () => controller.resendCode(context),
+                                ),
                               )
                           ],
                         ),
                       ),
                     Observer(
                         builder: (_) => Padding(
-                          padding: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).padding.bottom + 20,
-                          ),
-                          child: MyButton(
+                              padding: EdgeInsets.only(
+                                bottom:
+                                    MediaQuery.of(context).padding.bottom + 20,
+                              ),
+                              child: MyButton(
                                 title: controller.showCode
                                     ? 'VALIDAR CÓDIGO'
                                     : 'AVANÇAR',
@@ -179,54 +178,64 @@ class LoginPage extends BaseWidget<LoginController> {
                                 iconRight: controller.showCode ? false : true,
                                 loading: controller.isLoading,
                                 onPress: controller.enableButton
-                                    ? () => controller.onPress()
+                                    ? () => controller.onPress(context)
                                     : null,
                               ),
-                        )),
+                            )),
                   ],
                 )),
         dismissible: false,
         hasHeight: false,
         context: context, onClose: () {
-      controller.cleanLogin();
+      controller.cleanLogin(context);
     });
   }
 
-  Observer pinCodeInput() {
+  Observer pinCodeInput(BuildContext context) {
     return Observer(
         builder: (_) => Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 VisualDisplay.textFieldPin(
-                    onChanged: controller.setCode1,
-                    focusNode: controller.codePart1FocusNode,
-                    controller: controller.controllerCode1,
-                    listenText: controller.code1,
-                    errorText: controller.errorCode),
+                  context: context,
+                  onChanged: controller.setCode1,
+                  focusNode: controller.codePart1FocusNode,
+                  controller: controller.controllerCode1,
+                  listenText: controller.code1,
+                  errorText: controller.errorCode,
+                ),
                 VisualDisplay.textFieldPin(
-                    onChanged: controller.setCode2,
-                    focusNode: controller.codePart2FocusNode,
-                    controller: controller.controllerCode2,
-                    listenText: controller.code2,
-                    errorText: controller.errorCode),
+                  context: context,
+                  onChanged: controller.setCode2,
+                  focusNode: controller.codePart2FocusNode,
+                  controller: controller.controllerCode2,
+                  listenText: controller.code2,
+                  errorText: controller.errorCode,
+                ),
                 VisualDisplay.textFieldPin(
-                    onChanged: controller.setCode3,
-                    focusNode: controller.codePart3FocusNode,
-                    controller: controller.controllerCode3,
-                    listenText: controller.code3,
-                    errorText: controller.errorCode),
+                  context: context,
+                  onChanged: controller.setCode3,
+                  focusNode: controller.codePart3FocusNode,
+                  controller: controller.controllerCode3,
+                  listenText: controller.code3,
+                  errorText: controller.errorCode,
+                ),
                 VisualDisplay.textFieldPin(
-                    onChanged: controller.setCode4,
-                    focusNode: controller.codePart4FocusNode,
-                    controller: controller.controllerCode4,
-                    listenText: controller.code4,
-                    errorText: controller.errorCode),
+                  context: context,
+                  onChanged: controller.setCode4,
+                  focusNode: controller.codePart4FocusNode,
+                  controller: controller.controllerCode4,
+                  listenText: controller.code4,
+                  errorText: controller.errorCode,
+                ),
                 VisualDisplay.textFieldPin(
-                    onChanged: controller.setCode5,
-                    focusNode: controller.codePart5FocusNode,
-                    controller: controller.controllerCode5,
-                    listenText: controller.code5,
-                    errorText: controller.errorCode),
+                  context: context,
+                  onChanged: (value) => controller.setCode5(value, context),
+                  focusNode: controller.codePart5FocusNode,
+                  controller: controller.controllerCode5,
+                  listenText: controller.code5,
+                  errorText: controller.errorCode,
+                ),
               ],
             ));
   }

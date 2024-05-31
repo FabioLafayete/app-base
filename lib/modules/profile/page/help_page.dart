@@ -24,7 +24,7 @@ class HelpPage extends BaseWidget<ProfileController> {
           showAppBar: false,
           paddingPage: 0,
           body: Container(
-            width: width,
+            width: width(context),
             padding: const EdgeInsets.symmetric(
                 horizontal: 16,
                 vertical: 24
@@ -35,8 +35,8 @@ class HelpPage extends BaseWidget<ProfileController> {
               children: [
                 Container(
                   padding: const EdgeInsets.all(8),
-                  width: width * 0.6,
-                  height: width * 0.6,
+                  width: width(context) * 0.6,
+                  height: width(context) * 0.6,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(1000),

@@ -1,20 +1,14 @@
 import 'dart:async';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/my_button.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../service/storage/storage_service.dart';
 import '../../../shared/constants/storage_constants.dart';
 import '../../../shared/widgets/app_theme_widget.dart';
 import '../../../util/colors.dart';
-import 'package:sentry/sentry.dart';
 
 class WelcomeWidget extends StatefulWidget {
   const WelcomeWidget({Key? key, required this.signInOnPress})
@@ -48,8 +42,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     'assets/images/welcome/1.jpeg',
   ];
 
-  final double width = Get.width;
-  final double height = Get.height;
+  late final double width = MediaQuery.of(context).size.width;
+  late final double height = MediaQuery.of(context).size.height;
   final text = AppTheme().text;
   final AppColors colors = AppColors();
 

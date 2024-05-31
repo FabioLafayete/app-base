@@ -52,7 +52,7 @@ class ListCardFood extends BaseWidget {
             ],
           ),
         ),
-        space(0.01),
+        space(0.01, context),
         SizedBox(
           height:  250,
           child: SuperListView(
@@ -60,7 +60,7 @@ class ListCardFood extends BaseWidget {
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
             children: List.generate(listItems.length, (index){
-              return _item(index);
+              return _item(index, context);
             }),
           ),
         )
@@ -68,7 +68,7 @@ class ListCardFood extends BaseWidget {
     );
   }
 
-  Widget _item(int index){
+  Widget _item(int index, BuildContext context){
     CardFoodModel item = listItems[index];
     return GestureDetector(
       onTap: item.onPress,
@@ -99,8 +99,8 @@ class ListCardFood extends BaseWidget {
                             fadeInDuration: const Duration(milliseconds: 300),
                             imageUrl: listItems[index].thumbnail,
                             alignment: Alignment.center,
-                            width: width,
-                            height: height,
+                            width: width(context),
+                            height: height(context),
                             fit: BoxFit.cover,
                             placeholder: (context, url) => Shimmer.fromColors(
                               baseColor: Colors.grey.withOpacity(0.8),
@@ -117,8 +117,8 @@ class ListCardFood extends BaseWidget {
                           Image.asset(
                             listItems[index].thumbnail,
                             alignment: Alignment.center,
-                            width: width,
-                            height: height,
+                            width: width(context),
+                            height: height(context),
                             fit: BoxFit.cover,
                           ),
                         if(showFavorite)
@@ -140,7 +140,7 @@ class ListCardFood extends BaseWidget {
                 ),
               ),
               Container(
-                width: width,
+                width: width(context),
                 padding: const EdgeInsets.all(12).copyWith(top: 8, bottom: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

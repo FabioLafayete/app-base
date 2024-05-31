@@ -6,7 +6,6 @@ import 'package:app/shared/widgets/app_theme_widget.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:get/get.dart';
 
 abstract class BaseWidget<T extends Object> extends StatelessWidget {
 
@@ -21,13 +20,13 @@ abstract class BaseWidget<T extends Object> extends StatelessWidget {
 
   final text = AppTheme().text;
 
-  final double width = Get.width;
-  final double height = Get.height;
+  width(BuildContext context)  => MediaQuery.of(context).size.width;
+  height(BuildContext context) => MediaQuery.of(context).size.height;
 
-  Widget space(double value, {bool width = false}){
+  Widget space(double value, BuildContext context, {bool width = false}){
     return SizedBox(
-      height: !width ? Get.height * value : 0,
-      width: width ? Get.width * value : 0,
+      height: !width ? this.height(context) * value : 0,
+      width: width ? this.width(context) * value : 0,
     );
   }
 

@@ -415,11 +415,11 @@ mixin _$LoginController on LoginControllerBase, Store {
   }
 
   @override
-  void setCode5(String value) {
+  void setCode5(String value, BuildContext context) {
     final _$actionInfo = _$LoginControllerBaseActionController.startAction(
         name: 'LoginControllerBase.setCode5');
     try {
-      return super.setCode5(value);
+      return super.setCode5(value, context);
     } finally {
       _$LoginControllerBaseActionController.endAction(_$actionInfo);
     }

@@ -1,8 +1,8 @@
 import 'package:app/route/pages_name.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 
 class CustomBottomNavigation extends StatefulWidget {
   const CustomBottomNavigation({Key? key}) : super(key: key);
@@ -12,7 +12,6 @@ class CustomBottomNavigation extends StatefulWidget {
 }
 
 class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
-
   late Size size;
   late double bottom;
 
@@ -36,16 +35,13 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
         icon: FontAwesomeIcons.dumbbell,
       ),
       BottomNavigationBarModel(
-          name: 'Comunidade',
-          icon: FontAwesomeIcons.users
-      ),
+          name: 'Comunidade', icon: FontAwesomeIcons.users),
     ]);
   }
 
   double get spaceButton => 24;
 
   Widget _bar(List<BottomNavigationBarModel> list) {
-
     final values = [...list];
 
     return Column(
@@ -53,7 +49,8 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
       children: [
         Card(
           color: Colors.white,
-          margin: EdgeInsets.symmetric(horizontal: size.width * 0.15).copyWith(bottom: spaceButton),
+          margin: EdgeInsets.symmetric(horizontal: size.width * 0.15)
+              .copyWith(bottom: spaceButton),
           elevation: 3,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(1000),
@@ -75,21 +72,19 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
 
   Widget _item(BottomNavigationBarModel item) {
     bool sameHere = ModalRoute.of(context)?.settings.name == item.routerName;
-    var color = sameHere ? AppColors().primary
-        : Colors.black38;
+    var color = sameHere ? AppColors().primary : Colors.black38;
 
     return Expanded(
       child: GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTap: () {
-          if(sameHere) return;
-          if(item.routerName != null) Get.offNamed(item.routerName!);
-        },
-        child: Icon(
-          item.icon,
-          color: color,
-        )
-      ),
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            if (sameHere) return;
+            // if (item.routerName != null) Modular.(item.routerName!);
+          },
+          child: Icon(
+            item.icon,
+            color: color,
+          )),
     );
   }
 }
@@ -107,4 +102,3 @@ class BottomNavigationBarModel {
     this.isDisable = false,
   });
 }
-

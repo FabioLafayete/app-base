@@ -25,7 +25,7 @@ class TopPresentation extends BaseWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height * 0.45,
+      height: height(context) * 0.45,
       child: ClipRRect(
         borderRadius: const BorderRadius.only(
           bottomRight: Radius.circular(0),
@@ -33,8 +33,8 @@ class TopPresentation extends BaseWidget {
         ),
         child: Stack(
           children: [
-            _image(),
-            _effectImage(),
+            _image(context),
+            _effectImage(context),
             _information(context)
           ],
         ),
@@ -44,7 +44,7 @@ class TopPresentation extends BaseWidget {
 
   Widget _information(BuildContext context){
     return Container(
-      margin: EdgeInsets.only(bottom: height * 0.02).copyWith(left: 16, right: 16),
+      margin: EdgeInsets.only(bottom: height(context) * 0.02).copyWith(left: 16, right: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +59,7 @@ class TopPresentation extends BaseWidget {
                 ),
                 child: text(cardItemModel.typeTraining!, fontSize: 12, fontWeight: FontWeight.w600, color: colors.background),
               ),
-              space(0.01),
+              space(0.01, context),
             ],
           text(cardItemModel.description,
               fontWeight: FontWeight.w600,
@@ -67,7 +67,7 @@ class TopPresentation extends BaseWidget {
               textOverflow: TextOverflow.ellipsis,
               color: colors.background, fontSize: 26
           ),
-          space(0.01),
+          space(0.01, context),
           Row(
             children: [
               if(cardItemModel.trainer != null)
@@ -77,7 +77,7 @@ class TopPresentation extends BaseWidget {
                     fontWeight: FontWeight.w400, fontSize: 14, color: colors.background),
             ],
           ),
-          space(0.02),
+          space(0.02, context),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -111,12 +111,12 @@ class TopPresentation extends BaseWidget {
     );
   }
 
-  Widget _image() {
+  Widget _image(BuildContext context) {
     if(!cardItemModel.thumbnail.contains('http')){
       return Image.asset(
         cardItemModel.thumbnail,
-        width: width,
-        height: height * 0.45,
+        width: width(context),
+        height: height(context) * 0.45,
         alignment: Alignment.bottomCenter,
         fit: BoxFit.cover,
       );
@@ -124,16 +124,16 @@ class TopPresentation extends BaseWidget {
     return CachedNetworkImage(
       fadeInDuration: const Duration(milliseconds: 300),
       imageUrl: cardItemModel.thumbnail,
-      width: width,
-      height: height * 0.45,
+      width: width(context),
+      height: height(context) * 0.45,
       alignment: Alignment.bottomCenter,
       fit: BoxFit.cover,
     );
   }
 
-  Widget _effectImage(){
+  Widget _effectImage(BuildContext context){
     return Container(
-      height: height * 0.45,
+      height: height(context) * 0.45,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: FractionalOffset.topCenter,

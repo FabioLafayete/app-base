@@ -1,6 +1,5 @@
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class SelectItem extends BaseWidget {
@@ -17,12 +16,12 @@ class SelectItem extends BaseWidget {
   final Color? backgroundColor;
   final String? initialValue;
 
-  Rxn<SelectItemMenu> itemSelected = Rxn();
+  SelectItemMenu? itemSelected;
 
   @override
   Widget build(BuildContext context) {
     if(initialValue != null){
-      itemSelected.value = items.firstWhereOrNull(
+      itemSelected = items.firstWhere(
               (element) => element.title == initialValue
       );
     }
@@ -33,11 +32,11 @@ class SelectItem extends BaseWidget {
   }
 
   Widget _item(SelectItemMenu item) {
-    bool isSelected = itemSelected.value != null && itemSelected.value == item;
+    bool isSelected = itemSelected != null && itemSelected == item;
     bool hasIcon = item.icon != null;
     return GestureDetector(
         onTap: (){
-          itemSelected.value = item;
+          itemSelected = item;
           onChange(item);
         },
         child: Container(

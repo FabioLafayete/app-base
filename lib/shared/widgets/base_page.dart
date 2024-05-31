@@ -1,7 +1,6 @@
 import 'package:app/route/my_router.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class BasePage extends BaseWidget {
   BasePage({

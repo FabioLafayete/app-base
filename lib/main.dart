@@ -15,7 +15,8 @@ import 'shared/constants/string_contants.dart';
 void main() async {
   runZonedGuarded(() async {
     await _preload();
-    await SentryFlutter.init((options) {
+    await SentryFlutter.init(
+      (options) {
         options.dsn = StringConstants.sentryUrl;
         options.tracesSampleRate = 1.0;
         options.profilesSampleRate = 1.0;
@@ -27,8 +28,7 @@ void main() async {
               debugShowCheckedModeBanner: false,
               locale: const Locale('pt', 'BR'),
               theme: ThemeData(fontFamily: 'Inter'),
-              routerConfig: Modular.routerConfig
-          ),
+              routerConfig: Modular.routerConfig),
         ),
       )),
     );

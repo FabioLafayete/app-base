@@ -22,11 +22,11 @@ class ItemsWrapWidget extends BaseWidget {
       childAspectRatio: 0.85,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       physics: const NeverScrollableScrollPhysics(),
-      children: List.generate(items.length, _item),
+      children: List.generate(items.length, (index) => _item(index, context)),
     );
   }
 
-  Widget _item(int index){
+  Widget _item(int index, BuildContext context){
     ItemWrapModel item = items[index];
     return GestureDetector(
       onTap: item.onPress,
@@ -50,16 +50,16 @@ class ItemsWrapWidget extends BaseWidget {
                     item.image,
                     alignment: Alignment.center,
                     fit: BoxFit.cover,
-                    width: width,
-                    height: height,
+                    width: width(context),
+                    height: height(context),
                   ) :
                   CachedNetworkImage(
                       fadeInDuration: const Duration(milliseconds: 300),
                       imageUrl: item.image,
                       alignment: Alignment.center,
                       fit: BoxFit.cover,
-                      width: width,
-                      height: height,
+                      width: width(context),
+                      height: height(context),
                       placeholder: (context, url) => Shimmer.fromColors(
                         baseColor: Colors.grey.withOpacity(0.8),
                         highlightColor: Colors.grey.withOpacity(0.6),

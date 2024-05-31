@@ -2,7 +2,6 @@ import 'package:app/util/colors.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'bottom_sheet/bottom_sheet.dart';
 
 class VisualDisplay {
@@ -170,14 +169,15 @@ class VisualDisplay {
   }
 
   static Widget textFieldPin({
+    required BuildContext context,
     Function(String)? onChanged,
     FocusNode? focusNode,
     TextEditingController? controller,
     String? listenText = '',
     bool errorText = false,
   }) {
-    double width = Get.width;
-    double height = Get.height;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Container(
       width: width * 0.16,
       height: height * 0.07,
@@ -313,7 +313,7 @@ class VisualDisplay {
     );
   }
 
-  static Widget progressBar({
+  static Widget progressBar(BuildContext context, {
     required int totalItems,
     required int index,
   }) {
@@ -327,7 +327,7 @@ class VisualDisplay {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 500),
         color: AppColors().primary,
-        width: (Get.width * 0.55) * ((index == 0 ? 1 : index + 1) / totalItems),
+        width: (MediaQuery.of(context).size.width * 0.55) * ((index == 0 ? 1 : index + 1) / totalItems),
       ),
     );
   }

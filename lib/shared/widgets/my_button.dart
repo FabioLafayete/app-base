@@ -46,7 +46,7 @@ class MyButton extends BaseWidget {
         child: !loading ? TextButton(
             onPressed: onPress,
             style: ButtonStyle(
-                overlayColor: MaterialStateColor.resolveWith((states) => Colors.transparent)
+                overlayColor: WidgetStateColor.resolveWith((states) => Colors.transparent)
             ),
             child: text(
                 title,
@@ -64,8 +64,8 @@ class MyButton extends BaseWidget {
       );
     }
     return SizedBox(
-      width: width,
-      height: heightButton ?? height * 0.06,
+      width: width(context),
+      height: heightButton ?? height(context) * 0.06,
       child: ElevatedButton(
         onPressed: loading ? (){} : onPress,
         style: onPress != null ?
@@ -106,10 +106,10 @@ class MyButton extends BaseWidget {
 
   ButtonStyle enableButtonStyle(double border, double elevation){
     return ButtonStyle(
-        overlayColor: MaterialStateProperty.all<Color>(colors.primary.withOpacity(0.1)),
-        elevation: MaterialStateProperty.all<double>(elevation),
-        backgroundColor: MaterialStateProperty.all<Color>(colorButton ?? colors.primary),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        overlayColor: WidgetStateProperty.all<Color>(colors.primary.withOpacity(0.1)),
+        elevation: WidgetStateProperty.all<double>(elevation),
+        backgroundColor: WidgetStateProperty.all<Color>(colorButton ?? colors.primary),
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(border),
                 side: colorBorder != null ? BorderSide(color: colorBorder!) : BorderSide.none
@@ -120,13 +120,13 @@ class MyButton extends BaseWidget {
 
   ButtonStyle disableButtonStyle(double border, double elevation){
     return ButtonStyle(
-        overlayColor: MaterialStateProperty.all<Color>(colors.primary.withOpacity(0.1)),
-        elevation: MaterialStateProperty.all<double>(elevation),
-        shadowColor: shadowColor != null ? MaterialStateProperty.all<Color>(shadowColor!) : null,
-        backgroundColor: MaterialStateProperty.all<Color>(
+        overlayColor: WidgetStateProperty.all<Color>(colors.primary.withOpacity(0.1)),
+        elevation: WidgetStateProperty.all<double>(elevation),
+        shadowColor: shadowColor != null ? WidgetStateProperty.all<Color>(shadowColor!) : null,
+        backgroundColor: WidgetStateProperty.all<Color>(
             colorButton?.withOpacity(0.6) ?? colors.primary.withOpacity(0.6)
         ),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(border),
                 side: BorderSide(color: colorBorder ?? colors.primary.withOpacity(0.6), width: 1.5)

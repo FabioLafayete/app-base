@@ -7,7 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 import 'package:app/shared/widgets/base_controller.dart';
 import '../../navigator/controller/nav_controller.dart';
@@ -104,11 +103,11 @@ abstract class LoginControllerBase extends BaseController with Store {
     }
   }
   @action
-  void setCode5(String value) {
+  void setCode5(String value, BuildContext context) {
     code5 = value;
     if (value.isNotEmpty) {
-      Get.focusScope?.unfocus();
-      callLogin();
+      FocusScope.of(context).unfocus();
+      callLogin(context);
     } else {
       // codePart4FocusNode.requestFocus();
     }
@@ -117,7 +116,7 @@ abstract class LoginControllerBase extends BaseController with Store {
   late final FocusNode codePart1FocusNode = FocusNode(
     onKeyEvent: (node, event){
       if(node.hasFocus){
-        if(event is KeyDownEvent) {
+        if(event is KeyUpEvent) {
           if(int.tryParse(event.character ?? '') != null && code1.isNotEmpty){
             code1 = event.character!;
             controllerCode1.text = event.character!;
@@ -131,7 +130,7 @@ abstract class LoginControllerBase extends BaseController with Store {
   late final FocusNode codePart2FocusNode = FocusNode(
     onKeyEvent: (node, event){
       if(node.hasFocus){
-        if(event is KeyDownEvent) {
+        if(event is KeyUpEvent) {
           if (event.logicalKey == LogicalKeyboardKey.backspace) {
             if(code2.isEmpty){
               node.previousFocus();
@@ -149,7 +148,7 @@ abstract class LoginControllerBase extends BaseController with Store {
   late final FocusNode codePart3FocusNode = FocusNode(
     onKeyEvent: (node, event){
       if(node.hasFocus){
-        if(event is KeyDownEvent) {
+        if(event is KeyUpEvent) {
           if (event.logicalKey == LogicalKeyboardKey.backspace) {
             if(code3.isEmpty){
               node.previousFocus();
@@ -167,7 +166,7 @@ abstract class LoginControllerBase extends BaseController with Store {
   late final FocusNode codePart4FocusNode = FocusNode(
     onKeyEvent: (node, event){
       if(node.hasFocus){
-        if(event is KeyDownEvent) {
+        if(event is KeyUpEvent) {
           if (event.logicalKey == LogicalKeyboardKey.backspace) {
             if(code4.isEmpty){
               node.previousFocus();
@@ -185,7 +184,7 @@ abstract class LoginControllerBase extends BaseController with Store {
   late final FocusNode codePart5FocusNode = FocusNode(
     onKeyEvent: (node, event){
       if(node.hasFocus){
-        if(event is KeyDownEvent) {
+        if(event is KeyUpEvent) {
           if (event.logicalKey == LogicalKeyboardKey.backspace) {
             if(code5.isEmpty){
               node.previousFocus();
@@ -193,7 +192,6 @@ abstract class LoginControllerBase extends BaseController with Store {
           } else if(int.tryParse(event.character ?? '') != null && code5.isNotEmpty){
             code5 = event.character!;
             controllerCode3.text = event.character!;
-            callLogin();
           }
         }
       }
@@ -209,7 +207,7 @@ abstract class LoginControllerBase extends BaseController with Store {
   TextEditingController controllerCode4 = TextEditingController();
   TextEditingController controllerCode5 = TextEditingController();
 
-  Future<void> onPress() async {
+  Future<void> onPress(BuildContext context) async {
     try{
       setIsLoading(true);
       if(showCode) {
@@ -238,13 +236,13 @@ abstract class LoginControllerBase extends BaseController with Store {
         } else {
           setShowCode(true);
         }
-        Get.focusScope?.unfocus();
+        FocusScope.of(context).unfocus();
       }
     } catch(e) {
       if(showCode) {
         setErrorCode(true);
         cleanCode();
-        Get.focusScope?.unfocus();
+        FocusScope.of(context).unfocus();
       } else {
         setErrorEmail('Erro interno, favor tentar novamente');
       }
@@ -258,10 +256,10 @@ abstract class LoginControllerBase extends BaseController with Store {
 
   String get fullCode => '$code1$code2$code3$code4$code5';
 
-  Future<void> resendCode() async {
+  Future<void> resendCode(BuildContext context) async {
     try{
       setIsLoadingSendCode(true);
-      Get.focusScope?.unfocus();
+      FocusScope.of(context).unfocus();
       await repositoryImpl.postTokenEmail(
           email!,
           forceSendCode: forceSendCode,
@@ -281,8 +279,8 @@ abstract class LoginControllerBase extends BaseController with Store {
     return true;
   }
 
-  Future<void> changeEmail() async {
-    Get.focusScope?.unfocus();
+  Future<void> changeEmail(BuildContext context) async {
+    FocusScope.of(context).unfocus();
     setShowCode(false);
     cleanCode();
     setErrorEmail(null);
@@ -324,21 +322,21 @@ abstract class LoginControllerBase extends BaseController with Store {
     code5 = '';
   }
 
-  callLogin(){
+  callLogin(BuildContext context){
     if(code1.isNotEmpty &&
         code2.isNotEmpty &&
         code3.isNotEmpty &&
         code4.isNotEmpty &&
         code5.isNotEmpty) {
-      onPress();
+      onPress(context);
     }
   }
 
-  void cleanLogin(){
+  void cleanLogin(BuildContext context){
     setEmail('');
     cleanCode();
     controllerEmail.clear();
-    Get.focusScope?.unfocus();
+    FocusScope.of(context).unfocus();
     setShowCode(false);
     setErrorEmail(null);
     setErrorCode(false);
