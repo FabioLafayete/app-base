@@ -65,6 +65,22 @@ mixin _$LoginController on LoginControllerBase, Store {
     });
   }
 
+  late final _$tokenAtom =
+      Atom(name: 'LoginControllerBase.token', context: context);
+
+  @override
+  String? get token {
+    _$tokenAtom.reportRead();
+    return super.token;
+  }
+
+  @override
+  set token(String? value) {
+    _$tokenAtom.reportWrite(value, super.token, () {
+      super.token = value;
+    });
+  }
+
   late final _$errorEmailAtom =
       Atom(name: 'LoginControllerBase.errorEmail', context: context);
 
@@ -85,13 +101,13 @@ mixin _$LoginController on LoginControllerBase, Store {
       Atom(name: 'LoginControllerBase.errorCode', context: context);
 
   @override
-  bool get errorCode {
+  String? get errorCode {
     _$errorCodeAtom.reportRead();
     return super.errorCode;
   }
 
   @override
-  set errorCode(bool value) {
+  set errorCode(String? value) {
     _$errorCodeAtom.reportWrite(value, super.errorCode, () {
       super.errorCode = value;
     });
@@ -177,86 +193,6 @@ mixin _$LoginController on LoginControllerBase, Store {
     });
   }
 
-  late final _$code1Atom =
-      Atom(name: 'LoginControllerBase.code1', context: context);
-
-  @override
-  String get code1 {
-    _$code1Atom.reportRead();
-    return super.code1;
-  }
-
-  @override
-  set code1(String value) {
-    _$code1Atom.reportWrite(value, super.code1, () {
-      super.code1 = value;
-    });
-  }
-
-  late final _$code2Atom =
-      Atom(name: 'LoginControllerBase.code2', context: context);
-
-  @override
-  String get code2 {
-    _$code2Atom.reportRead();
-    return super.code2;
-  }
-
-  @override
-  set code2(String value) {
-    _$code2Atom.reportWrite(value, super.code2, () {
-      super.code2 = value;
-    });
-  }
-
-  late final _$code3Atom =
-      Atom(name: 'LoginControllerBase.code3', context: context);
-
-  @override
-  String get code3 {
-    _$code3Atom.reportRead();
-    return super.code3;
-  }
-
-  @override
-  set code3(String value) {
-    _$code3Atom.reportWrite(value, super.code3, () {
-      super.code3 = value;
-    });
-  }
-
-  late final _$code4Atom =
-      Atom(name: 'LoginControllerBase.code4', context: context);
-
-  @override
-  String get code4 {
-    _$code4Atom.reportRead();
-    return super.code4;
-  }
-
-  @override
-  set code4(String value) {
-    _$code4Atom.reportWrite(value, super.code4, () {
-      super.code4 = value;
-    });
-  }
-
-  late final _$code5Atom =
-      Atom(name: 'LoginControllerBase.code5', context: context);
-
-  @override
-  String get code5 {
-    _$code5Atom.reportRead();
-    return super.code5;
-  }
-
-  @override
-  set code5(String value) {
-    _$code5Atom.reportWrite(value, super.code5, () {
-      super.code5 = value;
-    });
-  }
-
   late final _$LoginControllerBaseActionController =
       ActionController(name: 'LoginControllerBase', context: context);
 
@@ -266,6 +202,17 @@ mixin _$LoginController on LoginControllerBase, Store {
         name: 'LoginControllerBase.setForceSendCode');
     try {
       return super.setForceSendCode(value);
+    } finally {
+      _$LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setToken(String? value, BuildContext context) {
+    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
+        name: 'LoginControllerBase.setToken');
+    try {
+      return super.setToken(value, context);
     } finally {
       _$LoginControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -349,7 +296,7 @@ mixin _$LoginController on LoginControllerBase, Store {
   }
 
   @override
-  dynamic setErrorCode(bool value) {
+  dynamic setErrorCode(String? value) {
     final _$actionInfo = _$LoginControllerBaseActionController.startAction(
         name: 'LoginControllerBase.setErrorCode');
     try {
@@ -371,66 +318,12 @@ mixin _$LoginController on LoginControllerBase, Store {
   }
 
   @override
-  void setCode1(String value) {
-    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
-        name: 'LoginControllerBase.setCode1');
-    try {
-      return super.setCode1(value);
-    } finally {
-      _$LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setCode2(String value) {
-    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
-        name: 'LoginControllerBase.setCode2');
-    try {
-      return super.setCode2(value);
-    } finally {
-      _$LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setCode3(String value) {
-    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
-        name: 'LoginControllerBase.setCode3');
-    try {
-      return super.setCode3(value);
-    } finally {
-      _$LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setCode4(String value) {
-    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
-        name: 'LoginControllerBase.setCode4');
-    try {
-      return super.setCode4(value);
-    } finally {
-      _$LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setCode5(String value, BuildContext context) {
-    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
-        name: 'LoginControllerBase.setCode5');
-    try {
-      return super.setCode5(value, context);
-    } finally {
-      _$LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 isLoadingSendCode: ${isLoadingSendCode},
 email: ${email},
+token: ${token},
 errorEmail: ${errorEmail},
 errorCode: ${errorCode},
 showCode: ${showCode},
@@ -438,11 +331,6 @@ showPassword: ${showPassword},
 obscureText: ${obscureText},
 forceSendCode: ${forceSendCode},
 password: ${password},
-code1: ${code1},
-code2: ${code2},
-code3: ${code3},
-code4: ${code4},
-code5: ${code5},
 enableButton: ${enableButton}
     ''';
   }

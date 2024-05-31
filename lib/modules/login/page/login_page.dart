@@ -3,8 +3,10 @@ import 'package:app/modules/login/widgets/welcome_widget.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/my_button.dart';
 import 'package:app/shared/widgets/visual_display.dart';
+import 'package:easy_mask/easy_mask.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 class LoginPage extends BaseWidget<LoginController> {
@@ -140,24 +142,16 @@ class LoginPage extends BaseWidget<LoginController> {
                                 color: colors.textSecondary),
                             space(0.02, context),
                             pinCodeInput(context),
-                            if (controller.errorCode)
-                              Container(
-                                margin: const EdgeInsets.only(top: 10),
-                                child: text(
-                                  'Código informado inválido',
-                                  color: colors.error,
-                                ),
-                              ),
                             if (controller.showCode)
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
                                 child: MyButton(
-                                    title: 'Enviar novo código',
-                                    colorTitle: colors.primary,
-                                    cleanButton: true,
-                                    loading: controller.isLoadingSendCode,
-                                    loadingColor: colors.primary,
-                                    onPress: () => controller.resendCode(context),
+                                  title: 'Enviar novo código',
+                                  colorTitle: colors.primary,
+                                  cleanButton: true,
+                                  loading: controller.isLoadingSendCode,
+                                  loadingColor: colors.primary,
+                                  onPress: () => controller.resendCode(context),
                                 ),
                               )
                           ],
@@ -191,52 +185,41 @@ class LoginPage extends BaseWidget<LoginController> {
     });
   }
 
-  Observer pinCodeInput(BuildContext context) {
-    return Observer(
-        builder: (_) => Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                VisualDisplay.textFieldPin(
-                  context: context,
-                  onChanged: controller.setCode1,
-                  focusNode: controller.codePart1FocusNode,
-                  controller: controller.controllerCode1,
-                  listenText: controller.code1,
-                  errorText: controller.errorCode,
-                ),
-                VisualDisplay.textFieldPin(
-                  context: context,
-                  onChanged: controller.setCode2,
-                  focusNode: controller.codePart2FocusNode,
-                  controller: controller.controllerCode2,
-                  listenText: controller.code2,
-                  errorText: controller.errorCode,
-                ),
-                VisualDisplay.textFieldPin(
-                  context: context,
-                  onChanged: controller.setCode3,
-                  focusNode: controller.codePart3FocusNode,
-                  controller: controller.controllerCode3,
-                  listenText: controller.code3,
-                  errorText: controller.errorCode,
-                ),
-                VisualDisplay.textFieldPin(
-                  context: context,
-                  onChanged: controller.setCode4,
-                  focusNode: controller.codePart4FocusNode,
-                  controller: controller.controllerCode4,
-                  listenText: controller.code4,
-                  errorText: controller.errorCode,
-                ),
-                VisualDisplay.textFieldPin(
-                  context: context,
-                  onChanged: (value) => controller.setCode5(value, context),
-                  focusNode: controller.codePart5FocusNode,
-                  controller: controller.controllerCode5,
-                  listenText: controller.code5,
-                  errorText: controller.errorCode,
-                ),
-              ],
-            ));
+  Widget pinCodeInput(BuildContext context) {
+
+    return VisualDisplay.textField(
+      controller: controller.controllerCode,
+      labelText: 'Token',
+      fillColor: Colors.white,
+      colorBorder: Colors.white,
+      colorCursor: colors.secondary,
+      errorText: controller.errorCode,
+      colorBorderFocus: colors.secondary.withOpacity(0.7),
+      colorLabel: colors.textSecondary,
+      colorLabelFocus: colors.textSecondary,
+      textAlign: TextAlign.start,
+      textInputType: TextInputType.number,
+      fontWeight: FontWeight.w700,
+      onChanged: (value) => controller.setToken(value, context),
+      maxLines: 1,
+      contentPadding: const EdgeInsets.all(20).copyWith(left: 20),
+      letterSpacing: width(context) * 0.12,
+      inputMask: [
+        TextInputMask(mask: ['99999']),
+      ],
+      onEditingComplete: () {
+        if (controller.enableButton) {
+          controller.onPress(context);
+        }
+      },
+      validator: (txt) {
+        if (txt != null) {
+          if (txt.isEmpty) {
+            return 'Código informado inválido';
+          }
+        }
+        return null;
+      },
+    );
   }
 }

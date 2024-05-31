@@ -58,6 +58,10 @@ class VisualDisplay {
     int? maxLength,
     int? maxLines,
     int? minLines,
+    TextAlign? textAlign,
+    EdgeInsetsGeometry? contentPadding,
+    double? letterSpacing,
+    FontWeight? fontWeight,
   }) {
     return Stack(
       children: [
@@ -81,10 +85,12 @@ class VisualDisplay {
           controller: controller,
           initialValue: initialValue,
           onChanged: onChanged,
+          textAlign: textAlign ?? TextAlign.start,
           style: TextStyle(
             color: colorText ?? AppColors().text,
             fontSize: 18,
-            fontWeight: FontWeight.w400,
+            fontWeight: fontWeight ?? FontWeight.w400,
+            letterSpacing: letterSpacing,
           ),
           obscureText: obscure ?? false,
           maxLength: maxLength,
@@ -103,14 +109,14 @@ class VisualDisplay {
             isDense: true,
             errorText: errorText,
             prefixIcon: prefix,
-            suffixIcon: Padding(
+            suffixIcon: suffix != null ? Padding(
               padding: const EdgeInsets.only(top: 15, right: 20),
               child: suffix,
-            ),
+            ) : null,
             alignLabelWithHint: true,
             filled: fillColor != null ? true : false,
             fillColor: fillColor,
-            contentPadding: const EdgeInsets.all(20).copyWith(left: 10),
+            contentPadding: contentPadding ?? const EdgeInsets.all(20).copyWith(left: 10),
             icon: icon,
             hintText: hintText,
             hintStyle: TextStyle(
@@ -172,8 +178,8 @@ class VisualDisplay {
     required BuildContext context,
     Function(String)? onChanged,
     FocusNode? focusNode,
-    TextEditingController? controller,
-    String? listenText = '',
+    required TextEditingController controller,
+    String listenText = '',
     bool errorText = false,
   }) {
     double width = MediaQuery.of(context).size.width;
@@ -192,20 +198,24 @@ class VisualDisplay {
           ),
         ],
       ),
-      child: TextFormField(
+      child: TextField(
         controller: controller,
         keyboardType: TextInputType.number,
         textAlignVertical: TextAlignVertical.center,
         textAlign: TextAlign.center,
         cursorColor: AppColors().text,
         style: TextStyle(
-            color: AppColors().text, fontSize: 24, fontWeight: FontWeight.w700,
+          color:  listenText.contains('.') ? Colors.transparent : AppColors().text,
+          fontSize: 24,
+          fontWeight: FontWeight.w700,
         ),
         expands: true,
         maxLines: null,
         minLines: null,
         autocorrect: false,
+        maxLength: 2,
         decoration: InputDecoration(
+          counterText: '',
             filled: false,
             errorText: errorText ? ' ' : null,
             isCollapsed: false,
@@ -222,7 +232,7 @@ class VisualDisplay {
               borderRadius: BorderRadius.circular(width * 0.03),
               borderSide: BorderSide(
                 width: 2,
-                color: listenText!.isNotEmpty
+                color: listenText.isNotEmpty
                     ? AppColors().primary.withOpacity(0.9)
                     : Colors.grey.shade500,
               ),
