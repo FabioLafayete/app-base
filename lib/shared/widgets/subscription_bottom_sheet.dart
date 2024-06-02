@@ -1,6 +1,8 @@
+import 'package:app/route/my_router.dart';
 import 'package:app/shared/modules/user/controller/user_controller.dart';
 import 'package:app/shared/widgets/back_button.dart';
 import 'package:app/shared/widgets/my_button.dart';
+import 'package:app/shared/widgets/subscription_success.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,7 +30,35 @@ class SubscriptionBottomSheet extends StatefulWidget {
       _SubscriptionBottomSheetState();
 }
 
-class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
+class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet>
+    with WidgetsBindingObserver {
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch(state){
+      case AppLifecycleState.resumed:
+        updateUser();
+        break;
+      case AppLifecycleState.inactive:
+        print("app in inactive");
+        break;
+      case AppLifecycleState.paused:
+        print("app in paused");
+        break;
+      case AppLifecycleState.detached:
+        print("app in detached");
+        break;
+      case AppLifecycleState.hidden:
+        print('app hidden');
+        break;
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
   final colors = AppColors();
 
@@ -38,11 +68,26 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
 
   PricingModel? itemSelected;
 
+  bool openPayment = false;
+
+  Future updateUser() async {
+    if(openPayment){
+      final result = await userController.checkUserSubscription();
+      setState(() {
+        openPayment = false;
+      });
+      if(result){
+        MyRouter().pop();
+        MyRouter().push(SubscriptionSuccessPage());
+      }
+    }
+  }
+
 
   @override
   void initState() {
     super.initState();
-
+    WidgetsBinding.instance.addObserver(this);
     prices = userController.productModel.map((e) => PricingModel(
       price: double.parse(e.valueProduct),
       totalMonth: e.month,
@@ -134,10 +179,15 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet> {
                   colorButton: colors.text2,
                   colorTitle: colors.primary,
                   border: 8,
+                  loading: openPayment,
+                  loadingColor: colors.primary,
                   onPress: itemSelected == null ? null : () async {
-                    launchUrl(
+                    await launchUrl(
                       Uri.parse(generateUrl(itemSelected!.url)),
                     );
+                    setState(() {
+                      openPayment = true;
+                    });
                   },
                 ),
               ),

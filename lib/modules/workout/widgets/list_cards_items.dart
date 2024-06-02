@@ -3,6 +3,7 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/subscription_bottom_sheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
@@ -80,7 +81,7 @@ class ListCardItems extends BaseWidget {
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
             children: List.generate(listItems.length, (index){
-              return _item(index, context);
+              return Observer(builder: (_) => _item(index, context));
             }),
           ),
         )
@@ -91,9 +92,9 @@ class ListCardItems extends BaseWidget {
   Widget _item(int index, BuildContext context){
     final userController = Modular.get<UserController>();
     CardItemModel item = listItems[index];
-    bool isLock = item.soon || !userController.user.activated;
+    bool isLock = item.soon || !userController.user.isSubscripted;
     return GestureDetector(
-      onTap: userController.user.activated ? item.onPress : (){
+      onTap: userController.user.isSubscripted ? item.onPress : (){
         const SubscriptionBottomSheet().show(context: context);
       },
       child: Container(

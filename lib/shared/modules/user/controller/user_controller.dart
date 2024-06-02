@@ -76,6 +76,18 @@ abstract class UserControllerBase with Store{
     getProducts();
   }
 
+  Future<bool> checkUserSubscription() async {
+    for (int i = 0; i < 3; i++) {
+      final data = await userRepositoryImpl.getUser();
+      setUser(data);
+      if(data.isSubscripted) {
+        break;
+      }
+      await Future.delayed(const Duration(seconds: 2));
+    }
+    return user.isSubscripted;
+  }
+
   Future deletePhotoUser() async {
     try{
       setPhotoUrlProfile(null);

@@ -74,10 +74,21 @@ abstract class WorkoutControllerBase extends BaseController with Store {
     }
   }
 
-  Future getWorkouts() async{
+  Future getWorkouts({bool force = false}) async{
     try{
-      if(state.comboProgramModel != null) return;
-      final workouts = await repositoryImpl.getWorkouts();
+      if(state.comboProgramModel != null && force == false) {
+        return;
+      }
+
+      state = state.copyWith(comboProgramModel: null);
+
+      List responses = await Future.wait([
+        repositoryImpl.getWorkouts(),
+        if(force)
+          userController.setInitUser(),
+      ]);
+
+      final workouts = responses[0];
       state = state.copyWith(
         comboProgramModel: workouts,
       );

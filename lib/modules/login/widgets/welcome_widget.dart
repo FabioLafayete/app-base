@@ -113,13 +113,18 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                           fontWeight: FontWeight.w600,
                           color: colors.background)),
                   SizedBox(height: height * 0.04),
-                  text('Explore nossa motivação e encontre sua força',
-                      color: colors.background, fontSize: height * 0.028),
+                  text(
+                    'Explore nossa motivação e encontre sua força',
+                    color: colors.background,
+                    fontWeight: FontWeight.w400,
+                    fontSize: height * 0.028,
+                  ),
                   const Spacer(),
                   MyButton(
                     title: 'ENTRAR',
                     sizeTitle: height * 0.022,
                     colorTitle: colors.primary,
+                    // colorTitle: Color(0xFF00bcd4),
                     colorButton: colors.text2,
                     onPress: () => widget.signInOnPress(false),
                   ),
@@ -135,11 +140,11 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     future: secure.get(StorageConstants.deepLink),
                     initialData: null,
                     builder: (_, snap) {
-                      if(snap.hasData) {
+                      if (snap.hasData) {
                         return GestureDetector(
-                          onTap: (){
-                            secure.delete(StorageConstants.deepLink);
-                          },
+                            onTap: () {
+                              secure.delete(StorageConstants.deepLink);
+                            },
                             child: text(snap.data!, color: Colors.white));
                       }
                       return const SizedBox.shrink();
@@ -204,16 +209,28 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
   Widget _background() {
     return Container(
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              tileMode: TileMode.repeated,
-              begin: Alignment.topRight,
-              end: Alignment.bottomRight,
-              colors: [
-            // Colors.white,
-            colors.secondary,
-            colors.primary,
-            colors.primary,
-          ]),
+        gradient: LinearGradient(
+            tileMode: TileMode.repeated,
+            begin: Alignment.topRight,
+            end: Alignment.bottomRight,
+            colors: [
+              colors.secondary,
+              colors.primary,
+              colors.primary,
+
+              // Color(0xFF67edff),
+              // Color(0xFF80deea),
+              // Color(0xFF00bcd4),
+
+              // Color(0xFF00bcd4),
+              // Color(0xFF00bcd4),
+              // Color(0xFF3bbdbf),
+
+
+              // Color(0xFF00e2d1),
+              // Color(0xFF00e2d1),
+              // Color(0xFF30d5c9),
+            ]),
       ),
     );
   }

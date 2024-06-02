@@ -28,6 +28,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
   Widget build(BuildContext context) {
     controller.getWorkouts();
     return BasePage(
+      onRefresh: () => controller.getWorkouts(force: true),
       backgroundColor: colors.background,
       showAppBar: false,
       paddingPage: 0,
@@ -41,13 +42,12 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
         return Stack(
           children: [
             SuperListView(
-              physics: const ClampingScrollPhysics(),
               padding: MediaQuery.maybeOf(context)?.padding.copyWith(top: 0),
               children: [
                 if(controller.state.topProgram != null)
                   TopPresentation(
                     cardItemModel: controller.state.topProgram!,
-                    showUsers: true,
+                    showUsers: false,
                   ),
                 SuperListView.builder(
                   itemCount: controller.state.comboProgramModel!.length,
@@ -67,6 +67,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
                               thumbnail: program.thumbnail,
                               description: program.description ?? '',
                               timeTraining: program.duration ?? '', trainer: program.difficulty,
+                              showFavorite: false,
                               soon: program.isSoon,
                             );
                           })),

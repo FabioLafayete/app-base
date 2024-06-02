@@ -38,7 +38,7 @@ class ImageCropperWidget extends StatefulWidget {
   final bool simpleView;
   final bool loading;
   final Function(File?) onChange;
-  final Function()? onPress;
+  final VoidCallback? onPress;
   final bool interactive;
 
   @override

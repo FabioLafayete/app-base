@@ -19,7 +19,7 @@ class ListButton extends BaseWidget {
         itemBuilder: (_, index){
           ListButtonItem item = list[index];
           return Container(
-            margin: EdgeInsets.only(top: item.isLogout ? 100 : 12),
+            margin: EdgeInsets.only(top: item.isLogout ? height(context) * 0.08 : 14),
             child: Card(
               margin: const EdgeInsets.only(bottom: 1),
               elevation: 0.8,

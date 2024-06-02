@@ -115,8 +115,10 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
 
   void startTimer() {
     const period = Duration(seconds: 1);
+    HapticFeedback.lightImpact();
     _timer = Timer.periodic(period, (Timer timer) {
         if (_start == 1) {
+          HapticFeedback.lightImpact();
           controller.setShowCountdown(false);
           if(hasInitialize){
             controller.state.videoPlayerController!.play();
@@ -373,7 +375,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
 
     controller.state.videoPlayerController!.setVolume(0);
     controller.state.videoPlayerController!.setLooping(true);
-    await controller.state.videoPlayerController!.setPlaybackSpeed(0.95);
+    await controller.state.videoPlayerController!.setPlaybackSpeed(1.0);
 
     await controller.state.videoPlayerController!.initialize();
     if(!isPrevious){

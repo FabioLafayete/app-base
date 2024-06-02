@@ -193,8 +193,35 @@ mixin _$LoginController on LoginControllerBase, Store {
     });
   }
 
+  late final _$timerCountAtom =
+      Atom(name: 'LoginControllerBase.timerCount', context: context);
+
+  @override
+  int get timerCount {
+    _$timerCountAtom.reportRead();
+    return super.timerCount;
+  }
+
+  @override
+  set timerCount(int value) {
+    _$timerCountAtom.reportWrite(value, super.timerCount, () {
+      super.timerCount = value;
+    });
+  }
+
   late final _$LoginControllerBaseActionController =
       ActionController(name: 'LoginControllerBase', context: context);
+
+  @override
+  dynamic setTimerCount(int value) {
+    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
+        name: 'LoginControllerBase.setTimerCount');
+    try {
+      return super.setTimerCount(value);
+    } finally {
+      _$LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic setForceSendCode(bool value) {
@@ -331,6 +358,7 @@ showPassword: ${showPassword},
 obscureText: ${obscureText},
 forceSendCode: ${forceSendCode},
 password: ${password},
+timerCount: ${timerCount},
 enableButton: ${enableButton}
     ''';
   }

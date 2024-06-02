@@ -23,7 +23,7 @@ class ProfilePage extends BaseWidget<ProfileController> {
           children: [
             Container(
               margin: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top + 50,
+                top: MediaQuery.of(context).padding.top + (height(context) * 0.05),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Observer(builder: (_) => ImageCropperWidget(
@@ -31,7 +31,13 @@ class ProfilePage extends BaseWidget<ProfileController> {
                 title: user.name,
                 imageUrl: user.photoUrl,
                 loading: controller.loading,
-                onChange: (_){},
+                onChange: (value){
+                  if(value != null) {
+                    controller.changePhoto(value);
+                  } else {
+                    controller.userController.deletePhotoUser();
+                  }
+                },
                 simpleView: true,
               )),
             ),

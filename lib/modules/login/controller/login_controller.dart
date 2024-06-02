@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app/config/app_config.dart';
 import 'package:app/modules/login/repository/impl/login_repository_impl.dart';
 import 'package:app/route/pages_name.dart';
@@ -46,9 +48,14 @@ abstract class LoginControllerBase extends BaseController with Store {
   bool forceSendCode = false;
   @observable
   String? password;
+  @observable
+  int timerCount = 0;
 
   final bottomSheet = Modular.get<NavController>();
 
+
+  @action
+  setTimerCount(int value) => timerCount = value;
   @action
   setForceSendCode(bool value) => forceSendCode = value;
   @action
@@ -107,11 +114,13 @@ abstract class LoginControllerBase extends BaseController with Store {
         return;
       }else {
         final response = await repositoryImpl.postTokenEmail(email!);
+        setErrorEmail(null);
         await Future.delayed(const Duration(milliseconds: 350));
         if(response.hasPassword){
           setShowPassword(true);
         } else {
           setShowCode(true);
+          startTimer();
         }
         FocusScope.of(context).unfocus();
       }
@@ -133,6 +142,11 @@ abstract class LoginControllerBase extends BaseController with Store {
 
   Future<void> resendCode(BuildContext context) async {
     try{
+      if(timerCount == 0){
+        startTimer();
+      } else {
+        return;
+      }
       setIsLoadingSendCode(true);
       FocusScope.of(context).unfocus();
       await repositoryImpl.postTokenEmail(
@@ -149,6 +163,22 @@ abstract class LoginControllerBase extends BaseController with Store {
     }
   }
 
+  Timer? _timer;
+
+  void startTimer() {
+    setTimerCount(30);
+    const period = Duration(seconds: 1);
+    _timer = Timer.periodic(period, (Timer timer) {
+      if (timerCount <= 1) {
+        timer.cancel();
+        setTimerCount(timerCount - 1);
+      } else {
+        setTimerCount(timerCount - 1);
+      }
+    },
+    );
+  }
+
   bool isDigit(){
 
     return true;
@@ -160,6 +190,7 @@ abstract class LoginControllerBase extends BaseController with Store {
     cleanCode();
     setErrorEmail(null);
     setErrorCode(null);
+    _timer?.cancel();
   }
 
   @computed

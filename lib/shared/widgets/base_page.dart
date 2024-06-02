@@ -1,6 +1,7 @@
 import 'package:app/route/my_router.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class BasePage extends BaseWidget {
   BasePage({
@@ -19,6 +20,7 @@ class BasePage extends BaseWidget {
     this.actions,
     this.elevation,
     this.bottomSheet,
+    this.onRefresh,
   }) : super(key: key);
 
   final Widget body;
@@ -35,9 +37,27 @@ class BasePage extends BaseWidget {
   final double? paddingPage;
   final List<Widget>? actions;
   final double? elevation;
+  final VoidCallback? onRefresh;
 
   @override
   Widget build(BuildContext context) {
+
+    if(onRefresh != null) {
+      return RefreshIndicator.adaptive(
+        onRefresh: () async {
+          HapticFeedback.lightImpact();
+          onRefresh!();
+        },
+        displacement: 50,
+        color: colors.primary,
+        child: child(context),
+      );
+    }
+
+    return child(context);
+  }
+
+  Widget child(BuildContext context){
     return GestureDetector(
       onTap: () =>  FocusScope.of(context).unfocus(),
       behavior: HitTestBehavior.translucent,

@@ -10,6 +10,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:toastification/toastification.dart';
 
+import 'firebase_options.dart';
 import 'shared/constants/string_contants.dart';
 
 void main() async {
@@ -43,9 +44,14 @@ void main() async {
 
 Future _preload() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
+  await Future.wait([
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge),
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]),
+    Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    ),
+  ]);
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
 

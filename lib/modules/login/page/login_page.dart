@@ -146,12 +146,15 @@ class LoginPage extends BaseWidget<LoginController> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
                                 child: MyButton(
-                                  title: 'Enviar novo código',
-                                  colorTitle: colors.primary,
+                                  title: 'Enviar novo código${controller.timerCount <= 1 ? '' : ' - ${controller.timerCount}'}',
+                                  colorTitle:  controller.timerCount == 0 ?
+                                  colors.primary :
+                                  colors.primary.withOpacity(0.3),
                                   cleanButton: true,
                                   loading: controller.isLoadingSendCode,
                                   loadingColor: colors.primary,
-                                  onPress: () => controller.resendCode(context),
+                                  onPress: controller.timerCount <= 1 ?
+                                      () => controller.resendCode(context) : null,
                                 ),
                               )
                           ],
@@ -168,6 +171,7 @@ class LoginPage extends BaseWidget<LoginController> {
                                     ? 'VALIDAR CÓDIGO'
                                     : 'AVANÇAR',
                                 colorTitle: colors.background,
+                                // colorButton: colors.primary,
                                 colorButton: colors.primary,
                                 iconRight: controller.showCode ? false : true,
                                 loading: controller.isLoading,

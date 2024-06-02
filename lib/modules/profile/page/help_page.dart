@@ -83,13 +83,13 @@ class HelpPage extends BaseWidget<ProfileController> {
         body: SuperListView(
           physics: const ClampingScrollPhysics(),
           children: [
-            const SizedBox(height: 40),
+            SizedBox(height: height(context) * 0.03),
             text(
               'Fale com a gente :)',
               fontSize: 30,
               fontWeight: FontWeight.w600,
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: height(context) * 0.02),
             text(
               'Você vai receber a resposta no e-mail que cadastrou aqui',
               fontSize: 18,
@@ -123,14 +123,13 @@ class HelpPage extends BaseWidget<ProfileController> {
               colorLabel: colors.textSecondary,
               colorLabelFocus: colors.textSecondary,
               onChanged: controller.setTitleHelp,
+              textInputAction: TextInputAction.next,
             ),
-            const SizedBox(height: 40),
+            SizedBox(height: height(context) * 0.03),
             text('Motivo do contato *', fontWeight: FontWeight.w600),
             const SizedBox(height: 10),
             GestureDetector(
-              onTap: () {
-                _showOptions(context);
-              },
+              onTap: () => _showOptions(context),
               child: Container(
                 decoration: BoxDecoration(
                   color: colors.text2,
@@ -152,7 +151,8 @@ class HelpPage extends BaseWidget<ProfileController> {
                       return text(
                           controller.optionHelp ?? 'Escolha o motivo do contato',
                           fontSize: 18,
-                          fontWeight: FontWeight.w500);
+                          fontWeight: FontWeight.w300,
+                      );
                     }),
                     Icon(
                       Icons.arrow_forward_ios_rounded,
@@ -162,7 +162,7 @@ class HelpPage extends BaseWidget<ProfileController> {
                 ),
               ),
             ),
-            const SizedBox(height: 40),
+            SizedBox(height: height(context) * 0.03),
             text('Mensagem *', fontWeight: FontWeight.w600),
             const SizedBox(height: 10),
             VisualDisplay.textField(
@@ -179,21 +179,30 @@ class HelpPage extends BaseWidget<ProfileController> {
               minLines: 4,
               maxLines: 4,
               onChanged: controller.setMessageHelp,
+              onEditingComplete: (){
+                FocusScope.of(context).unfocus();
+              }
             ),
-            const SizedBox(height: 50),
-            Observer(builder: (_) {
-              return MyButton(
-                onPress: controller.enableButtonSendHelp() ? () {
-                  controller.postSupport(context);
-                } : null,
-                colorTitle: colors.text2,
-                loading: controller.loading,
-                title: 'Enviar mensagem',
-              );
-            }),
-            const SizedBox(height: 60),
+            SizedBox(height: height(context) * 0.03),
           ],
         ),
+        bottomNavigationBar: Observer(builder: (_) {
+          return Container(
+            margin: EdgeInsets.only(
+              left: 16,
+              right: 16,
+              bottom: MediaQuery.of(context).padding.bottom + 10,
+            ),
+            child: MyButton(
+              onPress: controller.enableButtonSendHelp() ? () {
+                controller.postSupport(context);
+              } : null,
+              colorTitle: colors.text2,
+              loading: controller.loading,
+              title: 'Enviar mensagem',
+            ),
+          );
+        }),
       );
     });
   }

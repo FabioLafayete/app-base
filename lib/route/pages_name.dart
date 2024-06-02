@@ -22,4 +22,7 @@ class PagesNames {
   static const String profileData = '/profile/data';
   static const String profileHelp = '/profile/help';
   static const String profileHelpCongrats = '/profile/help/congrats';
+
+  /// MAINTENANCE
+  static const String maintenance = '/maintenance/';
 }

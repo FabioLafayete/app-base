@@ -9,6 +9,7 @@ class SubscriptionSuccessPage extends BaseWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('CHEGOU AQUI');
     return BasePage(
       showAppBar: false,
       paddingPage: 0,
