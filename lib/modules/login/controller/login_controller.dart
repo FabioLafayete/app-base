@@ -20,9 +20,7 @@ abstract class LoginControllerBase extends BaseController with Store {
 
   LoginControllerBase({
     required this.repositoryImpl
-  }) : super(){
-    // setShowCode(true);
-  }
+  });
 
   final LoginRepositoryImpl repositoryImpl;
 
@@ -224,5 +222,6 @@ abstract class LoginControllerBase extends BaseController with Store {
     setShowCode(false);
     setErrorEmail(null);
     setErrorCode(null);
+    _timer?.cancel();
   }
 }
