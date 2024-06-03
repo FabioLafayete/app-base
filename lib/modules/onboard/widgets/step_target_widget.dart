@@ -12,7 +12,7 @@ class StepTargetWidget extends BaseWidget<OnboardController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        space(0.05, context),
+        space(0.05),
         text(
           'Qual o seu principal objetivo?',
           fontSize: 25,

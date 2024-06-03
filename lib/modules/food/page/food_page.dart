@@ -78,7 +78,7 @@ class FoodPage extends BaseWidget<FoodController> {
               items: List.generate(_categories.length, (index) => _categories[index]),
             ),
             if(navController.videoSelected != null)
-              space(0.12, context),
+              space(0.12),
             if(navController.videoSelected == null)
               const SizedBox(height: 40),
           ],

@@ -14,7 +14,7 @@ class SubscriptionSuccessPage extends BaseWidget {
       showAppBar: false,
       paddingPage: 0,
       body: Container(
-        width: width(context),
+        width: width,
         padding: const EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 24
@@ -28,8 +28,8 @@ class SubscriptionSuccessPage extends BaseWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.all(30),
-                  width: width(context) * 0.6,
-                  height: width(context) * 0.6,
+                  width: width * 0.6,
+                  height: width * 0.6,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(1000),

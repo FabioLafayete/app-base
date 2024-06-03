@@ -24,7 +24,7 @@ class HelpPage extends BaseWidget<ProfileController> {
           showAppBar: false,
           paddingPage: 0,
           body: Container(
-            width: width(context),
+            width: width,
             padding: const EdgeInsets.symmetric(
                 horizontal: 16,
                 vertical: 24
@@ -35,8 +35,8 @@ class HelpPage extends BaseWidget<ProfileController> {
               children: [
                 Container(
                   padding: const EdgeInsets.all(8),
-                  width: width(context) * 0.6,
-                  height: width(context) * 0.6,
+                  width: width * 0.6,
+                  height: width * 0.6,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(1000),
@@ -83,13 +83,13 @@ class HelpPage extends BaseWidget<ProfileController> {
         body: SuperListView(
           physics: const ClampingScrollPhysics(),
           children: [
-            SizedBox(height: height(context) * 0.03),
+            SizedBox(height: height * 0.03),
             text(
               'Fale com a gente :)',
               fontSize: 30,
               fontWeight: FontWeight.w600,
             ),
-            SizedBox(height: height(context) * 0.02),
+            SizedBox(height: height * 0.02),
             text(
               'Você vai receber a resposta no e-mail que cadastrou aqui',
               fontSize: 18,
@@ -125,7 +125,7 @@ class HelpPage extends BaseWidget<ProfileController> {
               onChanged: controller.setTitleHelp,
               textInputAction: TextInputAction.next,
             ),
-            SizedBox(height: height(context) * 0.03),
+            SizedBox(height: height * 0.03),
             text('Motivo do contato *', fontWeight: FontWeight.w600),
             const SizedBox(height: 10),
             GestureDetector(
@@ -162,7 +162,7 @@ class HelpPage extends BaseWidget<ProfileController> {
                 ),
               ),
             ),
-            SizedBox(height: height(context) * 0.03),
+            SizedBox(height: height * 0.03),
             text('Mensagem *', fontWeight: FontWeight.w600),
             const SizedBox(height: 10),
             VisualDisplay.textField(
@@ -183,7 +183,7 @@ class HelpPage extends BaseWidget<ProfileController> {
                 FocusScope.of(context).unfocus();
               }
             ),
-            SizedBox(height: height(context) * 0.03),
+            SizedBox(height: height * 0.03),
           ],
         ),
         bottomNavigationBar: Observer(builder: (_) {

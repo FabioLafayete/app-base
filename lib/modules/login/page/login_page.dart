@@ -14,7 +14,7 @@ class LoginPage extends BaseWidget<LoginController> {
   @override
   Widget build(BuildContext context) {
     return WelcomeWidget(
-        signInOnPress: (signUp) => _login(context, isSingUp: signUp));
+        signInOnPress: (signUp) => _login(context,isSingUp: signUp));
   }
 
   void _login(BuildContext context, {bool isSingUp = false}) {
@@ -27,7 +27,7 @@ class LoginPage extends BaseWidget<LoginController> {
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                         textAlign: TextAlign.start),
-                    space(0.03, context),
+                    space(0.03),
                     VisualDisplay.textField(
                       controller: controller.controllerEmail,
                       labelText: 'E-mail',
@@ -73,7 +73,7 @@ class LoginPage extends BaseWidget<LoginController> {
                       },
                     ),
                     if (controller.showPassword) ...[
-                      space(0.02, context),
+                      space(0.02),
                       VisualDisplay.textField(
                         controller: controller.controllerPassword,
                         labelText: 'Senha',
@@ -126,20 +126,20 @@ class LoginPage extends BaseWidget<LoginController> {
                         ),
                       )
                     ],
-                    space(0.03, context),
+                    space(0.03),
                     if (controller.showCode)
                       Container(
                         margin: EdgeInsets.symmetric(
-                                horizontal: width(context) * 0.01)
+                                horizontal: width * 0.01)
                             .copyWith(
-                          bottom: height(context) * 0.03,
+                          bottom: height * 0.03,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             text('Informe o código enviado no seu e-mail...',
                                 color: colors.textSecondary),
-                            space(0.02, context),
+                            space(0.02),
                             pinCodeInput(context),
                             if (controller.showCode)
                               Padding(
@@ -206,7 +206,7 @@ class LoginPage extends BaseWidget<LoginController> {
       onChanged: (value) => controller.setToken(value, context),
       maxLines: 1,
       contentPadding: const EdgeInsets.all(20).copyWith(left: 20),
-      letterSpacing: width(context) * 0.12,
+      letterSpacing: width * 0.12,
       inputMask: [
         TextInputMask(mask: ['99999']),
       ],

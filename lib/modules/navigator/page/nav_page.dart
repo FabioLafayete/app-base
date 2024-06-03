@@ -51,7 +51,7 @@ class NavPage extends BaseWidget<NavController> {
                         minHeight: 80,
                         backgroundColor: Colors.transparent,
                         controller: controller.miniplayerController,
-                        maxHeight: height(context),
+                        maxHeight: height,
                         builder: (heightPlayer, percentage){
                           controller.setPercentVideo(percentage);
                           controller.percent.add(percentage);

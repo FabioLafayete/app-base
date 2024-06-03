@@ -14,7 +14,7 @@ class StepTargetWeightWidget extends BaseWidget<OnboardController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        space(0.05, context),
+        space(0.05),
         text(
           'Qual seu peso desejado?',
           fontSize: 25,
@@ -22,7 +22,7 @@ class StepTargetWeightWidget extends BaseWidget<OnboardController> {
           fontWeight: FontWeight.w700,
           textAlign: TextAlign.center
         ),
-        space(0.1, context),
+        space(0.1),
         IntrinsicWidth(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -50,7 +50,7 @@ class StepTargetWeightWidget extends BaseWidget<OnboardController> {
                   }
                 ),
               ),
-              space(0.03, context, width: true),
+              space(0.03, width: true),
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: text(

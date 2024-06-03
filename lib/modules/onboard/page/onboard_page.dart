@@ -39,11 +39,11 @@ class OnboardPage extends BaseWidget<OnboardController> {
       showAppBar: false,
       body: SafeArea(
         child: Observer(builder: (_) => SizedBox(
-          height: height(context) - (padding.bottom + padding.top),
+          height: height - (padding.bottom + padding.top),
           child: SuperListView(
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              space(0.02, context),
+              space(0.02),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,7 +64,7 @@ class OnboardPage extends BaseWidget<OnboardController> {
                     ),
                   ),
                   SizedBox(
-                    width: width(context) * 0.55,
+                    width: width * 0.55,
                     child: VisualDisplay.progressBar(
                       context,
                         totalItems: items.length,
@@ -75,7 +75,7 @@ class OnboardPage extends BaseWidget<OnboardController> {
                 ],
               ),
               SizedBox(
-                height: height(context) * 0.7,
+                height: height * 0.7,
                 child: PageView.builder(
                   controller: controller.pageController,
                   physics: const NeverScrollableScrollPhysics(),

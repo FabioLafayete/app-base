@@ -27,12 +27,12 @@ class MaintenanceWidget extends BaseWidget {
             fontSize: 20,
             textAlign: TextAlign.center
           ),
-          SizedBox(height: height(context) * 0.03,),
+          SizedBox(height: height * 0.03,),
           SpinKitThreeBounce(
             color: colors.text2,
             size: 18,
           ),
-          SizedBox(height: height(context) * 0.03,),
+          SizedBox(height: height * 0.03,),
           text(
             'Pedimos desculpe pelo incomodo.',
             color: Colors.white,

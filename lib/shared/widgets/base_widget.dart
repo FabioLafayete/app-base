@@ -20,13 +20,13 @@ abstract class BaseWidget<T extends Object> extends StatelessWidget {
 
   final text = AppTheme().text;
 
-  width(BuildContext context)  => MediaQuery.of(context).size.width;
-  height(BuildContext context) => MediaQuery.of(context).size.height;
+  double get width => MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
+  double get height => MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
 
-  Widget space(double value, BuildContext context, {bool width = false}){
+  Widget space(double value, {bool width = false}){
     return SizedBox(
-      height: !width ? this.height(context) * value : 0,
-      width: width ? this.width(context) * value : 0,
+      height: !width ? this.height * value : 0,
+      width: width ? this.width * value : 0,
     );
   }
 

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../shared/widgets/image_cropper.dart';
 import '../controller/profile_controller.dart';
 import '../widgets/list_button.dart';
@@ -23,30 +24,31 @@ class ProfilePage extends BaseWidget<ProfileController> {
           children: [
             Container(
               margin: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top + (height(context) * 0.05),
+                top: MediaQuery.of(context).padding.top + (height * 0.05),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Observer(builder: (_) => ImageCropperWidget(
-                textImage: user.name,
-                title: user.name,
-                imageUrl: user.photoUrl,
-                loading: controller.loading,
-                onChange: (value){
-                  if(value != null) {
-                    controller.changePhoto(value);
-                  } else {
-                    controller.userController.deletePhotoUser();
-                  }
-                },
-                simpleView: true,
-              )),
+              child: Observer(
+                  builder: (_) => ImageCropperWidget(
+                        textImage: user.name,
+                        title: user.name,
+                        imageUrl: user.photoUrl,
+                        loading: controller.loading,
+                        onChange: (value) {
+                          if (value != null) {
+                            controller.changePhoto(value);
+                          } else {
+                            controller.userController.deletePhotoUser();
+                          }
+                        },
+                        simpleView: true,
+                      )),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  space(0.03, context),
+                  space(0.03),
                   // Container(
                   //   decoration: BoxDecoration(
                   //     borderRadius: BorderRadius.circular(10),
@@ -193,52 +195,77 @@ class ProfilePage extends BaseWidget<ProfileController> {
                   // space(0.03),
                   ListButton(
                     list: [
-                      ListButtonItem(title: 'Meus dados', icon: SvgPicture.asset(
-                        'assets/images/icon/svg/user.svg',
-                        height: 24,
-                        colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
-                      ), onPress: (){
-                        router.pushNamed(PagesNames.profileData);
-                      }),
-                      ListButtonItem(title: 'Política de privacidade', icon: SvgPicture.asset(
-                        'assets/images/icon/svg/shield-tick.svg',
-                        height: 24,
-                        colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
-                      ), onPress: (){}),
-                      ListButtonItem(title: 'Termos de uso', icon: SvgPicture.asset(
-                        'assets/images/icon/svg/document.svg',
-                        height: 24,
-                        colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
-                      ), onPress: (){}),
-                      ListButtonItem(title: 'Fale com a gente', icon: SvgPicture.asset(
-                        'assets/images/icon/svg/messages.svg',
-                        height: 24,
-                        colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
-                      ), onPress: (){
-                        router.pushNamed(PagesNames.profileHelp);
-                      }),
-                      ListButtonItem(title: 'Sair da conta', icon: SvgPicture.asset(
-                        'assets/images/icon/svg/signout.svg',
-                        height: 24,
-                        colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
-                      ), onPress: controller.logout, isLogout: true),
+                      ListButtonItem(
+                          title: 'Meus dados',
+                          icon: SvgPicture.asset(
+                            'assets/images/icon/svg/user.svg',
+                            height: 24,
+                            colorFilter: ColorFilter.mode(
+                                colors.textSecondary, BlendMode.srcIn),
+                          ),
+                          onPress: () {
+                            router.pushNamed(PagesNames.profileData);
+                          }),
+                      ListButtonItem(
+                        title: 'Política de privacidade',
+                        icon: SvgPicture.asset(
+                          'assets/images/icon/svg/shield-tick.svg',
+                          height: 24,
+                          colorFilter: ColorFilter.mode(
+                              colors.textSecondary, BlendMode.srcIn),
+                        ),
+                        onPress: () {
+                          launchUrl(Uri.parse(
+                              'https://ibetter.io/politica-de-privacidade/'));
+                        },
+                      ),
+                      ListButtonItem(
+                          title: 'Termos de uso',
+                          icon: SvgPicture.asset(
+                            'assets/images/icon/svg/document.svg',
+                            height: 24,
+                            colorFilter: ColorFilter.mode(
+                                colors.textSecondary, BlendMode.srcIn),
+                          ),
+                          onPress: () {
+                            launchUrl(
+                                Uri.parse('https://ibetter.io/termos-de-uso'));
+                          }),
+                      ListButtonItem(
+                          title: 'Fale com a gente',
+                          icon: SvgPicture.asset(
+                            'assets/images/icon/svg/messages.svg',
+                            height: 24,
+                            colorFilter: ColorFilter.mode(
+                                colors.textSecondary, BlendMode.srcIn),
+                          ),
+                          onPress: () {
+                            router.pushNamed(PagesNames.profileHelp);
+                          }),
+                      ListButtonItem(
+                          title: 'Sair da conta',
+                          icon: SvgPicture.asset(
+                            'assets/images/icon/svg/signout.svg',
+                            height: 24,
+                            colorFilter: ColorFilter.mode(
+                                colors.textSecondary, BlendMode.srcIn),
+                          ),
+                          onPress: controller.logout,
+                          isLogout: true),
                     ],
                   ),
                 ],
               ),
             ),
             Observer(builder: (_) {
-              if(controller.version != null) {
+              if (controller.version != null) {
                 return Container(
                   margin: const EdgeInsets.symmetric(vertical: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      text(
-                          controller.version!,
-                          color: colors.text.withOpacity(0.4),
-                        fontSize: 12
-                      ),
+                      text(controller.version!,
+                          color: colors.text.withOpacity(0.4), fontSize: 12),
                     ],
                   ),
                 );
@@ -246,20 +273,19 @@ class ProfilePage extends BaseWidget<ProfileController> {
               return const SizedBox.shrink();
             })
           ],
-        )
-    );
+        ));
   }
 
-  Widget typeImc(){
+  Widget typeImc() {
     late Color color;
     late String typeString;
-    if(imc() > 30){
+    if (imc() > 30) {
       color = Colors.redAccent;
       typeString = 'OBESIDADE';
-    } else if(imc() > 24.99 && imc() < 31){
+    } else if (imc() > 24.99 && imc() < 31) {
       color = Colors.orangeAccent;
       typeString = 'SOBREPESO';
-    } else if(imc() > 18.5 && imc() < 25){
+    } else if (imc() > 18.5 && imc() < 25) {
       color = Colors.green;
       typeString = 'NORMAL';
     } else {
@@ -272,18 +298,12 @@ class ProfilePage extends BaseWidget<ProfileController> {
         color: color,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-      child: text(
-        typeString,
-        color: Colors.white,
-        fontWeight: FontWeight.w600,
-        fontSize: 10
-
-      ),
+      child: text(typeString,
+          color: Colors.white, fontWeight: FontWeight.w600, fontSize: 10),
     );
   }
 
-  double imc(){
-   return (user.weight! / ((user.height! / 100) * (user.height! / 100)));
+  double imc() {
+    return (user.weight! / ((user.height! / 100) * (user.height! / 100)));
   }
-
 }

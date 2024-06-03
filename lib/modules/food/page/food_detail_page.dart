@@ -23,15 +23,15 @@ class FoodDetailPage extends BaseWidget {
       paddingPage: 0,
       body: SlidingUpPanel(
         renderPanelSheet: true,
-        minHeight: height(context) * 0.62,
-        maxHeight: ((height(context) * 0.9) - MediaQuery.of(context).padding.top),
+        minHeight: height * 0.62,
+        maxHeight: ((height * 0.9) - MediaQuery.of(context).padding.top),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(15),
           topRight: Radius.circular(15),
         ),
         body: Container(
-            height: height(context),
-            width: width(context),
+            height: height,
+            width: width,
             alignment: Alignment.topCenter,
             child: _imageTop(context)
         ),
@@ -192,8 +192,8 @@ class FoodDetailPage extends BaseWidget {
         if(model.image!.contains('assets/image'))
           Image.asset(
             model.image!,
-            width: width(context),
-            height: height(context) * 0.4,
+            width: width,
+            height: height * 0.4,
             alignment: Alignment.bottomCenter,
             fit: BoxFit.cover,
           )
@@ -201,8 +201,8 @@ class FoodDetailPage extends BaseWidget {
         CachedNetworkImage(
           fadeInDuration: const Duration(milliseconds: 400),
           imageUrl: model.image ?? '',
-          width: width(context),
-          height: height(context) * 0.4,
+          width: width,
+          height: height * 0.4,
           alignment: Alignment.bottomCenter,
           fit: BoxFit.cover,
           imageBuilder: (_, img) {

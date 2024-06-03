@@ -74,9 +74,9 @@ class ListCardItems extends BaseWidget {
             ],
           ),
         ),
-        space(0.01, context),
+        space(0.01),
         SizedBox(
-          height: width(context) * 0.57,
+          height: width * 0.57,
           child: SuperListView(
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
@@ -99,7 +99,7 @@ class ListCardItems extends BaseWidget {
       },
       child: Container(
         margin: EdgeInsets.only(left: index == 0 ? 16 : 0, right: index + 1 == listItems.length ? 16 : 10),
-        width: width(context) * 0.7,
+        width: width * 0.7,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -115,14 +115,14 @@ class ListCardItems extends BaseWidget {
                         CachedNetworkImage(
                           fadeInDuration: const Duration(milliseconds: 300),
                           imageUrl: listItems[index].thumbnail,
-                          width: width(context),
+                          width: width,
                           alignment: Alignment.topCenter,
                           fit: BoxFit.cover,
                         )
                       else
                         Image.asset(
                           listItems[index].thumbnail,
-                          width: width(context),
+                          width: width,
                           alignment: Alignment.topCenter,
                           fit: BoxFit.cover,
                           isAntiAlias: true,
@@ -158,21 +158,21 @@ class ListCardItems extends BaseWidget {
                 ),
               ),
             ),
-            space(0.01, context),
+            space(0.01),
             if(item.typeTraining != null)
               ...[
                 text(item.typeTraining!,
                     fontSize: 10,
                     fontWeight: FontWeight.w700,
                     color: invertColors ? colors.text2 : colors.primary),
-                space(0.005, context),
+                space(0.005),
               ],
             text(item.description,
                 fontWeight: FontWeight.w600,
                 maxLines: 2,
                 textOverflow: TextOverflow.ellipsis,
                 color: invertColors ? colors.text2 : colors.text),
-            space(0.005, context),
+            space(0.005),
             Row(
               children: [
                 if(item.trainer != null)

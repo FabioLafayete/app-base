@@ -26,7 +26,7 @@ class TopPresentation extends BaseWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: height(context) * 0.45,
+        height: height * 0.45,
         child: ClipRRect(
           borderRadius: const BorderRadius.only(
             bottomRight: Radius.circular(0),
@@ -44,7 +44,7 @@ class TopPresentation extends BaseWidget {
 
   Widget _information(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: height(context) * 0.02)
+      margin: EdgeInsets.only(bottom: height * 0.02)
           .copyWith(left: 16, right: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -61,7 +61,7 @@ class TopPresentation extends BaseWidget {
                   fontWeight: FontWeight.w600,
                   color: colors.background),
             ),
-            space(0.01, context),
+            space(0.01),
           ],
           text(
             cardItemModel.description,
@@ -71,7 +71,7 @@ class TopPresentation extends BaseWidget {
             color: colors.background,
             fontSize: 24,
           ),
-          space(0.015, context),
+          space(0.015),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -97,7 +97,7 @@ class TopPresentation extends BaseWidget {
                 button(context),
             ],
           ),
-          space(0.02, context),
+          space(0.02),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -148,8 +148,8 @@ class TopPresentation extends BaseWidget {
     if (!cardItemModel.thumbnail.contains('http')) {
       return Image.asset(
         cardItemModel.thumbnail,
-        width: width(context),
-        height: height(context) * 0.45,
+        width: width,
+        height: height * 0.45,
         alignment: Alignment.bottomCenter,
         fit: BoxFit.cover,
       );
@@ -157,8 +157,8 @@ class TopPresentation extends BaseWidget {
     return CachedNetworkImage(
       fadeInDuration: const Duration(milliseconds: 300),
       imageUrl: cardItemModel.thumbnail,
-      width: width(context),
-      height: height(context) * 0.45,
+      width: width,
+      height: height * 0.45,
       alignment: Alignment.bottomCenter,
       fit: BoxFit.cover,
     );
@@ -166,7 +166,7 @@ class TopPresentation extends BaseWidget {
 
   Widget _effectImage(BuildContext context) {
     return Container(
-      height: height(context) * 0.45,
+      height: height * 0.45,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: FractionalOffset.topCenter,

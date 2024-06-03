@@ -13,7 +13,7 @@ class StepLimitationWidget extends BaseWidget<OnboardController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        space(0.05, context),
+        space(0.05),
         text(
           'Tem alguma limitação física?',
           fontSize: 25,

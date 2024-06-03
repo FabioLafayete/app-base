@@ -186,7 +186,7 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
 
   Widget _effectImage(BuildContext context){
     return Container(
-      height: height(context) * 0.45,
+      height: height * 0.45,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: FractionalOffset.topCenter,
@@ -205,16 +205,16 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
     if(!controller.state.programModel!.thumbnail.contains('http')) {
       return Image.asset(
       controller.state.programModel!.thumbnail,
-      width: width(context),
-      height: height(context) * 0.45,
+      width: width,
+      height: height * 0.45,
       fit: BoxFit.cover,
     );
     }
     return CachedNetworkImage(
       fadeInDuration: const Duration(milliseconds: 300),
       imageUrl: controller.state.programModel!.thumbnail,
-      width: width(context),
-      height: height(context) * 0.45,
+      width: width,
+      height: height * 0.45,
       fit: BoxFit.cover,
     );
   }

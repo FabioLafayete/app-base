@@ -101,7 +101,7 @@ class ListImagesWidget extends BaseWidget {
 
   Widget _effectImage(BuildContext context){
     return Container(
-      height: height(context) * 0.4,
+      height: height * 0.4,
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: FractionalOffset.topCenter,

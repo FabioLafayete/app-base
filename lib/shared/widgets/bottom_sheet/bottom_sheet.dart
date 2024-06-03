@@ -29,7 +29,7 @@ class CustomBottomSheet extends BaseWidget<NavController> {
             children: [
               Container(
                 height: 5,
-                width: width(context) * 0.2,
+                width: width * 0.2,
                 margin: const EdgeInsets.only(bottom: 10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
@@ -41,22 +41,22 @@ class CustomBottomSheet extends BaseWidget<NavController> {
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
                     // height: !hasHeight ? null : (height * controller.heightBottomSheet),
-                    width: width(context),
+                    width: width,
                     padding: const EdgeInsets.all(16).copyWith(
                         top: 30
                     ),
                     decoration: BoxDecoration(
                         color: AppColors().background,
                         borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(width(context) * 0.08),
-                          topRight: Radius.circular(width(context) * 0.08),
+                          topLeft: Radius.circular(width * 0.08),
+                          topRight: Radius.circular(width * 0.08),
                         )
                     ),
                     child: child,
                   ),
                   Positioned(
-                    top: height(context) * 0.02,
-                    right: width(context) * 0.04,
+                    top: height * 0.02,
+                    right: width * 0.04,
                     child: IconButton(
                       icon: const Icon(Icons.close),
                       color: AppColors().text,

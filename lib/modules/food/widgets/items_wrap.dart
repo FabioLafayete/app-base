@@ -50,16 +50,16 @@ class ItemsWrapWidget extends BaseWidget {
                     item.image,
                     alignment: Alignment.center,
                     fit: BoxFit.cover,
-                    width: width(context),
-                    height: height(context),
+                    width: width,
+                    height: height,
                   ) :
                   CachedNetworkImage(
                       fadeInDuration: const Duration(milliseconds: 300),
                       imageUrl: item.image,
                       alignment: Alignment.center,
                       fit: BoxFit.cover,
-                      width: width(context),
-                      height: height(context),
+                      width: width,
+                      height: height,
                       placeholder: (context, url) => Shimmer.fromColors(
                         baseColor: Colors.grey.withOpacity(0.8),
                         highlightColor: Colors.grey.withOpacity(0.6),

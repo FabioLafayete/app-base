@@ -74,7 +74,7 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
                     );
                   },
                 ),
-                space(0.07, context),
+                space(0.07),
                 _bottomCard(
                   'Precisa de ajuda?',
                   'Envie uma mensagem para nossa equipe de suporte',

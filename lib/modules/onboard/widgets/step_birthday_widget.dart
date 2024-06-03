@@ -13,7 +13,7 @@ class StepBirthdayWidget extends BaseWidget<OnboardController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        space(0.05, context),
+        space(0.05),
         text(
           'E sua data de nascimento?',
           fontSize: 25,
@@ -21,7 +21,7 @@ class StepBirthdayWidget extends BaseWidget<OnboardController> {
           fontWeight: FontWeight.w700,
           textAlign: TextAlign.center
         ),
-        space(0.2, context),
+        space(0.2),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Observer(builder: (_) => DatePickerWidget(

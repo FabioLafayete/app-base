@@ -52,7 +52,7 @@ class ListCardFood extends BaseWidget {
             ],
           ),
         ),
-        space(0.01, context),
+        space(0.01),
         SizedBox(
           height:  250,
           child: SuperListView(
@@ -99,8 +99,8 @@ class ListCardFood extends BaseWidget {
                             fadeInDuration: const Duration(milliseconds: 300),
                             imageUrl: listItems[index].thumbnail,
                             alignment: Alignment.center,
-                            width: width(context),
-                            height: height(context),
+                            width: width,
+                            height: height,
                             fit: BoxFit.cover,
                             placeholder: (context, url) => Shimmer.fromColors(
                               baseColor: Colors.grey.withOpacity(0.8),
@@ -117,8 +117,8 @@ class ListCardFood extends BaseWidget {
                           Image.asset(
                             listItems[index].thumbnail,
                             alignment: Alignment.center,
-                            width: width(context),
-                            height: height(context),
+                            width: width,
+                            height: height,
                             fit: BoxFit.cover,
                           ),
                         if(showFavorite)
@@ -140,7 +140,7 @@ class ListCardFood extends BaseWidget {
                 ),
               ),
               Container(
-                width: width(context),
+                width: width,
                 padding: const EdgeInsets.all(12).copyWith(top: 8, bottom: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
