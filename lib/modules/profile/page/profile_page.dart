@@ -248,7 +248,8 @@ class ProfilePage extends BaseWidget<ProfileController> {
                             'assets/images/icon/svg/signout.svg',
                             height: 24,
                             colorFilter: ColorFilter.mode(
-                                colors.textSecondary, BlendMode.srcIn),
+                                colors.textSecondary, BlendMode.srcIn,
+                            ),
                           ),
                           onPress: controller.logout,
                           isLogout: true),

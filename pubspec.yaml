@@ -92,11 +92,11 @@ flutter:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/logo-icon.png"
+  image_path: "assets/iBetter.jpg"
   min_sdk_android: 19
   macos:
     generate: true
-    image_path: "assets/logo-icon.png"
+    image_path: "assets/iBetter.jpg"
 
 
 flutter_intl:

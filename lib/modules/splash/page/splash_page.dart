@@ -1,11 +1,8 @@
-import 'package:app/shared/widgets/app_theme_widget.dart';
 import 'package:app/config/app_config.dart';
 import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/widgets/base_page.dart';
-import 'package:app/shared/widgets/maintenance_widget.dart';
 import 'package:app/util/colors.dart';
-import 'package:app/util/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../../shared/modules/user/controller/user_controller.dart';
@@ -21,6 +18,8 @@ class _SplashPageState extends State<SplashPage> {
 
   late final remoteConfig = FirebaseRemoteConfigService();
 
+  final size = MediaQueryData.fromView(WidgetsBinding.instance.window).size;
+
   @override
   void initState() {
     super.initState();
@@ -34,7 +33,6 @@ class _SplashPageState extends State<SplashPage> {
       AppConfig().load(),
       remoteConfig.init(),
     ]);
-    print(remoteConfig.isMaintenance);
     if(remoteConfig.isMaintenance){
       MyRouter().pushReplacementNamed(PagesNames.maintenance);
       return;
@@ -62,12 +60,10 @@ class _SplashPageState extends State<SplashPage> {
         alignment: Alignment.center,
         children: [
           _background(),
-          AppTheme().text(
-              'iBetter',
-              fontSize: 35,
-              fontWeight: FontWeight.w600,
-              color: AppColors().background
-          )
+          Image.asset(
+            'assets/images/ibetter-logo-white.png',
+            width: size.width * 0.45,
+          ),
         ],
       ),
     );
