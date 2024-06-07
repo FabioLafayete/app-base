@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class StepBirthdayWidget extends BaseWidget<OnboardController> {
+class StepBirthdayWidget extends BaseState<OnboardController> {
   StepBirthdayWidget({Key? key}) : super(key: key);
 
   @override

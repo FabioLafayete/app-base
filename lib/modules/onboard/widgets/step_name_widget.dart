@@ -4,7 +4,7 @@ import 'package:app/shared/widgets/visual_display.dart';
 import 'package:flutter/material.dart';
 
 
-class StepName extends BaseWidget<OnboardController> {
+class StepName extends BaseState<OnboardController> {
   StepName({Key? key}) : super(key: key);
 
   @override

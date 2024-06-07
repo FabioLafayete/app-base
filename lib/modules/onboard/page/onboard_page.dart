@@ -15,7 +15,7 @@ import '../widgets/step_weight_widget.dart';
 import '../widgets/step_height_widget.dart';
 import '../widgets/step_target_weight_widget.dart';
 
-class OnboardPage extends BaseWidget<OnboardController> {
+class OnboardPage extends BaseState<OnboardController> {
 
   OnboardPage({Key? key}) : super(key: key);
 

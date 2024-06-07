@@ -10,7 +10,7 @@ import '../../../shared/widgets/image_cropper.dart';
 import '../controller/profile_controller.dart';
 import '../widgets/list_button.dart';
 
-class ProfilePage extends BaseWidget<ProfileController> {
+class ProfilePage extends BaseState<ProfileController> {
   ProfilePage({Key? key}) : super(key: key);
 
   @override

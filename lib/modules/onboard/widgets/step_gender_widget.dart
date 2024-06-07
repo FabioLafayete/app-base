@@ -4,7 +4,7 @@ import 'package:app/shared/widgets/select_item/select_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class StepGender extends BaseWidget<OnboardController> {
+class StepGender extends BaseState<OnboardController> {
   StepGender({Key? key}) : super(key: key);
 
   @override

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../../../route/pages_name.dart';
 
 
-class StepTargetWeightWidget extends BaseWidget<OnboardController> {
+class StepTargetWeightWidget extends BaseState<OnboardController> {
   StepTargetWeightWidget({Key? key}) : super(key: key);
 
   @override

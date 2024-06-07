@@ -5,7 +5,7 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 
-class CongratsPage extends BaseWidget {
+class CongratsPage extends BaseState {
   CongratsPage({super.key});
 
   @override

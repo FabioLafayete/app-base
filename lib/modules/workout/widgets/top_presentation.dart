@@ -10,7 +10,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../shared/widgets/multiple_users.dart';
 
-class TopPresentation extends BaseWidget {
+class TopPresentation extends BaseState {
   TopPresentation({
     Key? key,
     required this.cardItemModel,

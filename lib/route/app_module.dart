@@ -1,3 +1,4 @@
+import 'package:app/config/app_local.dart';
 import 'package:app/modules/splash/module/splash_module.dart';
 import 'package:app/modules/workout/controller/workout_controller.dart';
 import 'package:app/modules/workout/module/workout_module.dart';
@@ -32,6 +33,7 @@ class AppModule extends Module {
     i.addSingleton(() => MyRouter.instance());
     i.addSingleton(() => SecureStorageService.instance);
     i.addSingleton(() => AppConfig.instance);
+    i.addSingleton(() => AppLocal.instance);
     i.addSingleton(() => FirebaseRemoteConfigService.instance);
     i.addSingleton(() => NavController());
     i.addSingleton(() =>

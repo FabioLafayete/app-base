@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 
-class StepLimitationWidget extends BaseWidget<OnboardController> {
+class StepLimitationWidget extends BaseState<OnboardController> {
   StepLimitationWidget({Key? key}) : super(key: key);
 
   @override

@@ -12,7 +12,7 @@ import '../widgets/list_images_widget.dart';
 import 'home_mock.dart';
 
 
-class HomePage extends BaseWidget<HomeController> {
+class HomePage extends BaseState<HomeController> {
   HomePage({Key? key}) : super(key: key);
 
   final navController = Modular.get<NavController>();

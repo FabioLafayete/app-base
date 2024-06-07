@@ -66,14 +66,6 @@
                 <data android:host="ibetter.page.link" />
             </intent-filter>
 
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" />
-                <data android:host="novaplataforma.page.link" />
-            </intent-filter>
-
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -89,16 +81,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-
-       <provider
-           android:name="com.pichillilorenzo.flutter_inappwebview_android.InAppWebViewFileProvider"
-           android:authorities="${applicationId}.flutter_inappwebview_android.fileprovider"
-           android:exported="false"
-           android:grantUriPermissions="true">
-           <meta-data
-               android:name="android.support.FILE_PROVIDER_PATHS"
-               android:resource="@xml/provider_paths" />
-       </provider>
 
     </application>
 </manifest>

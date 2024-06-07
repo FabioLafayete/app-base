@@ -1,4 +1,5 @@
 import 'package:app/config/app_config.dart';
+import 'package:app/config/app_local.dart';
 import 'package:app/route/my_router.dart';
 import 'package:app/shared/model/user/user_model.dart';
 import 'package:app/shared/modules/user/controller/user_controller.dart';
@@ -7,15 +8,18 @@ import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-abstract class BaseWidget<T extends Object> extends StatelessWidget {
+abstract class BaseState<T extends Object> extends StatelessWidget {
 
-  BaseWidget({Key? key}) : super(key: key);
+  BaseState({Key? key}) : super(key: key);
 
   final Set<T> _value = <T>{};
+
   final MyRouter router = MyRouter();
   final AppColors colors = AppColors();
   final AppConfig config = AppConfig();
+  final AppLocal local = AppLocal();
   final AppTheme appTheme = AppTheme();
+
   UserModel get user => Modular.get<UserController>().user;
 
   final text = AppTheme().text;

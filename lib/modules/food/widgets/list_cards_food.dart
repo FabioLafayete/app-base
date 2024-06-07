@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
-class ListCardFood extends BaseWidget {
+class ListCardFood extends BaseState {
   ListCardFood({
     Key? key,
     required this.title,

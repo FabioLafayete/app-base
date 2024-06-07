@@ -7,7 +7,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
-class ListCardItems extends BaseWidget {
+class ListCardItems extends BaseState {
   ListCardItems({
     Key? key,
     required this.title,

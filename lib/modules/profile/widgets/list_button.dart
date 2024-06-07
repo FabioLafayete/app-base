@@ -1,7 +1,7 @@
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
 
-class ListButton extends BaseWidget {
+class ListButton extends BaseState {
   ListButton({
     Key? key,
     required this.list

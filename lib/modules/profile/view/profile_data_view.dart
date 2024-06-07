@@ -11,7 +11,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../shared/widgets/image_cropper.dart';
 import '../widgets/list_button.dart';
 
-class ProfileDataView extends BaseWidget<ProfileController> {
+class ProfileDataView extends BaseState<ProfileController> {
   ProfileDataView({Key? key}) : super(key: key);
 
   @override

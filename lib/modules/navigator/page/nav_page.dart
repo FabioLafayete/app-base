@@ -13,7 +13,7 @@ import '../../food/page/food_page.dart';
 import '../../profile/page/profile_page.dart';
 import '../../workout/page/workout_page.dart';
 
-class NavPage extends BaseWidget<NavController> {
+class NavPage extends BaseState<NavController> {
   NavPage({Key? key}) : super(key: key);
 
 

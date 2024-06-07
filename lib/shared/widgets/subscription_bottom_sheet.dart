@@ -20,7 +20,7 @@ class SubscriptionBottomSheet extends StatefulWidget {
       backgroundColor: Colors.transparent,
       isScrollControlled: true,
       isDismissible: true,
-      enableDrag: true,
+      enableDrag: false,
       builder: (_) => this,
     );
   }

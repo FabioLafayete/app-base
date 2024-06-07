@@ -8,13 +8,17 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class LoginPage extends BaseWidget<LoginController> {
+class LoginPage extends BaseState<LoginController> {
   LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return WelcomeWidget(
-        signInOnPress: (signUp) => _login(context,isSingUp: signUp));
+      signInOnPress: (signUp) => _login(
+        context,
+        isSingUp: signUp,
+      ),
+    );
   }
 
   void _login(BuildContext context, {bool isSingUp = false}) {
@@ -129,8 +133,7 @@ class LoginPage extends BaseWidget<LoginController> {
                     space(0.03),
                     if (controller.showCode)
                       Container(
-                        margin: EdgeInsets.symmetric(
-                                horizontal: width * 0.01)
+                        margin: EdgeInsets.symmetric(horizontal: width * 0.01)
                             .copyWith(
                           bottom: height * 0.03,
                         ),
@@ -145,15 +148,17 @@ class LoginPage extends BaseWidget<LoginController> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
                                 child: MyButton(
-                                  title: 'Enviar novo código${controller.timerCount <= 1 ? '' : ' - ${controller.timerCount}'}',
-                                  colorTitle:  controller.timerCount == 0 ?
-                                  colors.primary :
-                                  colors.primary.withOpacity(0.3),
+                                  title:
+                                      'Enviar novo código${controller.timerCount <= 1 ? '' : ' - ${controller.timerCount}'}',
+                                  colorTitle: controller.timerCount == 0
+                                      ? colors.primary
+                                      : colors.primary.withOpacity(0.3),
                                   cleanButton: true,
                                   loading: controller.isLoadingSendCode,
                                   loadingColor: colors.primary,
-                                  onPress: controller.timerCount <= 1 ?
-                                      () => controller.resendCode(context) : null,
+                                  onPress: controller.timerCount <= 1
+                                      ? () => controller.resendCode(context)
+                                      : null,
                                 ),
                               )
                           ],
@@ -189,7 +194,6 @@ class LoginPage extends BaseWidget<LoginController> {
   }
 
   Widget pinCodeInput(BuildContext context) {
-
     return VisualDisplay.textField(
       controller: controller.controllerCode,
       labelText: 'Token',

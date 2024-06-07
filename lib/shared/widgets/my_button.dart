@@ -2,7 +2,7 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class MyButton extends BaseWidget {
+class MyButton extends BaseState {
   MyButton({
     Key? key,
     required this.title,

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:app/config/app_local.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/my_button.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
   bool showImages = false;
 
   final secure = Modular.get<SecureStorageService>();
+
+
 
   @override
   initState() {
@@ -107,11 +110,14 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                      width: width * 0.75,
-                      child: text('Bem-vinda ao iBetter',
-                          fontSize: height * 0.047,
-                          fontWeight: FontWeight.w600,
-                          color: colors.background)),
+                    width: width * 0.75,
+                    child: text(
+                      'Bem-vinda ao iBetter',
+                      fontSize: height * 0.047,
+                      fontWeight: FontWeight.w600,
+                      color: colors.background,
+                    ),
+                  ),
                   SizedBox(height: height * 0.04),
                   text(
                     'Explore nossa motivação e encontre sua força',
@@ -225,7 +231,6 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
               // Color(0xFF00bcd4),
               // Color(0xFF00bcd4),
               // Color(0xFF3bbdbf),
-
 
               // Color(0xFF00e2d1),
               // Color(0xFF00e2d1),

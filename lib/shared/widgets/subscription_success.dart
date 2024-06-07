@@ -4,7 +4,7 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 
-class SubscriptionSuccessPage extends BaseWidget {
+class SubscriptionSuccessPage extends BaseState {
   SubscriptionSuccessPage({super.key});
 
   @override

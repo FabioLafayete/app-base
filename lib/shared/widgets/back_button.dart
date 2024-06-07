@@ -1,7 +1,7 @@
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
 
-class MyBackButton extends BaseWidget {
+class MyBackButton extends BaseState {
   MyBackButton({
     super.key,
     this.onPress,

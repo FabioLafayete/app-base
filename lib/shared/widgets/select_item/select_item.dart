@@ -2,7 +2,7 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class SelectItem extends BaseWidget {
+class SelectItem extends BaseState {
   SelectItem({
     Key? key,
     required this.items,

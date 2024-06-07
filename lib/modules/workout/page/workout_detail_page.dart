@@ -13,7 +13,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
-class WorkoutDetailPage extends BaseWidget<WorkoutController> {
+class WorkoutDetailPage extends BaseState<WorkoutController> {
   WorkoutDetailPage({
     Key? key,
   }) : super(key: key);

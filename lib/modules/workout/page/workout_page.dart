@@ -13,7 +13,7 @@ import '../../navigator/controller/nav_controller.dart';
 import '../widgets/list_cards_items.dart';
 import '../widgets/top_presentation.dart';
 
-class WorkoutPage extends BaseWidget<WorkoutController> {
+class WorkoutPage extends BaseState<WorkoutController> {
   WorkoutPage({Key? key}) : super(key: key);
 
   final navController = Modular.get<NavController>();

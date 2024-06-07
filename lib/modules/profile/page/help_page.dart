@@ -9,7 +9,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
-class HelpPage extends BaseWidget<ProfileController> {
+class HelpPage extends BaseState<ProfileController> {
 
   final bool isLoginRequest;
 

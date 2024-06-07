@@ -4,7 +4,7 @@ import 'package:app/shared/widgets/visual_display.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 
-class StepWeightWidget extends BaseWidget<OnboardController> {
+class StepWeightWidget extends BaseState<OnboardController> {
   StepWeightWidget({Key? key}) : super(key: key);
 
   @override

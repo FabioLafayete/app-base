@@ -3,7 +3,7 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class BasePage extends BaseWidget {
+class BasePage extends BaseState {
   BasePage({
     Key? key,
     required this.body,

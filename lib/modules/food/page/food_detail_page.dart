@@ -8,7 +8,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
-class FoodDetailPage extends BaseWidget {
+class FoodDetailPage extends BaseState {
   FoodDetailPage({
     super.key,
     required this.model

@@ -16,7 +16,7 @@ import '../../workout/widgets/list_cards_items.dart';
 import '../widgets/items_wrap.dart';
 import '../widgets/list_cards_food.dart';
 
-class FoodPage extends BaseWidget<FoodController> {
+class FoodPage extends BaseState<FoodController> {
   FoodPage({Key? key}) : super(key: key);
 
   final navController = Modular.get<NavController>();

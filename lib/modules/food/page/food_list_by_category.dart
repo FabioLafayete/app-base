@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../../route/pages_name.dart';
 
-class FoodListByCategory extends BaseWidget {
+class FoodListByCategory extends BaseState {
   FoodListByCategory({
     super.key,
     required this.listFoodDetailModel,

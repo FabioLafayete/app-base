@@ -4,7 +4,7 @@ import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class CustomBottomSheet extends BaseWidget<NavController> {
+class CustomBottomSheet extends BaseState<NavController> {
 
   CustomBottomSheet({
     Key? key,
