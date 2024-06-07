@@ -18,38 +18,66 @@ import 'shared/constants/string_contants.dart';
 
 void main() async {
   runZonedGuarded(() async {
+
     await _preload();
+    BuildContext? context;
+
+    FlutterError.onError = (details) {
+      FlutterError.presentError(details);
+      if (!kDebugMode) {
+        FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+      }
+    };
+
+    PlatformDispatcher.instance.onError = (error, stack) {
+      if (!kDebugMode) {
+        FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      }
+      return true;
+    };
+
     await SentryFlutter.init(
       (options) {
         options.dsn = StringConstants.sentryUrl;
         options.tracesSampleRate = 1.0;
         options.profilesSampleRate = 1.0;
       },
-      appRunner: () => runApp(
-        ModularApp(
-          module: AppModule(),
-          child: ToastificationWrapper(
-            child: RestartWidget(
-              child: MaterialApp.router(
-                debugShowCheckedModeBanner: false,
-                locale: const Locale('pt', 'BR'),
-                theme: ThemeData(fontFamily: 'Inter'),
-                routerConfig: Modular.routerConfig,
+      appRunner: () => runApp(ValueListenableBuilder(
+        valueListenable: AppLocal().local,
+        builder: (_, __, ___) {
+          if(context != null){
+            RestartWidget.restartApp(context!);
+          }
+          return ModularApp(
+            module: AppModule(),
+            child: ToastificationWrapper(
+              child: RestartWidget(
+                child: MaterialApp.router(
+                  debugShowCheckedModeBanner: false,
+                  locale: const Locale('pt', 'BR'),
+                  theme: ThemeData(fontFamily: 'Inter'),
+                  routerConfig: Modular.routerConfig,
+                  builder: (_, child){
+                    context = _;
+                    return child!;
+                  },
+                ),
               ),
             ),
-          ),
-        ),
-      ),
+          );
+        },
+      )),
     );
   }, (error, stack) {
-    if (kDebugMode) {
-      print(error);
+    if (!kDebugMode) {
+      FirebaseCrashlytics.instance.recordError(error, stack);
+      Sentry.captureException(
+        error,
+        stackTrace: stack,
+      );
+      return;
     }
-    FirebaseCrashlytics.instance.recordError(error, stack);
-    Sentry.captureException(
-      error,
-      stackTrace: stack,
-    );
+    print(error);
   });
 }
 
@@ -69,3 +97,5 @@ Future _preload() async {
 
   Modular.setInitialRoute(PagesNames.splash);
 }
+
+

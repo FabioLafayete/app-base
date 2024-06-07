@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:app/config/app_local.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/my_button.dart';
 import 'package:flutter/material.dart';

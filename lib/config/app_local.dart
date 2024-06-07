@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 
-import '../shared/widgets/restart_app.dart';
-
 class AppLocal {
 
   factory AppLocal() => GetIt.instance.get<AppLocal>();
@@ -15,7 +13,7 @@ class AppLocal {
 
   late Map<LanguageLocal, dynamic> _tr;
 
-  LanguageLocal _local = LanguageLocal.pt;
+  final ValueNotifier<LanguageLocal> _local = ValueNotifier(LanguageLocal.pt);
 
   Future load() async {
     List response = await Future.wait([
@@ -29,14 +27,13 @@ class AppLocal {
     };
   }
 
-  void setLocal(LanguageLocal value, BuildContext context) {
-    if(value == _local) return;
-    _local = value;
-    RestartWidget.restartApp(context);
+  void setLocal(LanguageLocal value) {
+    if(value == _local.value) return;
+    _local.value = value;
   }
 
-  LanguageLocal get local => _local;
-  Map<String, dynamic> get tr => _tr[_local];
+  ValueNotifier<LanguageLocal> get local => _local;
+  Map<String, dynamic> get tr => _tr[_local.value];
 }
 
 enum LanguageLocal {
