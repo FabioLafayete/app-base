@@ -1,4 +1,26 @@
 {
   "language": "PORTUGUES",
-  "title": "IBETTER - PORTUGA"
+  "login": {
+    "title": "Bem-vinda ao iBetter",
+    "description": "Explore nossa motivação e encontre sua força",
+    "buttonLogin": "ENTRAR",
+    "doNotHaveAccount": "Não tem cadastro? Adquira aqui",
+    "bottomSheet": {
+      "title": "Entrar na minha conta",
+      "titleSignUp": "Criar conta",
+      "emailHint": "E-mail",
+      "emailError": "Digite um e-mail válido",
+      "emailChange": "trocar e-mail",
+      "passwordHint": "Senha",
+      "passwordError": "Digite uma senha válida",
+      "buttonNext": "AVANÇAR",
+      "forgetPassword": "Esqueci a senha",
+      "codeSendEmail": "Informe o código enviado no seu e-mail...",
+      "tokenHint": "Token",
+      "sendNewToken": "Enviar novo código",
+      "buttonCheckToken": "VALIDAR CÓDIGO",
+      "errorToken": "Código informado inválido",
+      "internalError": "Erro interno, favor tentar novamente"
+    }
+  }
 }

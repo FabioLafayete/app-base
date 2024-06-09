@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:app/config/app_config.dart';
+import 'package:app/config/app_local.dart';
 import 'package:app/modules/login/repository/impl/login_repository_impl.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/model/auth_model/auth_model.dart';
@@ -124,11 +125,11 @@ abstract class LoginControllerBase extends BaseController with Store {
       }
     } catch(e) {
       if(showCode) {
-        setErrorCode('Código informado inválido');
+        setErrorCode(AppLocal().tr['login']['bottomSheet']['errorToken']);
         cleanCode();
         FocusScope.of(context).unfocus();
       } else {
-        setErrorEmail('Erro interno, favor tentar novamente');
+        setErrorEmail(AppLocal().tr['login']['bottomSheet']['internalError']);
       }
       if (kDebugMode) {
         print(e);

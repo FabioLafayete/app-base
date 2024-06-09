@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:app/config/app_local.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/my_button.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
 
   final secure = Modular.get<SecureStorageService>();
 
-
+  dynamic tr = AppLocal().tr['login'];
 
   @override
   initState() {
@@ -111,7 +112,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   SizedBox(
                     width: width * 0.75,
                     child: text(
-                      'Bem-vinda ao iBetter',
+                      tr['title'],
                       fontSize: height * 0.047,
                       fontWeight: FontWeight.w600,
                       color: colors.background,
@@ -119,14 +120,14 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   ),
                   SizedBox(height: height * 0.04),
                   text(
-                    'Explore nossa motivação e encontre sua força',
+                    tr['description'],
                     color: colors.background,
                     fontWeight: FontWeight.w400,
                     fontSize: height * 0.028,
                   ),
                   const Spacer(),
                   MyButton(
-                    title: 'ENTRAR',
+                    title: tr['buttonLogin'],
                     sizeTitle: height * 0.022,
                     colorTitle: colors.primary,
                     // colorTitle: Color(0xFF00bcd4),
@@ -135,7 +136,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   ),
                   const SizedBox(height: 15),
                   MyButton(
-                    title: 'Não tem cadastro? Adquira aqui',
+                    title: tr['doNotHaveAccount'],
                     sizeTitle: height * 0.018,
                     colorTitle: Colors.white,
                     cleanButton: true,

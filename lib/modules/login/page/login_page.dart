@@ -22,11 +22,12 @@ class LoginPage extends BaseState<LoginController> {
   }
 
   void _login(BuildContext context, {bool isSingUp = false}) {
+    dynamic tr = local.tr['login']['bottomSheet'];
     VisualDisplay.bottomSheet(
         Observer(
             builder: (_) => Column(
                   children: [
-                    text(isSingUp ? 'Criar conta' : 'Entrar na minha conta',
+                    text(isSingUp ? tr['titleSignUp'] : tr['title'],
                         color: colors.text,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -34,7 +35,7 @@ class LoginPage extends BaseState<LoginController> {
                     space(0.03),
                     VisualDisplay.textField(
                       controller: controller.controllerEmail,
-                      labelText: 'E-mail',
+                      labelText: tr['emailHint'],
                       fillColor: Colors.white,
                       colorBorder: Colors.white,
                       colorCursor: colors.secondary,
@@ -48,7 +49,7 @@ class LoginPage extends BaseState<LoginController> {
                         if (controller.enableButton) {
                           controller.onPress(context);
                         } else {
-                          controller.setErrorEmail('Digite um e-mail válido');
+                          controller.setErrorEmail(tr['emailError']);
                         }
                       },
                       validator: (txt) {
@@ -57,7 +58,7 @@ class LoginPage extends BaseState<LoginController> {
                         }
                         if (txt != null) {
                           if (!EmailValidator.validate(txt)) {
-                            return 'Digite um e-mail válido';
+                            return tr['emailError'];
                           }
                         }
                         return null;
@@ -65,7 +66,7 @@ class LoginPage extends BaseState<LoginController> {
                       suffix: controller.showCode
                           ? GestureDetector(
                               onTap: () => controller.changeEmail(context),
-                              child: text('trocar e-mail',
+                              child: text(tr['emailChange'],
                                   color: colors.primary,
                                   fontWeight: FontWeight.w600))
                           : null,
@@ -80,7 +81,7 @@ class LoginPage extends BaseState<LoginController> {
                       space(0.02),
                       VisualDisplay.textField(
                         controller: controller.controllerPassword,
-                        labelText: 'Senha',
+                        labelText: tr['passwordHint'],
                         obscure: controller.obscureText,
                         fillColor: Colors.white,
                         colorBorder: Colors.white,
@@ -109,7 +110,7 @@ class LoginPage extends BaseState<LoginController> {
                         validator: (txt) {
                           if (txt != null) {
                             if (txt.isEmpty) {
-                              return 'Digite uma senha válida';
+                              return tr['passwordError'];
                             }
                           }
                           return null;
@@ -118,7 +119,7 @@ class LoginPage extends BaseState<LoginController> {
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: MyButton(
-                          title: 'Esqueci a senha',
+                          title: tr['forgetPassword'],
                           colorTitle: colors.primary,
                           cleanButton: true,
                           loading: controller.isLoadingSendCode,
@@ -140,7 +141,7 @@ class LoginPage extends BaseState<LoginController> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            text('Informe o código enviado no seu e-mail...',
+                            text(tr['codeSendEmail'],
                                 color: colors.textSecondary),
                             space(0.02),
                             pinCodeInput(context),
@@ -149,7 +150,7 @@ class LoginPage extends BaseState<LoginController> {
                                 padding: const EdgeInsets.only(top: 10),
                                 child: MyButton(
                                   title:
-                                      'Enviar novo código${controller.timerCount <= 1 ? '' : ' - ${controller.timerCount}'}',
+                                      '${tr['sendNewToken']}${controller.timerCount <= 1 ? '' : ' - ${controller.timerCount}'}',
                                   colorTitle: controller.timerCount == 0
                                       ? colors.primary
                                       : colors.primary.withOpacity(0.3),
@@ -172,8 +173,8 @@ class LoginPage extends BaseState<LoginController> {
                               ),
                               child: MyButton(
                                 title: controller.showCode
-                                    ? 'VALIDAR CÓDIGO'
-                                    : 'AVANÇAR',
+                                    ? tr['buttonCheckToken']
+                                    : tr['buttonNext'],
                                 colorTitle: colors.background,
                                 // colorButton: colors.primary,
                                 colorButton: colors.primary,
@@ -194,9 +195,10 @@ class LoginPage extends BaseState<LoginController> {
   }
 
   Widget pinCodeInput(BuildContext context) {
+    dynamic tr = local.tr['login']['bottomSheet'];
     return VisualDisplay.textField(
       controller: controller.controllerCode,
-      labelText: 'Token',
+      labelText: tr['tokenHint'],
       fillColor: Colors.white,
       colorBorder: Colors.white,
       colorCursor: colors.secondary,
@@ -222,7 +224,7 @@ class LoginPage extends BaseState<LoginController> {
       validator: (txt) {
         if (txt != null) {
           if (txt.isEmpty) {
-            return 'Código informado inválido';
+            return tr['errorToken'];
           }
         }
         return null;
