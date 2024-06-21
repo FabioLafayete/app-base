@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import '../../config/app_config.dart';
+import '../../config/app_local.dart';
 
 // ignore: constant_identifier_names
 enum RequestType { GET, POST, PUT, PATCH, DELETE }
@@ -9,6 +10,7 @@ class HttpService {
   late Dio dio;
 
   AppConfig appConfig = AppConfig();
+  AppLocal appLocal = AppLocal();
 
   Future<Response> request({
     required RequestType type,
@@ -44,11 +46,18 @@ class HttpService {
     }
   }
 
-  configInitApi() async {
+  Future configInitApi() async {
+    String language = 'English';
+    if(appLocal.local.value == LanguageLocal.pt){
+      language = 'Portuguese';
+    }
     dio = Dio(
       BaseOptions(
         baseUrl: appConfig.baseUrl,
-        headers: {'authorization': 'Bearer ${appConfig.bearerToken}'},
+        headers: {
+          'authorization': 'Bearer ${appConfig.bearerToken}',
+          'language': language,
+        },
         validateStatus: (status) => status!  < 400,
         receiveTimeout: const Duration(seconds: 10),
         connectTimeout: const Duration(seconds: 30),

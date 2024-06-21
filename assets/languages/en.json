@@ -1,4 +1,27 @@
 {
   "language": "ENGLISH",
-  "title": "IBETTER - ENGLISH"
+  "title": "IBETTER - ENGLISH",
+  "login": {
+    "title": "Welcome to iBetter",
+    "description": "Explore our motivation and find your strength",
+    "buttonLogin": "LOGIN",
+    "doNotHaveAccount": "Don't have an account? Sign up here",
+    "bottomSheet": {
+      "title": "Log into my account",
+      "titleSignUp": "Create account",
+      "emailHint": "Email",
+      "emailError": "Enter a valid email",
+      "emailChange": "change email",
+      "passwordHint": "Password",
+      "passwordError": "Enter a valid password",
+      "buttonNext": "NEXT",
+      "forgetPassword": "Forgot password",
+      "codeSendEmail": "Enter the code sent to your email...",
+      "tokenHint": "Token",
+      "sendNewToken": "Send new code",
+      "buttonCheckToken": "VALIDATE CODE",
+      "errorToken": "Invalid code entered",
+      "internalError": "Internal error, please try again"
+    }
+  }
 }

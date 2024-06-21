@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
@@ -25,6 +26,12 @@ class AppLocal {
       LanguageLocal.pt: await json.decode(response[0]),
       LanguageLocal.en: await json.decode(response[1]),
     };
+
+    if(Platform.localeName == 'pt_BR'){
+      _local.value = LanguageLocal.pt;
+    } else {
+      _local.value = LanguageLocal.en;
+    }
   }
 
   void setLocal(LanguageLocal value) {
