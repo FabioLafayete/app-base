@@ -285,7 +285,8 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
         hasHeight: false,
         dismissible: true,
         context: context,
-        onClose: () {});
+        onClose: () {},
+    );
   }
 
   Widget _itemCard(

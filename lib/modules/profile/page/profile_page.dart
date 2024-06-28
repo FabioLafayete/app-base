@@ -1,6 +1,7 @@
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/shared/widgets/visual_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -196,16 +197,29 @@ class ProfilePage extends BaseState<ProfileController> {
                   ListButton(
                     list: [
                       ListButtonItem(
-                          title: 'Meus dados',
-                          icon: SvgPicture.asset(
-                            'assets/images/icon/svg/user.svg',
-                            height: 24,
-                            colorFilter: ColorFilter.mode(
-                                colors.textSecondary, BlendMode.srcIn),
-                          ),
-                          onPress: () {
-                            router.pushNamed(PagesNames.profileData);
-                          }),
+                        title: 'Meus dados',
+                        icon: SvgPicture.asset(
+                          'assets/images/icon/svg/user.svg',
+                          height: 24,
+                          colorFilter: ColorFilter.mode(
+                              colors.textSecondary, BlendMode.srcIn),
+                        ),
+                        onPress: () {
+                          router.pushNamed(PagesNames.profileData);
+                        },
+                      ),
+                      ListButtonItem(
+                        title: 'Linguagem',
+                        icon: SvgPicture.asset(
+                          'assets/images/icon/svg/world.svg',
+                          height: 24,
+                          colorFilter: ColorFilter.mode(
+                              colors.textSecondary, BlendMode.srcIn),
+                        ),
+                        onPress: () {
+                          _openOptions(context);
+                        },
+                      ),
                       ListButtonItem(
                         title: 'Política de privacidade',
                         icon: SvgPicture.asset(
@@ -248,7 +262,8 @@ class ProfilePage extends BaseState<ProfileController> {
                             'assets/images/icon/svg/signout.svg',
                             height: 24,
                             colorFilter: ColorFilter.mode(
-                                colors.textSecondary, BlendMode.srcIn,
+                              colors.textSecondary,
+                              BlendMode.srcIn,
                             ),
                           ),
                           onPress: controller.logout,
@@ -306,5 +321,66 @@ class ProfilePage extends BaseState<ProfileController> {
 
   double imc() {
     return (user.weight! / ((user.height! / 100) * (user.height! / 100)));
+  }
+
+  void _openOptions(BuildContext context) {
+    VisualDisplay.bottomSheet(
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          text(
+            'Trocar idioma',
+            color: colors.text,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            textAlign: TextAlign.start,
+          ),
+          const SizedBox(height: 32),
+          _itemCard(
+            context,
+            'US.svg',
+            'English',
+            () {},
+          ),
+          const SizedBox(height: 30),
+          _itemCard(
+            context,
+            'BR.svg',
+            'Português',
+            () {},
+          ),
+          const SizedBox(height: 30),
+        ],
+      ),
+      hasHeight: false,
+      dismissible: true,
+      context: context,
+      onClose: () {},
+    );
+  }
+
+  Widget _itemCard(
+      BuildContext context, String flag, String title, Function() onPress) {
+    return GestureDetector(
+      onTap: onPress,
+      child: Container(
+        color: Colors.transparent,
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          children: [
+            SvgPicture.asset(
+              'assets/images/icon/svg/$flag',
+              height: 24,
+            ),
+            const SizedBox(width: 20),
+            text(
+              title,
+              fontWeight: FontWeight.w600,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
