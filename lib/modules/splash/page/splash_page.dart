@@ -1,4 +1,5 @@
 import 'package:app/config/app_config.dart';
+import 'package:app/config/app_local.dart';
 import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/widgets/base_page.dart';
@@ -27,10 +28,9 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future _init() async {
-    // final secure = Modular.get<SecureStorageService>();
-    // secure.clearAll();
     await Future.wait([
       AppConfig().load(),
+      AppLocal().loadTranslation(),
       remoteConfig.init(),
     ]);
     if(remoteConfig.isMaintenance){

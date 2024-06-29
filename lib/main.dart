@@ -11,10 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get_it/get_it.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:toastification/toastification.dart';
 import 'firebase_options.dart';
-import 'shared/constants/string_contants.dart';
 
 void main() async {
   runZonedGuarded(() async {
@@ -36,45 +34,35 @@ void main() async {
       return true;
     };
 
-    await SentryFlutter.init(
-      (options) {
-        options.dsn = StringConstants.sentryUrl;
-        options.tracesSampleRate = 1.0;
-        options.profilesSampleRate = 1.0;
-      },
-      appRunner: () => runApp(ValueListenableBuilder(
-        valueListenable: AppLocal().local,
-        builder: (_, __, ___) {
-          if(context != null){
-            RestartWidget.restartApp(context!);
-          }
-          return ModularApp(
-            module: AppModule(),
-            child: ToastificationWrapper(
-              child: RestartWidget(
-                child: MaterialApp.router(
-                  debugShowCheckedModeBanner: false,
-                  locale: const Locale('pt', 'BR'),
-                  theme: ThemeData(fontFamily: 'Inter'),
-                  routerConfig: Modular.routerConfig,
-                  builder: (_, child){
-                    context = _;
-                    return child!;
-                  },
-                ),
+    runApp(ValueListenableBuilder(
+      valueListenable: AppLocal().local,
+      builder: (_, __, ___) {
+        if(context != null){
+          RestartWidget.restartApp(context!);
+        }
+        return ModularApp(
+          module: AppModule(),
+          child: ToastificationWrapper(
+            child: RestartWidget(
+              child: MaterialApp.router(
+                debugShowCheckedModeBanner: false,
+                locale: const Locale('pt', 'BR'),
+                theme: ThemeData(fontFamily: 'Inter'),
+                routerConfig: Modular.routerConfig,
+                builder: (_, child){
+                  context = _;
+                  return child!;
+                },
               ),
             ),
-          );
-        },
-      )),
-    );
+          ),
+        );
+      },
+    ));
+
   }, (error, stack) {
     if (!kDebugMode) {
       FirebaseCrashlytics.instance.recordError(error, stack);
-      Sentry.captureException(
-        error,
-        stackTrace: stack,
-      );
       return;
     }
     print(error);
@@ -90,7 +78,7 @@ Future _preload() async {
     Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     ),
-    AppLocal().load(),
+
   ]);
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;

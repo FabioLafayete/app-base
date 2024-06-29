@@ -40,10 +40,15 @@ abstract class BaseState<T extends Object> extends StatelessWidget {
   }
 }
 
-abstract class BaseStateFul<T extends Object> extends StatefulWidget {
-  BaseStateFul({super.key});
+abstract class ViewState<S extends StatefulWidget, T extends Object>
+    extends State<S> {
 
   final Set<T> _value = <T>{};
+
+  T get controller {
+    if (_value.isEmpty) _value.add(Modular.get<T>());
+    return _value.first;
+  }
 
   final MyRouter router = MyRouter();
   final AppColors colors = AppColors();
@@ -64,11 +69,6 @@ abstract class BaseStateFul<T extends Object> extends StatefulWidget {
       width: width ? this.width * value : 0,
     );
   }
-
-  T get controller {
-    if (_value.isEmpty) _value.add(Modular.get<T>());
-    return _value.first;
-  }
-
 }
+
 

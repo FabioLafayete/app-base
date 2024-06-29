@@ -13,8 +13,20 @@ import '../../navigator/controller/nav_controller.dart';
 import '../widgets/list_cards_items.dart';
 import '../widgets/top_presentation.dart';
 
-class WorkoutPage extends BaseStateFul<WorkoutController> {
-  WorkoutPage({Key? key}) : super(key: key);
+class WorkoutPage extends StatefulWidget {
+  const WorkoutPage({Key? key}) : super(key: key);
+
+  @override
+  State<WorkoutPage> createState() => _WorkoutPageState();
+}
+
+class _WorkoutPageState extends ViewState<WorkoutPage, WorkoutController> {
+
+  @override
+  void initState() {
+    super.initState();
+    controller.getWorkouts();
+  }
 
   final navController = Modular.get<NavController>();
 
@@ -23,10 +35,9 @@ class WorkoutPage extends BaseStateFul<WorkoutController> {
     router.pushNamed(PagesNames.workoutDetail);
   }
 
-
   @override
   Widget build(BuildContext context) {
-    controller.getWorkouts();
+
     return BasePage(
       onRefresh: () => controller.getWorkouts(force: true),
       backgroundColor: colors.background,
@@ -124,11 +135,4 @@ class WorkoutPage extends BaseStateFul<WorkoutController> {
       ),
     );
   }
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
-
 }

@@ -93,9 +93,9 @@ abstract class WorkoutControllerBase extends BaseController with Store {
         comboProgramModel: workouts,
       );
 
-      if(state.topProgram != null){
-        return state.topProgram!;
-      }
+      // if(state.topProgram != null){
+      //   return state.topProgram!;
+      // }
 
       final item = Random().nextInt(state.comboProgramModel!.length - 1);
       final listItem = state.comboProgramModel![item].targetProgram;

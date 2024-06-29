@@ -13,9 +13,14 @@ import '../../../shared/widgets/image_cropper.dart';
 import '../controller/profile_controller.dart';
 import '../widgets/list_button.dart';
 
-class ProfilePage extends BaseState<ProfileController> {
-  ProfilePage({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
   @override
   Widget build(BuildContext context) {
     return BasePage(
