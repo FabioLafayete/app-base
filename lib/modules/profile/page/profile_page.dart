@@ -1,3 +1,5 @@
+import 'package:app/config/app_local.dart';
+import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
@@ -341,14 +343,20 @@ class ProfilePage extends BaseState<ProfileController> {
             context,
             'US.svg',
             'English',
-            () {},
+            () {
+              AppLocal().setLocal(LanguageLocal.en);
+              MyRouter().pop();
+            },
           ),
           const SizedBox(height: 30),
           _itemCard(
             context,
             'BR.svg',
             'Português',
-            () {},
+            () {
+              AppLocal().setLocal(LanguageLocal.pt);
+              MyRouter().pop();
+            },
           ),
           const SizedBox(height: 30),
         ],

@@ -13,7 +13,7 @@ import '../../navigator/controller/nav_controller.dart';
 import '../widgets/list_cards_items.dart';
 import '../widgets/top_presentation.dart';
 
-class WorkoutPage extends BaseState<WorkoutController> {
+class WorkoutPage extends BaseStateFul<WorkoutController> {
   WorkoutPage({Key? key}) : super(key: key);
 
   final navController = Modular.get<NavController>();
@@ -123,6 +123,12 @@ class WorkoutPage extends BaseState<WorkoutController> {
         ],
       ),
     );
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 
 }

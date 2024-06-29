@@ -39,3 +39,36 @@ abstract class BaseState<T extends Object> extends StatelessWidget {
     return _value.first;
   }
 }
+
+abstract class BaseStateFul<T extends Object> extends StatefulWidget {
+  BaseStateFul({super.key});
+
+  final Set<T> _value = <T>{};
+
+  final MyRouter router = MyRouter();
+  final AppColors colors = AppColors();
+  final AppConfig config = AppConfig();
+  final AppLocal local = AppLocal();
+  final AppTheme appTheme = AppTheme();
+
+  UserModel get user => Modular.get<UserController>().user;
+
+  final text = AppTheme().text;
+
+  double get width => MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
+  double get height => MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
+
+  Widget space(double value, {bool width = false}){
+    return SizedBox(
+      height: !width ? this.height * value : 0,
+      width: width ? this.width * value : 0,
+    );
+  }
+
+  T get controller {
+    if (_value.isEmpty) _value.add(Modular.get<T>());
+    return _value.first;
+  }
+
+}
+
