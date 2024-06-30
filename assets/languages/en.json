@@ -113,6 +113,31 @@
       "title": "Well done",
       "button": "FINISH"
     }
+  },
+  "food": {
+    "title": "What would you like to cook today?",
+    "findFood": {
+      "seeFood": "See recipe",
+      "title": "Find a recipe",
+      "description": "We help you find a recipe to make."
+    },
+    "popularFoods": "Popular recipes",
+    "soon": {
+      "title": "Coming soon",
+      "description": "Cooking classes are being finalized"
+    },
+    "categories": {
+      "title": "Categories",
+      "breakfast": "Breakfast",
+      "lunch": "Lunch",
+      "dinner": "Dinner",
+      "beverages": "Beverages",
+      "salads": "Salads",
+      "vegan": "Vegan",
+      "snacks": "Snacks",
+      "desserts": "Desserts"
+    },
+    "ingredients": "Ingredients",
+    "howToDo": "How To Do"
   }
-
 }

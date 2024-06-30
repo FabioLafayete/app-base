@@ -309,6 +309,8 @@ abstract class FoodDetailMock{
         "proteins": 10
       },
 
+
+
       {
         "id": null,
         "name": "Salada de Quinoa com Legumes Assados",
@@ -652,6 +654,9 @@ abstract class FoodDetailMock{
         "proteins": 25
       },
 
+
+
+
       {
         "id": null,
         "name": "Risoto de Cogumelos",
@@ -975,6 +980,9 @@ abstract class FoodDetailMock{
         "proteins": 20
       },
 
+
+
+
       {
         "id": null,
         "name": "Suco Verde Detox",
@@ -1256,6 +1264,9 @@ abstract class FoodDetailMock{
         "carbs": 5,
         "proteins": 1
       },
+
+
+
 
       {
         "id": null,

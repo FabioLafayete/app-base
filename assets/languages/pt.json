@@ -113,5 +113,31 @@
       "title": "Bom trabalho",
       "button": "FINALIZAR"
     }
+  },
+  "food": {
+    "title": "O que você gostaria de cozinhar hoje?",
+    "findFood": {
+      "seeFood": "Ver receita",
+      "title": "Encontre uma receita",
+      "description": "Nós te ajudamos a encontrar uma receita para fazer."
+    },
+    "popularFoods": "Receitas populares",
+    "soon": {
+      "title": "Em breve",
+      "description": "Aulas de culinária estão sendo finalizadas"
+    },
+    "categories": {
+      "title": "Categorias",
+      "breakfast": "Café da manhã",
+      "lunch": "Almoço",
+      "dinner": "Jantar",
+      "beverages": "Bebidas",
+      "salads": "Saladas",
+      "vegan": "Vegano",
+      "snacks": "Lanches",
+      "desserts": "Doces"
+    },
+    "ingredients": "Ingredientes",
+    "howToDo": "Modo de preparo"
   }
 }
