@@ -17,25 +17,29 @@ class AppLocal {
 
   late Map<LanguageLocal, dynamic> _tr;
 
-  final ValueNotifier<LanguageLocal> _local = ValueNotifier(LanguageLocal.pt);
+  final ValueNotifier<LanguageLocal> _local = ValueNotifier(LanguageLocal.en);
 
   late SecureStorageService secure;
 
   Future load() async {
     List response = await Future.wait([
       rootBundle.loadString('assets/languages/pt.json'),
-      rootBundle.loadString('assets/languages/en.json')
+      rootBundle.loadString('assets/languages/en.json'),
+      rootBundle.loadString('assets/languages/fr.json')
     ]);
 
     _tr = {
       LanguageLocal.pt: await json.decode(response[0]),
       LanguageLocal.en: await json.decode(response[1]),
+      LanguageLocal.fr: await json.decode(response[2]),
     };
 
     if (Platform.localeName == 'pt_BR') {
       _local.value = LanguageLocal.pt;
-    } else {
+    } else if (Platform.localeName == 'en_US') {
       _local.value = LanguageLocal.en;
+    } else {
+      _local.value = LanguageLocal.fr;
     }
   }
 
@@ -66,4 +70,4 @@ class AppLocal {
   Map<String, dynamic> get tr => _tr[_local.value];
 }
 
-enum LanguageLocal { pt, en }
+enum LanguageLocal { pt, en, fr }

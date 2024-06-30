@@ -25,7 +25,6 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
   @override
   Widget build(BuildContext context) {
     dynamic tr = local.tr['profile'];
-    print('PROFILE');
     return BasePage(
         showAppBar: false,
         paddingPage: 0,
@@ -366,6 +365,17 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
             'Português',
             () {
               AppLocal().setLocal(LanguageLocal.pt);
+              controller.checkVersion();
+              MyRouter().pop();
+            },
+          ),
+          const SizedBox(height: 30),
+          _itemCard(
+            context,
+            'FR.svg',
+            'Français',
+                () {
+              AppLocal().setLocal(LanguageLocal.fr);
               controller.checkVersion();
               MyRouter().pop();
             },

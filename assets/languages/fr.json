@@ -1,0 +1,143 @@
+{
+  "language": "ENGLISH",
+  "login": {
+    "title": "Bienvenue sur iBetter",
+    "description": "Explorez notre motivation et trouvez votre force",
+    "buttonLogin": "CONNEXION",
+    "doNotHaveAccount": "Pas encore de compte ? Inscrivez-vous ici",
+    "bottomSheet": {
+      "title": "Se connecter à mon compte",
+      "titleSignUp": "Créer un compte",
+      "emailHint": "Email",
+      "emailError": "Entrez une adresse email valide",
+      "emailChange": "changer d'email",
+      "passwordHint": "Mot de passe",
+      "passwordError": "Entrez un mot de passe valide",
+      "buttonNext": "SUIVANT",
+      "forgetPassword": "Mot de passe oublié",
+      "codeSendEmail": "Entrez le code envoyé à votre email...",
+      "tokenHint": "Code",
+      "sendNewToken": "Envoyer un nouveau code",
+      "buttonCheckToken": "VALIDER LE CODE",
+      "errorToken": "Code saisi invalide",
+      "internalError": "Erreur interne, veuillez réessayer"
+    }
+  },
+  "profile": {
+    "myData": "Mes données",
+    "language": "Langue",
+    "policyPrivacy": "Politique de confidentialité",
+    "termsUse": "Conditions d'utilisation",
+    "talkToUs": "Contactez-nous",
+    "logout": "Déconnexion",
+    "changeLanguage": "Changer de langue",
+    "version": "Version",
+    "data": {
+      "title": "Profil",
+      "edit": "Modifier",
+      "name": "Nom",
+      "newName": "Nouveau nom",
+      "editName": "Modifier le nom",
+      "phone": "Téléphone",
+      "newPhone": "Nouveau téléphone",
+      "editPhone": "Modifier le téléphone",
+      "save": "Enregistrer",
+      "errorName": "Entrez un nom valide",
+      "errorPhone": "Entrez un numéro de téléphone valide",
+      "editPhoto": {
+        "title": "Modifier la photo",
+        "choosePhoto": "Choisir une nouvelle photo",
+        "takePhoto": "Prendre une nouvelle photo",
+        "removePhoto": "Supprimer la photo",
+        "loadPhoto": "Charger la photo",
+        "movePhoto": "Déplacer et redimensionner"
+      }
+    },
+    "talkToUsData": {
+      "appBar": "Besoin d'aide ?",
+      "title": "Contactez-nous :)",
+      "description": "Vous recevrez la réponse à l'adresse email que vous avez enregistrée ici",
+      "subject": "Sujet *",
+      "subjectHint": "Entrez le sujet du message",
+      "reason": "Motif du contact *",
+      "reasonHint": "Choisissez le motif du contact",
+      "message": "Message *",
+      "messageHint": "Entrez votre message",
+      "sendMessage": "Envoyer le message",
+      "whatReason": {
+        "title": "Quel est le motif ?",
+        "problem": "Problème",
+        "doubt": "Question",
+        "praises": "Éloges",
+        "partnership": "Partenariat",
+        "cancelRegistration": "Annuler l'inscription"
+      },
+      "messageSent": {
+        "goBack": "RETOUR",
+        "title": "Message envoyé :)",
+        "messageSent": "Message enregistré avec succès !",
+        "description": "Un email a été envoyé pour confirmer la réception !",
+        "finish": "TERMINER"
+      },
+      "errorMessage": {
+        "title": "Message non envoyé",
+        "description": "Échec de l'envoi du message, veuillez réessayer."
+      }
+    }
+  },
+  "bottomNavigation": {
+    "home": "Accueil",
+    "recipes": "Recettes",
+    "profile": "Profil"
+  },
+  "workout": {
+    "topPresentation": {
+      "button": "DÉMARRER"
+    },
+    "needHelp": {
+      "title": "Besoin d'aide ?",
+      "description": "Envoyez un message à notre équipe de support",
+      "button": "Contactez-nous"
+    },
+    "planWorkoutDetails": {
+      "title": "Entraînements",
+      "button": "Démarrer"
+    },
+    "videoWorkout": {
+      "stayStrong": "Restez fort !",
+      "youCanDoIt": "Vous pouvez le faire !",
+      "button": "Continuer l'entraînement",
+      "finishWorkout": "Terminer l'entraînement"
+    },
+    "congratsPage": {
+      "title": "Bien joué",
+      "button": "TERMINER"
+    }
+  },
+  "food": {
+    "title": "Que souhaitez-vous cuisiner aujourd'hui ?",
+    "findFood": {
+      "seeFood": "Voir la recette",
+      "title": "Trouver une recette",
+      "description": "Nous vous aidons à trouver une recette à préparer."
+    },
+    "popularFoods": "Recettes populaires",
+    "soon": {
+      "title": "Prochainement",
+      "description": "Les cours de cuisine sont en cours de finalisation"
+    },
+    "categories": {
+      "title": "Catégories",
+      "breakfast": "Petit-déjeuner",
+      "lunch": "Déjeuner",
+      "dinner": "Dîner",
+      "beverages": "Boissons",
+      "salads": "Salades",
+      "vegan": "Végétalien",
+      "snacks": "Collations",
+      "desserts": "Desserts"
+    },
+    "ingredients": "Ingrédients",
+    "howToDo": "Comment faire"
+  }
+}
