@@ -84,5 +84,35 @@
         "description": "Failed to send message, please try again."
       }
     }
+  },
+  "bottomNavigation": {
+    "home": "Home",
+    "revenues": "Revenues",
+    "profile": "Profile"
+  },
+  "workout": {
+    "topPresentation": {
+      "button": "START"
+    },
+    "needHelp": {
+      "title": "Need help?",
+      "description": "Send a message to our support team",
+      "button": "Talk to us"
+    },
+    "planWorkoutDetails": {
+      "title": "Workouts",
+      "button": "Start"
+    },
+    "videoWorkout": {
+      "stayStrong": "Stay strong!",
+      "youCanDoIt": "You can do it!",
+      "button": "Continue workout",
+      "finishWorkout": "Finish workout"
+    },
+    "congratsPage": {
+      "title": "Well done",
+      "button": "FINISH"
+    }
   }
+
 }

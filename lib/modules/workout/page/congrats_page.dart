@@ -38,7 +38,7 @@ class CongratsPage extends BaseState {
                 ),
                 const SizedBox(height: 30),
                 text(
-                  'Bom trabalho',
+                  local.tr['workout']['congratsPage']['title'],
                   color: colors.text2,
                   fontSize: 30,
                   fontWeight: FontWeight.w500
@@ -48,7 +48,7 @@ class CongratsPage extends BaseState {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: MyButton(
-                title: 'FINALIZAR',
+                title: local.tr['workout']['congratsPage']['button'],
                 colorButton: colors.text2,
                 colorTitle: colors.primary,
                 onPress: (){

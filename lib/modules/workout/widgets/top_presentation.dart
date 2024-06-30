@@ -10,8 +10,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../shared/widgets/multiple_users.dart';
 
-class TopPresentation extends BaseState {
-  TopPresentation({
+class TopPresentation extends StatefulWidget {
+  const TopPresentation({
     Key? key,
     required this.cardItemModel,
     this.titleButton,
@@ -21,8 +21,13 @@ class TopPresentation extends BaseState {
   final CardItemModel cardItemModel;
   final String? titleButton;
   final bool showUsers;
-  final userController = Modular.get<UserController>();
 
+  @override
+  State<TopPresentation> createState() => _TopPresentationState();
+}
+
+class _TopPresentationState extends State<TopPresentation> with ViewMixin {
+  final userController = Modular.get<UserController>();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -50,13 +55,13 @@ class TopPresentation extends BaseState {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (cardItemModel.typeTraining != null) ...[
+          if (widget.cardItemModel.typeTraining != null) ...[
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
                   color: colors.primary,
                   borderRadius: BorderRadius.circular(8)),
-              child: text(cardItemModel.typeTraining!,
+              child: text(widget.cardItemModel.typeTraining!,
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                   color: colors.background),
@@ -64,7 +69,7 @@ class TopPresentation extends BaseState {
             space(0.01),
           ],
           text(
-            cardItemModel.description,
+            widget.cardItemModel.description,
             fontWeight: FontWeight.w600,
             maxLines: 3,
             textOverflow: TextOverflow.ellipsis,
@@ -77,23 +82,23 @@ class TopPresentation extends BaseState {
             children: [
               Row(
                 children: [
-                  if (cardItemModel.trainer != null)
+                  if (widget.cardItemModel.trainer != null)
                     text(
-                      cardItemModel.trainer!,
+                      widget.cardItemModel.trainer!,
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
                       color: colors.background,
                     ),
-                  if (cardItemModel.timeTraining != null)
+                  if (widget.cardItemModel.timeTraining != null)
                     text(
-                      '${cardItemModel.trainer != null ? ' | ' : ''}${cardItemModel.timeTraining!}',
+                      '${widget.cardItemModel.trainer != null ? ' | ' : ''}${widget.cardItemModel.timeTraining!}',
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
                       color: colors.background,
                     ),
                 ],
               ),
-              if(!showUsers)
+              if(!widget.showUsers)
                 button(context),
             ],
           ),
@@ -102,7 +107,7 @@ class TopPresentation extends BaseState {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (showUsers)
+              if (widget.showUsers)
                 MultipleUsers(
                   users: [
                     MultipleUsersModel(
@@ -117,7 +122,7 @@ class TopPresentation extends BaseState {
                     MultipleUsersModel(name: 'Vitor R'),
                   ],
                 ),
-              if (showUsers) button(context),
+              if (widget.showUsers) button(context),
             ],
           ),
         ],
@@ -130,13 +135,14 @@ class TopPresentation extends BaseState {
       return SizedBox(
         width: 120,
         child: MyButton(
-            title: titleButton ?? 'INICIAR',
+            title: widget.titleButton ??
+                local.tr['workout']['topPresentation']['button'],
             heightButton: 35,
             sizeTitle: 15,
             colorTitle: colors.primary,
             colorButton: colors.background,
             onPress: userController.user.isSubscripted
-                ? cardItemModel.onPress
+                ? widget.cardItemModel.onPress
                 : () {
                     const SubscriptionBottomSheet().show(context: context);
                   }),
@@ -145,9 +151,9 @@ class TopPresentation extends BaseState {
   }
 
   Widget _image(BuildContext context) {
-    if (!cardItemModel.thumbnail.contains('http')) {
+    if (!widget.cardItemModel.thumbnail.contains('http')) {
       return Image.asset(
-        cardItemModel.thumbnail,
+        widget.cardItemModel.thumbnail,
         width: width,
         height: height * 0.45,
         alignment: Alignment.bottomCenter,
@@ -156,7 +162,7 @@ class TopPresentation extends BaseState {
     }
     return CachedNetworkImage(
       fadeInDuration: const Duration(milliseconds: 300),
-      imageUrl: cardItemModel.thumbnail,
+      imageUrl: widget.cardItemModel.thumbnail,
       width: width,
       height: height * 0.45,
       alignment: Alignment.bottomCenter,
