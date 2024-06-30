@@ -56,6 +56,7 @@ class AppLocal {
 
   void setLocal(LanguageLocal value) {
     if (value == _local.value) return;
+    HapticFeedback.lightImpact();
     secure.put(StorageConstants.language, value.toString());
     _local.value = value;
     Modular.get<WorkoutController>().getWorkouts(force: true);
