@@ -171,7 +171,7 @@ class _BottomNavState extends ViewState<BottomNav, NavController> {
                 'assets/images/icon/svg/cloche.svg',
                 colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
               ),
-              label: tr['revenues']
+              label: tr['recipes']
           ),
           // BottomNavigationBarItem(
           //     icon: FaIcon(LineIcons.users),
