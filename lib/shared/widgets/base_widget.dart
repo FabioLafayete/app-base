@@ -53,7 +53,7 @@ abstract class ViewState<S extends StatefulWidget, T extends Object>
   final MyRouter router = MyRouter();
   final AppColors colors = AppColors();
   final AppConfig config = AppConfig();
-  final AppLocal local = AppLocal();
+  late AppLocal local = AppLocal();
   final AppTheme appTheme = AppTheme();
 
   UserModel get user => Modular.get<UserController>().user;
@@ -71,4 +71,32 @@ abstract class ViewState<S extends StatefulWidget, T extends Object>
   }
 }
 
+mixin ViewMixin<T extends Object> {
+  final Set<T> _value = <T>{};
+
+  T get controller {
+    if (_value.isEmpty) _value.add(Modular.get<T>());
+    return _value.first;
+  }
+
+  final MyRouter router = MyRouter();
+  final AppColors colors = AppColors();
+  final AppConfig config = AppConfig();
+  late AppLocal local = AppLocal();
+  final AppTheme appTheme = AppTheme();
+
+  UserModel get user => Modular.get<UserController>().user;
+
+  final text = AppTheme().text;
+
+  double get width => MediaQueryData.fromView(WidgetsBinding.instance.window).size.width;
+  double get height => MediaQueryData.fromView(WidgetsBinding.instance.window).size.height;
+
+  Widget space(double value, {bool width = false}){
+    return SizedBox(
+      height: !width ? this.height * value : 0,
+      width: width ? this.width * value : 0,
+    );
+  }
+}
 

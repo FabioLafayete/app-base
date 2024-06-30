@@ -5,11 +5,20 @@ import 'package:app/shared/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CongratsPage extends BaseState {
+class CongratsPage extends StatefulWidget {
   CongratsPage({super.key});
 
   @override
+  State<CongratsPage> createState() => _CongratsPageState();
+}
+
+class _CongratsPageState extends State<CongratsPage> with ViewMixin {
+
+  late dynamic tr;
+
+  @override
   Widget build(BuildContext context) {
+    tr = local.tr['profile']['talkToUsData']['messageSent'];
     return BasePage(
       showAppBar: false,
       paddingPage: 0,
@@ -41,7 +50,7 @@ class CongratsPage extends BaseState {
                 ),
                 const SizedBox(height: 30),
                 text(
-                  'Mensagem registrada com sucesso!',
+                  tr['messageSent'],
                   color: colors.text2,
                   fontSize: 30,
                   fontWeight: FontWeight.w500,
@@ -49,7 +58,7 @@ class CongratsPage extends BaseState {
                 ),
                 const SizedBox(height: 40),
                 text(
-                    'Um e-mail foi enviado confirmando o recebimento!',
+                    tr['description'],
                     color: colors.text2,
                     fontSize: 20,
                     fontWeight: FontWeight.w400,
@@ -60,7 +69,7 @@ class CongratsPage extends BaseState {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: MyButton(
-                title: 'FINALIZAR',
+                title: tr['finish'],
                 colorButton: colors.text2,
                 colorTitle: colors.primary,
                 onPress: (){

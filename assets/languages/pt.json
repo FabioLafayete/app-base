@@ -22,5 +22,67 @@
       "errorToken": "Código informado inválido",
       "internalError": "Erro interno, favor tentar novamente"
     }
+  },
+  "profile": {
+    "myData": "Meus dados",
+    "language": "Linguagem",
+    "policyPrivacy": "Política de privacidade",
+    "termsUse": "Termos de uso",
+    "talkToUs": "Fale com a gente",
+    "logout": "Sair da conta",
+    "changeLanguage": "Trocar idioma",
+    "version": "Versão",
+    "data": {
+      "title": "Perfil",
+      "edit": "Editar",
+      "name": "Nome",
+      "newName": "Novo nome",
+      "editName": "Editar nome",
+      "phone": "Celular",
+      "newPhone": "Novo celular",
+      "editPhone": "Editar celular",
+      "save": "salvar",
+      "errorName": "Digite um nome válido",
+      "errorPhone": "Digite um numero válido",
+      "editPhoto": {
+        "title": "Editar foto",
+        "choosePhoto": "Escolher nova foto",
+        "takePhoto": "Tirar nova foto",
+        "removePhoto": "Remover foto",
+        "loadPhoto": "Carregar foto",
+        "movePhoto": "Mover e redimensionar"
+      }
+    },
+    "talkToUsData": {
+      "appBar": "Precisa de ajuda?",
+      "title": "Fale com a gente :)",
+      "description": "Você vai receber a resposta no e-mail que cadastrou aqui",
+      "subject": "Assunto *",
+      "subjectHint": "Digite o assunto da mensagem",
+      "reason": "Motivo do contato *",
+      "reasonHint": "Escolher o motivo do contato",
+      "message": "Mensagem *",
+      "messageHint": "Digite sua mensagem",
+      "sendMessage": "Enviar mensagem",
+      "whatReason": {
+        "title": "Qual é o motivo?",
+        "problem": "Problema",
+        "doubt": "Dúvida",
+        "praises": "Elogio",
+        "partnership": "Parceria",
+        "cancelRegistration": "Cancelar assinatua"
+      },
+      "messageSent": {
+        "goBack": "VOLTAR",
+        "title": "Mensagem enviada :)",
+        "messageSent": "Mensagem registrada com sucesso!",
+        "description": "Um e-mail foi enviado confirmando o recebimento!",
+        "finish": "FINALIZAR"
+      },
+      "errorMessage": {
+        "title": "Mensagem não enviada",
+        "description": "Falha ao tentar enviar mensagem, por favor, tente novamente."
+      }
+    }
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:app/config/app_local.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/model/support/support_model.dart';
 import 'package:app/shared/widgets/base_controller.dart';
@@ -59,12 +60,23 @@ abstract class ProfileControllerBase extends BaseController with Store {
   String? messageHelp;
 
   List<String> listOptionsHelp = [
-    'Problema',
-    'Dúvida',
-    'Elogio',
-    'Parceria',
-    // 'Reembolso',
-    'Cancelar assinatura'
+    if(AppLocal().local.value == LanguageLocal.pt)
+     ...[
+       'Problema',
+       'Dúvida',
+       'Elogio',
+       'Parceria',
+       'Cancelar assinatura'
+     ]
+    else
+      ...[
+        'Problem',
+        'Question',
+        'Praise',
+        'Partnership',
+        'Cancel subscription',
+
+      ]
   ];
 
   @action
@@ -171,7 +183,8 @@ abstract class ProfileControllerBase extends BaseController with Store {
   Future checkVersion() async {
     try{
       PackageInfo packageInfo = await PackageInfo.fromPlatform();
-      setVersion('Versão ${packageInfo.version} (${packageInfo.buildNumber}) (Beta)');
+      final tr = AppLocal().tr;
+      setVersion('${tr['profile']['version']} ${packageInfo.version} (${packageInfo.buildNumber}) (Beta)');
     }catch(_){
       print(_);
     }
@@ -193,27 +206,28 @@ abstract class ProfileControllerBase extends BaseController with Store {
   }
 
   Future postSupport(BuildContext context) async {
+    dynamic tr = AppLocal().tr['profile']['talkToUsData'];
     try{
       setLoading(true);
 
       late SupportReasonEnum supportReasonEnum;
 
-      if(optionHelp! == 'Problema'){
+      if(optionHelp! == tr['whatReason']['problem']){
         supportReasonEnum = SupportReasonEnum.PROBLEM;
       }
-      if(optionHelp! == 'Dúvida'){
+      if(optionHelp! == tr['whatReason']['doubt']){
         supportReasonEnum = SupportReasonEnum.DOUBT;
       }
-      if(optionHelp! == 'Elogio'){
+      if(optionHelp! == tr['whatReason']['praises']){
         supportReasonEnum = SupportReasonEnum.PRIASE;
       }
-      if(optionHelp! == 'Parceria'){
+      if(optionHelp! == tr['whatReason']['partnership']){
         supportReasonEnum = SupportReasonEnum.PARTNERSHIP;
       }
-      if(optionHelp! == 'Reembolso'){
-        supportReasonEnum = SupportReasonEnum.REIMBURSEMENT;
-      }
-      if(optionHelp! == 'Cancelar assinatura'){
+      // if(optionHelp! == 'Reembolso'){
+      //   supportReasonEnum = SupportReasonEnum.REIMBURSEMENT;
+      // }
+      if(optionHelp! == tr['whatReason']['cancelRegistration']){
         supportReasonEnum = SupportReasonEnum.SUBSCRIPTION_CANCELED;
       }
 
@@ -229,11 +243,11 @@ abstract class ProfileControllerBase extends BaseController with Store {
         router.pushReplacementNamed(PagesNames.profileHelpCongrats);
       }
 
-    }catch(_){
+    }catch(_) {
       showToast(
         context: context,
-        title: 'Mensagem não enviada',
-        description: 'Falha ao tentar enviar mensagem, por favor, tente novamente.',
+        title: tr['errorMessage']['title'],
+        description: tr['errorMessage']['description'],
         type: ToastificationType.error
       );
       print(_);
@@ -241,5 +255,4 @@ abstract class ProfileControllerBase extends BaseController with Store {
       setLoading(false);
     }
   }
-
 }

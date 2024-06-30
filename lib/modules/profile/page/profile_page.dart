@@ -21,8 +21,11 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
+
   @override
   Widget build(BuildContext context) {
+    dynamic tr = local.tr['profile'];
+    print('PROFILE');
     return BasePage(
         showAppBar: false,
         paddingPage: 0,
@@ -204,7 +207,7 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
                   ListButton(
                     list: [
                       ListButtonItem(
-                        title: 'Meus dados',
+                        title: tr['myData'],
                         icon: SvgPicture.asset(
                           'assets/images/icon/svg/user.svg',
                           height: 24,
@@ -216,7 +219,7 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
                         },
                       ),
                       ListButtonItem(
-                        title: 'Linguagem',
+                        title: tr['language'],
                         icon: SvgPicture.asset(
                           'assets/images/icon/svg/world.svg',
                           height: 24,
@@ -228,7 +231,7 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
                         },
                       ),
                       ListButtonItem(
-                        title: 'Política de privacidade',
+                        title: tr['policyPrivacy'],
                         icon: SvgPicture.asset(
                           'assets/images/icon/svg/shield-tick.svg',
                           height: 24,
@@ -241,7 +244,7 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
                         },
                       ),
                       ListButtonItem(
-                          title: 'Termos de uso',
+                          title: tr['termsUse'],
                           icon: SvgPicture.asset(
                             'assets/images/icon/svg/document.svg',
                             height: 24,
@@ -253,7 +256,7 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
                                 Uri.parse('https://ibetter.io/termos-de-uso'));
                           }),
                       ListButtonItem(
-                          title: 'Fale com a gente',
+                          title: tr['talkToUs'],
                           icon: SvgPicture.asset(
                             'assets/images/icon/svg/messages.svg',
                             height: 24,
@@ -264,7 +267,7 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
                             router.pushNamed(PagesNames.profileHelp);
                           }),
                       ListButtonItem(
-                          title: 'Sair da conta',
+                          title: tr['logout'],
                           icon: SvgPicture.asset(
                             'assets/images/icon/svg/signout.svg',
                             height: 24,
@@ -274,7 +277,8 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
                             ),
                           ),
                           onPress: controller.logout,
-                          isLogout: true),
+                          isLogout: true,
+                      ),
                     ],
                   ),
                 ],
@@ -331,13 +335,14 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
   }
 
   void _openOptions(BuildContext context) {
+    dynamic tr = local.tr['profile'];
     VisualDisplay.bottomSheet(
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           text(
-            'Trocar idioma',
+            tr['changeLanguage'],
             color: colors.text,
             fontSize: 20,
             fontWeight: FontWeight.w600,
@@ -350,6 +355,7 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
             'English',
             () {
               AppLocal().setLocal(LanguageLocal.en);
+              controller.checkVersion();
               MyRouter().pop();
             },
           ),
@@ -360,6 +366,7 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
             'Português',
             () {
               AppLocal().setLocal(LanguageLocal.pt);
+              controller.checkVersion();
               MyRouter().pop();
             },
           ),

@@ -9,14 +9,23 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
-class HelpPage extends BaseState<ProfileController> {
+class HelpPage extends StatefulWidget {
 
   final bool isLoginRequest;
 
   HelpPage({super.key, this.isLoginRequest = false});
 
   @override
+  State<HelpPage> createState() => _HelpPageState();
+}
+
+class _HelpPageState extends ViewState<HelpPage, ProfileController> {
+
+  late dynamic tr;
+
+  @override
   Widget build(BuildContext context) {
+    tr = local.tr['profile']['talkToUsData'];
     controller.clearHelpPage();
     return Observer(builder: (_){
       if(controller.successPage){
@@ -51,7 +60,7 @@ class HelpPage extends BaseState<ProfileController> {
                 ),
                 const SizedBox(height: 70),
                 text(
-                    'Mensagem enviada :)',
+                    tr['messageSent']['title'],
                     color: colors.text2,
                     fontSize: 30,
                     fontWeight: FontWeight.w500
@@ -60,11 +69,11 @@ class HelpPage extends BaseState<ProfileController> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: MyButton(
-                    title: 'VOLTAR',
+                    title: tr['messageSent']['goBack'],
                     colorButton: colors.text2,
                     colorTitle: colors.primary,
                     onPress: (){
-                      if(isLoginRequest){
+                      if(widget.isLoginRequest){
                         router.pushReplacementNamed(PagesNames.login);
                       } else {
                         router.pop();
@@ -79,25 +88,25 @@ class HelpPage extends BaseState<ProfileController> {
         );
       }
       return BasePage(
-        title: 'Precisa de ajuda?',
+        title: tr['appBar'],
         body: SuperListView(
           physics: const ClampingScrollPhysics(),
           children: [
             SizedBox(height: height * 0.03),
             text(
-              'Fale com a gente :)',
+              tr['title'],
               fontSize: 30,
               fontWeight: FontWeight.w600,
             ),
             SizedBox(height: height * 0.02),
             text(
-              'Você vai receber a resposta no e-mail que cadastrou aqui',
+              tr['description'],
               fontSize: 18,
             ),
             const SizedBox(height: 30),
-            if(isLoginRequest)
+            if(widget.isLoginRequest)
               ...[
-                text('Email *', fontWeight: FontWeight.w600),
+                text('E-mail *', fontWeight: FontWeight.w600),
                 const SizedBox(height: 10),
                 VisualDisplay.textField(
                   hintText: 'Digite seu e-mail',
@@ -112,10 +121,10 @@ class HelpPage extends BaseState<ProfileController> {
                 ),
                 const SizedBox(height: 40),
             ],
-            text('Assunto *', fontWeight: FontWeight.w600),
+            text(tr['subject'], fontWeight: FontWeight.w600),
             const SizedBox(height: 10),
             VisualDisplay.textField(
-              hintText: 'Digite o assunto da mensagem',
+              hintText: tr['subjectHint'],
               fillColor: Colors.white,
               colorBorder: Colors.white,
               colorCursor: colors.secondary,
@@ -126,7 +135,7 @@ class HelpPage extends BaseState<ProfileController> {
               textInputAction: TextInputAction.next,
             ),
             SizedBox(height: height * 0.03),
-            text('Motivo do contato *', fontWeight: FontWeight.w600),
+            text(tr['reason'], fontWeight: FontWeight.w600),
             const SizedBox(height: 10),
             GestureDetector(
               onTap: () => _showOptions(context),
@@ -149,7 +158,7 @@ class HelpPage extends BaseState<ProfileController> {
                   children: [
                     Observer(builder: (_) {
                       return text(
-                          controller.optionHelp ?? 'Escolha o motivo do contato',
+                          controller.optionHelp ?? tr['reasonHint'],
                           fontSize: 18,
                           fontWeight: FontWeight.w300,
                       );
@@ -163,10 +172,10 @@ class HelpPage extends BaseState<ProfileController> {
               ),
             ),
             SizedBox(height: height * 0.03),
-            text('Mensagem *', fontWeight: FontWeight.w600),
+            text(tr['message'], fontWeight: FontWeight.w600),
             const SizedBox(height: 10),
             VisualDisplay.textField(
-              hintText: 'Digite sua mensagem',
+              hintText: tr['messageHint'],
               fillColor: Colors.white,
               colorBorder: Colors.white,
               colorCursor: colors.secondary,
@@ -199,7 +208,7 @@ class HelpPage extends BaseState<ProfileController> {
               } : null,
               colorTitle: colors.text2,
               loading: controller.loading,
-              title: 'Enviar mensagem',
+              title: tr['sendMessage'],
             ),
           );
         }),
@@ -213,7 +222,7 @@ class HelpPage extends BaseState<ProfileController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            text('Qual é o motivo?',
+            text(tr['whatReason']['title'],
                 color: colors.text,
                 fontSize: 26,
                 fontWeight: FontWeight.w600,

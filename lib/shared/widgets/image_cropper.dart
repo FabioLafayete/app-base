@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:app/shared/widgets/app_theme_widget.dart';
+import 'package:app/config/app_local.dart';
 import 'package:app/route/my_router.dart';
+import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:app/util/colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -45,13 +46,13 @@ class ImageCropperWidget extends StatefulWidget {
   State<ImageCropperWidget> createState() => _ImageCropperWidgetState();
 }
 
-class _ImageCropperWidgetState extends State<ImageCropperWidget> {
+class _ImageCropperWidgetState extends State<ImageCropperWidget>
+    with ViewMixin {
+
   File? image;
   String? imageUrl;
   late bool hasImage;
-  final colors = AppColors();
-  final text = AppTheme().text;
-  final MyRouter router = MyRouter();
+  late dynamic tr;
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +71,7 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
   }
 
   Widget _body(int textLength) {
+    tr = local.tr['profile']['data']['editPhoto'];
     return Card(
       elevation: 1.5,
       color: Colors.white,
@@ -133,8 +135,8 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
                               text(
                                 widget.title ??
                                     (hasImage
-                                        ? 'Editar foto'
-                                        : 'Carregar foto'),
+                                        ? tr['title']
+                                        : tr['loadPhoto']),
                                 maxLines: 1,
                                 textOverflow: TextOverflow.ellipsis,
                                 fontWeight: FontWeight.w600,
@@ -255,24 +257,24 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            text(hasImage ? 'Editar foto' : 'Carregar foto',
+            text(hasImage ? tr['title'] : tr['loadPhoto'],
                 color: colors.text,
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
                 textAlign: TextAlign.start),
             const SizedBox(height: 32),
-            _itemCard(context, Icons.photo, 'Escolher nova foto', () {
+            _itemCard(context, Icons.photo, tr['choosePhoto'], () {
               getPhoto(onGallery: true);
               router.pop();
             }),
             const SizedBox(height: 32),
-            _itemCard(context, Icons.photo_camera, 'Tirar nova foto', () {
+            _itemCard(context, Icons.photo_camera, tr['takePhoto'], () {
               getPhoto(onGallery: false);
               router.pop();
             }),
             const SizedBox(height: 32),
             if (hasImage)
-              _itemCard(context, Icons.delete, 'Remover foto', () {
+              _itemCard(context, Icons.delete, tr['removePhoto'], () {
                 setState(() {
                   image = null;
                 });
@@ -470,9 +472,9 @@ class _ImageCropState extends State<ImageCrop> {
             backgroundColor: Colors.black,
             appBar: AppBar(
               backgroundColor: colors.primary,
-              title: const Text(
-                'Mover e redimensionar',
-                style: TextStyle(
+              title: Text(
+                AppLocal().tr['profile']['data']['editPhoto']['movePhoto'],
+                style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                     color: Colors.white),

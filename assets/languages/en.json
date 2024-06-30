@@ -1,6 +1,5 @@
 {
   "language": "ENGLISH",
-  "title": "IBETTER - ENGLISH",
   "login": {
     "title": "Welcome to iBetter",
     "description": "Explore our motivation and find your strength",
@@ -22,6 +21,68 @@
       "buttonCheckToken": "VALIDATE CODE",
       "errorToken": "Invalid code entered",
       "internalError": "Internal error, please try again"
+    }
+  },
+  "profile": {
+    "myData": "My data",
+    "language": "Language",
+    "policyPrivacy": "Privacy policy",
+    "termsUse": "Terms of use",
+    "talkToUs": "Talk to us",
+    "logout": "Log out",
+    "changeLanguage": "Change language",
+    "version": "Version",
+    "data": {
+      "title": "Profile",
+      "edit": "Edit",
+      "name": "Name",
+      "newName": "New name",
+      "editName": "Edit name",
+      "phone": "Phone",
+      "newPhone": "New phone",
+      "editPhone": "Edit phone",
+      "save": "Save",
+      "errorName": "Enter a valid name",
+      "errorPhone": "Enter a valid phone number",
+      "editPhoto": {
+        "title": "Edit photo",
+        "choosePhoto": "Choose new photo",
+        "takePhoto": "Take new photo",
+        "removePhoto": "Remove photo",
+        "loadPhoto": "Load photo",
+        "movePhoto": "Move and resize"
+      }
+    },
+    "talkToUsData": {
+      "appBar": "Need help?",
+      "title": "Talk to us :)",
+      "description": "You will receive the response in the email you registered here",
+      "subject": "Subject *",
+      "subjectHint": "Enter the subject of the message",
+      "reason": "Reason for contact *",
+      "reasonHint": "Choose the reason for contact",
+      "message": "Message *",
+      "messageHint": "Enter your message",
+      "sendMessage": "Send message",
+      "whatReason": {
+        "title": "What is the reason?",
+        "problem": "Problem",
+        "doubt": "Question",
+        "praises": "Praise",
+        "partnership": "Partnership",
+        "cancelRegistration": "Cancel subscription"
+      },
+      "messageSent": {
+        "goBack": "BACK",
+        "title": "Message sent :)",
+        "messageSent": "Message successfully registered!",
+        "description": "An email has been sent confirming receipt!",
+        "finish": "FINISH"
+      },
+      "errorMessage": {
+        "title": "Message not sent",
+        "description": "Failed to send message, please try again."
+      }
     }
   }
 }

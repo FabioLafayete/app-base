@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:app/modules/workout/controller/workout_controller.dart';
 import 'package:app/service/storage/storage_service.dart';
 import 'package:app/shared/constants/storage_constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get_it/get_it.dart';
 
 class AppLocal {
@@ -56,6 +58,7 @@ class AppLocal {
     if (value == _local.value) return;
     secure.put(StorageConstants.language, value.toString());
     _local.value = value;
+    Modular.get<WorkoutController>().getWorkouts(force: true);
   }
 
   ValueNotifier<LanguageLocal> get local => _local;

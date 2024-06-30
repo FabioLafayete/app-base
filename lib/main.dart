@@ -78,7 +78,7 @@ Future _preload() async {
     Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     ),
-
+    AppLocal().load(),
   ]);
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;

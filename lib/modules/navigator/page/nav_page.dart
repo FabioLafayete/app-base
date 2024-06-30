@@ -13,10 +13,14 @@ import '../../food/page/food_page.dart';
 import '../../profile/page/profile_page.dart';
 import '../../workout/page/workout_page.dart';
 
-class NavPage extends BaseState<NavController> {
-  NavPage({Key? key}) : super(key: key);
+class NavPage extends StatefulWidget {
+  const NavPage({Key? key}) : super(key: key);
 
+  @override
+  State<NavPage> createState() => _NavPageState();
+}
 
+class _NavPageState extends ViewState<NavPage, NavController> {
   @override
   Widget build(BuildContext context) {
     final screens = [
