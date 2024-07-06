@@ -56,6 +56,7 @@ class _FoodPageState extends ViewState<FoodPage, FoodController> {
                 return CardFoodModel(
                   title: e.name!,
                   kcal: e.kcal.toString(),
+                  duration: e.duration,
                   onPress: () {
                     router.pushNamed(
                       PagesNames.foodDetail,

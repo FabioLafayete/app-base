@@ -36,10 +36,8 @@ class AppLocal {
 
     if (Platform.localeName == 'pt_BR') {
       _local.value = LanguageLocal.pt;
-    } else if (Platform.localeName == 'en_US') {
-      _local.value = LanguageLocal.en;
     } else {
-      _local.value = LanguageLocal.fr;
+      _local.value = LanguageLocal.en;
     }
   }
 

@@ -132,7 +132,7 @@ class _BottomNavState extends ViewState<BottomNav, NavController> {
         currentIndex: controller.pageSelected,
         type: BottomNavigationBarType.fixed,
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: colors.background,
         selectedItemColor: colors.primary,
         unselectedItemColor: colors.textSecondary,
         selectedLabelStyle: const TextStyle(

@@ -105,7 +105,7 @@ class FoodDetailPage extends BaseState {
               )),
           child: text(
             local.tr['food']['ingredients'],
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w700,
             fontSize: 18,
           ),
         ),
@@ -118,10 +118,22 @@ class FoodDetailPage extends BaseState {
                 top: 15,
                 left: 16,
               ),
-              child: text(
-                item,
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  text(
+                    '• ',
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  Expanded(
+                    child: text(
+                      item,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
             );
           }),
@@ -152,7 +164,7 @@ class FoodDetailPage extends BaseState {
           ),
           child: text(
             local.tr['food']['howToDo'],
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w700,
             fontSize: 18,
           ),
         ),

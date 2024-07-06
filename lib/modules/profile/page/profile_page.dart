@@ -369,17 +369,17 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
               MyRouter().pop();
             },
           ),
-          const SizedBox(height: 30),
-          _itemCard(
-            context,
-            'FR.svg',
-            'Français',
-                () {
-              AppLocal().setLocal(LanguageLocal.fr);
-              controller.checkVersion();
-              MyRouter().pop();
-            },
-          ),
+          // const SizedBox(height: 30),
+          // _itemCard(
+          //   context,
+          //   'FR.svg',
+          //   'Français',
+          //       () {
+          //     AppLocal().setLocal(LanguageLocal.fr);
+          //     controller.checkVersion();
+          //     MyRouter().pop();
+          //   },
+          // ),
           const SizedBox(height: 30),
         ],
       ),

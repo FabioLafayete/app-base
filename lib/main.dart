@@ -16,7 +16,6 @@ import 'firebase_options.dart';
 
 void main() async {
   runZonedGuarded(() async {
-
     await _preload();
     BuildContext? context;
 
@@ -37,7 +36,7 @@ void main() async {
     runApp(ValueListenableBuilder(
       valueListenable: AppLocal().local,
       builder: (_, __, ___) {
-        if(context != null){
+        if (context != null) {
           RestartWidget.restartApp(context!);
         }
         return ModularApp(
@@ -49,7 +48,7 @@ void main() async {
                 locale: const Locale('pt', 'BR'),
                 theme: ThemeData(fontFamily: 'Inter'),
                 routerConfig: Modular.routerConfig,
-                builder: (_, child){
+                builder: (_, child) {
                   context = _;
                   return child!;
                 },
@@ -59,7 +58,6 @@ void main() async {
         );
       },
     ));
-
   }, (error, stack) {
     if (!kDebugMode) {
       FirebaseCrashlytics.instance.recordError(error, stack);
@@ -71,6 +69,9 @@ void main() async {
 
 Future _preload() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+  );
   GetIt.instance.registerSingleton<AppLocal>(AppLocal.instance);
   await Future.wait([
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge),
@@ -85,5 +86,3 @@ Future _preload() async {
 
   Modular.setInitialRoute(PagesNames.splash);
 }
-
-
