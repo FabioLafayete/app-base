@@ -14,7 +14,7 @@ class StepGender extends BaseState<OnboardController> {
       children: [
         space(0.05),
         text(
-          'Qual o seu gênero?',
+            local.tr['onboarding']['stepGender']['title'],
           fontSize: 25,
           color: colors.text,
           fontWeight: FontWeight.w700
@@ -26,22 +26,31 @@ class StepGender extends BaseState<OnboardController> {
             initialValue: controller.gender,
             items: [
               SelectItemMenu(
-                  title: 'Feminino',
+                  title: local.tr['onboarding']['stepGender']['feminine'],
+                  enumItem: GenderEnum.feminine.name,
                   icon: text('👩', fontSize: 24)
               ),
               SelectItemMenu(
-                  title: 'Masculino',
+                  title: local.tr['onboarding']['stepGender']['masculine'],
+                  enumItem: GenderEnum.masculine.name,
                   icon: text('👱‍♂️', fontSize: 24)
               ),
               SelectItemMenu(
-                  title: 'Outro',
+                  title: local.tr['onboarding']['stepGender']['other'],
+                  enumItem: GenderEnum.other.name,
                   icon: text('👱‍️', fontSize: 24)
               ),
             ],
-            onChange: (value) => controller.setGender(value.title),
+            onChange: (value) => controller.setGender(value.enumItem),
           )),
         )
       ],
     );
   }
+}
+
+enum GenderEnum {
+  feminine,
+  masculine,
+  other
 }

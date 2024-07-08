@@ -14,7 +14,7 @@ class StepName extends BaseState<OnboardController> {
       children: [
         space(0.05),
         text(
-          'Qual o seu nome?',
+          local.tr['onboarding']['stepName']['title'],
           fontSize: 25,
           color: colors.text,
           fontWeight: FontWeight.w700
@@ -23,7 +23,7 @@ class StepName extends BaseState<OnboardController> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: VisualDisplay.textField(
-            labelText: 'Nome e sobrenome',
+            labelText: local.tr['onboarding']['stepName']['labelText'],
             initialValue: controller.name,
             fillColor: Colors.white,
             colorBorder: Colors.white,

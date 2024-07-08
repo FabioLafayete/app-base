@@ -21,8 +21,9 @@ class HttpService {
     CancelToken? cancelToken,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
+    String? country,
   }) async {
-    await configInitApi();
+    await configInitApi(country);
     try {
       return dio.request(
         path,
@@ -46,7 +47,7 @@ class HttpService {
     }
   }
 
-  Future configInitApi() async {
+  Future configInitApi(String? country) async {
     String language = 'English';
     if(appLocal.local.value == LanguageLocal.pt){
       language = 'Portuguese';
@@ -57,6 +58,8 @@ class HttpService {
         headers: {
           'authorization': 'Bearer ${appConfig.bearerToken}',
           'language': language,
+          if(country != null)
+            'country': country,
         },
         validateStatus: (status) => status!  < 400,
         receiveTimeout: const Duration(seconds: 10),

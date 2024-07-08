@@ -10,5 +10,5 @@ abstract class UserRepository {
   Future<void> deletePhoto();
   Future<String> addPhoto(File file);
   Future<void> postSupport(SupportModel model);
-  Future<List<ProductModel>> getProducts();
+  Future<List<ProductModel>> getProducts(String? country);
 }

@@ -22,6 +22,7 @@ class UserModel with _$UserModel {
     int? weight,
     int? targetWeight,
     String? target,
+    String? country,
     @Default(true) bool activated,
     @Default(true) bool newUser,
     @Default(false) bool verifiedEmail,

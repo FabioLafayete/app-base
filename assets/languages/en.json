@@ -139,5 +139,53 @@
     },
     "ingredients": "Ingredients",
     "howToDo": "Directions"
+  },
+  "checkout": {
+    "description": "Say goodbye to your old version and unlock your full potential",
+    "buttonPay": "CONTINUE",
+    "termsDescription": "By continuing, you agree to our Terms of Use and Privacy Policy",
+    "month": "month",
+    "months": "months",
+    "week": "week"
+  },
+  "onboarding": {
+    "stepName": {
+      "title": "What is your name?",
+      "labelText": "First and last name"
+    },
+    "stepBirthday": {
+      "title": "And your birth date?"
+    },
+    "stepGender": {
+      "title": "What is your gender?",
+      "feminine": "Female",
+      "masculine": "Male",
+      "other": "Other"
+    },
+    "stepLimitation": {
+      "title": "Do you have any physical limitations?",
+      "none": "None",
+      "limitation01": "Back pain",
+      "limitation02": "Knee pain",
+      "limitation03": "Reduced mobility (wheelchair)",
+      "limitation04": "Others"
+    },
+    "stepHeight": {
+      "title": "What is your height?"
+    },
+    "stepTarget": {
+      "title": "What is your main goal?",
+      "target01": "Lose weight",
+      "target02": "Gain muscle mass",
+      "target03": "Tone and maintain weight"
+    },
+    "stepWeight": {
+      "title": "What is your current weight?"
+    },
+    "stepTargetWeight": {
+      "title": "What is your desired weight?"
+    },
+    "buttonFinish": "FINISH",
+    "buttonNext": "NEXT"
   }
 }

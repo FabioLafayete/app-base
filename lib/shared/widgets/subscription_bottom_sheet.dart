@@ -1,3 +1,4 @@
+import 'package:app/config/app_local.dart';
 import 'package:app/route/my_router.dart';
 import 'package:app/shared/modules/user/controller/user_controller.dart';
 import 'package:app/shared/widgets/back_button.dart';
@@ -65,6 +66,7 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet>
   late final userController = Modular.get<UserController>();
   late List<PricingModel> prices;
   late Size size = MediaQuery.of(context).size;
+  late dynamic tr;
 
   PricingModel? itemSelected;
 
@@ -101,6 +103,7 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet>
 
   @override
   Widget build(BuildContext context) {
+    tr = AppLocal().tr['checkout'];
     return Container(
       height: size.height * 0.95,
       decoration: BoxDecoration(
@@ -155,7 +158,7 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet>
                   children: [
                     Flexible(
                       child: Text(
-                        'Diga adeus ao excesso de gordura e destrave todo o seu potencial',
+                        tr['description'],
                         style: TextStyle(
                           color: colors.text2,
                           fontSize: 18,
@@ -175,7 +178,7 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet>
                   horizontal: 16,
                 ),
                 child: MyButton(
-                  title: 'CONTINUE',
+                  title: tr['buttonPay'],
                   colorButton: colors.text2,
                   colorTitle: colors.primary,
                   border: 8,
@@ -199,7 +202,7 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet>
                   bottom: MediaQuery.of(context).padding.bottom + 20,
                 ),
                 child: Text(
-                  'Continuando, você concorda com os nossos Termos de Uso e Política de Privacidade',
+                  tr['termsDescription'],
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: colors.text2,
@@ -284,11 +287,11 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet>
                     ),
                     SizedBox(height: size.height * 0.01),
                     Text(
-                      '${item.totalMonth} ${item.totalMonth == 1 ? 'mês' : 'meses'}',
+                      '${item.totalMonth} ${item.totalMonth == 1 ? tr['month'] : tr['months']}',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         color: colors.text2,
-                        fontSize: 18,
+                        fontSize: 16,
                       ),
                     ),
                     SizedBox(height: size.height * 0.01),
@@ -306,12 +309,12 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet>
                         horizontal: 20,
                       ),
                       child: Divider(
-                        thickness: 0.2,
+                        thickness: 0.5,
                         height: 0,
                       ),
                     ),
                     Text(
-                      'semana',
+                      tr['week'],
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
@@ -354,6 +357,9 @@ class _SubscriptionBottomSheetState extends State<SubscriptionBottomSheet>
 
   String generateUrl(String link){
     final user = userController.user;
+    if(link.contains('?')) {
+      return '$link&name=${user.name}&email=${user.email}&cpf=${user.cpf}&phone=${user.cellphone}';
+    }
     return '$link?name=${user.name}&email=${user.email}&cpf=${user.cpf}&phone=${user.cellphone}';
   }
 

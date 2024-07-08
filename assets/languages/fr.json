@@ -1,5 +1,5 @@
 {
-  "language": "ENGLISH",
+  "language": "FRENCH",
   "login": {
     "title": "Bienvenue sur iBetter",
     "description": "Explorez notre motivation et trouvez votre force",
@@ -139,5 +139,53 @@
     },
     "ingredients": "Ingrédients",
     "howToDo": "Comment faire"
+  },
+  "checkout": {
+    "description": "Dites adieu à votre ancienne version et débloquez tout votre potentiel",
+    "buttonPay": "CONTINUER",
+    "termsDescription": "En continuant, vous acceptez nos Conditions d'Utilisation et notre Politique de Confidentialité",
+    "month": "mois",
+    "months": "mois",
+    "week": "semaine"
+  },
+  "onboarding": {
+    "stepName": {
+      "title": "Quel est votre nom?",
+      "labelText": "Prénom et nom de famille"
+    },
+    "stepBirthday": {
+      "title": "Et votre date de naissance?"
+    },
+    "stepGender": {
+      "title": "Quel est votre genre?",
+      "feminine": "Féminin",
+      "masculine": "Masculin",
+      "other": "Autre"
+    },
+    "stepLimitation": {
+      "title": "Avez-vous des limitations physiques?",
+      "none": "Aucune",
+      "limitation01": "Douleurs au dos",
+      "limitation02": "Douleurs au genou",
+      "limitation03": "Mobilité réduite (fauteuil roulant)",
+      "limitation04": "Autres"
+    },
+    "stepHeight": {
+      "title": "Quelle est votre taille?"
+    },
+    "stepTarget": {
+      "title": "Quel est votre principal objectif?",
+      "target01": "Perdre du poids",
+      "target02": "Gagner de la masse musculaire",
+      "target03": "Tonifier et maintenir le poids"
+    },
+    "stepWeight": {
+      "title": "Quel est votre poids actuel?"
+    },
+    "stepTargetWeight": {
+      "title": "Quel est votre poids souhaité?"
+    },
+    "buttonFinish": "TERMINER",
+    "buttonNext": "SUIVANT"
   }
 }

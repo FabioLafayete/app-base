@@ -16,7 +16,7 @@ class StepTargetWeightWidget extends BaseState<OnboardController> {
       children: [
         space(0.05),
         text(
-          'Qual seu peso desejado?',
+            local.tr['onboarding']['stepTargetWeight']['title'],
           fontSize: 25,
           color: colors.text,
           fontWeight: FontWeight.w700,

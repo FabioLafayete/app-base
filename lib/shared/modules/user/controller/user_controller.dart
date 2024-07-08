@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:app/shared/model/support/support_model.dart';
 import 'package:app/shared/model/user/user_model.dart';
 import 'package:dio/dio.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
 import '../../../model/products/product_model.dart';
 import '../repository/impl/user_repository_impl.dart';
@@ -11,8 +13,7 @@ part 'user_controller.g.dart';
 
 class UserController = UserControllerBase with _$UserController;
 
-abstract class UserControllerBase with Store{
-
+abstract class UserControllerBase with Store {
   final UserRepositoryImpl userRepositoryImpl;
 
   UserControllerBase(this.userRepositoryImpl);
@@ -24,7 +25,7 @@ abstract class UserControllerBase with Store{
   List<ProductModel> productModel = [];
 
   @action
-  setProducts(List<ProductModel> value){
+  setProducts(List<ProductModel> value) {
     productModel = List.from(value);
   }
 
@@ -47,7 +48,8 @@ abstract class UserControllerBase with Store{
   setGenderProfile(String? value) => user = user.copyWith(gender: value);
 
   @action
-  setLimitationProfile(String? value) => user = user.copyWith(limitation: value);
+  setLimitationProfile(String? value) =>
+      user = user.copyWith(limitation: value);
 
   @action
   setHeightProfile(int? value) => user = user.copyWith(height: value);
@@ -60,27 +62,28 @@ abstract class UserControllerBase with Store{
 
   @action
   setTargetWeightProfile(int? value) => user = user.copyWith(
-      targetWeight: value, newUser: false,
-  );
+        targetWeight: value,
+        newUser: false,
+      );
 
   @action
   setUser(UserModel value) => user = value;
 
   Future<void> setInitUser({UserModel? userModel}) async {
-    if(userModel != null){
+    if (userModel != null) {
       setUser(userModel);
     } else {
       final data = await userRepositoryImpl.getUser();
       setUser(data);
     }
-    getProducts();
+    await getProducts();
   }
 
   Future<bool> checkUserSubscription() async {
     for (int i = 0; i < 3; i++) {
       final data = await userRepositoryImpl.getUser();
       setUser(data);
-      if(data.isSubscripted) {
+      if (data.isSubscripted) {
         break;
       }
       await Future.delayed(const Duration(seconds: 2));
@@ -89,11 +92,11 @@ abstract class UserControllerBase with Store{
   }
 
   Future deletePhotoUser() async {
-    try{
+    try {
       setPhotoUrlProfile(null);
       await userRepositoryImpl.deletePhoto();
-    }catch(_){
-      if(_ is DioError){
+    } catch (_) {
+      if (_ is DioError) {
         print(_.message);
         print(_.error);
       } else {
@@ -103,11 +106,11 @@ abstract class UserControllerBase with Store{
   }
 
   Future addPhotoUser(File file) async {
-    try{
+    try {
       String urlPhoto = await userRepositoryImpl.addPhoto(file);
       setPhotoUrlProfile(urlPhoto);
-    }catch(_){
-      if(_ is DioError){
+    } catch (_) {
+      if (_ is DioError) {
         print(_.message);
         print(_.error);
       } else {
@@ -117,11 +120,11 @@ abstract class UserControllerBase with Store{
   }
 
   Future<void> updateUser(UserModel value) async {
-    try{
+    try {
       final userModel = await userRepositoryImpl.updateUser(value);
       setUser(userModel);
-    }catch(_){
-      if(_ is DioException){
+    } catch (_) {
+      if (_ is DioException) {
         print(_.message);
         print(_.error);
         print(_.response?.data);
@@ -132,11 +135,11 @@ abstract class UserControllerBase with Store{
   }
 
   Future<bool> postSupport(SupportModel model) async {
-    try{
+    try {
       await userRepositoryImpl.postSupport(model);
       return true;
-    }catch(_){
-      if(_ is DioException){
+    } catch (_) {
+      if (_ is DioException) {
         print(_.message);
         print(_.error);
         print(_.response?.data);
@@ -148,12 +151,13 @@ abstract class UserControllerBase with Store{
   }
 
   Future getProducts() async {
-    try{
-      if(productModel.isNotEmpty) return;
-      final response = await userRepositoryImpl.getProducts();
+    try {
+      if (productModel.isNotEmpty) return;
+      final String? country = await getCountry();
+      final response = await userRepositoryImpl.getProducts(country);
       setProducts(response);
-    }catch(_){
-      if(_ is DioException){
+    } catch (_) {
+      if (_ is DioException) {
         print(_.message);
         print(_.error);
         print(_.response?.data);
@@ -164,4 +168,54 @@ abstract class UserControllerBase with Store{
     return false;
   }
 
+  Future<String?> getCountry() async {
+    try {
+      if (user.country != null && user.country!.isNotEmpty) return user.country;
+
+      if (await handleLocationPermission()) {
+        Position position = await _determinePosition();
+        List<Placemark> placemarks = await placemarkFromCoordinates(
+          position.latitude,
+          position.longitude,
+        );
+        updateUser(user.copyWith(country: placemarks.first.isoCountryCode));
+        return placemarks.first.isoCountryCode;
+      }
+      return null;
+    } catch (_) {
+      if (_ is DioException) {
+        print(_.message);
+        print(_.error);
+        print(_.response?.data);
+      } else {
+        print(_);
+      }
+      return null;
+    }
+  }
+
+  Future<Position> _determinePosition() async {
+    return await Geolocator.getCurrentPosition();
+  }
+
+  Future<bool> handleLocationPermission() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return false;
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return false;
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return false;
+    }
+    return true;
+  }
 }

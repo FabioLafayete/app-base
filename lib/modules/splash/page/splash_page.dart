@@ -6,6 +6,7 @@ import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:geolocator/geolocator.dart';
 import '../../../shared/modules/user/controller/user_controller.dart';
 import '../../../util/firebase_remote_config.dart';
 
@@ -32,6 +33,7 @@ class _SplashPageState extends State<SplashPage> {
       AppConfig().load(),
       AppLocal().loadTranslation(),
       remoteConfig.init(),
+      _handleLocationPermission(),
     ]);
     if(remoteConfig.isMaintenance){
       MyRouter().pushReplacementNamed(PagesNames.maintenance);
@@ -39,14 +41,14 @@ class _SplashPageState extends State<SplashPage> {
     }
     if(AppConfig().bearerToken != null) {
       UserController controller = Modular.get<UserController>();
-      await Future.delayed(const Duration(seconds: 1));
+      // await Future.delayed(const Duration(seconds: 1));
       if(controller.user.newUser){
         MyRouter().pushReplacementNamed(PagesNames.onboard);
       } else {
         MyRouter().pushReplacementNamed(PagesNames.home);
       }
     } else {
-      await Future.delayed(const Duration(seconds: 1));
+      // await Future.delayed(const Duration(seconds: 1));
       MyRouter().pushReplacementNamed(PagesNames.login);
     }
   }
@@ -84,5 +86,26 @@ class _SplashPageState extends State<SplashPage> {
           )
       ),
     );
+  }
+
+  Future<bool> _handleLocationPermission() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return false;
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return false;
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return false;
+    }
+    return true;
   }
 }

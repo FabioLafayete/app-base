@@ -38,8 +38,8 @@ class UserRepositoryImpl extends UserRepository{
   Future<void> postSupport(SupportModel model) async => userService.postSupport(model);
 
   @override
-  Future<List<ProductModel>> getProducts() async {
-    final data = await userService.getProducts();
+  Future<List<ProductModel>> getProducts(String? country) async {
+    final data = await userService.getProducts(country);
     return (data.data as List).map((e) => ProductModel.fromJson(e)).toList();
   }
 }

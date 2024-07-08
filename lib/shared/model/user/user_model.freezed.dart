@@ -34,6 +34,7 @@ mixin _$UserModel {
   int? get weight => throw _privateConstructorUsedError;
   int? get targetWeight => throw _privateConstructorUsedError;
   String? get target => throw _privateConstructorUsedError;
+  String? get country => throw _privateConstructorUsedError;
   bool get activated => throw _privateConstructorUsedError;
   bool get newUser => throw _privateConstructorUsedError;
   bool get verifiedEmail => throw _privateConstructorUsedError;
@@ -66,6 +67,7 @@ abstract class $UserModelCopyWith<$Res> {
       int? weight,
       int? targetWeight,
       String? target,
+      String? country,
       bool activated,
       bool newUser,
       bool verifiedEmail,
@@ -100,6 +102,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? weight = freezed,
     Object? targetWeight = freezed,
     Object? target = freezed,
+    Object? country = freezed,
     Object? activated = null,
     Object? newUser = null,
     Object? verifiedEmail = null,
@@ -163,6 +166,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
               as String?,
+      country: freezed == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String?,
       activated: null == activated
           ? _value.activated
           : activated // ignore: cast_nullable_to_non_nullable
@@ -209,6 +216,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       int? weight,
       int? targetWeight,
       String? target,
+      String? country,
       bool activated,
       bool newUser,
       bool verifiedEmail,
@@ -241,6 +249,7 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? weight = freezed,
     Object? targetWeight = freezed,
     Object? target = freezed,
+    Object? country = freezed,
     Object? activated = null,
     Object? newUser = null,
     Object? verifiedEmail = null,
@@ -304,6 +313,10 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
               as String?,
+      country: freezed == country
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String?,
       activated: null == activated
           ? _value.activated
           : activated // ignore: cast_nullable_to_non_nullable
@@ -346,6 +359,7 @@ class _$_UserModel extends _UserModel {
       this.weight,
       this.targetWeight,
       this.target,
+      this.country,
       this.activated = true,
       this.newUser = true,
       this.verifiedEmail = false,
@@ -385,6 +399,8 @@ class _$_UserModel extends _UserModel {
   @override
   final String? target;
   @override
+  final String? country;
+  @override
   @JsonKey()
   final bool activated;
   @override
@@ -402,7 +418,7 @@ class _$_UserModel extends _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, email: $email, cpf: $cpf, password: $password, age: $age, cellphone: $cellphone, photoUrl: $photoUrl, gender: $gender, limitation: $limitation, height: $height, weight: $weight, targetWeight: $targetWeight, target: $target, activated: $activated, newUser: $newUser, verifiedEmail: $verifiedEmail, verifiedCellphone: $verifiedCellphone, isSubscripted: $isSubscripted)';
+    return 'UserModel(id: $id, name: $name, email: $email, cpf: $cpf, password: $password, age: $age, cellphone: $cellphone, photoUrl: $photoUrl, gender: $gender, limitation: $limitation, height: $height, weight: $weight, targetWeight: $targetWeight, target: $target, country: $country, activated: $activated, newUser: $newUser, verifiedEmail: $verifiedEmail, verifiedCellphone: $verifiedCellphone, isSubscripted: $isSubscripted)';
   }
 
   @override
@@ -429,6 +445,7 @@ class _$_UserModel extends _UserModel {
             (identical(other.targetWeight, targetWeight) ||
                 other.targetWeight == targetWeight) &&
             (identical(other.target, target) || other.target == target) &&
+            (identical(other.country, country) || other.country == country) &&
             (identical(other.activated, activated) ||
                 other.activated == activated) &&
             (identical(other.newUser, newUser) || other.newUser == newUser) &&
@@ -458,6 +475,7 @@ class _$_UserModel extends _UserModel {
         weight,
         targetWeight,
         target,
+        country,
         activated,
         newUser,
         verifiedEmail,
@@ -495,6 +513,7 @@ abstract class _UserModel extends UserModel {
       final int? weight,
       final int? targetWeight,
       final String? target,
+      final String? country,
       final bool activated,
       final bool newUser,
       final bool verifiedEmail,
@@ -533,6 +552,8 @@ abstract class _UserModel extends UserModel {
   int? get targetWeight;
   @override
   String? get target;
+  @override
+  String? get country;
   @override
   bool get activated;
   @override

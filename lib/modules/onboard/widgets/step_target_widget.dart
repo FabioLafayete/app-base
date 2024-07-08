@@ -14,7 +14,7 @@ class StepTargetWidget extends BaseState<OnboardController> {
       children: [
         space(0.05),
         text(
-          'Qual o seu principal objetivo?',
+            local.tr['onboarding']['stepTarget']['title'],
           fontSize: 25,
           color: colors.text,
           fontWeight: FontWeight.w700,
@@ -27,22 +27,32 @@ class StepTargetWidget extends BaseState<OnboardController> {
             initialValue: controller.target,
             items: [
               SelectItemMenu(
-                  title: 'Perder peso',
+                  title: local.tr['onboarding']['stepTarget']['target01'],
+                  enumItem: TargetEnum.loseWeight.name,
                   icon: text('🏋️‍♀️', fontSize: 24)
               ),
               SelectItemMenu(
-                  title: 'Ganhar massa muscular',
+                  title: local.tr['onboarding']['stepTarget']['target02'],
+                  enumItem: TargetEnum.gainMuscularMass.name,
                   icon: text('💪️', fontSize: 24)
               ),
               SelectItemMenu(
-                  title: 'Definir e manter o peso',
+                  title: local.tr['onboarding']['stepTarget']['target03'],
+                  enumItem: TargetEnum.defineMaintainWeight.name,
                   icon: text('🏃‍♀️', fontSize: 24)
               ),
             ],
-            onChange: (value) => controller.setTarget(value.title),
+            onChange: (value) => controller.setTarget(value.enumItem),
           )),
         )
       ],
     );
   }
 }
+
+enum TargetEnum {
+  loseWeight,
+  gainMuscularMass,
+  defineMaintainWeight,
+}
+

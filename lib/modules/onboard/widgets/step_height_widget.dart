@@ -14,7 +14,7 @@ class StepHeightWidget extends BaseState<OnboardController> {
       children: [
         space(0.05),
         text(
-          'Qual sua altura?',
+            local.tr['onboarding']['stepHeight']['title'],
           fontSize: 25,
           color: colors.text,
           fontWeight: FontWeight.w700,

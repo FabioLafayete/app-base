@@ -62,10 +62,11 @@ class UserServiceImpl implements UserService {
   }
 
   @override
-  Future<Response> getProducts() async {
+  Future<Response> getProducts(String? country) async {
     return _service.request(
-        type: RequestType.GET,
-        path: UserConstants.getProducts,
+      type: RequestType.GET,
+      path: UserConstants.getProducts,
+      country: country,
     );
   }
 }
