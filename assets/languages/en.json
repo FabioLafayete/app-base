@@ -187,5 +187,14 @@
     },
     "buttonFinish": "FINISH",
     "buttonNext": "NEXT"
+  },
+  "maintenance": {
+    "title": "We are under maintenance,\nwe'll be back soon",
+    "text": "We apologize for the inconvenience."
+  },
+  "subscriptionSuccess": {
+    "title": "Congratulations \uD83D\uDCAA",
+    "description": "Now you are part of our family, let's go!!",
+    "button": "FINISH"
   }
 }

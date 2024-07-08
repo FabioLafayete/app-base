@@ -9,15 +9,14 @@ class SubscriptionSuccessPage extends BaseState {
 
   @override
   Widget build(BuildContext context) {
-    print('CHEGOU AQUI');
     return BasePage(
       showAppBar: false,
       paddingPage: 0,
       body: Container(
         width: width,
         padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 24
+          horizontal: 20,
+          vertical: 24,
         ),
         color: colors.primary.withOpacity(0.95),
         child: Column(
@@ -38,29 +37,29 @@ class SubscriptionSuccessPage extends BaseState {
                 ),
                 const SizedBox(height: 30),
                 text(
-                    'Parabéns 💪',
-                    color: colors.text2,
-                    fontSize: 30,
-                    fontWeight: FontWeight.w500,
-                    textAlign: TextAlign.center
+                  local.tr['subscriptionSuccess']['title'],
+                  color: colors.text2,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w500,
+                  textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 40),
                 text(
-                    'Agora você faz parte do nosso time, vamos nessa!!',
-                    color: colors.text2,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400,
-                    textAlign: TextAlign.center
+                  local.tr['subscriptionSuccess']['description'],
+                  color: colors.text2,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                  textAlign: TextAlign.center,
                 ),
               ],
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: MyButton(
-                title: 'FINALIZAR',
+                title: local.tr['subscriptionSuccess']['button'],
                 colorButton: colors.text2,
                 colorTitle: colors.primary,
-                onPress: (){
+                onPress: () {
                   router.pop();
                 },
               ),

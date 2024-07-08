@@ -187,5 +187,14 @@
     },
     "buttonFinish": "FINALIZAR",
     "buttonNext": "AVANÇAR"
+  },
+  "maintenance": {
+    "title": "Estamos em manutenção,\nvoltamos ja ja",
+    "text": "Pedimos desculpe pelo incomodo."
+  },
+  "subscriptionSuccess": {
+    "title": "Parabéns \uD83D\uDCAA",
+    "description": "Agora você faz parte da nossa família, vamos nessa !!",
+    "button": "FINALIZAR"
   }
 }

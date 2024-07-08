@@ -59,8 +59,8 @@ abstract class ProfileControllerBase extends BaseController with Store {
   @observable
   String? messageHelp;
 
-  List<String> listOptionsHelp = [
-    if(AppLocal().local.value == LanguageLocal.pt)
+  List<String> listOptionsHelp(LanguageLocal language) => [
+    if(language == LanguageLocal.pt)
      ...[
        'Problema',
        'Dúvida',

@@ -19,9 +19,8 @@ class MaintenanceWidget extends BaseState {
           SvgPicture.asset(
             'assets/images/icon/svg/maintenance.svg',
           ),
-
           text(
-            'Estamos em manutenção,\nvoltamos ja ja',
+            local.tr['maintenance']['title'],
             color: Colors.white,
             fontWeight: FontWeight.w600,
             fontSize: 20,
@@ -34,7 +33,7 @@ class MaintenanceWidget extends BaseState {
           ),
           SizedBox(height: height * 0.03,),
           text(
-            'Pedimos desculpe pelo incomodo.',
+            local.tr['maintenance']['text'],
             color: Colors.white,
             fontWeight: FontWeight.w300,
             fontSize: 18,

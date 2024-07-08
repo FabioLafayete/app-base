@@ -21,7 +21,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
-
   @override
   Widget build(BuildContext context) {
     dynamic tr = local.tr['profile'];
@@ -238,8 +237,13 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
                               colors.textSecondary, BlendMode.srcIn),
                         ),
                         onPress: () {
-                          launchUrl(Uri.parse(
-                              'https://ibetter.io/politica-de-privacidade/'));
+                          launchUrl(
+                            Uri.parse(
+                              local.local.value == LanguageLocal.pt ?
+                              'https://ibetter.io/politica-de-privacidade' :
+                              'https://ibetter.io/privacy-policies',
+                            ),
+                          );
                         },
                       ),
                       ListButtonItem(
@@ -252,7 +256,12 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
                           ),
                           onPress: () {
                             launchUrl(
-                                Uri.parse('https://ibetter.io/termos-de-uso'));
+                              Uri.parse(
+                                local.local.value == LanguageLocal.pt ?
+                                'https://ibetter.io/termos-de-uso' :
+                                'https://ibetter.io/terms',
+                              ),
+                            );
                           }),
                       ListButtonItem(
                           title: tr['talkToUs'],
@@ -266,17 +275,17 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
                             router.pushNamed(PagesNames.profileHelp);
                           }),
                       ListButtonItem(
-                          title: tr['logout'],
-                          icon: SvgPicture.asset(
-                            'assets/images/icon/svg/signout.svg',
-                            height: 24,
-                            colorFilter: ColorFilter.mode(
-                              colors.textSecondary,
-                              BlendMode.srcIn,
-                            ),
+                        title: tr['logout'],
+                        icon: SvgPicture.asset(
+                          'assets/images/icon/svg/signout.svg',
+                          height: 24,
+                          colorFilter: ColorFilter.mode(
+                            colors.textSecondary,
+                            BlendMode.srcIn,
                           ),
-                          onPress: controller.logout,
-                          isLogout: true,
+                        ),
+                        onPress: controller.logout,
+                        isLogout: true,
                       ),
                     ],
                   ),

@@ -23,8 +23,6 @@ class FirebaseRemoteConfigService {
       minimumFetchInterval: const Duration(minutes: 5), 
     ));
     await _remoteConfig.fetchAndActivate();
-    print('REMOTE');
-    print(_remoteConfig.getString('seila'));
   }
 
   bool get isMaintenance => _remoteConfig.getBool('manutencao');
