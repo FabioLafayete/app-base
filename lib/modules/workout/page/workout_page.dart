@@ -13,60 +13,78 @@ import '../../navigator/controller/nav_controller.dart';
 import '../widgets/list_cards_items.dart';
 import '../widgets/top_presentation.dart';
 
-class WorkoutPage extends BaseWidget<WorkoutController> {
-  WorkoutPage({Key? key}) : super(key: key);
+class WorkoutPage extends StatefulWidget {
+  const WorkoutPage({Key? key}) : super(key: key);
+
+  @override
+  State<WorkoutPage> createState() => _WorkoutPageState();
+}
+
+class _WorkoutPageState extends ViewState<WorkoutPage, WorkoutController> {
+  @override
+  void initState() {
+    super.initState();
+    controller.getWorkouts();
+  }
 
   final navController = Modular.get<NavController>();
 
-  void openVideo (ProgramModel model){
+  void openVideo(ProgramModel model) {
     controller.setProgramModel(model);
     router.pushNamed(PagesNames.workoutDetail);
   }
 
+  late dynamic tr;
 
   @override
   Widget build(BuildContext context) {
-    controller.getWorkouts();
+    tr = local.tr['workout'];
     return BasePage(
+      onRefresh: () => controller.getWorkouts(force: true),
       backgroundColor: colors.background,
       showAppBar: false,
       paddingPage: 0,
       extendBodyBehindAppBar: true,
       elevation: 0,
-      body: Observer(builder: (_){
-        if(controller.state.comboProgramModel == null) {
+      body: Observer(builder: (_) {
+        if (controller.state.comboProgramModel == null) {
           return const WorkoutLoading();
         }
 
         return Stack(
           children: [
             SuperListView(
-              physics: const ClampingScrollPhysics(),
               padding: MediaQuery.maybeOf(context)?.padding.copyWith(top: 0),
               children: [
-                if(controller.state.topProgram != null)
+                if (controller.state.topProgram != null)
                   TopPresentation(
                     cardItemModel: controller.state.topProgram!,
-                    showUsers: true,
+                    showUsers: false,
                   ),
                 SuperListView.builder(
                   itemCount: controller.state.comboProgramModel!.length,
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemBuilder: (_, index){
+                  itemBuilder: (_, index) {
                     final item = controller.state.comboProgramModel![index];
-                    final targetProgram = controller.state.comboProgramModel![index].targetProgram;
+                    final targetProgram = controller
+                        .state.comboProgramModel![index].targetProgram;
                     return Padding(
                       padding: EdgeInsets.only(top: index == 0 ? 0 : 40),
                       child: ListCardItems(
                           title: item.name,
-                          listItems: List.generate(targetProgram.length, (index){
+                          listItems:
+                              List.generate(targetProgram.length, (index) {
                             final program = targetProgram[index].program!;
                             return CardItemModel(
-                              onPress: program.isSoon ? (){} : () => openVideo(program),
+                              onPress: program.isSoon
+                                  ? () {}
+                                  : () => openVideo(program),
                               thumbnail: program.thumbnail,
                               description: program.description ?? '',
-                              timeTraining: program.duration ?? '', trainer: program.difficulty,
+                              timeTraining: program.duration ?? '',
+                              trainer: program.difficulty,
+                              showFavorite: false,
                               soon: program.isSoon,
                             );
                           })),
@@ -75,11 +93,12 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
                 ),
                 space(0.07),
                 _bottomCard(
-                  'Precisa de ajuda?',
-                  'Envie uma mensagem para nossa equipe de suporte',
-                  'Fale com a gente', (){
-                  router.pushNamed(PagesNames.profileHelp);
-                },
+                  tr['needHelp']['title'],
+                  tr['needHelp']['description'],
+                  tr['needHelp']['button'],
+                  () {
+                    router.pushNamed(PagesNames.profileHelp);
+                  },
                 ),
               ],
             ),
@@ -90,22 +109,15 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
   }
 
   Widget _bottomCard(
-      String title,
-      String description,
-      String buttonName,
-      Function() onPress){
+      String title, String description, String buttonName, Function() onPress) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 30),
       color: colors.primary,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          text(
-              title,
-              color: colors.text2,
-              fontWeight: FontWeight.w700,
-              fontSize: 24
-          ),
+          text(title,
+              color: colors.text2, fontWeight: FontWeight.w700, fontSize: 24),
           const SizedBox(height: 30),
           text(
             description,
@@ -123,5 +135,4 @@ class WorkoutPage extends BaseWidget<WorkoutController> {
       ),
     );
   }
-
 }

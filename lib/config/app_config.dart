@@ -1,3 +1,4 @@
+import 'package:app/service/deep_link_manager.dart';
 import 'package:app/service/storage/storage_service.dart';
 import 'package:app/shared/constants/storage_constants.dart';
 import 'package:app/shared/flavor/flavor_types.dart';
@@ -30,6 +31,7 @@ class AppConfig {
     /// BEARER TOKEN
     final secure = Modular.get<SecureStorageService>();
     String? bearer = await secure.get(StorageConstants.bearerToken);
+
     if(bearer != null) {
       _bearerToken = bearer;
     }
@@ -39,8 +41,11 @@ class AppConfig {
       UserController controller = Modular.get<UserController>();
       await controller.setInitUser().catchError((e){
         _bearerToken = null;
+        secure.clearAll();
       });
     }
+
+    initUniLinks();
 
     print('Ambiente de ${flavors?.getCurrentFlavor() == FlavorType.dev ? 'dev'
         : flavors?.getCurrentFlavor() == FlavorType.local ? 'local'

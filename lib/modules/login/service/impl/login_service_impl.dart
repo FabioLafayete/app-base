@@ -12,24 +12,32 @@ class LoginServiceImpl implements LoginService {
   final HttpService _service;
 
   @override
-  Future<Response> postTokenEmail(String email) {
+  Future<Response> postTokenEmail(String email, {bool forceSendCode = false,}) {
     return _service.request(
       type: RequestType.POST,
       path: LoginConstants.postTokenEmail,
       dataRequest: {
-        "email": email
+        "email": email,
+        if(forceSendCode)
+          "forceSendCode": forceSendCode
       }
     );
   }
 
   @override
-  Future<Response> postLogin(String email, String token) {
+  Future<Response> postLogin(String email, {
+    String? token,
+    String? password,
+  }) {
     return _service.request(
         type: RequestType.POST,
         path: LoginConstants.postLogin,
         dataRequest: {
           "email": email,
-          "token": token
+          if(token != null)
+            "token": token,
+          if(password != null)
+            "password": password,
         }
     );
   }

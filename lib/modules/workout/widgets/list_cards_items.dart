@@ -1,9 +1,13 @@
+import 'package:app/shared/modules/user/controller/user_controller.dart';
 import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/shared/widgets/subscription_bottom_sheet.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
-class ListCardItems extends BaseWidget {
+class ListCardItems extends BaseState {
   ListCardItems({
     Key? key,
     required this.title,
@@ -77,7 +81,7 @@ class ListCardItems extends BaseWidget {
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
             children: List.generate(listItems.length, (index){
-              return _item(index);
+              return Observer(builder: (_) => _item(index, context));
             }),
           ),
         )
@@ -85,10 +89,14 @@ class ListCardItems extends BaseWidget {
     );
   }
 
-  Widget _item(int index){
+  Widget _item(int index, BuildContext context){
+    final userController = Modular.get<UserController>();
     CardItemModel item = listItems[index];
+    bool isLock = item.soon || !userController.user.isSubscripted;
     return GestureDetector(
-      onTap: item.onPress,
+      onTap: userController.user.isSubscripted ? item.onPress : (){
+        const SubscriptionBottomSheet().show(context: context);
+      },
       child: Container(
         margin: EdgeInsets.only(left: index == 0 ? 16 : 0, right: index + 1 == listItems.length ? 16 : 10),
         width: width * 0.7,
@@ -97,7 +105,7 @@ class ListCardItems extends BaseWidget {
           children: [
             Flexible(
               child: Opacity(
-                opacity: item.soon ? 0.8 : 1.0,
+                opacity: isLock ? 0.8 : 1.0,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Stack(
@@ -133,16 +141,17 @@ class ListCardItems extends BaseWidget {
                           )
                       ),
                       Container(
-                          padding: EdgeInsets.all(!item.soon ? 0 : 15),
+                          padding: EdgeInsets.all(
+                            !isLock ? 0 : 15,
+                          ),
                           decoration: BoxDecoration(
                             color: colors.text.withOpacity(0.5),
                             borderRadius: BorderRadius.circular(1000),
                             border: Border.all(width: 1.5, color: colors.text2)
                           ),
-                          child: !item.soon ?
+                          child: !isLock ?
                           Icon(Icons.play_arrow_rounded, color: colors.background, size: 50) :
                           Icon(Icons.lock, color: colors.background, size: 30)
-
                       ),
                     ],
                   ),

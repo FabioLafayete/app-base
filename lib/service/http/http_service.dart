@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import '../../config/app_config.dart';
+import '../../config/app_local.dart';
 
 // ignore: constant_identifier_names
 enum RequestType { GET, POST, PUT, PATCH, DELETE }
@@ -9,6 +10,7 @@ class HttpService {
   late Dio dio;
 
   AppConfig appConfig = AppConfig();
+  AppLocal appLocal = AppLocal();
 
   Future<Response> request({
     required RequestType type,
@@ -19,8 +21,9 @@ class HttpService {
     CancelToken? cancelToken,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
+    String? country,
   }) async {
-    await configInitApi();
+    await configInitApi(country);
     try {
       return dio.request(
         path,
@@ -44,13 +47,22 @@ class HttpService {
     }
   }
 
-  configInitApi() async {
+  Future configInitApi(String? country) async {
+    String language = 'English';
+    if(appLocal.local.value == LanguageLocal.pt){
+      language = 'Portuguese';
+    }
     dio = Dio(
       BaseOptions(
         baseUrl: appConfig.baseUrl,
-        headers: {'authorization': 'Bearer ${appConfig.bearerToken}'},
+        headers: {
+          'authorization': 'Bearer ${appConfig.bearerToken}',
+          'language': language,
+          if(country != null)
+            'country': country,
+        },
         validateStatus: (status) => status!  < 400,
-        receiveTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 20),
         connectTimeout: const Duration(seconds: 30),
       ),
     );
@@ -142,7 +154,8 @@ class CustomInterceptors extends Interceptor {
         '[PATH]     -> ${err.requestOptions.path}\n'
         '[BODY]     -> ${err.requestOptions.data}\n'
         '[MESSAGE]  -> ${err.message}\n'
-        '[ERROR]    -> ${err.error}'
+        '[ERROR]    -> ${err.error}\n'
+        '[RESPONSE] -> ${err.response?.data}'
     );
     super.onError(err, handler);
   }

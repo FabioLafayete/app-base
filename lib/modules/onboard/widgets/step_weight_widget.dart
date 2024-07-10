@@ -3,9 +3,8 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class StepWeightWidget extends BaseWidget<OnboardController> {
+class StepWeightWidget extends BaseState<OnboardController> {
   StepWeightWidget({Key? key}) : super(key: key);
 
   @override
@@ -15,7 +14,7 @@ class StepWeightWidget extends BaseWidget<OnboardController> {
       children: [
         space(0.05),
         text(
-          'Qual o seu peso atual?',
+            local.tr['onboarding']['stepWeight']['title'],
           fontSize: 25,
           color: colors.text,
           fontWeight: FontWeight.w700,
@@ -43,7 +42,7 @@ class StepWeightWidget extends BaseWidget<OnboardController> {
                   },
                   onEditingComplete: (){
                     if(controller.enableButton){
-                      controller.onPressButton();
+                      controller.onPressButton(context);
                     }
                   }
                 ),

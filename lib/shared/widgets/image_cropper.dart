@@ -1,15 +1,15 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:app/shared/widgets/app_theme_widget.dart';
+import 'package:app/config/app_local.dart';
 import 'package:app/route/my_router.dart';
+import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:app/util/colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crop/crop.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shimmer/shimmer.dart';
@@ -39,20 +39,20 @@ class ImageCropperWidget extends StatefulWidget {
   final bool simpleView;
   final bool loading;
   final Function(File?) onChange;
-  final Function()? onPress;
+  final VoidCallback? onPress;
   final bool interactive;
 
   @override
   State<ImageCropperWidget> createState() => _ImageCropperWidgetState();
 }
 
-class _ImageCropperWidgetState extends State<ImageCropperWidget> {
+class _ImageCropperWidgetState extends State<ImageCropperWidget>
+    with ViewMixin {
+
   File? image;
   String? imageUrl;
   late bool hasImage;
-  final colors = AppColors();
-  final text = AppTheme().text;
-  final MyRouter router = MyRouter();
+  late dynamic tr;
 
   @override
   Widget build(BuildContext context) {
@@ -70,86 +70,98 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
     return widget.simpleView ? _simpleview(textLength) : _body(textLength);
   }
 
-  Widget _body(int textLength){
+  Widget _body(int textLength) {
+    tr = local.tr['profile']['data']['editPhoto'];
     return Card(
       elevation: 1.5,
       color: Colors.white,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10)
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Material(
           type: MaterialType.transparency,
           child: InkWell(
-            onTap: widget.loading ? null : widget.onPress ?? () => _openOptions(context),
+            onTap: widget.loading
+                ? null
+                : widget.onPress ?? () => _openOptions(context),
             splashColor: Colors.black54.withOpacity(0.05),
             child: Padding(
               padding: const EdgeInsets.all(16),
-              child: widget.loading ? _loading() : Row(
-                children: [
-                  if (image != null && (imageUrl == null || imageUrl!.isEmpty))
-                    _image(),
-                  if (imageUrl != null && imageUrl!.isNotEmpty)
-                    _imageUrl(),
-                  if (!hasImage) Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(1000),
-                      color: const Color(0xFFE4E7EC),
-                    ),
-                    child: Center(
-                      child: (widget.textImage != null && widget.textImage!.isNotEmpty) ? SizedBox(
-                        height: 30,
-                        width: 30,
-                        child: Center(
-                          child: Text(
-                              widget.textImage!.substring(0, textLength).toUpperCase(),
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                              )
-                          ),
-                        ),
-                      )
-                          : const Icon(Icons.person,
-                        color: Colors.white, size: 18,),
-                    ),
-                  ),
-                  const SizedBox(width: 20),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              child: widget.loading
+                  ? _loading()
+                  : Row(
                       children: [
-                        text(
-                          widget.title ?? (hasImage ? 'Editar foto' : 'Carregar foto'),
-                          maxLines: 1,
-                          textOverflow: TextOverflow.ellipsis,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                        ),
-                        if (widget.subTitle != null)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4),
-                            child: text(
-                                widget.subTitle!,
+                        if (image != null &&
+                            (imageUrl == null || imageUrl!.isEmpty))
+                          _image(),
+                        if (imageUrl != null && imageUrl!.isNotEmpty)
+                          _imageUrl(),
+                        if (!hasImage)
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(1000),
+                              color: const Color(0xFFE4E7EC),
+                            ),
+                            child: Center(
+                              child: (widget.textImage != null &&
+                                      widget.textImage!.isNotEmpty)
+                                  ? SizedBox(
+                                      height: 30,
+                                      width: 30,
+                                      child: Center(
+                                        child: Text(
+                                            widget.textImage!
+                                                .substring(0, textLength)
+                                                .toUpperCase(),
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 16,
+                                            )),
+                                      ),
+                                    )
+                                  : const Icon(
+                                      Icons.person,
+                                      color: Colors.white,
+                                      size: 18,
+                                    ),
+                            ),
+                          ),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              text(
+                                widget.title ??
+                                    (hasImage
+                                        ? tr['title']
+                                        : tr['loadPhoto']),
                                 maxLines: 1,
                                 textOverflow: TextOverflow.ellipsis,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.black54,
-                                fontSize: 12
-                            ),
+                                fontSize: 16,
+                              ),
+                              if (widget.subTitle != null)
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4),
+                                  child: text(widget.subTitle!,
+                                      maxLines: 1,
+                                      textOverflow: TextOverflow.ellipsis,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black54,
+                                      fontSize: 12),
+                                ),
+                            ],
                           ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: colors.primary,
+                          size: 18,
+                        )
                       ],
                     ),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: colors.primary,
-                    size: 18,
-                  )
-                ],
-              ),
             ),
           ),
         ),
@@ -157,71 +169,77 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
     );
   }
 
-  Widget _loading(){
+  Widget _loading() {
     return SizedBox(
       width: double.infinity,
       height: 40,
       child: Shimmer.fromColors(
           baseColor: Colors.grey.withOpacity(0.2),
           highlightColor: Colors.grey.withOpacity(0.1),
-        child: Row(
-          children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(1000)
+          child: Row(
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(1000)),
               ),
-            ),
-            const SizedBox(width: 30),
-            Container(
-              width: 120,
-              height: 20,
-              color: Colors.black,
-            ),
-            const Spacer(),
-            Icon(
-              Icons.arrow_forward_ios_rounded,
-              color: colors.primary,
-              size: 18,
-            )
-          ],
-        )
-      ),
+              const SizedBox(width: 30),
+              Container(
+                width: 120,
+                height: 20,
+                color: Colors.black,
+              ),
+              const Spacer(),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: colors.primary,
+                size: 18,
+              )
+            ],
+          )),
     );
   }
 
-  Widget _simpleview(int textLength){
+  Widget _simpleview(int textLength) {
     return Column(
       children: [
         if (image != null && (imageUrl == null || imageUrl!.isEmpty)) _image(),
         if (imageUrl != null && imageUrl!.isNotEmpty) _imageUrl(),
-        if (!hasImage) Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(1000),
-            color: const Color(0xFFE4E7EC),
+        if (!hasImage)
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(1000),
+              color: const Color(0xFFE4E7EC),
+            ),
+            height: 80,
+            width: 80,
+            child: Center(
+              child: (widget.textImage != null && widget.textImage!.isNotEmpty)
+                  ? SizedBox(
+                      height: 30,
+                      width: 30,
+                      child: Center(
+                        child: text(
+                          widget.textImage!
+                              .substring(0, textLength)
+                              .toUpperCase(),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                      ),
+                    )
+                  : const Icon(
+                      Icons.person,
+                      color: Colors.white,
+                      size: 18,
+                    ),
+            ),
           ),
-          height: 80, width: 80,
-          child: Center(
-            child: (widget.textImage != null && widget.textImage!.isNotEmpty) ? SizedBox(
-              height: 30,
-              width: 30,
-              child: Center(
-                child: text(
-                  widget.textImage!.substring(0, textLength).toUpperCase(),
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                ),
-              ),
-            )
-                : const Icon(Icons.person,
-              color: Colors.white, size: 18,),
-          ),
-        ),
         const SizedBox(height: 20),
-        if(widget.title != null)
+        if (widget.title != null)
           text(
             widget.title!,
             maxLines: 1,
@@ -233,32 +251,30 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
     );
   }
 
-  void _openOptions(BuildContext context){
+  void _openOptions(BuildContext context) {
     VisualDisplay.bottomSheet(
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            text(
-                hasImage ? 'Editar foto' : 'Carregar foto',
+            text(hasImage ? tr['title'] : tr['loadPhoto'],
                 color: colors.text,
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
-                textAlign: TextAlign.start
-            ),
+                textAlign: TextAlign.start),
             const SizedBox(height: 32),
-            _itemCard(Icons.photo, 'Escolher nova foto', (){
+            _itemCard(context, Icons.photo, tr['choosePhoto'], () {
               getPhoto(onGallery: true);
               router.pop();
             }),
             const SizedBox(height: 32),
-            _itemCard(Icons.photo_camera, 'Tirar nova foto', (){
+            _itemCard(context, Icons.photo_camera, tr['takePhoto'], () {
               getPhoto(onGallery: false);
               router.pop();
             }),
             const SizedBox(height: 32),
-            if(hasImage)
-              _itemCard(Icons.delete, 'Remover foto', () {
+            if (hasImage)
+              _itemCard(context, Icons.delete, tr['removePhoto'], () {
                 setState(() {
                   image = null;
                 });
@@ -271,22 +287,19 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
         hasHeight: false,
         dismissible: true,
         context: context,
-        onClose: (){}
+        onClose: () {},
     );
   }
 
-  Widget _itemCard(IconData icon, String title, Function() onPress){
+  Widget _itemCard(
+      BuildContext context, IconData icon, String title, Function() onPress) {
     return GestureDetector(
       onTap: onPress,
       child: Container(
         color: Colors.transparent,
-        width: Get.width,
+        width: MediaQuery.of(context).size.width,
         child: Row(
-          children: [
-            Icon(icon),
-            const SizedBox(width: 20),
-            text(title)
-          ],
+          children: [Icon(icon), const SizedBox(width: 20), text(title)],
         ),
       ),
     );
@@ -326,27 +339,25 @@ class _ImageCropperWidgetState extends State<ImageCropperWidget> {
         return Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            borderRadius:
-            BorderRadius.circular(1000),
+            borderRadius: BorderRadius.circular(1000),
             color: const Color(0xFFE4E7EC),
           ),
           child: Center(
             child: (widget.textImage != null && widget.textImage!.isNotEmpty)
                 ? SizedBox(
-              height: 30,
-              width: 30,
-              child: Center(
-                child: Text(
-                  widget.textImage!
-                      .substring(0, textLength)
-                      .toUpperCase(),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
+                    height: 30,
+                    width: 30,
+                    child: Center(
+                      child: Text(
+                          widget.textImage!
+                              .substring(0, textLength)
+                              .toUpperCase(),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          )),
+                    ),
                   )
-                ),
-              ),
-            )
                 : const Icon(Icons.person, color: Colors.white, size: 18),
           ),
         );
@@ -415,9 +426,9 @@ class ImageCropperModel {
   });
 }
 
-
 class ImageCrop extends StatefulWidget {
-  const ImageCrop({super.key, 
+  const ImageCrop({
+    super.key,
     required this.imageOriginal,
     required this.onCropped,
     this.interactive = false,
@@ -432,7 +443,6 @@ class ImageCrop extends StatefulWidget {
 }
 
 class _ImageCropState extends State<ImageCrop> {
-
   BehaviorSubject<bool> isLoadingStream = BehaviorSubject.seeded(false);
 
   final controller = CropController();
@@ -462,60 +472,66 @@ class _ImageCropState extends State<ImageCrop> {
             backgroundColor: Colors.black,
             appBar: AppBar(
               backgroundColor: colors.primary,
-              title: const Text('Mover e redimensionar',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
-                  color: Colors.white
-                ),
+              title: Text(
+                AppLocal().tr['profile']['data']['editPhoto']['movePhoto'],
+                style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    color: Colors.white),
               ),
               leading: IconButton(
                 icon: const Icon(
                   Icons.keyboard_arrow_left,
                   color: Colors.white,
                 ),
-                onPressed:  Navigator.of(context).pop,
+                onPressed: Navigator.of(context).pop,
               ),
               actions: [
                 IconButton(
                   icon: isLoading
                       ? const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation(Colors.white),
-                      strokeWidth: 2,
-                    ),
-                  )
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation(Colors.white),
+                            strokeWidth: 2,
+                          ),
+                        )
                       : const Icon(Icons.check),
                   color: Colors.white,
                   iconSize: 24,
                   onPressed: isLoading
                       ? null
                       : () async {
-                    isLoadingStream.add(true);
-                    try{
-                      final tempDir = await getTemporaryDirectory();
-                      final pixelRatio = MediaQuery.of(context).devicePixelRatio;
-                      final cropped = await controller.crop(pixelRatio: pixelRatio);
-                      if(cropped != null){
-                        final data = await cropped.toByteData(format: ImageByteFormat.png);
-                        final compressImage = await Util.compressWithBytes(
-                          bytes: data!.buffer.asUint8List(),
-                          quality: 50,
-                        );
-                        final file = await File('${tempDir.path}/${DateTime.now().toString()}.png').create();
-                        file.writeAsBytesSync(compressImage);
-                        widget.onCropped(file);
-                        isLoadingStream.add(false);
-                        router.pop();
-                      }
-                    }catch(e){
-                      widget.onCropped(null);
-                      isLoadingStream.add(false);
-                      router.pop();
-                    }
-                  },
+                          isLoadingStream.add(true);
+                          try {
+                            final tempDir = await getTemporaryDirectory();
+                            final pixelRatio =
+                                MediaQuery.of(context).devicePixelRatio;
+                            final cropped =
+                                await controller.crop(pixelRatio: pixelRatio);
+                            if (cropped != null) {
+                              final data = await cropped.toByteData(
+                                  format: ImageByteFormat.png);
+                              final compressImage =
+                                  await Util.compressWithBytes(
+                                bytes: data!.buffer.asUint8List(),
+                                quality: 50,
+                              );
+                              final file = await File(
+                                      '${tempDir.path}/${DateTime.now().toString()}.png')
+                                  .create();
+                              file.writeAsBytesSync(compressImage);
+                              widget.onCropped(file);
+                              isLoadingStream.add(false);
+                              router.pop();
+                            }
+                          } catch (e) {
+                            widget.onCropped(null);
+                            isLoadingStream.add(false);
+                            router.pop();
+                          }
+                        },
                 )
               ],
             ),
@@ -541,7 +557,6 @@ class _ImageCropState extends State<ImageCrop> {
                     controller: controller,
                     shape: BoxShape.circle,
                     backgroundColor: Colors.transparent,
-
                     child: Image.file(
                       widget.imageOriginal,
                       width: size.width,

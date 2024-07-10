@@ -1,3 +1,4 @@
+import 'package:app/config/app_local.dart';
 import 'package:app/modules/splash/module/splash_module.dart';
 import 'package:app/modules/workout/controller/workout_controller.dart';
 import 'package:app/modules/workout/module/workout_module.dart';
@@ -6,6 +7,8 @@ import 'package:app/modules/workout/service/impl/workout_service_impl.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/modules/user/repository/impl/user_repository_impl.dart';
 import 'package:app/shared/widgets/base_controller.dart';
+import 'package:app/shared/widgets/maintenance_widget.dart';
+import 'package:app/util/firebase_remote_config.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../config/app_config.dart';
 import '../modules/food/controller/food_controller.dart';
@@ -30,6 +33,8 @@ class AppModule extends Module {
     i.addSingleton(() => MyRouter.instance());
     i.addSingleton(() => SecureStorageService.instance);
     i.addSingleton(() => AppConfig.instance);
+    i.addSingleton(() => AppLocal.instance);
+    i.addSingleton(() => FirebaseRemoteConfigService.instance);
     i.addSingleton(() => NavController());
     i.addSingleton(() =>
         UserController(UserRepositoryImpl(UserServiceImpl(HttpService()))));
@@ -76,6 +81,10 @@ class AppModule extends Module {
             PagesNames.splash,
             module: SplashModule(),
             transition: TransitionType.noTransition
+        );
+        r.child(
+          PagesNames.maintenance,
+          child: (_) => MaintenanceWidget(),
         );
       }
 }

@@ -5,7 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class MultipleUsers extends BaseWidget {
+class MultipleUsers extends BaseState {
   MultipleUsers({Key? key, required this.users}) : super(key: key);
 
   final List<MultipleUsersModel> users;
@@ -51,8 +51,7 @@ class MultipleUsers extends BaseWidget {
             return ClipRRect(
               borderRadius: BorderRadius.circular(1000),
               child: Image(
-                height: 30,
-                width: 30,
+                fit: BoxFit.cover,
                 image: img,
               ),
             );
@@ -76,7 +75,7 @@ class MultipleUsers extends BaseWidget {
 
   String compact(BuildContext context){
     final format = NumberFormat.compact(locale: Localizations.localeOf(context).languageCode);
-    String number = format.format(400 + Random().nextInt(5000));
+    String number = format.format(100 + Random().nextInt(900));
     if(number.contains('.')){
       number = '${number.substring(0, number.indexOf('.'))}K';
     }

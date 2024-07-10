@@ -3,16 +3,13 @@ import 'dart:async';
 import 'package:app/modules/workout/controller/workout_controller.dart';
 import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
-import 'package:app/shared/widgets/app_theme_widget.dart';
 import 'package:app/shared/widgets/back_button.dart';
 import 'package:app/shared/widgets/base_page.dart';
+import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/my_button.dart';
-import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
 class WorkoutVideoPage extends StatefulWidget {
@@ -24,24 +21,17 @@ class WorkoutVideoPage extends StatefulWidget {
   State<WorkoutVideoPage> createState() => _WorkoutVideoPageState();
 }
 
-class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
+class _WorkoutVideoPageState extends ViewState<WorkoutVideoPage, WorkoutController> {
 
-  late WorkoutController controller;
-  late MyRouter router;
-
-  AppColors colors = AppColors();
-  final text = AppTheme().text;
-  final double width = Get.width;
-  final double height = Get.height;
   bool hasInitialize = false;
 
   Timer? _timer;
   int _start = 3;
 
+  late dynamic tr;
+
   @override
   void initState() {
-    controller = Modular.get<WorkoutController>();
-    router = MyRouter();
     initController();
     controller.setShowCountdown(true);
     super.initState();
@@ -55,6 +45,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
 
   @override
   Widget build(BuildContext context) {
+    tr = local.tr['workout']['videoWorkout'];
     return BasePage(
       backgroundColor: colors.background,
       showAppBar: false,
@@ -116,8 +107,10 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
 
   void startTimer() {
     const period = Duration(seconds: 1);
+    HapticFeedback.lightImpact();
     _timer = Timer.periodic(period, (Timer timer) {
         if (_start == 1) {
+          HapticFeedback.lightImpact();
           controller.setShowCountdown(false);
           if(hasInitialize){
             controller.state.videoPlayerController!.play();
@@ -175,14 +168,14 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
           children: [
             text('💪', fontSize: 60),
             const SizedBox(height: 20),
-            text('Fique firme!', fontSize: 30, fontWeight: FontWeight.w600),
+            text(tr['stayStrong'], fontSize: 30, fontWeight: FontWeight.w600),
             const SizedBox(height: 10),
-            text('Você consegue!', fontSize: 30, fontWeight: FontWeight.w600),
+            text(tr['youCanDoIt'], fontSize: 30, fontWeight: FontWeight.w600),
             const SizedBox(height: 50),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: MyButton(
-                title: 'Continuar exercicio',
+                title: tr['button'],
                 heightButton: 55,
                 sizeTitle: 20,
                 colorTitle: colors.background,
@@ -200,7 +193,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
             ),
             const SizedBox(height: 20),
             MyButton(
-              title: 'Terminar treino',
+              title: tr['finishWorkout'],
               colorTitle: colors.text.withOpacity(0.6),
               sizeTitle: 18,
               cleanButton: true,
@@ -374,7 +367,7 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
 
     controller.state.videoPlayerController!.setVolume(0);
     controller.state.videoPlayerController!.setLooping(true);
-    await controller.state.videoPlayerController!.setPlaybackSpeed(0.95);
+    await controller.state.videoPlayerController!.setPlaybackSpeed(1.0);
 
     await controller.state.videoPlayerController!.initialize();
     if(!isPrevious){

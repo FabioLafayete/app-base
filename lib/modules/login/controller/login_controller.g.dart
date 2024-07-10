@@ -65,6 +65,22 @@ mixin _$LoginController on LoginControllerBase, Store {
     });
   }
 
+  late final _$tokenAtom =
+      Atom(name: 'LoginControllerBase.token', context: context);
+
+  @override
+  String? get token {
+    _$tokenAtom.reportRead();
+    return super.token;
+  }
+
+  @override
+  set token(String? value) {
+    _$tokenAtom.reportWrite(value, super.token, () {
+      super.token = value;
+    });
+  }
+
   late final _$errorEmailAtom =
       Atom(name: 'LoginControllerBase.errorEmail', context: context);
 
@@ -113,88 +129,154 @@ mixin _$LoginController on LoginControllerBase, Store {
     });
   }
 
-  late final _$code1Atom =
-      Atom(name: 'LoginControllerBase.code1', context: context);
+  late final _$showPasswordAtom =
+      Atom(name: 'LoginControllerBase.showPassword', context: context);
 
   @override
-  String get code1 {
-    _$code1Atom.reportRead();
-    return super.code1;
+  bool get showPassword {
+    _$showPasswordAtom.reportRead();
+    return super.showPassword;
   }
 
   @override
-  set code1(String value) {
-    _$code1Atom.reportWrite(value, super.code1, () {
-      super.code1 = value;
+  set showPassword(bool value) {
+    _$showPasswordAtom.reportWrite(value, super.showPassword, () {
+      super.showPassword = value;
     });
   }
 
-  late final _$code2Atom =
-      Atom(name: 'LoginControllerBase.code2', context: context);
+  late final _$obscureTextAtom =
+      Atom(name: 'LoginControllerBase.obscureText', context: context);
 
   @override
-  String get code2 {
-    _$code2Atom.reportRead();
-    return super.code2;
+  bool get obscureText {
+    _$obscureTextAtom.reportRead();
+    return super.obscureText;
   }
 
   @override
-  set code2(String value) {
-    _$code2Atom.reportWrite(value, super.code2, () {
-      super.code2 = value;
+  set obscureText(bool value) {
+    _$obscureTextAtom.reportWrite(value, super.obscureText, () {
+      super.obscureText = value;
     });
   }
 
-  late final _$code3Atom =
-      Atom(name: 'LoginControllerBase.code3', context: context);
+  late final _$forceSendCodeAtom =
+      Atom(name: 'LoginControllerBase.forceSendCode', context: context);
 
   @override
-  String get code3 {
-    _$code3Atom.reportRead();
-    return super.code3;
+  bool get forceSendCode {
+    _$forceSendCodeAtom.reportRead();
+    return super.forceSendCode;
   }
 
   @override
-  set code3(String value) {
-    _$code3Atom.reportWrite(value, super.code3, () {
-      super.code3 = value;
+  set forceSendCode(bool value) {
+    _$forceSendCodeAtom.reportWrite(value, super.forceSendCode, () {
+      super.forceSendCode = value;
     });
   }
 
-  late final _$code4Atom =
-      Atom(name: 'LoginControllerBase.code4', context: context);
+  late final _$passwordAtom =
+      Atom(name: 'LoginControllerBase.password', context: context);
 
   @override
-  String get code4 {
-    _$code4Atom.reportRead();
-    return super.code4;
+  String? get password {
+    _$passwordAtom.reportRead();
+    return super.password;
   }
 
   @override
-  set code4(String value) {
-    _$code4Atom.reportWrite(value, super.code4, () {
-      super.code4 = value;
+  set password(String? value) {
+    _$passwordAtom.reportWrite(value, super.password, () {
+      super.password = value;
     });
   }
 
-  late final _$code5Atom =
-      Atom(name: 'LoginControllerBase.code5', context: context);
+  late final _$timerCountAtom =
+      Atom(name: 'LoginControllerBase.timerCount', context: context);
 
   @override
-  String get code5 {
-    _$code5Atom.reportRead();
-    return super.code5;
+  int get timerCount {
+    _$timerCountAtom.reportRead();
+    return super.timerCount;
   }
 
   @override
-  set code5(String value) {
-    _$code5Atom.reportWrite(value, super.code5, () {
-      super.code5 = value;
+  set timerCount(int value) {
+    _$timerCountAtom.reportWrite(value, super.timerCount, () {
+      super.timerCount = value;
     });
   }
 
   late final _$LoginControllerBaseActionController =
       ActionController(name: 'LoginControllerBase', context: context);
+
+  @override
+  dynamic setTimerCount(int value) {
+    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
+        name: 'LoginControllerBase.setTimerCount');
+    try {
+      return super.setTimerCount(value);
+    } finally {
+      _$LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setForceSendCode(bool value) {
+    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
+        name: 'LoginControllerBase.setForceSendCode');
+    try {
+      return super.setForceSendCode(value);
+    } finally {
+      _$LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setToken(String? value, BuildContext context) {
+    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
+        name: 'LoginControllerBase.setToken');
+    try {
+      return super.setToken(value, context);
+    } finally {
+      _$LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setPassword(String? value) {
+    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
+        name: 'LoginControllerBase.setPassword');
+    try {
+      return super.setPassword(value);
+    } finally {
+      _$LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setObscureText(bool value) {
+    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
+        name: 'LoginControllerBase.setObscureText');
+    try {
+      return super.setObscureText(value);
+    } finally {
+      _$LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setShowPassword(bool value) {
+    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
+        name: 'LoginControllerBase.setShowPassword');
+    try {
+      return super.setShowPassword(value);
+    } finally {
+      _$LoginControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic setIsLoading(bool value) {
@@ -263,74 +345,20 @@ mixin _$LoginController on LoginControllerBase, Store {
   }
 
   @override
-  void setCode1(String value) {
-    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
-        name: 'LoginControllerBase.setCode1');
-    try {
-      return super.setCode1(value);
-    } finally {
-      _$LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setCode2(String value) {
-    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
-        name: 'LoginControllerBase.setCode2');
-    try {
-      return super.setCode2(value);
-    } finally {
-      _$LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setCode3(String value) {
-    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
-        name: 'LoginControllerBase.setCode3');
-    try {
-      return super.setCode3(value);
-    } finally {
-      _$LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setCode4(String value) {
-    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
-        name: 'LoginControllerBase.setCode4');
-    try {
-      return super.setCode4(value);
-    } finally {
-      _$LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setCode5(String value) {
-    final _$actionInfo = _$LoginControllerBaseActionController.startAction(
-        name: 'LoginControllerBase.setCode5');
-    try {
-      return super.setCode5(value);
-    } finally {
-      _$LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 isLoadingSendCode: ${isLoadingSendCode},
 email: ${email},
+token: ${token},
 errorEmail: ${errorEmail},
 errorCode: ${errorCode},
 showCode: ${showCode},
-code1: ${code1},
-code2: ${code2},
-code3: ${code3},
-code4: ${code4},
-code5: ${code5},
+showPassword: ${showPassword},
+obscureText: ${obscureText},
+forceSendCode: ${forceSendCode},
+password: ${password},
+timerCount: ${timerCount},
 enableButton: ${enableButton}
     ''';
   }

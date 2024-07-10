@@ -1,7 +1,6 @@
 import 'package:app/shared/widgets/base_controller.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 
 part 'onboard_controller.g.dart';
@@ -125,9 +124,9 @@ abstract class OnboardControllerBase extends BaseController with Store {
     }
   }
 
-  void onPressButton(){
+  void onPressButton(BuildContext context){
     try{
-      Get.focusScope?.unfocus();
+      FocusScope.of(context).unfocus();
       if(index == 0){
         addName();
       } else if (index == 1){

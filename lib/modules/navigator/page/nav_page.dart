@@ -1,32 +1,44 @@
 import 'package:app/modules/navigator/controller/nav_controller.dart';
+import 'package:app/shared/modules/user/controller/user_controller.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/video_player_view.dart';
-import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 import '../../food/page/food_page.dart';
 import '../../profile/page/profile_page.dart';
 import '../../workout/page/workout_page.dart';
 
-class NavPage extends BaseWidget<NavController> {
-  NavPage({Key? key}) : super(key: key);
+class NavPage extends StatefulWidget {
+  const NavPage({Key? key}) : super(key: key);
 
+  @override
+  State<NavPage> createState() => _NavPageState();
+}
+
+class _NavPageState extends ViewState<NavPage, NavController> {
+
+  late dynamic tr;
+
+  @override
+  void initState() {
+    super.initState();
+    UserController userController = Modular.get<UserController>();
+    userController.postLog();
+  }
 
   @override
   Widget build(BuildContext context) {
+    tr = local.tr['bottomNavigation'];
     final screens = [
       // HomePage(),
-      WorkoutPage(),
+      const WorkoutPage(),
       FoodPage(),
-      ProfilePage(),
+      const ProfilePage(),
     ];
 
     return Observer(builder: (_) => WillPopScope(
@@ -54,7 +66,7 @@ class NavPage extends BaseWidget<NavController> {
                         minHeight: 80,
                         backgroundColor: Colors.transparent,
                         controller: controller.miniplayerController,
-                        maxHeight: Get.height,
+                        maxHeight: height,
                         builder: (heightPlayer, percentage){
                           controller.setPercentVideo(percentage);
                           controller.percent.add(percentage);
@@ -82,13 +94,13 @@ class BottomNav extends StatefulWidget {
   State<BottomNav> createState() => _BottomNavState();
 }
 
-class _BottomNavState extends State<BottomNav> {
+class _BottomNavState extends ViewState<BottomNav, NavController> {
 
-  final controller = Modular.get<NavController>();
-  final colors = AppColors();
+  late dynamic tr;
 
   @override
   Widget build(BuildContext context) {
+    tr = local.tr['bottomNavigation'];
     return StreamBuilder<double>(
       initialData: 0.0,
       stream: controller.percent,
@@ -129,7 +141,7 @@ class _BottomNavState extends State<BottomNav> {
         currentIndex: controller.pageSelected,
         type: BottomNavigationBarType.fixed,
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: colors.background,
         selectedItemColor: colors.primary,
         unselectedItemColor: colors.textSecondary,
         selectedLabelStyle: const TextStyle(
@@ -157,7 +169,7 @@ class _BottomNavState extends State<BottomNav> {
                 'assets/images/icon/svg/home-4.svg',
                 colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
               ),
-              label: 'Inicio'
+              label: tr['home']
           ),
           BottomNavigationBarItem(
               icon: SvgPicture.asset(
@@ -168,7 +180,7 @@ class _BottomNavState extends State<BottomNav> {
                 'assets/images/icon/svg/cloche.svg',
                 colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
               ),
-              label: 'Receitas'
+              label: tr['recipes']
           ),
           // BottomNavigationBarItem(
           //     icon: FaIcon(LineIcons.users),
@@ -183,7 +195,7 @@ class _BottomNavState extends State<BottomNav> {
                 'assets/images/icon/svg/user.svg',
                 colorFilter: ColorFilter.mode(colors.primary, BlendMode.srcIn),
               ),
-              label: 'Perfil'
+              label: tr['profile']
           ),
         ],
       ),

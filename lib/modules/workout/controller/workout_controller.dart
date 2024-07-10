@@ -5,6 +5,7 @@ import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/model/workout/program_model/program_model.dart';
 import 'package:app/shared/model/workout/workout_model/workout_model.dart';
+import 'package:app/shared/widgets/base_controller.dart';
 import 'package:mobx/mobx.dart';
 import 'package:video_player/video_player.dart';
 
@@ -15,7 +16,7 @@ part 'workout_controller.g.dart';
 
 class WorkoutController = WorkoutControllerBase with _$WorkoutController;
 
-abstract class WorkoutControllerBase with Store {
+abstract class WorkoutControllerBase extends BaseController with Store {
 
   WorkoutControllerBase({
     required this.repositoryImpl,
@@ -73,17 +74,28 @@ abstract class WorkoutControllerBase with Store {
     }
   }
 
-  Future getWorkouts() async{
+  Future getWorkouts({bool force = false}) async{
     try{
-      if(state.comboProgramModel != null) return;
-      final workouts = await repositoryImpl.getWorkouts();
+      if(state.comboProgramModel != null && force == false) {
+        return;
+      }
+
+      state = state.copyWith(comboProgramModel: null);
+
+      List responses = await Future.wait([
+        repositoryImpl.getWorkouts(),
+        if(force)
+          userController.setInitUser(),
+      ]);
+
+      final workouts = responses[0];
       state = state.copyWith(
         comboProgramModel: workouts,
       );
 
-      if(state.topProgram != null){
-        return state.topProgram!;
-      }
+      // if(state.topProgram != null){
+      //   return state.topProgram!;
+      // }
 
       final item = Random().nextInt(state.comboProgramModel!.length - 1);
       final listItem = state.comboProgramModel![item].targetProgram;

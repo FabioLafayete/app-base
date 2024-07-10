@@ -1,14 +1,13 @@
 import 'dart:async';
+import 'package:app/config/app_local.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/my_button.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:url_launcher/url_launcher.dart';
 
+import '../../../service/storage/storage_service.dart';
+import '../../../shared/constants/storage_constants.dart';
 import '../../../shared/widgets/app_theme_widget.dart';
 import '../../../util/colors.dart';
 
@@ -23,7 +22,6 @@ class WelcomeWidget extends StatefulWidget {
 }
 
 class _WelcomeWidgetState extends State<WelcomeWidget> {
-
   final List<String> _image01 = [
     'assets/images/welcome/0.jpeg',
     'assets/images/welcome/7.png',
@@ -45,14 +43,18 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     'assets/images/welcome/1.jpeg',
   ];
 
-  final double width = Get.width;
-  final double height = Get.height;
+  late final double width = MediaQuery.of(context).size.width;
+  late final double height = MediaQuery.of(context).size.height;
   final text = AppTheme().text;
   final AppColors colors = AppColors();
 
   bool topGrid = false;
 
   bool showImages = false;
+
+  final secure = Modular.get<SecureStorageService>();
+
+  dynamic tr = AppLocal().tr['login'];
 
   @override
   initState() {
@@ -108,29 +110,51 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                      width: width * 0.75,
-                      child: text('Bem-vinda ao iBetter',
-                          fontSize: height * 0.047,
-                          fontWeight: FontWeight.w600,
-                          color: colors.background)),
+                    width: width * 0.75,
+                    child: text(
+                      tr['title'],
+                      fontSize: height * 0.047,
+                      fontWeight: FontWeight.w600,
+                      color: colors.background,
+                    ),
+                  ),
                   SizedBox(height: height * 0.04),
-                  text('Explore nossa motivação e encontre sua força',
-                      color: colors.background, fontSize: height * 0.028),
+                  text(
+                    tr['description'],
+                    color: colors.background,
+                    fontWeight: FontWeight.w400,
+                    fontSize: height * 0.028,
+                  ),
                   const Spacer(),
                   MyButton(
-                    title: 'ENTRAR',
+                    title: tr['buttonLogin'],
                     sizeTitle: height * 0.022,
                     colorTitle: colors.primary,
+                    // colorTitle: Color(0xFF00bcd4),
                     colorButton: colors.text2,
                     onPress: () => widget.signInOnPress(false),
                   ),
                   const SizedBox(height: 15),
                   MyButton(
-                    title: 'Não tem cadastro? Adquira aqui',
+                    title: tr['doNotHaveAccount'],
                     sizeTitle: height * 0.018,
                     colorTitle: Colors.white,
                     cleanButton: true,
                     onPress: () => widget.signInOnPress(true),
+                  ),
+                  FutureBuilder<String?>(
+                    future: secure.get(StorageConstants.deepLink),
+                    initialData: null,
+                    builder: (_, snap) {
+                      if (snap.hasData) {
+                        return GestureDetector(
+                            onTap: () {
+                              secure.delete(StorageConstants.deepLink);
+                            },
+                            child: text(snap.data!, color: Colors.white));
+                      }
+                      return const SizedBox.shrink();
+                    },
                   ),
                   SizedBox(height: height * 0.05),
                 ],
@@ -171,17 +195,17 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     ),
                   )
                 : AnimatedOpacity(
-              duration: const Duration(milliseconds: 900),
-              opacity: showImages ? 1.0 : 0.0,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(13),
-                child: Image.asset(
-                  images[index],
-                  filterQuality: FilterQuality.high,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+                    duration: const Duration(milliseconds: 900),
+                    opacity: showImages ? 1.0 : 0.0,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(13),
+                      child: Image.asset(
+                        images[index],
+                        filterQuality: FilterQuality.high,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
           );
         }),
       ),
@@ -191,16 +215,28 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
   Widget _background() {
     return Container(
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              tileMode: TileMode.repeated,
-              begin: Alignment.topRight,
-              end: Alignment.bottomRight,
-              colors: [
-            // Colors.white,
-            colors.secondary,
-            colors.primary,
-            colors.primary,
-          ])),
+        gradient: LinearGradient(
+            tileMode: TileMode.repeated,
+            begin: Alignment.topRight,
+            end: Alignment.bottomRight,
+            colors: [
+              colors.secondary,
+              colors.primary,
+              colors.primary,
+
+              // Color(0xFF67edff),
+              // Color(0xFF80deea),
+              // Color(0xFF00bcd4),
+
+              // Color(0xFF00bcd4),
+              // Color(0xFF00bcd4),
+              // Color(0xFF3bbdbf),
+
+              // Color(0xFF00e2d1),
+              // Color(0xFF00e2d1),
+              // Color(0xFF30d5c9),
+            ]),
+      ),
     );
   }
 }

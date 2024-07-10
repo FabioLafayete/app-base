@@ -1,0 +1,209 @@
+{
+  "language": "ENGLISH",
+  "login": {
+    "title": "Welcome to iBetter",
+    "description": "Explore our motivation and find your strength",
+    "buttonLogin": "LOGIN",
+    "doNotHaveAccount": "Don't have an account? Sign up here",
+    "bottomSheet": {
+      "title": "Log into my account",
+      "titleSignUp": "Create account",
+      "emailHint": "Email",
+      "emailError": "Enter a valid email",
+      "emailChange": "change email",
+      "passwordHint": "Password",
+      "passwordError": "Enter a valid password",
+      "buttonNext": "NEXT",
+      "forgetPassword": "Forgot password",
+      "codeSendEmail": "Enter the code sent to your email...",
+      "tokenHint": "Token",
+      "sendNewToken": "Send new code",
+      "buttonCheckToken": "VALIDATE CODE",
+      "errorToken": "Invalid code entered",
+      "internalError": "Internal error, please try again"
+    }
+  },
+  "profile": {
+    "myData": "My data",
+    "language": "Language",
+    "policyPrivacy": "Privacy policy",
+    "termsUse": "Terms of use",
+    "talkToUs": "Talk to us",
+    "logout": "Log out",
+    "changeLanguage": "Change language",
+    "version": "Version",
+    "data": {
+      "title": "Profile",
+      "edit": "Edit",
+      "name": "Name",
+      "newName": "New name",
+      "editName": "Edit name",
+      "phone": "Phone",
+      "newPhone": "New phone",
+      "editPhone": "Edit phone",
+      "save": "Save",
+      "errorName": "Enter a valid name",
+      "errorPhone": "Enter a valid phone number",
+      "editPhoto": {
+        "title": "Edit photo",
+        "choosePhoto": "Choose new photo",
+        "takePhoto": "Take new photo",
+        "removePhoto": "Remove photo",
+        "loadPhoto": "Load photo",
+        "movePhoto": "Move and resize"
+      },
+      "deleteAccount": {
+        "title": "Delete Account",
+        "bottomTitle": "Do you really want to delete your account?",
+        "description": "Attention, this process cannot be undone, do you want to DELETE your account?",
+        "buttonBack": "No, I want to go back",
+        "buttonDelete": "Yes, delete my account",
+        "error": "Error",
+        "errorText": "We couldn't delete your account, please try again or send us a message"
+      }
+    },
+    "talkToUsData": {
+      "appBar": "Need help?",
+      "title": "Talk to us :)",
+      "description": "You will receive the response in the email you registered here",
+      "subject": "Subject *",
+      "subjectHint": "Enter the subject of the message",
+      "reason": "Reason for contact *",
+      "reasonHint": "Choose the reason for contact",
+      "message": "Message *",
+      "messageHint": "Enter your message",
+      "sendMessage": "Send message",
+      "whatReason": {
+        "title": "What is the reason?",
+        "problem": "Problem",
+        "doubt": "Question",
+        "praises": "Praise",
+        "partnership": "Partnership",
+        "cancelRegistration": "Cancel subscription"
+      },
+      "messageSent": {
+        "goBack": "BACK",
+        "title": "Message sent :)",
+        "messageSent": "Message successfully registered!",
+        "description": "An email has been sent confirming receipt!",
+        "finish": "FINISH"
+      },
+      "errorMessage": {
+        "title": "Message not sent",
+        "description": "Failed to send message, please try again."
+      }
+    }
+  },
+  "bottomNavigation": {
+    "home": "Home",
+    "recipes": "Recipes",
+    "profile": "Profile"
+  },
+  "workout": {
+    "topPresentation": {
+      "button": "START"
+    },
+    "needHelp": {
+      "title": "Need help?",
+      "description": "Send a message to our support team",
+      "button": "Talk to us"
+    },
+    "planWorkoutDetails": {
+      "title": "Workouts",
+      "button": "Start"
+    },
+    "videoWorkout": {
+      "stayStrong": "Stay strong!",
+      "youCanDoIt": "You can do it!",
+      "button": "Continue workout",
+      "finishWorkout": "Finish workout"
+    },
+    "congratsPage": {
+      "title": "Well done",
+      "button": "FINISH"
+    }
+  },
+  "food": {
+    "title": "What would you like to cook today?",
+    "findFood": {
+      "seeFood": "See recipe",
+      "title": "Find a recipe",
+      "description": "We help you find a recipe to make."
+    },
+    "popularFoods": "Popular recipes",
+    "soon": {
+      "title": "Coming soon",
+      "description": "Cooking classes are being finalized"
+    },
+    "categories": {
+      "title": "Categories",
+      "breakfast": "Breakfast",
+      "lunch": "Lunch",
+      "dinner": "Dinner",
+      "beverages": "Beverages",
+      "salads": "Salads",
+      "vegan": "Vegan",
+      "snacks": "Snacks",
+      "desserts": "Desserts"
+    },
+    "ingredients": "Ingredients",
+    "howToDo": "Directions"
+  },
+  "checkout": {
+    "description": "Say goodbye to your old version and unlock your full potential",
+    "buttonPay": "CONTINUE",
+    "termsDescription": "By continuing, you agree to our Terms of Use and Privacy Policy",
+    "month": "month",
+    "months": "months",
+    "week": "week"
+  },
+  "onboarding": {
+    "stepName": {
+      "title": "What is your name?",
+      "labelText": "First and last name"
+    },
+    "stepBirthday": {
+      "title": "And your birth date?"
+    },
+    "stepGender": {
+      "title": "What is your gender?",
+      "feminine": "Female",
+      "masculine": "Male",
+      "other": "Other"
+    },
+    "stepLimitation": {
+      "title": "Do you have any physical limitations?",
+      "none": "None",
+      "limitation01": "Back pain",
+      "limitation02": "Knee pain",
+      "limitation03": "Reduced mobility (wheelchair)",
+      "limitation04": "Others"
+    },
+    "stepHeight": {
+      "title": "What is your height?"
+    },
+    "stepTarget": {
+      "title": "What is your main goal?",
+      "target01": "Lose weight",
+      "target02": "Gain muscle mass",
+      "target03": "Tone and maintain weight"
+    },
+    "stepWeight": {
+      "title": "What is your current weight?"
+    },
+    "stepTargetWeight": {
+      "title": "What is your desired weight?"
+    },
+    "buttonFinish": "FINISH",
+    "buttonNext": "NEXT"
+  },
+  "maintenance": {
+    "title": "We are under maintenance,\nwe'll be back soon",
+    "text": "We apologize for the inconvenience."
+  },
+  "subscriptionSuccess": {
+    "title": "Congratulations \uD83D\uDCAA",
+    "description": "Now you are part of our family, let's go!!",
+    "button": "FINISH"
+  }
+}

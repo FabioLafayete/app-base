@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 
 
-class ListImagesWidget extends BaseWidget {
+class ListImagesWidget extends BaseState {
 
   ListImagesWidget({
     super.key,
@@ -99,7 +99,7 @@ class ListImagesWidget extends BaseWidget {
     );
   }
 
-  Widget _effectImage(){
+  Widget _effectImage(BuildContext context){
     return Container(
       height: height * 0.4,
       decoration: BoxDecoration(

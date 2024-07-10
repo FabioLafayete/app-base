@@ -13,17 +13,22 @@ import 'package:path_provider/path_provider.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
-class WorkoutDetailPage extends BaseWidget<WorkoutController> {
-  WorkoutDetailPage({
+class WorkoutDetailPage extends StatefulWidget {
+  const WorkoutDetailPage({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<WorkoutDetailPage> createState() => _WorkoutDetailPageState();
+}
+
+class _WorkoutDetailPageState extends ViewState<WorkoutDetailPage, WorkoutController> {
+
+  late dynamic tr;
 
   @override
   Widget build(BuildContext context) {
-
-    final viewTransformationController = TransformationController();
-
+    tr = local.tr['workout']['planWorkoutDetails'];
     return BasePage(
       backgroundColor: colors.background,
       showAppBar: false,
@@ -37,8 +42,8 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
             children: [
               Stack(
                 children: [
-                  _image(),
-                  _effectImage(),
+                  _image(context),
+                  _effectImage(context),
                   _info(),
                   MyBackButton(),
                 ],
@@ -49,7 +54,7 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 20),
-                    text('Treinos', fontSize: 20, fontWeight: FontWeight.w700),
+                    text(tr['title'], fontSize: 20, fontWeight: FontWeight.w700),
                     const SizedBox(height: 20),
                     ...List.generate(controller.state.programModel!.workouts.length, (index){
                       final item = controller.state.programModel!.workouts[index].video!;
@@ -153,7 +158,7 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: MyButton(
-                title: 'Começar',
+                title: tr['button'],
                 sizeTitle: 20,
                 heightButton: 55,
                 border: 10,
@@ -187,7 +192,7 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
     return fileName!;
   }
 
-  Widget _effectImage(){
+  Widget _effectImage(BuildContext context){
     return Container(
       height: height * 0.45,
       decoration: BoxDecoration(
@@ -204,7 +209,7 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
     );
   }
 
-  Widget _image() {
+  Widget _image(BuildContext context) {
     if(!controller.state.programModel!.thumbnail.contains('http')) {
       return Image.asset(
       controller.state.programModel!.thumbnail,
@@ -257,7 +262,6 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
                         color: colors.text2,
                         fontSize: 16,
                       ),
-                      text(' min', fontSize: 12, color: colors.text2)
                     ],
                   ),
                   Row(
@@ -296,5 +300,4 @@ class WorkoutDetailPage extends BaseWidget<WorkoutController> {
       ),
     );
   }
-
 }

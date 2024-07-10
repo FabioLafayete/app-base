@@ -3,7 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ItemsWrapWidget extends BaseWidget {
+class ItemsWrapWidget extends BaseState {
 
   ItemsWrapWidget({
     Key? key,
@@ -22,11 +22,11 @@ class ItemsWrapWidget extends BaseWidget {
       childAspectRatio: 0.85,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       physics: const NeverScrollableScrollPhysics(),
-      children: List.generate(items.length, _item),
+      children: List.generate(items.length, (index) => _item(index, context)),
     );
   }
 
-  Widget _item(int index){
+  Widget _item(int index, BuildContext context){
     ItemWrapModel item = items[index];
     return GestureDetector(
       onTap: item.onPress,

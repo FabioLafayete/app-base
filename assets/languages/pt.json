@@ -1,0 +1,209 @@
+{
+  "language": "PORTUGUES",
+  "login": {
+    "title": "Bem-vinda ao iBetter",
+    "description": "Explore nossa motivação e encontre sua força",
+    "buttonLogin": "ENTRAR",
+    "doNotHaveAccount": "Não tem cadastro? Adquira aqui",
+    "bottomSheet": {
+      "title": "Entrar na minha conta",
+      "titleSignUp": "Criar conta",
+      "emailHint": "E-mail",
+      "emailError": "Digite um e-mail válido",
+      "emailChange": "trocar e-mail",
+      "passwordHint": "Senha",
+      "passwordError": "Digite uma senha válida",
+      "buttonNext": "AVANÇAR",
+      "forgetPassword": "Esqueci a senha",
+      "codeSendEmail": "Informe o código enviado no seu e-mail...",
+      "tokenHint": "Token",
+      "sendNewToken": "Enviar novo código",
+      "buttonCheckToken": "VALIDAR CÓDIGO",
+      "errorToken": "Código informado inválido",
+      "internalError": "Erro interno, favor tentar novamente"
+    }
+  },
+  "profile": {
+    "myData": "Meus dados",
+    "language": "Linguagem",
+    "policyPrivacy": "Política de privacidade",
+    "termsUse": "Termos de uso",
+    "talkToUs": "Fale com a gente",
+    "logout": "Sair da conta",
+    "changeLanguage": "Trocar idioma",
+    "version": "Versão",
+    "data": {
+      "title": "Perfil",
+      "edit": "Editar",
+      "name": "Nome",
+      "newName": "Novo nome",
+      "editName": "Editar nome",
+      "phone": "Celular",
+      "newPhone": "Novo celular",
+      "editPhone": "Editar celular",
+      "save": "salvar",
+      "errorName": "Digite um nome válido",
+      "errorPhone": "Digite um numero válido",
+      "editPhoto": {
+        "title": "Editar foto",
+        "choosePhoto": "Escolher nova foto",
+        "takePhoto": "Tirar nova foto",
+        "removePhoto": "Remover foto",
+        "loadPhoto": "Carregar foto",
+        "movePhoto": "Mover e redimensionar"
+      },
+      "deleteAccount": {
+        "title": "Deletar conta",
+        "bottomTitle": "Deseja mesmo deletar sua conta?",
+        "description": "Atenção,  esse processo não poderá ser revertido, deseja DELETAR sua conta?",
+        "buttonBack": "Não, quero voltar",
+        "buttonDelete": "Sim, deletar minha conta",
+        "error": "Erro",
+        "errorText": "Não conseguimos deletar sua conta, tente novamente ou mande uma mensagem para a gente"
+      }
+    },
+    "talkToUsData": {
+      "appBar": "Precisa de ajuda?",
+      "title": "Fale com a gente :)",
+      "description": "Você vai receber a resposta no e-mail que cadastrou aqui",
+      "subject": "Assunto *",
+      "subjectHint": "Digite o assunto da mensagem",
+      "reason": "Motivo do contato *",
+      "reasonHint": "Escolher o motivo do contato",
+      "message": "Mensagem *",
+      "messageHint": "Digite sua mensagem",
+      "sendMessage": "Enviar mensagem",
+      "whatReason": {
+        "title": "Qual é o motivo?",
+        "problem": "Problema",
+        "doubt": "Dúvida",
+        "praises": "Elogio",
+        "partnership": "Parceria",
+        "cancelRegistration": "Cancelar assinatua"
+      },
+      "messageSent": {
+        "goBack": "VOLTAR",
+        "title": "Mensagem enviada :)",
+        "messageSent": "Mensagem registrada com sucesso!",
+        "description": "Um e-mail foi enviado confirmando o recebimento!",
+        "finish": "FINALIZAR"
+      },
+      "errorMessage": {
+        "title": "Mensagem não enviada",
+        "description": "Falha ao tentar enviar mensagem, por favor, tente novamente."
+      }
+    }
+  },
+  "bottomNavigation": {
+    "home": "Início",
+    "recipes": "Receitas",
+    "profile": "Perfil"
+  },
+  "workout": {
+    "topPresentation": {
+      "button": "INICIAR"
+    },
+    "needHelp": {
+      "title": "Precisa de ajuda?",
+      "description": "Envie uma mensagem para nossa equipe de suporte",
+      "button": "Fale com a gente"
+    },
+    "planWorkoutDetails": {
+      "title": "Treinos",
+      "button": "Começar"
+    },
+    "videoWorkout": {
+      "stayStrong": "Fique firme!",
+      "youCanDoIt": "Você consegue!",
+      "button": "Continuar exercicio",
+      "finishWorkout": "Terminar treino"
+    },
+    "congratsPage": {
+      "title": "Bom trabalho",
+      "button": "FINALIZAR"
+    }
+  },
+  "food": {
+    "title": "O que você gostaria de cozinhar hoje?",
+    "findFood": {
+      "seeFood": "Ver receita",
+      "title": "Encontre uma receita",
+      "description": "Nós te ajudamos a encontrar uma receita para fazer."
+    },
+    "popularFoods": "Receitas populares",
+    "soon": {
+      "title": "Em breve",
+      "description": "Aulas de culinária estão sendo finalizadas"
+    },
+    "categories": {
+      "title": "Categorias",
+      "breakfast": "Café da manhã",
+      "lunch": "Almoço",
+      "dinner": "Jantar",
+      "beverages": "Bebidas",
+      "salads": "Saladas",
+      "vegan": "Vegano",
+      "snacks": "Lanches",
+      "desserts": "Doces"
+    },
+    "ingredients": "Ingredientes",
+    "howToDo": "Modo de preparo"
+  },
+  "checkout": {
+    "description": "Diga adeus a sua antiga versão e destrave todo o seu potencial",
+    "buttonPay": "CONTINUAR",
+    "termsDescription": "Continuando, você concorda com os nossos Termos de Uso e Política de Privacidade",
+    "month": "mês",
+    "months": "meses",
+    "week": "semana"
+  },
+  "onboarding": {
+    "stepName": {
+      "title": "Qual o seu nome?",
+      "labelText": "Nome e sobrenome"
+    },
+    "stepBirthday": {
+      "title": "E sua data de nascimento?"
+    },
+    "stepGender": {
+      "title": "Qual o seu gênero?",
+      "feminine": "Feminino",
+      "masculine": "Masculino",
+      "other": "Outro"
+    },
+    "stepLimitation": {
+      "title": "Tem alguma limitação física?",
+      "none": "Nenhuma",
+      "limitation01": "Dores nas costas",
+      "limitation02": "Dores no joelho",
+      "limitation03": "Mobilidade resuzida (cadeira de rodas)",
+      "limitation04": "Outros"
+    },
+    "stepHeight": {
+      "title": "Qual sua altura?"
+    },
+    "stepTarget": {
+      "title": "Qual o seu principal objetivo?",
+      "target01": "Perder peso",
+      "target02": "Ganhar massa muscular",
+      "target03": "Definir e manter o peso"
+    },
+    "stepWeight": {
+      "title": "Qual o seu peso atual?"
+    },
+    "stepTargetWeight": {
+      "title": "Qual seu peso desejado?"
+    },
+    "buttonFinish": "FINALIZAR",
+    "buttonNext": "AVANÇAR"
+  },
+  "maintenance": {
+    "title": "Estamos em manutenção,\nvoltamos ja ja",
+    "text": "Pedimos desculpe pelo incomodo."
+  },
+  "subscriptionSuccess": {
+    "title": "Parabéns \uD83D\uDCAA",
+    "description": "Agora você faz parte da nossa família, vamos nessa !!",
+    "button": "FINALIZAR"
+  }
+}

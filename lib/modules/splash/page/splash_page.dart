@@ -1,12 +1,14 @@
-import 'package:app/shared/widgets/app_theme_widget.dart';
 import 'package:app/config/app_config.dart';
+import 'package:app/config/app_local.dart';
 import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:geolocator/geolocator.dart';
 import '../../../shared/modules/user/controller/user_controller.dart';
+import '../../../util/firebase_remote_config.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -16,6 +18,10 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
 
+  late final remoteConfig = FirebaseRemoteConfigService();
+
+  final size = MediaQueryData.fromView(WidgetsBinding.instance.window).size;
+
   @override
   void initState() {
     super.initState();
@@ -23,18 +29,25 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future _init() async {
-    // final secure = Modular.get<SecureStorageService>();
-    // secure.clearAll();
-    await AppConfig().load();
+    await Future.wait([
+      AppConfig().load(),
+      AppLocal().loadTranslation(),
+      remoteConfig.init(),
+    ]);
+    if(remoteConfig.isMaintenance){
+      MyRouter().pushReplacementNamed(PagesNames.maintenance);
+      return;
+    }
     if(AppConfig().bearerToken != null) {
       UserController controller = Modular.get<UserController>();
+      // await Future.delayed(const Duration(seconds: 1));
       if(controller.user.newUser){
         MyRouter().pushReplacementNamed(PagesNames.onboard);
       } else {
         MyRouter().pushReplacementNamed(PagesNames.home);
       }
     } else {
-      await Future.delayed(const Duration(seconds: 1));
+      // await Future.delayed(const Duration(seconds: 1));
       MyRouter().pushReplacementNamed(PagesNames.login);
     }
   }
@@ -48,12 +61,10 @@ class _SplashPageState extends State<SplashPage> {
         alignment: Alignment.center,
         children: [
           _background(),
-          AppTheme().text(
-              'iBetter',
-              fontSize: 35,
-              fontWeight: FontWeight.w600,
-              color: AppColors().background
-          )
+          Image.asset(
+            'assets/images/ibetter-logo-white.png',
+            width: size.width * 0.45,
+          ),
         ],
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
 
-class ListButton extends BaseWidget {
+class ListButton extends BaseState {
   ListButton({
     Key? key,
     required this.list
@@ -19,7 +19,7 @@ class ListButton extends BaseWidget {
         itemBuilder: (_, index){
           ListButtonItem item = list[index];
           return Container(
-            margin: EdgeInsets.only(top: item.isLogout ? 100 : 12),
+            margin: EdgeInsets.only(top: item.isLogout ? 50 : 14),
             child: Card(
               margin: const EdgeInsets.only(bottom: 1),
               elevation: 0.8,
@@ -35,7 +35,7 @@ class ListButton extends BaseWidget {
                     onTap: item.onPress,
                     splashColor: item.onPress != null ? Colors.black54.withOpacity(0.05) : Colors.transparent,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 18),
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -66,7 +66,7 @@ class ListButton extends BaseWidget {
                                         item.title,
                                         maxLines: 1,
                                         textOverflow: TextOverflow.ellipsis,
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),

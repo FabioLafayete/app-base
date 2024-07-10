@@ -5,7 +5,7 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 
-class CongratsPage extends BaseWidget {
+class CongratsPage extends BaseState {
   CongratsPage({super.key});
 
   @override
@@ -38,7 +38,7 @@ class CongratsPage extends BaseWidget {
                 ),
                 const SizedBox(height: 30),
                 text(
-                  'Bom trabalho',
+                  local.tr['workout']['congratsPage']['title'],
                   color: colors.text2,
                   fontSize: 30,
                   fontWeight: FontWeight.w500
@@ -48,7 +48,7 @@ class CongratsPage extends BaseWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: MyButton(
-                title: 'FINALIZAR',
+                title: local.tr['workout']['congratsPage']['button'],
                 colorButton: colors.text2,
                 colorTitle: colors.primary,
                 onPress: (){

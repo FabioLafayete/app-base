@@ -2,10 +2,9 @@ import 'package:app/modules/onboard/controller/onboard_controller.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 
-class StepName extends BaseWidget<OnboardController> {
+class StepName extends BaseState<OnboardController> {
   StepName({Key? key}) : super(key: key);
 
   @override
@@ -15,7 +14,7 @@ class StepName extends BaseWidget<OnboardController> {
       children: [
         space(0.05),
         text(
-          'Qual o seu nome?',
+          local.tr['onboarding']['stepName']['title'],
           fontSize: 25,
           color: colors.text,
           fontWeight: FontWeight.w700
@@ -24,7 +23,7 @@ class StepName extends BaseWidget<OnboardController> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: VisualDisplay.textField(
-            labelText: 'Nome e sobrenome',
+            labelText: local.tr['onboarding']['stepName']['labelText'],
             initialValue: controller.name,
             fillColor: Colors.white,
             colorBorder: Colors.white,
@@ -36,7 +35,7 @@ class StepName extends BaseWidget<OnboardController> {
             maxLines: 1,
             onEditingComplete: (){
               if(controller.enableButton){
-                controller.onPressButton();
+                controller.onPressButton(context);
               }
             },
             onChanged: controller.setName

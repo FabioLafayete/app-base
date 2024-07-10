@@ -1,9 +1,14 @@
 import 'dart:io';
+import 'package:app/config/app_local.dart';
+import 'package:app/route/pages_name.dart';
+import 'package:app/shared/model/support/support_model.dart';
 import 'package:app/shared/widgets/base_controller.dart';
 import 'package:brasil_fields/brasil_fields.dart';
-import 'package:get/get_utils/src/get_utils/get_utils.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:toastification/toastification.dart';
 
 part 'profile_controller.g.dart';
 
@@ -20,6 +25,9 @@ abstract class ProfileControllerBase extends BaseController with Store {
 
   @observable
   File? photoProfile;
+
+  @observable
+  bool loadingDelete = false;
 
   @observable
   String? name;
@@ -54,13 +62,28 @@ abstract class ProfileControllerBase extends BaseController with Store {
   @observable
   String? messageHelp;
 
-  List<String> listOptionsHelp = [
-    'Problema',
-    'Dúvida',
-    'Elogio',
-    'Parceria',
-    'Reembolso',
+  List<String> listOptionsHelp(LanguageLocal language) => [
+    if(language == LanguageLocal.pt)
+     ...[
+       'Problema',
+       'Dúvida',
+       'Elogio',
+       'Parceria',
+       'Cancelar assinatura'
+     ]
+    else
+      ...[
+        'Problem',
+        'Question',
+        'Praise',
+        'Partnership',
+        'Cancel subscription',
+
+      ]
   ];
+
+  @action
+  setLoadingDelete(bool value) => loadingDelete = value;
 
   @action
   setSuccessPage(bool value) => successPage = value;
@@ -110,7 +133,7 @@ abstract class ProfileControllerBase extends BaseController with Store {
 
   @computed
   bool get enableButtonEmail {
-    if(email != null && email!.isNotEmpty && GetUtils.isEmail(email!)) return true;
+    if(email != null && email!.isNotEmpty && EmailValidator.validate(email!)) return true;
     return false;
   }
 
@@ -166,7 +189,8 @@ abstract class ProfileControllerBase extends BaseController with Store {
   Future checkVersion() async {
     try{
       PackageInfo packageInfo = await PackageInfo.fromPlatform();
-      setVersion('Versão ${packageInfo.version} (${packageInfo.buildNumber}) (Beta)');
+      final tr = AppLocal().tr;
+      setVersion('${tr['profile']['version']} ${packageInfo.version} (${packageInfo.buildNumber}) (Beta)');
     }catch(_){
       print(_);
     }
@@ -183,7 +207,58 @@ abstract class ProfileControllerBase extends BaseController with Store {
     if(messageHelp == null || messageHelp!.isEmpty) return false;
     if(titleHelp == null || titleHelp!.isEmpty) return false;
     if(optionHelp == null || optionHelp!.isEmpty) return false;
+    if(loading) return false;
     return true;
   }
 
+  Future postSupport(BuildContext context) async {
+    dynamic tr = AppLocal().tr['profile']['talkToUsData'];
+    try{
+      setLoading(true);
+
+      late SupportReasonEnum supportReasonEnum;
+
+      if(optionHelp! == tr['whatReason']['problem']){
+        supportReasonEnum = SupportReasonEnum.PROBLEM;
+      }
+      if(optionHelp! == tr['whatReason']['doubt']){
+        supportReasonEnum = SupportReasonEnum.DOUBT;
+      }
+      if(optionHelp! == tr['whatReason']['praises']){
+        supportReasonEnum = SupportReasonEnum.PRIASE;
+      }
+      if(optionHelp! == tr['whatReason']['partnership']){
+        supportReasonEnum = SupportReasonEnum.PARTNERSHIP;
+      }
+      // if(optionHelp! == 'Reembolso'){
+      //   supportReasonEnum = SupportReasonEnum.REIMBURSEMENT;
+      // }
+      if(optionHelp! == tr['whatReason']['cancelRegistration']){
+        supportReasonEnum = SupportReasonEnum.SUBSCRIPTION_CANCELED;
+      }
+
+      final model = SupportModel(
+        message: messageHelp!,
+        subject: titleHelp!,
+        reason: supportReasonEnum
+      );
+
+      final response = await userController.postSupport(model);
+
+      if(response){
+        router.pushReplacementNamed(PagesNames.profileHelpCongrats);
+      }
+
+    }catch(_) {
+      showToast(
+        context: context,
+        title: tr['errorMessage']['title'],
+        description: tr['errorMessage']['description'],
+        type: ToastificationType.error
+      );
+      print(_);
+    } finally {
+      setLoading(false);
+    }
+  }
 }

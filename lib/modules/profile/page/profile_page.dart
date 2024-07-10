@@ -1,20 +1,31 @@
+import 'package:app/config/app_local.dart';
+import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
+import 'package:app/shared/widgets/back_button.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/shared/widgets/my_button.dart';
+import 'package:app/shared/widgets/visual_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../shared/widgets/image_cropper.dart';
 import '../controller/profile_controller.dart';
 import '../widgets/list_button.dart';
 
-class ProfilePage extends BaseWidget<ProfileController> {
-  ProfilePage({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
+  @override
   Widget build(BuildContext context) {
+    dynamic tr = local.tr['profile'];
     return BasePage(
         showAppBar: false,
         paddingPage: 0,
@@ -24,17 +35,24 @@ class ProfilePage extends BaseWidget<ProfileController> {
           children: [
             Container(
               margin: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top + 50,
+                top: MediaQuery.of(context).padding.top + (height * 0.05),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Observer(builder: (_) => ImageCropperWidget(
-                textImage: user.name,
-                title: user.name,
-                imageUrl: user.photoUrl,
-                loading: controller.loading,
-                onChange: (_){},
-                simpleView: true,
-              )),
+              child: Observer(
+                  builder: (_) => ImageCropperWidget(
+                        textImage: user.name,
+                        title: user.name,
+                        imageUrl: user.photoUrl,
+                        loading: controller.loading,
+                        onChange: (value) {
+                          if (value != null) {
+                            controller.changePhoto(value);
+                          } else {
+                            controller.userController.deletePhotoUser();
+                          }
+                        },
+                        simpleView: true,
+                      )),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -188,52 +206,103 @@ class ProfilePage extends BaseWidget<ProfileController> {
                   // space(0.03),
                   ListButton(
                     list: [
-                      ListButtonItem(title: 'Meus dados', icon: SvgPicture.asset(
-                        'assets/images/icon/svg/user.svg',
-                        height: 24,
-                        colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
-                      ), onPress: (){
-                        router.pushNamed(PagesNames.profileData);
-                      }),
-                      ListButtonItem(title: 'Política de privacidade', icon: SvgPicture.asset(
-                        'assets/images/icon/svg/shield-tick.svg',
-                        height: 24,
-                        colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
-                      ), onPress: (){}),
-                      ListButtonItem(title: 'Termos de uso', icon: SvgPicture.asset(
-                        'assets/images/icon/svg/document.svg',
-                        height: 24,
-                        colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
-                      ), onPress: (){}),
-                      ListButtonItem(title: 'Fale com a gente', icon: SvgPicture.asset(
-                        'assets/images/icon/svg/messages.svg',
-                        height: 24,
-                        colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
-                      ), onPress: (){
-                        router.pushNamed(PagesNames.profileHelp);
-                      }),
-                      ListButtonItem(title: 'Sair da conta', icon: SvgPicture.asset(
-                        'assets/images/icon/svg/signout.svg',
-                        height: 24,
-                        colorFilter: ColorFilter.mode(colors.textSecondary, BlendMode.srcIn),
-                      ), onPress: controller.logout, isLogout: true),
+                      ListButtonItem(
+                        title: tr['myData'],
+                        icon: SvgPicture.asset(
+                          'assets/images/icon/svg/user.svg',
+                          height: 20,
+                          colorFilter: ColorFilter.mode(
+                              colors.textSecondary, BlendMode.srcIn),
+                        ),
+                        onPress: () {
+                          router.pushNamed(PagesNames.profileData);
+                        },
+                      ),
+                      ListButtonItem(
+                        title: tr['language'],
+                        icon: SvgPicture.asset(
+                          'assets/images/icon/svg/world.svg',
+                          height: 20,
+                          colorFilter: ColorFilter.mode(
+                              colors.textSecondary, BlendMode.srcIn),
+                        ),
+                        onPress: () {
+                          _openOptions(context);
+                        },
+                      ),
+                      ListButtonItem(
+                        title: tr['policyPrivacy'],
+                        icon: SvgPicture.asset(
+                          'assets/images/icon/svg/shield-tick.svg',
+                          height: 20,
+                          colorFilter: ColorFilter.mode(
+                              colors.textSecondary, BlendMode.srcIn),
+                        ),
+                        onPress: () {
+                          launchUrl(
+                            Uri.parse(
+                              local.local.value == LanguageLocal.pt ?
+                              'https://ibetter.io/politica-de-privacidade' :
+                              'https://ibetter.io/privacy-policies',
+                            ),
+                          );
+                        },
+                      ),
+                      ListButtonItem(
+                          title: tr['termsUse'],
+                          icon: SvgPicture.asset(
+                            'assets/images/icon/svg/document.svg',
+                            height: 20,
+                            colorFilter: ColorFilter.mode(
+                                colors.textSecondary, BlendMode.srcIn),
+                          ),
+                          onPress: () {
+                            launchUrl(
+                              Uri.parse(
+                                local.local.value == LanguageLocal.pt ?
+                                'https://ibetter.io/termos-de-uso' :
+                                'https://ibetter.io/terms',
+                              ),
+                            );
+                          }),
+                      ListButtonItem(
+                          title: tr['talkToUs'],
+                          icon: SvgPicture.asset(
+                            'assets/images/icon/svg/messages.svg',
+                            height: 20,
+                            colorFilter: ColorFilter.mode(
+                                colors.textSecondary, BlendMode.srcIn),
+                          ),
+                          onPress: () {
+                            router.pushNamed(PagesNames.profileHelp);
+                          }),
+                      ListButtonItem(
+                        title: tr['logout'],
+                        icon: SvgPicture.asset(
+                          'assets/images/icon/svg/signout.svg',
+                          height: 20,
+                          colorFilter: ColorFilter.mode(
+                            colors.textSecondary,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                        onPress: controller.logout,
+                        isLogout: true,
+                      ),
                     ],
                   ),
                 ],
               ),
             ),
             Observer(builder: (_) {
-              if(controller.version != null) {
+              if (controller.version != null) {
                 return Container(
                   margin: const EdgeInsets.symmetric(vertical: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      text(
-                          controller.version!,
-                          color: colors.text.withOpacity(0.4),
-                        fontSize: 12
-                      ),
+                      text(controller.version!,
+                          color: colors.text.withOpacity(0.4), fontSize: 12),
                     ],
                   ),
                 );
@@ -241,20 +310,19 @@ class ProfilePage extends BaseWidget<ProfileController> {
               return const SizedBox.shrink();
             })
           ],
-        )
-    );
+        ));
   }
 
-  Widget typeImc(){
+  Widget typeImc() {
     late Color color;
     late String typeString;
-    if(imc() > 30){
+    if (imc() > 30) {
       color = Colors.redAccent;
       typeString = 'OBESIDADE';
-    } else if(imc() > 24.99 && imc() < 31){
+    } else if (imc() > 24.99 && imc() < 31) {
       color = Colors.orangeAccent;
       typeString = 'SOBREPESO';
-    } else if(imc() > 18.5 && imc() < 25){
+    } else if (imc() > 18.5 && imc() < 25) {
       color = Colors.green;
       typeString = 'NORMAL';
     } else {
@@ -267,18 +335,94 @@ class ProfilePage extends BaseWidget<ProfileController> {
         color: color,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-      child: text(
-        typeString,
-        color: Colors.white,
-        fontWeight: FontWeight.w600,
-        fontSize: 10
-
-      ),
+      child: text(typeString,
+          color: Colors.white, fontWeight: FontWeight.w600, fontSize: 10),
     );
   }
 
-  double imc(){
-   return (user.weight! / ((user.height! / 100) * (user.height! / 100)));
+  double imc() {
+    return (user.weight! / ((user.height! / 100) * (user.height! / 100)));
   }
 
+
+  void _openOptions(BuildContext context) {
+    dynamic tr = local.tr['profile'];
+    VisualDisplay.bottomSheet(
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          text(
+            tr['changeLanguage'],
+            color: colors.text,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            textAlign: TextAlign.start,
+          ),
+          const SizedBox(height: 32),
+          _itemCard(
+            context,
+            'US.svg',
+            'English',
+            () {
+              AppLocal().setLocal(LanguageLocal.en);
+              controller.checkVersion();
+              MyRouter().pop();
+            },
+          ),
+          const SizedBox(height: 30),
+          _itemCard(
+            context,
+            'BR.svg',
+            'Português',
+            () {
+              AppLocal().setLocal(LanguageLocal.pt);
+              controller.checkVersion();
+              MyRouter().pop();
+            },
+          ),
+          // const SizedBox(height: 30),
+          // _itemCard(
+          //   context,
+          //   'FR.svg',
+          //   'Français',
+          //       () {
+          //     AppLocal().setLocal(LanguageLocal.fr);
+          //     controller.checkVersion();
+          //     MyRouter().pop();
+          //   },
+          // ),
+          const SizedBox(height: 30),
+        ],
+      ),
+      hasHeight: false,
+      dismissible: true,
+      context: context,
+      onClose: () {},
+    );
+  }
+
+  Widget _itemCard(
+      BuildContext context, String flag, String title, Function() onPress) {
+    return GestureDetector(
+      onTap: onPress,
+      child: Container(
+        color: Colors.transparent,
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          children: [
+            SvgPicture.asset(
+              'assets/images/icon/svg/$flag',
+              height: 24,
+            ),
+            const SizedBox(width: 20),
+            text(
+              title,
+              fontWeight: FontWeight.w600,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

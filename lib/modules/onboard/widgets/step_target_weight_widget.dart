@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../../../route/pages_name.dart';
 
 
-class StepTargetWeightWidget extends BaseWidget<OnboardController> {
+class StepTargetWeightWidget extends BaseState<OnboardController> {
   StepTargetWeightWidget({Key? key}) : super(key: key);
 
   @override
@@ -16,7 +16,7 @@ class StepTargetWeightWidget extends BaseWidget<OnboardController> {
       children: [
         space(0.05),
         text(
-          'Qual seu peso desejado?',
+            local.tr['onboarding']['stepTargetWeight']['title'],
           fontSize: 25,
           color: colors.text,
           fontWeight: FontWeight.w700,
@@ -45,7 +45,7 @@ class StepTargetWeightWidget extends BaseWidget<OnboardController> {
                   },
                   onEditingComplete: (){
                     if(controller.enableButton){
-                      controller.onPressButton();
+                      controller.onPressButton(context);
                     }
                   }
                 ),
