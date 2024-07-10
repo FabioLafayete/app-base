@@ -134,6 +134,22 @@ abstract class UserControllerBase with Store {
     }
   }
 
+  Future<bool> postLog() async {
+    try {
+      userRepositoryImpl.postLog(user);
+      return true;
+    } catch (_) {
+      if (_ is DioException) {
+        print(_.message);
+        print(_.error);
+        print(_.response?.data);
+      } else {
+        print(_);
+      }
+      return false;
+    }
+  }
+
   Future<bool> postSupport(SupportModel model) async {
     try {
       await userRepositoryImpl.postSupport(model);

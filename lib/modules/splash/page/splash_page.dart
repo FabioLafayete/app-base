@@ -33,7 +33,6 @@ class _SplashPageState extends State<SplashPage> {
       AppConfig().load(),
       AppLocal().loadTranslation(),
       remoteConfig.init(),
-      _handleLocationPermission(),
     ]);
     if(remoteConfig.isMaintenance){
       MyRouter().pushReplacementNamed(PagesNames.maintenance);
@@ -86,26 +85,5 @@ class _SplashPageState extends State<SplashPage> {
           )
       ),
     );
-  }
-
-  Future<bool> _handleLocationPermission() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return false;
-    }
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return false;
-      }
-    }
-    if (permission == LocationPermission.deniedForever) {
-      return false;
-    }
-    return true;
   }
 }

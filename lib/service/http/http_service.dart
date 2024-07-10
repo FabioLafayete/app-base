@@ -62,7 +62,7 @@ class HttpService {
             'country': country,
         },
         validateStatus: (status) => status!  < 400,
-        receiveTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 20),
         connectTimeout: const Duration(seconds: 30),
       ),
     );

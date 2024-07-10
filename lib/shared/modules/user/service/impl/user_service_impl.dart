@@ -69,4 +69,13 @@ class UserServiceImpl implements UserService {
       country: country,
     );
   }
+
+  @override
+  Future<Response> postLog(Map<String, String> body) async {
+    return _service.request(
+      type: RequestType.POST,
+      path: UserConstants.postLog,
+      dataRequest: body,
+    );
+  }
 }

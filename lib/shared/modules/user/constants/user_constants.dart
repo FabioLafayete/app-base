@@ -5,4 +5,5 @@ class UserConstants {
   static const String addPhoto = '/user/upload-photo';
   static const String postSupport = '/user/support';
   static const String getProducts = '/user/products';
+  static const String postLog = '/user/log-access';
 }

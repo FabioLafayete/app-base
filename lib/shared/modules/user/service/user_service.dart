@@ -11,4 +11,5 @@ abstract class UserService {
   Future<Response> addPhoto(File file);
   Future<Response> postSupport(SupportModel model);
   Future<Response> getProducts(String? country);
+  Future<Response> postLog(Map<String, String> body);
 }

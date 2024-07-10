@@ -1,9 +1,11 @@
 import 'package:app/modules/navigator/controller/nav_controller.dart';
+import 'package:app/shared/modules/user/controller/user_controller.dart';
 import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/video_player_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:super_sliver_list/super_sliver_list.dart';
@@ -21,6 +23,13 @@ class NavPage extends StatefulWidget {
 class _NavPageState extends ViewState<NavPage, NavController> {
 
   late dynamic tr;
+
+  @override
+  void initState() {
+    super.initState();
+    UserController userController = Modular.get<UserController>();
+    userController.postLog();
+  }
 
   @override
   Widget build(BuildContext context) {
