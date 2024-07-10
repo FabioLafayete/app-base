@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:app/shared/model/support/support_model.dart';
 import 'package:app/shared/model/user/user_model.dart';
+import 'package:devicelocale/devicelocale.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
@@ -203,6 +205,12 @@ abstract class UserControllerBase with Store {
   Future<String?> getCountry() async {
     try {
       if (user.country != null && user.country!.isNotEmpty) return user.country;
+
+      if(Platform.isIOS) {
+        Locale? locale = await Devicelocale.currentAsLocale;
+        updateUser(user.copyWith(country: locale?.countryCode));
+        return locale?.countryCode;
+      }
 
       if (await handleLocationPermission()) {
         Position position = await _determinePosition();

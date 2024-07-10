@@ -57,7 +57,5 @@
     </dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-    <string>Using localization to select default language and better support.</string>
 </dict>
 </plist>

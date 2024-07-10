@@ -85,4 +85,5 @@ Future _preload() async {
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
 
   Modular.setInitialRoute(PagesNames.splash);
+
 }
