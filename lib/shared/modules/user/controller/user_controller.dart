@@ -166,6 +166,22 @@ abstract class UserControllerBase with Store {
     return false;
   }
 
+  Future<bool> deleteAccount() async {
+    try {
+      await userRepositoryImpl.deleteAccount();
+      return true;
+    } catch (_) {
+      if (_ is DioException) {
+        print(_.message);
+        print(_.error);
+        print(_.response?.data);
+      } else {
+        print(_);
+      }
+    }
+    return false;
+  }
+
   Future getProducts() async {
     try {
       if (productModel.isNotEmpty) return;

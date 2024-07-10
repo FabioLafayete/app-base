@@ -51,6 +51,15 @@
         "removePhoto": "Remover foto",
         "loadPhoto": "Carregar foto",
         "movePhoto": "Mover e redimensionar"
+      },
+      "deleteAccount": {
+        "title": "Deletar conta",
+        "bottomTitle": "Deseja mesmo deletar sua conta?",
+        "description": "Atenção,  esse processo não poderá ser revertido, deseja DELETAR sua conta?",
+        "buttonBack": "Não, quero voltar",
+        "buttonDelete": "Sim, deletar minha conta",
+        "error": "Erro",
+        "errorText": "Não conseguimos deletar sua conta, tente novamente ou mande uma mensagem para a gente"
       }
     },
     "talkToUsData": {

@@ -84,4 +84,7 @@ class UserRepositoryImpl extends UserRepository{
 
     userService.postLog(body);
   }
+
+  @override
+  Future<void> deleteAccount() => userService.deleteAccount();
 }

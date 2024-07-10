@@ -1,8 +1,10 @@
 import 'package:app/config/app_local.dart';
 import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
+import 'package:app/shared/widgets/back_button.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
+import 'package:app/shared/widgets/my_button.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -208,7 +210,7 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
                         title: tr['myData'],
                         icon: SvgPicture.asset(
                           'assets/images/icon/svg/user.svg',
-                          height: 24,
+                          height: 20,
                           colorFilter: ColorFilter.mode(
                               colors.textSecondary, BlendMode.srcIn),
                         ),
@@ -220,7 +222,7 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
                         title: tr['language'],
                         icon: SvgPicture.asset(
                           'assets/images/icon/svg/world.svg',
-                          height: 24,
+                          height: 20,
                           colorFilter: ColorFilter.mode(
                               colors.textSecondary, BlendMode.srcIn),
                         ),
@@ -232,7 +234,7 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
                         title: tr['policyPrivacy'],
                         icon: SvgPicture.asset(
                           'assets/images/icon/svg/shield-tick.svg',
-                          height: 24,
+                          height: 20,
                           colorFilter: ColorFilter.mode(
                               colors.textSecondary, BlendMode.srcIn),
                         ),
@@ -250,7 +252,7 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
                           title: tr['termsUse'],
                           icon: SvgPicture.asset(
                             'assets/images/icon/svg/document.svg',
-                            height: 24,
+                            height: 20,
                             colorFilter: ColorFilter.mode(
                                 colors.textSecondary, BlendMode.srcIn),
                           ),
@@ -267,7 +269,7 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
                           title: tr['talkToUs'],
                           icon: SvgPicture.asset(
                             'assets/images/icon/svg/messages.svg',
-                            height: 24,
+                            height: 20,
                             colorFilter: ColorFilter.mode(
                                 colors.textSecondary, BlendMode.srcIn),
                           ),
@@ -278,7 +280,7 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
                         title: tr['logout'],
                         icon: SvgPicture.asset(
                           'assets/images/icon/svg/signout.svg',
-                          height: 24,
+                          height: 20,
                           colorFilter: ColorFilter.mode(
                             colors.textSecondary,
                             BlendMode.srcIn,
@@ -341,6 +343,7 @@ class _ProfilePageState extends ViewState<ProfilePage, ProfileController> {
   double imc() {
     return (user.weight! / ((user.height! / 100) * (user.height! / 100)));
   }
+
 
   void _openOptions(BuildContext context) {
     dynamic tr = local.tr['profile'];

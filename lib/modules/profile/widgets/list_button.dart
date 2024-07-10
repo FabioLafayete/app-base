@@ -19,7 +19,7 @@ class ListButton extends BaseState {
         itemBuilder: (_, index){
           ListButtonItem item = list[index];
           return Container(
-            margin: EdgeInsets.only(top: item.isLogout ? height * 0.08 : 14),
+            margin: EdgeInsets.only(top: item.isLogout ? 50 : 14),
             child: Card(
               margin: const EdgeInsets.only(bottom: 1),
               elevation: 0.8,
@@ -35,7 +35,7 @@ class ListButton extends BaseState {
                     onTap: item.onPress,
                     splashColor: item.onPress != null ? Colors.black54.withOpacity(0.05) : Colors.transparent,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 18),
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -66,7 +66,7 @@ class ListButton extends BaseState {
                                         item.title,
                                         maxLines: 1,
                                         textOverflow: TextOverflow.ellipsis,
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),

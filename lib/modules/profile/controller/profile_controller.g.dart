@@ -63,6 +63,22 @@ mixin _$ProfileController on ProfileControllerBase, Store {
     });
   }
 
+  late final _$loadingDeleteAtom =
+      Atom(name: 'ProfileControllerBase.loadingDelete', context: context);
+
+  @override
+  bool get loadingDelete {
+    _$loadingDeleteAtom.reportRead();
+    return super.loadingDelete;
+  }
+
+  @override
+  set loadingDelete(bool value) {
+    _$loadingDeleteAtom.reportWrite(value, super.loadingDelete, () {
+      super.loadingDelete = value;
+    });
+  }
+
   late final _$nameAtom =
       Atom(name: 'ProfileControllerBase.name', context: context);
 
@@ -243,6 +259,17 @@ mixin _$ProfileController on ProfileControllerBase, Store {
       ActionController(name: 'ProfileControllerBase', context: context);
 
   @override
+  dynamic setLoadingDelete(bool value) {
+    final _$actionInfo = _$ProfileControllerBaseActionController.startAction(
+        name: 'ProfileControllerBase.setLoadingDelete');
+    try {
+      return super.setLoadingDelete(value);
+    } finally {
+      _$ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setSuccessPage(bool value) {
     final _$actionInfo = _$ProfileControllerBaseActionController.startAction(
         name: 'ProfileControllerBase.setSuccessPage');
@@ -379,6 +406,7 @@ mixin _$ProfileController on ProfileControllerBase, Store {
     return '''
 version: ${version},
 photoProfile: ${photoProfile},
+loadingDelete: ${loadingDelete},
 name: ${name},
 email: ${email},
 phone: ${phone},

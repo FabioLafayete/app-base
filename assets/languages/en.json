@@ -51,6 +51,15 @@
         "removePhoto": "Remove photo",
         "loadPhoto": "Load photo",
         "movePhoto": "Move and resize"
+      },
+      "deleteAccount": {
+        "title": "Delete Account",
+        "bottomTitle": "Do you really want to delete your account?",
+        "description": "Attention, this process cannot be undone, do you want to DELETE your account?",
+        "buttonBack": "No, I want to go back",
+        "buttonDelete": "Yes, delete my account",
+        "error": "Error",
+        "errorText": "We couldn't delete your account, please try again or send us a message"
       }
     },
     "talkToUsData": {

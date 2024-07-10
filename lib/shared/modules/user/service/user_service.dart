@@ -12,4 +12,5 @@ abstract class UserService {
   Future<Response> postSupport(SupportModel model);
   Future<Response> getProducts(String? country);
   Future<Response> postLog(Map<String, String> body);
+  Future<Response> deleteAccount();
 }

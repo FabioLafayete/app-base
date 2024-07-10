@@ -51,6 +51,15 @@
         "removePhoto": "Supprimer la photo",
         "loadPhoto": "Charger la photo",
         "movePhoto": "Déplacer et redimensionner"
+      },
+      "deleteAccount": {
+        "title": "Supprimer le compte",
+        "bottomTitle": "Voulez-vous vraiment supprimer votre compte?",
+        "description": "Attention, ce processus ne peut pas être annulé, voulez-vous SUPPRIMER votre compte?",
+        "buttonBack": "Non, je veux revenir",
+        "buttonDelete": "Oui, supprimer le compte",
+        "error": "Erreur",
+        "errorText": "Nous n'avons pas pu supprimer votre compte, veuillez réessayer ou nous envoyer un message"
       }
     },
     "talkToUsData": {

@@ -6,4 +6,5 @@ class UserConstants {
   static const String postSupport = '/user/support';
   static const String getProducts = '/user/products';
   static const String postLog = '/user/log-access';
+  static const String deleteAccount = '/user/delete';
 }

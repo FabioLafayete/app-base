@@ -27,6 +27,9 @@ abstract class ProfileControllerBase extends BaseController with Store {
   File? photoProfile;
 
   @observable
+  bool loadingDelete = false;
+
+  @observable
   String? name;
 
   @observable
@@ -78,6 +81,9 @@ abstract class ProfileControllerBase extends BaseController with Store {
 
       ]
   ];
+
+  @action
+  setLoadingDelete(bool value) => loadingDelete = value;
 
   @action
   setSuccessPage(bool value) => successPage = value;
