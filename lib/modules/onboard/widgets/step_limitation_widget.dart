@@ -9,7 +9,7 @@ class StepLimitationWidget extends BaseState<OnboardController> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
         space(0.05),
         text(
@@ -21,7 +21,9 @@ class StepLimitationWidget extends BaseState<OnboardController> {
         ),
         const Spacer(),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0).copyWith(
+            bottom: height * 0.05
+          ),
           child: Observer(
             builder: (_) {
               return SelectItem(

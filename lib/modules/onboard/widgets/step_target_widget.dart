@@ -22,7 +22,9 @@ class StepTargetWidget extends BaseState<OnboardController> {
         ),
         const Spacer(),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0).copyWith(
+              bottom: height * 0.05
+          ),
           child: Observer(builder: (_) => SelectItem(
             initialValue: controller.target,
             items: [
