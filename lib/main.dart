@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:app/config/app_local.dart';
 import 'package:app/route/app_module.dart';
 import 'package:app/route/pages_name.dart';
+import 'package:app/shared/flavor/flavor_constants.dart';
+import 'package:app/shared/flavor/flavor_types.dart';
 import 'package:app/shared/widgets/restart_app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -33,18 +35,21 @@ void main() async {
       return true;
     };
 
+    const environment = String.fromEnvironment(flavorKey);
+
     runApp(ValueListenableBuilder(
       valueListenable: AppLocal().local,
       builder: (_, __, ___) {
         if (context != null) {
           RestartWidget.restartApp(context!);
         }
+
         return ModularApp(
           module: AppModule(),
           child: ToastificationWrapper(
             child: RestartWidget(
               child: MaterialApp.router(
-                debugShowCheckedModeBanner: false,
+                debugShowCheckedModeBanner: environment.toFlavor() == FlavorType.dev,
                 locale: const Locale('pt', 'BR'),
                 theme: ThemeData(fontFamily: 'Inter'),
                 routerConfig: Modular.routerConfig,
