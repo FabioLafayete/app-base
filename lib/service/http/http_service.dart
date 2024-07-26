@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import '../../config/app_config.dart';
@@ -157,6 +159,8 @@ class CustomInterceptors extends Interceptor {
         '[ERROR]    -> ${err.error}\n'
         '[RESPONSE] -> ${err.response?.data}'
     );
+    log(err.message.toString());
+    log(err.response?.data?.toString() ?? '');
     super.onError(err, handler);
   }
 }

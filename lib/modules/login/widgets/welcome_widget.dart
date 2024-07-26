@@ -142,20 +142,20 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     cleanButton: true,
                     onPress: () => widget.signInOnPress(true),
                   ),
-                  FutureBuilder<String?>(
-                    future: secure.get(StorageConstants.deepLink),
-                    initialData: null,
-                    builder: (_, snap) {
-                      if (snap.hasData) {
-                        return GestureDetector(
-                            onTap: () {
-                              secure.delete(StorageConstants.deepLink);
-                            },
-                            child: text(snap.data!, color: Colors.white));
-                      }
-                      return const SizedBox.shrink();
-                    },
-                  ),
+                  // FutureBuilder<String?>(
+                  //   future: secure.get(StorageConstants.deepLink),
+                  //   initialData: null,
+                  //   builder: (_, snap) {
+                  //     if (snap.hasData) {
+                  //       return GestureDetector(
+                  //           onTap: () {
+                  //             secure.delete(StorageConstants.deepLink);
+                  //           },
+                  //           child: text(snap.data!, color: Colors.white));
+                  //     }
+                  //     return const SizedBox.shrink();
+                  //   },
+                  // ),
                   SizedBox(height: height * 0.05),
                 ],
               ),
