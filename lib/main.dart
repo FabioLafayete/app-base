@@ -48,15 +48,19 @@ void main() async {
           module: AppModule(),
           child: ToastificationWrapper(
             child: RestartWidget(
-              child: MaterialApp.router(
-                debugShowCheckedModeBanner: environment.toFlavor() == FlavorType.dev,
-                locale: const Locale('pt', 'BR'),
-                theme: ThemeData(fontFamily: 'Inter'),
-                routerConfig: Modular.routerConfig,
-                builder: (_, child) {
-                  context = _;
-                  return child!;
-                },
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                child: MaterialApp.router(
+                  debugShowCheckedModeBanner: environment.toFlavor() == FlavorType.dev,
+                  locale: const Locale('pt', 'BR'),
+                  theme: ThemeData(fontFamily: 'Inter'),
+                  routerConfig: Modular.routerConfig,
+                  builder: (_, child) {
+                    context = _;
+                    return child!;
+                  },
+                ),
               ),
             ),
           ),
