@@ -6,7 +6,6 @@ import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:geolocator/geolocator.dart';
 import '../../../shared/modules/user/controller/user_controller.dart';
 import '../../../util/firebase_remote_config.dart';
 

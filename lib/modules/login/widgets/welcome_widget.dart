@@ -7,7 +7,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../../../service/storage/storage_service.dart';
-import '../../../shared/constants/storage_constants.dart';
 import '../../../shared/widgets/app_theme_widget.dart';
 import '../../../util/colors.dart';
 

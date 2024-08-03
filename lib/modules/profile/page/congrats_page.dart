@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CongratsPage extends StatefulWidget {
-  CongratsPage({super.key});
+  const CongratsPage({super.key});
 
   @override
   State<CongratsPage> createState() => _CongratsPageState();

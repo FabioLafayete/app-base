@@ -38,7 +38,7 @@ class HttpService {
       );
 
     } catch (error) {
-      if(error is DioError){
+      if(error is DioException){
         print(error.message);
         print(error.response?.statusCode);
         print(error.requestOptions.uri);

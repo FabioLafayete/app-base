@@ -17,7 +17,7 @@ import '../widgets/items_wrap.dart';
 import '../widgets/list_cards_food.dart';
 
 class FoodPage extends StatefulWidget {
-  FoodPage({Key? key}) : super(key: key);
+  const FoodPage({Key? key}) : super(key: key);
 
   @override
   State<FoodPage> createState() => _FoodPageState();

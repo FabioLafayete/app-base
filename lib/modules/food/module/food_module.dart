@@ -11,7 +11,7 @@ class FoodModule extends Module {
         '/',
         child: (context) {
           Modular.get<NavController>().setPageSelected(1);
-          return NavPage();
+          return const NavPage();
         }
     );
     r.child(

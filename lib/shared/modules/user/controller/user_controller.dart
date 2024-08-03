@@ -98,7 +98,7 @@ abstract class UserControllerBase with Store {
       setPhotoUrlProfile(null);
       await userRepositoryImpl.deletePhoto();
     } catch (_) {
-      if (_ is DioError) {
+      if (_ is DioException) {
         print(_.message);
         print(_.error);
       } else {
@@ -112,7 +112,7 @@ abstract class UserControllerBase with Store {
       String urlPhoto = await userRepositoryImpl.addPhoto(file);
       setPhotoUrlProfile(urlPhoto);
     } catch (_) {
-      if (_ is DioError) {
+      if (_ is DioException) {
         print(_.message);
         print(_.error);
       } else {

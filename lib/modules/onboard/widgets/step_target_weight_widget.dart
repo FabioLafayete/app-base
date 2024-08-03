@@ -3,7 +3,6 @@ import 'package:app/shared/widgets/base_widget.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
-import '../../../route/pages_name.dart';
 
 
 class StepTargetWeightWidget extends BaseState<OnboardController> {

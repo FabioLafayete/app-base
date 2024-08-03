@@ -1,10 +1,8 @@
 import 'package:app/config/app_local.dart';
 import 'package:app/route/my_router.dart';
 import 'package:app/route/pages_name.dart';
-import 'package:app/shared/widgets/back_button.dart';
 import 'package:app/shared/widgets/base_page.dart';
 import 'package:app/shared/widgets/base_widget.dart';
-import 'package:app/shared/widgets/my_button.dart';
 import 'package:app/shared/widgets/visual_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';

@@ -13,7 +13,7 @@ import '../../../shared/widgets/image_cropper.dart';
 import '../widgets/list_button.dart';
 
 class ProfileDataView extends StatefulWidget {
-  ProfileDataView({Key? key}) : super(key: key);
+  const ProfileDataView({Key? key}) : super(key: key);
 
   @override
   State<ProfileDataView> createState() => _ProfileDataViewState();

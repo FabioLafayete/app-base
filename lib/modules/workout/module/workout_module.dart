@@ -12,7 +12,7 @@ class WorkoutModule extends Module {
       '/',
       child: (context) {
         Modular.get<NavController>().setPageSelected(0);
-        return NavPage();
+        return const NavPage();
       },
     );
     r.child(
@@ -22,7 +22,7 @@ class WorkoutModule extends Module {
     );
     r.child(
       '/detail',
-      child: (context) =>  WorkoutDetailPage(),
+      child: (context) =>  const WorkoutDetailPage(),
     );
     r.child(
       '/congrats',

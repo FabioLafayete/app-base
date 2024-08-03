@@ -37,7 +37,7 @@ class _NavPageState extends ViewState<NavPage, NavController> {
     final screens = [
       // HomePage(),
       const WorkoutPage(),
-      FoodPage(),
+      const FoodPage(),
       const ProfilePage(),
     ];
 

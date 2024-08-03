@@ -12,20 +12,20 @@ class ProfileModule extends Module {
         '/',
         child: (context) {
           Modular.get<NavController>().setPageSelected(2);
-          return NavPage();
+          return const NavPage();
         }
     );
     r.child(
         '/data',
-        child: (context) => ProfileDataView()
+        child: (context) => const ProfileDataView()
     );
     r.child(
         '/help',
-        child: (context) => HelpPage()
+        child: (context) => const HelpPage()
     );
     r.child(
       '/help/congrats',
-      child: (context) =>  CongratsPage(),
+      child: (context) =>  const CongratsPage(),
     );
   }
 }

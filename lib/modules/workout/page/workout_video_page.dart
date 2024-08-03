@@ -21,8 +21,8 @@ class WorkoutVideoPage extends StatefulWidget {
   State<WorkoutVideoPage> createState() => _WorkoutVideoPageState();
 }
 
-class _WorkoutVideoPageState extends ViewState<WorkoutVideoPage, WorkoutController> {
-
+class _WorkoutVideoPageState
+    extends ViewState<WorkoutVideoPage, WorkoutController> {
   bool hasInitialize = false;
 
   Timer? _timer;
@@ -51,14 +51,15 @@ class _WorkoutVideoPageState extends ViewState<WorkoutVideoPage, WorkoutControll
       showAppBar: false,
       paddingPage: 0,
       extendBodyBehindAppBar: false,
-      body: Observer(builder: (_){
+      body: Observer(builder: (_) {
         return Stack(
           children: [
             SizedBox(height: height),
-            if(controller.state.videoPlayerController == null ||
+            if (controller.state.videoPlayerController == null ||
                 !controller.state.videoPlayerController!.value.isInitialized)
               _loading(),
-            if(controller.state.videoPlayerController?.value.isInitialized ?? false)
+            if (controller.state.videoPlayerController?.value.isInitialized ??
+                false)
               _video(),
             _appBar(),
             _videoControl(),
@@ -70,17 +71,17 @@ class _WorkoutVideoPageState extends ViewState<WorkoutVideoPage, WorkoutControll
     );
   }
 
-  Widget _appBar(){
+  Widget _appBar() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         MyBackButton(
-          onPress: (){
+          onPress: () {
             controller.setOutWorkout(true);
-            if(controller.state.videoPlayerController != null &&
-                controller.state.videoPlayerController!.value.isInitialized){
-              if(controller.state.videoPlayerController!.value.isPlaying){
+            if (controller.state.videoPlayerController != null &&
+                controller.state.videoPlayerController!.value.isInitialized) {
+              if (controller.state.videoPlayerController!.value.isPlaying) {
                 controller.state.videoPlayerController!.pause();
                 // setState(() {});
               }
@@ -91,15 +92,13 @@ class _WorkoutVideoPageState extends ViewState<WorkoutVideoPage, WorkoutControll
           margin: const EdgeInsets.only(top: 30, right: 16),
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: colors.text.withOpacity(0.6)
-          ),
+              borderRadius: BorderRadius.circular(8),
+              color: colors.text.withOpacity(0.6)),
           child: text(
-            '${controller.state.currentIndexVideo + 1} / ${controller.state.programModel?.workouts.length}',
-            color: colors.text2,
-            fontSize: 16,
-            fontWeight: FontWeight.w600
-          ),
+              '${controller.state.currentIndexVideo + 1} / ${controller.state.programModel?.workouts.length}',
+              color: colors.text2,
+              fontSize: 16,
+              fontWeight: FontWeight.w600),
         ),
       ],
     );
@@ -108,11 +107,13 @@ class _WorkoutVideoPageState extends ViewState<WorkoutVideoPage, WorkoutControll
   void startTimer() {
     const period = Duration(seconds: 1);
     HapticFeedback.lightImpact();
-    _timer = Timer.periodic(period, (Timer timer) {
+    _timer = Timer.periodic(
+      period,
+      (Timer timer) {
         if (_start == 1) {
           HapticFeedback.lightImpact();
           controller.setShowCountdown(false);
-          if(hasInitialize){
+          if (hasInitialize) {
             controller.state.videoPlayerController!.play();
           }
           timer.cancel();
@@ -126,42 +127,37 @@ class _WorkoutVideoPageState extends ViewState<WorkoutVideoPage, WorkoutControll
     );
   }
 
-  Widget _countDown(){
-    if(!controller.state.showCountdown) return const SizedBox.shrink();
-    if(!(_timer?.isActive ?? false)){
+  Widget _countDown() {
+    if (!controller.state.showCountdown) return const SizedBox.shrink();
+    if (!(_timer?.isActive ?? false)) {
       _start = 3;
       startTimer();
     }
     return Container(
       color: colors.primary.withOpacity(0.85),
       child: Center(
-        child: text(
-            '$_start',
-            color: colors.text2,
-            fontSize: 100,
-            fontWeight: FontWeight.w700
-        ),
+        child: text('$_start',
+            color: colors.text2, fontSize: 100, fontWeight: FontWeight.w700),
       ),
     );
   }
 
-  Widget _outWorkout(){
-
-    if(controller.state.showOutWorkout) {
+  Widget _outWorkout() {
+    if (controller.state.showOutWorkout) {
       return Container(
         height: height,
         width: width,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: FractionalOffset.topCenter,
-                end: FractionalOffset.bottomCenter,
-                colors: [
-                  colors.background.withOpacity(0.4),
-                  colors.background,
-                ],
-                stops: const [0.01, 0.6]
-            )
+          gradient: LinearGradient(
+            begin: FractionalOffset.topCenter,
+            end: FractionalOffset.bottomCenter,
+            colors: [
+              colors.background.withOpacity(0.4),
+              colors.background,
+            ],
+            stops: const [0.01, 0.6],
+          ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -179,11 +175,13 @@ class _WorkoutVideoPageState extends ViewState<WorkoutVideoPage, WorkoutControll
                 heightButton: 55,
                 sizeTitle: 20,
                 colorTitle: colors.background,
-                onPress: (){
+                onPress: () {
                   controller.setOutWorkout(false);
-                  if(controller.state.videoPlayerController != null &&
-                      controller.state.videoPlayerController!.value.isInitialized){
-                    if(!controller.state.videoPlayerController!.value.isPlaying){
+                  if (controller.state.videoPlayerController != null &&
+                      controller
+                          .state.videoPlayerController!.value.isInitialized) {
+                    if (!controller
+                        .state.videoPlayerController!.value.isPlaying) {
                       controller.state.videoPlayerController!.play();
                       setState(() {});
                     }
@@ -197,7 +195,7 @@ class _WorkoutVideoPageState extends ViewState<WorkoutVideoPage, WorkoutControll
               colorTitle: colors.text.withOpacity(0.6),
               sizeTitle: 18,
               cleanButton: true,
-              onPress: (){
+              onPress: () {
                 MyRouter().pop();
                 controller.setOutWorkout(false);
               },
@@ -233,23 +231,23 @@ class _WorkoutVideoPageState extends ViewState<WorkoutVideoPage, WorkoutControll
         child: SizedBox(
           height: height * 0.28,
           width: width,
-          child: VideoPlayer(controller.state.videoPlayerController!)
+          child: VideoPlayer(controller.state.videoPlayerController!),
         ),
       ),
     );
   }
 
-  Widget _videoControl(){
-    if(controller.state.videoPlayerController == null) {
+  Widget _videoControl() {
+    if (controller.state.videoPlayerController == null) {
       return const SizedBox.shrink();
     }
     return Positioned(
-      bottom: 0, left: 0, right: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
       child: Container(
         height: height * 0.41,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           color: colors.background,
           borderRadius: const BorderRadius.only(
@@ -272,14 +270,13 @@ class _WorkoutVideoPageState extends ViewState<WorkoutVideoPage, WorkoutControll
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if(controller.state.currentIndexVideo > 0)
+                if (controller.state.currentIndexVideo > 0)
                   Padding(
                     padding: const EdgeInsets.only(top: 15),
                     child: IconButton(
-                      onPressed: (){
+                      onPressed: () {
                         initController(
-                            index: controller.state.currentIndexVideo - 1
-                        );
+                            index: controller.state.currentIndexVideo - 1);
                       },
                       icon: const Icon(Icons.skip_previous_rounded),
                       iconSize: 60,
@@ -291,35 +288,44 @@ class _WorkoutVideoPageState extends ViewState<WorkoutVideoPage, WorkoutControll
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 0),
                   child: IconButton(
-                    onPressed: (){
-                        if(controller.state.videoPlayerController != null &&
-                            controller.state.videoPlayerController!.value.isInitialized){
-                          if(controller.state.videoPlayerController!.value.isPlaying){
-                            controller.state.videoPlayerController!.pause();
-                          } else {
-                            controller.state.videoPlayerController!.play();
-                          }
-                          setState(() {});
+                    onPressed: () {
+                      if (controller.state.videoPlayerController != null &&
+                          controller.state.videoPlayerController!.value
+                              .isInitialized) {
+                        if (controller
+                            .state.videoPlayerController!.value.isPlaying) {
+                          controller.state.videoPlayerController!.pause();
+                        } else {
+                          controller.state.videoPlayerController!.play();
                         }
-                      },
+                        setState(() {});
+                      }
+                    },
                     icon: Stack(
                       alignment: Alignment.center,
                       children: [
                         Icon(
-                            controller.state.videoPlayerController!.value.isPlaying ?
-                                Icons.pause_circle_filled_rounded :
-                                Icons.play_circle_fill_rounded
+                          controller
+                                  .state.videoPlayerController!.value.isPlaying
+                              ? Icons.pause_circle_filled_rounded
+                              : Icons.play_circle_fill_rounded,
                         ),
-                        // if(controller.positionVideo != null)
-                        //   SizedBox(
-                        //     height: 70,
-                        //     width: 70,
-                        //     child: CircularProgressIndicator(
-                        //       color: colors.background,
-                        //       strokeWidth: 2,
-                        //       value: controller.percentVideo,
-                        //     ),
-                        //   )
+                        if (controller.state.positionVideo != null)
+                          SizedBox(
+                            height: 70,
+                            width: 70,
+                            child: TweenAnimationBuilder<double>(
+                              tween:
+                                  Tween(begin: 0, end: controller.percentVideo),
+                              duration: const Duration(milliseconds: 500),
+                              builder: (context, value, _) =>
+                                  CircularProgressIndicator(
+                                color: colors.background,
+                                strokeWidth: 2,
+                                value: value,
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                     iconSize: 90,
@@ -329,24 +335,27 @@ class _WorkoutVideoPageState extends ViewState<WorkoutVideoPage, WorkoutControll
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
                   child: IconButton(
-                    onPressed: (){
-                      if(controller.state.currentIndexVideo < controller.state.programModel!.workouts.length - 1){
+                    onPressed: () {
+                      if (controller.state.currentIndexVideo <
+                          controller.state.programModel!.workouts.length - 1) {
                         initController(
-                            index: controller.state.currentIndexVideo + 1
+                          index: controller.state.currentIndexVideo + 1,
                         );
                         controller.setShowCountdown(true);
                       } else {
-                        router.pushNamedAndRemoveUntil(PagesNames.workoutCongrats);
+                        router.pushNamedAndRemoveUntil(
+                          PagesNames.workoutCongrats,
+                        );
                       }
                     },
                     icon: const Icon(Icons.skip_next_rounded),
                     iconSize: 60,
                     color: colors.primary,
                   ),
-                )
+                ),
               ],
             ),
-            SizedBox(height: height * 0.12)
+            SizedBox(height: height * 0.12),
           ],
         ),
       ),
@@ -361,39 +370,37 @@ class _WorkoutVideoPageState extends ViewState<WorkoutVideoPage, WorkoutControll
     controller.state.videoPlayerController?.dispose();
     controller.setVideoPlayerController(null);
 
-    controller.setVideoPlayerController(
-        VideoPlayerController.networkUrl(Uri.parse(controller.workoutModel!.videoUrl))
-    );
+    controller.setVideoPlayerController(VideoPlayerController.networkUrl(
+        Uri.parse(controller.workoutModel!.videoUrl)));
 
     controller.state.videoPlayerController!.setVolume(0);
     controller.state.videoPlayerController!.setLooping(true);
     await controller.state.videoPlayerController!.setPlaybackSpeed(1.0);
 
     await controller.state.videoPlayerController!.initialize();
-    if(!isPrevious){
+    if (!isPrevious) {
       hasInitialize = true;
     }
 
-    if(!(_timer?.isActive ?? false)){
+    if (!(_timer?.isActive ?? false)) {
       controller.state.videoPlayerController!.play();
     }
-    controller.state.videoPlayerController!.addListener((){
-      if(controller.state.videoPlayerController != null){
-        if(hasInitialize == false && isPrevious){
+    controller.state.videoPlayerController!.addListener(() {
+      if (controller.state.videoPlayerController != null) {
+        if (hasInitialize == false && isPrevious) {
           hasInitialize = true;
           setState(() {});
         }
-        controller.setPositionVideo(controller.state.videoPlayerController!.value.position);
+        controller.setPositionVideo(
+            controller.state.videoPlayerController!.value.position);
       }
     });
-
   }
 
-  void disposeVideo(){
+  void disposeVideo() {
     controller.setCurrentIndexVideo(0);
     controller.setPositionVideo(Duration.zero);
     controller.state.videoPlayerController?.dispose();
     controller.setVideoPlayerController(null);
   }
-
 }

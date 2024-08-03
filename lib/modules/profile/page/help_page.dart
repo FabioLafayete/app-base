@@ -12,7 +12,7 @@ import 'package:super_sliver_list/super_sliver_list.dart';
 class HelpPage extends StatefulWidget {
   final bool isLoginRequest;
 
-  HelpPage({super.key, this.isLoginRequest = false});
+  const HelpPage({super.key, this.isLoginRequest = false});
 
   @override
   State<HelpPage> createState() => _HelpPageState();
